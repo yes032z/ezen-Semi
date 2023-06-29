@@ -12,7 +12,7 @@
 	//[1] 회원등록 : list.jsp에서 [회원등록] 링크 클릭하여 get방식 이동
 	//[2] 회원수정 : detail.jsp에서 [회원수정] 링크 클릭하여 get방식 이동
 	
-	//1. 요청파라미터 읽어오기([2]에만 해당)
+	//1. 요청파라미터 읽어오기([2]에만 해당)123123
 	String no=request.getParameter("no");
 	boolean isEdit=false;
 	String pageTitle="", btLabel="";
