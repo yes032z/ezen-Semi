@@ -23,7 +23,7 @@
 	<% return;
 	}
 
-	//2. db작업
+	//2. db작업123
 	personDAO personDao=new personDAO();
 	try{
 		int cnt=personDao.deletePerson(Integer.parseInt(no));
