@@ -391,7 +391,19 @@ button:not(:disabled),
 [type=submit]:not(:disabled) {
   cursor: pointer;
 }
+  form.d-flex {
+    width: 170px;
+    height: 82px;
+    text-align: center;
+    margin: 3px;
+    padding: 12px;
+}
 
+button.btn.btn-outline-dark {
+    width: 89px;
+    height: 58px;
+    text-align: center;
+}
 ::-moz-focus-inner {
   padding: 0;
   border-style: none;
@@ -10823,4 +10835,5 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+
 }
