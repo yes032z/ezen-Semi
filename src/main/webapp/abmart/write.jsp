@@ -1,6 +1,3 @@
-<%@page import="java.sql.SQLException"%>
-<%@page import="com.semi.review.model.ReviewDAO"%>
-<%@page import="com.semi.review.model.ReviewVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>

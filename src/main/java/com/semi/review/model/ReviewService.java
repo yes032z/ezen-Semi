@@ -16,6 +16,5 @@ public class ReviewService {
 	public int updateReview(ReviewVO vo) throws SQLException {
 		return reviewDao.updateReview(vo);
 	}
-	
-	
+
 }
