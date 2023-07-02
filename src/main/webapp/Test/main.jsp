@@ -19,7 +19,7 @@
         <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="#!">ABC-MART</a>
+                <a class="navbar-brand" href="#!">Main</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -28,7 +28,7 @@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Type</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">All products</a></li>
+                                <li><a class="dropdown-item" href="#!">All products</a></li>k
                                 <li><hr class="dropdown-divider" />running shoe</li>
                                 <li><a class="dropdown-item" href="#!">Sneakers</a></li>
                                 <li><a class="dropdown-item" href="#!">shoes</a></li>
@@ -54,11 +54,12 @@
                 </div>
             </div>
         </nav>
-        <!-- Headerd이미지-->
+        <!-- Header-->
         <header class="bg-dark py-5">
-            <div class="container px-5 px-lg-5 my-5">
+            <div class="container px-4 px-lg-5 my-5">
                 <div class="text-center text-white">
-                <img class="card-img-top" src="https://image.a-rt.com//art/display/gs/contents/202306/20230626115213680.jpg?fitting=large|1920:600" alt="..." />
+                    <h1 class="display-4 fw-bolder"> img in</h1>
+                    <p class="lead fw-normal text-white-50 mb-0"> abcd</p>
                 </div>
             </div>
         </header>
@@ -69,7 +70,7 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product(상품) image 이미지 사이즈 450 X 300-->
-                            <img class="card-img-top" src="https://image.a-rt.com/art/product/2023/05/95624_1684127463243.jpg?shrink=388:388" alt="..." />
+                            <img class="card-img-top" src="../images/test.jpg" alt="..." />
                             <!-- Cart ins-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -90,7 +91,7 @@
                             <!-- Sale( 세일 표시) -->
                             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                             <!-- Product image-->
-                            <img class="card-img-top" src="https://image.a-rt.com/art/product/2022/07/31594_1657260332781.jpg?shrink=388:388" alt="..." />
+                            <img class="card-img-top" src="../images/test.jpg" alt="..." />
                             <!-- Cart ins-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -121,7 +122,7 @@
                             <!-- Sale badge-->
                             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                             <!-- Product image-->
-                            <img class="card-img-top" src="https://image.a-rt.com/art/product/2022/11/17087_1667897429957.jpg?shrink=388:388" alt="..." />
+                            <img class="card-img-top" src="../images/test.jpg" alt="..." />
                             <!-- Cart ins-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -141,7 +142,7 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="https://image.a-rt.com/art/product/2022/10/87894_1665563300308.jpg?shrink=388:388" alt="..." />
+                            <img class="card-img-top" src="../images/test.jpg" alt="..." />
                             <!-- Cart ins-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -170,7 +171,7 @@
                             <!-- Sale badge-->
                             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                             <!-- Product image-->
-                            <img class="card-img-top" src="https://image.a-rt.com/art/product/2022/02/34705_1643943288328.jpg?shrink=388:388" alt="..." />
+                            <img class="card-img-top" src="../images/test.jpg" alt="..." />
                             <!-- Cart ins-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -190,7 +191,7 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="https://image.a-rt.com/art/product/2023/03/11678_1678179755820.jpg?shrink=388:388" alt="..." />
+                            <img class="card-img-top" src="../images/test.jpg" alt="..." />
                             <!-- Cart ins-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -211,7 +212,7 @@
                             <!-- Sale badge-->
                             <div class="badge bg-dark text-white position-absolute" style="top: 0.5rem; right: 0.5rem">Sale</div>
                             <!-- Product image-->
-                            <img class="card-img-top" src="https://image.a-rt.com/art/product/2020/05/06991_1590654666755.jpg?shrink=388:388" alt="..." />
+                            <img class="card-img-top" src="../images/test.jpg" alt="..." />
                             <!-- Cart ins-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -239,7 +240,7 @@
                     <div class="col mb-5">
                         <div class="card h-100">
                             <!-- Product image-->
-                            <img class="card-img-top" src="https://image.a-rt.com/art/product/2021/10/06142_1634025702044.jpg?shrink=388:388" alt="..." />
+                            <img class="card-img-top" src="../images/test.jpg" alt="..." />
                             <!-- Cart ins-->
                             <div class="card-body p-4">
                                 <div class="text-center">
