@@ -1,5 +1,21 @@
 package com.semi.member.model;
 
-public class MemberDAO {
+import com.semi.db.ConnectionPoolMgr;
 
+public class MemberDAO {
+	private ConnectionPoolMgr pool;
+	
+	public MemberDAO() {
+		pool=new ConnectionPoolMgr();
+	}
+	
+	/*
+	 * public insertMember() { }
+	 */
+	
+	
+	
+	
+	
+	
 }
