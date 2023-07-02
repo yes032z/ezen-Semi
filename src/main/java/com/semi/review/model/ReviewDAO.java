@@ -44,6 +44,37 @@ public class ReviewDAO {
 			pool.dbClose(ps, con);
 		}
 	}
-	
+	/**
+	 * 리뷰 수정 메서드
+	 * @param vo
+	 * @return
+	 * @throws SQLException
+	 */
+	public int updateReview(ReviewVO vo) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		int cnt=0;
+		
+		try {
+			con=pool.getConnection();
+			String sql="update review"
+					+ " set reviewbody= ?, reviewgrade= ?, filename= ?,"
+					+ " filesize= ?, originalfilename= ?"
+					+ " where reviewno= ?";
+					ps=con.prepareStatement(sql);
+			ps.setString(1, vo.getReviewbody());
+			ps.setInt(2, vo.getReviewgrade());
+			ps.setString(3, vo.getFilename());
+			ps.setLong(4, vo.getFilesize());
+			ps.setString(5, vo.getOriginalfilename());
+			ps.setInt(6, vo.getReviewno());
+			
+			cnt=ps.executeUpdate();
+			System.out.println("리뷰 수정 결과, cnt="+cnt+", 매개변수 vo="+vo);
+			return cnt;
+		}finally {
+			pool.dbClose(ps, con);
+		}
+	}
 	
 }

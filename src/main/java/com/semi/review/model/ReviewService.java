@@ -12,7 +12,10 @@ public class ReviewService {
 	public int insertReview(ReviewVO vo) throws SQLException {
 		return reviewDao.insertReview(vo);
 	}
-	
+	//리뷰 수정 메서드
+	public int updateReview(ReviewVO vo) throws SQLException {
+		return reviewDao.updateReview(vo);
+	}
 	
 	
 }
