@@ -68,13 +68,17 @@
 		
 		$('input[type=button]').click(function(){
 			if(confirm('리뷰 등록을 취소하시겠습니까?')){
-				location.href='#';
+				self.close();
 			};
 		});
 		
 		$('input[type=submit]').click(function(){
 			if(!$('input[name=rating]:checked').val()){
 				alert('별점을 체크해주세요.');
+				return false;
+			}
+			if($('#reviewbody').val().length <10){
+				alert('10글자 이상 입력 바랍니다.');
 				return false;
 			}
 			
@@ -124,10 +128,10 @@
 	<%	}	%>  >	  
 	<textarea id="reviewbody" name="reviewbody"></textarea><br>
 	<label for="upfile">사진 첨부</label>
-    <input type="file" id="upfile" name="upfile" /> (최대 파일사이즈~~)<br><br>
+    <input type="file" multiple="multiple" name="upmultifile" />(최대 파일사이즈~~)<br><br>
 	<div class="center">
            	<input type = "submit" value="<%=btLabel %>"/>
-            <input type = "Button" value="취소" />         
+            <input type = "Button" value="취소" />
         </div>
 </form>	
 	</article>
