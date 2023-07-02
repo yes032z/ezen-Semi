@@ -1,3 +1,7 @@
+<%@page import="com.semi.review.model.ReviewService"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="com.semi.review.model.ReviewDAO"%>
+<%@page import="com.semi.review.model.ReviewVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -6,11 +10,11 @@
 <meta charset="UTF-8">
 <%
 	
-	String no=request.getParameter("no");
+	String reviewno=request.getParameter("reviewno");
 	boolean isEdit=false;
 	String pageTitle="", btLabel="";
-	if(no!=null && !no.isEmpty()){
-		isEdit=true;  //리뷰수정
+	if(reviewno!=null && !reviewno.isEmpty()){
+		isEdit=true;  //파라미터 reviewno가 있는경우 리뷰수정
 		
 		pageTitle="리뷰 수정하기";
 		btLabel="수정";
@@ -21,7 +25,24 @@
 	
 	//2
 	//리뷰수정인 경우만 db에서 데이터 조회해서 출력해준다
+	ReviewVO reviewVo=new ReviewVO();
+	if(isEdit){
+		ReviewService reviewService=new ReviewService();
+		
+		try{
+			int cnt=reviewService.updateReview(reviewVo);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+	}
 	
+	String reviewbody=reviewVo.getReviewbody();
+	String reviewgrade=Integer.toString(reviewVo.getReviewgrade());  ///????
+	String fileName=reviewVo.getFilename();
+	
+	if(reviewbody==null) reviewbody="";
+	if(reviewgrade==null) reviewgrade="";
+	if(fileName==null) fileName="";
 %>
 <title><%=pageTitle %></title>
 <style type="text/css">
@@ -55,6 +76,9 @@
 	background: #eee;
 	border: 1px solid gray;
 	font-size: 17px;
+}
+.center{
+	text-align: center;
 }
 
 </style>
@@ -105,6 +129,12 @@
 	<article>
 	<h3>리뷰 작성하기</h3><hr>
 	<h4>상품의 별점은 몇점인가요?</h4>
+<form name="frmWrite" method="post" enctype="multipart/form-data"
+	<%if(!isEdit){%>
+		action="write_ok.jsp"
+	<%	}else{%>
+		action="edit_ok.jsp"	
+	<%	}	%>  >	  
 	<div class="star-rating">
 	  <input type="radio" id="5-stars" name="rating" value="5" />
 	  <label for="5-stars" class="star">&#9733;</label>
@@ -117,17 +147,10 @@
 	  <input type="radio" id="1-star" name="rating" value="1" />
 	  <label for="1-star" class="star">&#9733;</label>
 	</div>
-	
 	<p class="score" style="display: none"><span></span>점을 주셨네요!<br>
 	상품에 대한 상세후기를 작성해주세요.</p>
-<form name="frmWrite" method="post" enctype="multipart/form-data"
-	<%if(!isEdit){%>
-		action="write_ok.jsp"
-	<%	}else{%>
-		action="edit_ok.jsp"	
-	<%	}	%>  >	  
-	<textarea id="reviewbody" name="reviewbody"></textarea><br>
-	<label for="upfile">사진 첨부</label>
+	<textarea id="reviewbody" name="reviewbody"><%=reviewbody %></textarea><br>
+	<label>사진 첨부</label><br>
     <input type="file" name="upfile1" /><br>
     <input type="file" name="upfile2" /><br>
     <input type="file" name="upfile3" /><br><br>
