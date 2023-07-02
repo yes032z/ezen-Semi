@@ -128,7 +128,9 @@
 	<%	}	%>  >	  
 	<textarea id="reviewbody" name="reviewbody"></textarea><br>
 	<label for="upfile">사진 첨부</label>
-    <input type="file" multiple="multiple" name="upmultifile" />(최대 파일사이즈~~)<br><br>
+    <input type="file" name="upfile1" /><br>
+    <input type="file" name="upfile2" /><br>
+    <input type="file" name="upfile3" /><br><br>
 	<div class="center">
            	<input type = "submit" value="<%=btLabel %>"/>
             <input type = "Button" value="취소" />
