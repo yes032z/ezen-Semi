@@ -54,6 +54,7 @@
 	height: 300px;
 	background: #eee;
 	border: 1px solid gray;
+	font-size: 17px;
 }
 
 </style>
@@ -121,7 +122,7 @@
 	<%	}else{%>
 		action="edit_ok.jsp"	
 	<%	}	%>  >	  
-	<input type="text" id="reviewbody" name="reviewbody" /><br>
+	<textarea id="reviewbody" name="reviewbody"></textarea><br>
 	<label for="upfile">사진 첨부</label>
     <input type="file" id="upfile" name="upfile" /> (최대 파일사이즈~~)<br><br>
 	<div class="center">
