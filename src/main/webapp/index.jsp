@@ -17,6 +17,15 @@
 	rel="stylesheet" />
 <!-- Core theme CSS (includes Bootstrap)-->
 <link href="css/styles.css" rel="stylesheet" />
+<style>
+  .carousel-inner {
+    width: 1550px;
+}
+
+.carousel-item.active {
+    left: 263px;
+}
+</style>
 </head>
 <body>
 	<!-- 한글 인코딩이 깨져서 영어로 표시  -->
@@ -74,15 +83,36 @@
 	<!-- Headerd이미지-->
 	<header class="bg-dark py-5">
 		< <!-- 기존 배너 -->
-	 <div class="container px-5 px-lg-5 my-5">
+	<!-- 	<!--  <div class="container px-5 px-lg-5 my-5">
 			<div class="text-center text-white">
 				<img class="card-img-top"
 					src="https://image.a-rt.com//art/display/gs/contents/202306/20230626115213680.jpg?fitting=large|1920:600"
 					alt="..." />
 			</div>
 
-		</div>  
+		</div>   -->
 
+ <div id="carouselExample" class="carousel slide">
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="logo.png" class="d-block w-100" alt="..." style="width:200px; height:100px;" />
+        </div>
+        <div class="carousel-item">
+          <img src="mokoko.png" class="d-block w-100" alt="..."style="width:200px; height:100px;" />
+        </div>
+        <div class="carousel-item">
+          <img src="zombie3.jpg" class="d-block w-100" alt="..." />
+        </div>
+      </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
+    </div>
 	</header>
 	<!-- Section-->
 	<section class="py-5">
