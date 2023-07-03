@@ -16,10 +16,10 @@
 </head>
 <body>
 <%
-	String upDir="upload";
+	String upDir="images";
 	String saveDir=config.getServletContext().getRealPath(upDir);
 	saveDir=application.getRealPath(upDir);
-	saveDir="D:\\lecture\\workspace_list\\web_semi_ws\\semiProject\\src\\main\\webapp\\upload";
+	saveDir="D:\\lecture\\workspace_list\\web_semi_ws\\semiProject\\src\\main\\webapp\\images";
 	out.println("업로드 경로: "+saveDir);
 	
 	int maxSize= 10*1024*1024; //10메가
