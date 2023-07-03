@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta charset="EUC-KR">
-<title>register.jsp</title>
+<title>Insert title here</title>
 </head>
 <body>
-회원가입창
+
 </body>
 </html>

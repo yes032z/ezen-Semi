@@ -31,7 +31,7 @@
           <div class="input-form-box"><span>비밀번호 </span><input type="password" name="upw" class="form-control"></div>
           <div class="button-login-box" >
             <button type="button" class="btn btn-primary btn-xs" style="width:30%" onclick="location.href='index.jsp'">로그인</button>
-            <button type="button" class="btn btn-primary btn-xs" style="width:30%" onclick="location.href='member/register.jsp'">회원가입</button>
+            <button type="button" class="btn btn-primary btn-xs" style="width:30%" onclick="location.href='abmart/member/register.jsp'">회원가입</button>
           </div>
         </div>
         
