@@ -10,19 +10,17 @@
 					src="https://image.a-rt.com//art/display/gs/contents/202306/20230626115213680.jpg?fitting=large|1920:600"
 					alt="..." />
 			</div>
-
-		</div>   --> 
-
+		</div>   -->
  <div id="carouselExample" class="carousel slide">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="https://image.a-rt.com//art/display/gs/contents/202306/20230629143044736.jpg?fitting=large|1920:900" class="d-block w-100" alt="..."  />
+          <img src="https://image.a-rt.com//art/display/gs/contents/202306/20230629143044736.jpg?fitting=large|1920:600" class="d-block w-100" alt="..."  />
         </div>
         <div class="carousel-item">
-          <img src="https://image.a-rt.com//art/display/gs/contents/202307/20230701104256906.jpg?fitting=large|1920:900" class="d-block w-100" alt="..." />
+          <img src="https://image.a-rt.com//art/display/gs/contents/202307/20230701104256906.jpg?fitting=large|1920:600" class="d-block w-100" alt="..." />
         </div>
         <div class="carousel-item">
-          <img src="https://image.a-rt.com//art/display/gs/contents/202306/20230602100214370.jpg?fitting=large|1920:900" class="d-block w-100" alt="..." />
+          <img src="https://image.a-rt.com//art/display/gs/contents/202306/20230602100214370.jpg?fitting=large|1920:600" class="d-block w-100" alt="..." />
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
@@ -39,13 +37,13 @@
 	<section class="py-5">
 		<h1 class="container px-4 px-lg-5 mt-5">Sales 상품</h1>
 		<div class="container px-4 px-lg-5 mt-5">
-			<div
-				class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+			<div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
 				<div class="col mb-5">
 					<div class="card h-100">
 						<!-- Sale badge-->
 						<div class="badge bg-dark text-white position-absolute"
-							style="top: 0.5rem; right: 0.5rem">Sale</div>
+							style="top: 0.5rem; right: 0.5rem">Sale
+						</div>
 						<!-- Product(상품) image 이미지 사이즈 450 X 300-->
 						<img class="card-img-top"
 							src="https://image.a-rt.com/art/product/2023/05/95624_1684127463243.jpg?shrink=388:388"
