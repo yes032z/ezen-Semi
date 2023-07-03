@@ -95,13 +95,13 @@
  <div id="carouselExample" class="carousel slide">
       <div class="carousel-inner">
         <div class="carousel-item active">
-          <img src="logo.png" class="d-block w-100" alt="..." style="width:200px; height:100px;" />
+          <img src="https://image.a-rt.com//art/display/gs/contents/202306/20230629143044736.jpg?fitting=large|1920:600" class="d-block w-100" alt="..."  />
         </div>
         <div class="carousel-item">
-          <img src="mokoko.png" class="d-block w-100" alt="..."style="width:200px; height:100px;" />
+          <img src="https://image.a-rt.com//art/display/gs/contents/202307/20230701104256906.jpg?fitting=large|1920:600" class="d-block w-100" alt="..." />
         </div>
         <div class="carousel-item">
-          <img src="zombie3.jpg" class="d-block w-100" alt="..." />
+          <img src="https://image.a-rt.com//art/display/gs/contents/202306/20230602100214370.jpg?fitting=large|1920:600" class="d-block w-100" alt="..." />
         </div>
       </div>
       <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
