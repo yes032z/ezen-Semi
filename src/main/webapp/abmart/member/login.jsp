@@ -4,16 +4,18 @@
 <html>
 <head>
 <link rel="stylesheet" href="../../css/loginstyle.css">
-
+<script type="text/javascript">
+	
+</script>
 <meta charset="EUC-KR">
 <title>로그인 페이지</title>
 </head>
 <body>
-<div class="background-wrap">
+<!-- <div class="background-wrap">
   <div class="background"></div>
 </div>
-
-<form id="accesspanel" action="login" method="post">
+ -->
+<form id="accesspanel" action="../../index.jsp" method="post">
   <h1 id="litheader">AB - MART</h1>
   <div class="inset">
     <p>
