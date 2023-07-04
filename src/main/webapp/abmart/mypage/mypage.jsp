@@ -7,7 +7,12 @@
     margin-bottom: 30px;
     overflow: hidden;
     padding-top: 30px;
+    width: 1000px;
 }
+#mypage{
+	text-align: center;
+}
+
 #orderinfo-second div{
 	float: left;
 }
@@ -33,10 +38,12 @@ div#orderinfo-second div a{
 	font-weight: bold;
 	text-decoration: none;
 }
-
+footer{
+clear: both;
+}
 
 </style>
-<article>
+<article id="mypage">
 	<div class="orderinfo">
 	 	<div id="orderinfo-first">최근 주문내역</div>
 	 	<div id="orderinfo-second">

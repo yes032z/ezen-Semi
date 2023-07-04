@@ -3,11 +3,11 @@
 <style type="text/css">
 section {
 	display: hidden;
-	text-align: center;
 }
 #leftNav {
 	width: 300px;
 	float: left;
+	text-align: center;
 }
 h4{
     font-weight: bold;
