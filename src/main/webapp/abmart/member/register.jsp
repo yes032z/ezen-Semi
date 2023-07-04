@@ -3,7 +3,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+
 <link rel="stylesheet" href="../../css/loginstyle.css">
+<style type="text/css">
+form#accesspanel {
+    width: 600px;
+    padding-top: 109px;
+    height: 740px;
+}
+</style>
 <script type="text/javascript">
 	
 </script>
@@ -27,16 +35,18 @@
       <input type="password" name="password" id="pwdchk" placeholder="User pwdck">
     </p>
     <p>
-      <input type="password" name="password" id="password" placeholder="User pwd">
+    <!-- 우편번호 검색 넣기 -->
+      <input type="text" name="addres" id="addres" placeholder="addres">
     </p>
     <p>
-      <input type="password" name="password" id="password" placeholder="User pwd">
+      <input type="text" name="tel" id="tel" placeholder="Tel">
     </p>
+    
   </div>
-  <p class="p-container" >
-  <!-- jq에서 클릭 링크걸기 -->
-     <input type="submit" name="register" id="register_go" value="회원가입" width="40%" >
-  </p>
+ <p class="p-container" >
+
+     <input type="submit" name="register" id="register_go" value="회원가입"  >
+  </p> 
 </form>
 </body>
 </html>
