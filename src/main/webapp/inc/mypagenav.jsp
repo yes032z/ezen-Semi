@@ -5,7 +5,7 @@ section {
 	display: hidden;
 }
 #leftNav {
-	width: 300px;
+	width: 250px;
 	float: left;
 	text-align: center;
 }
