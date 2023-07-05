@@ -113,19 +113,6 @@
 </script>
 </head>
 <body>
-	<nav>
-		<dl id="leftNavi">
-			<!-- category list -->
-			<dt>마이페이지</dt>
-			<dd><a href="#">주문조회</a></dd>
-			<dd><a href="#">취소/환불</a></dd>
-			<dd><a href="#">찜한상품</a></dd>
-			<dd><a href="#">재고알림</a></dd>
-			<dd><a href="#">상품QnA</a></dd>
-			<dd><a href="#">상품리뷰</a></dd>
-		</dl>
-	</nav>
-	<section>
 	<article>
 	<h3>리뷰 작성하기</h3><hr>
 	<h4>상품의 별점은 몇점인가요?</h4>
@@ -160,6 +147,5 @@
         </div>
 </form>	
 	</article>
-	</section>
 </body>
 </html>
