@@ -39,7 +39,7 @@
             <td><input type="checkbox" name="1"></td>
             <td>
                 <div class="media">
-                    <img src="" class="mr-3" alt="1">
+                    <img src="../../images/test.jpg" class="mr-3 pdimgsize" alt="1">
                     <div class="media-body">
                         <h5 class="mt-0"><a href="#">상품명</a></h5>
                     </div>
