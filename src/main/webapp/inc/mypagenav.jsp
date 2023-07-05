@@ -24,10 +24,6 @@ dl#leftNavi {
 	font-size: 18px;
 	font-weight: bold;
 }
-#leftNavi dd{
-	font-size:15px;
-    margin-left: 0px;
-}
 #leftNavi dd a {
 	text-decoration: none;
 	color: #585721;
@@ -51,7 +47,6 @@ clear: both;
 		<dd><a href="<%=request.getContextPath() %>/abmart/mypage/wishList.jsp">찜한 상품</a></dd>
 		<dd><a href="<%=request.getContextPath() %>/abmart/mypage/pdQnA.jsp">상품 Q & A</a></dd>
 		<dd><a href="<%=request.getContextPath() %>/abmart/mypage/pdReview.jsp">상품 리뷰</a></dd>
->>>>>>> refs/heads/master
 		<dt>나의 정보</dt>
 		<dd><a href="#">회원정보 수정</a><dd>
 		<dd><a href="#">비밀번호 변경</a><dd>
