@@ -14,6 +14,7 @@
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <link href="<%=request.getContextPath()%>/css/pdstyle.css" rel="stylesheet"/>
         <!-- Core theme CSS (includes Bootstrap)-->
         <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" /> -->
         <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet" />

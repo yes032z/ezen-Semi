@@ -1,19 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../../inc/top.jsp" %>
-<style>
-	.btn[name=size]{
-		border: 1px solid black;
-		background: rgb(244,244,244);
-	}
-	div[name=pddetail]{
-		padding: 5px;
-		float:left;
-		width:600px;
-		border-top: 1px solid gray;
-		background: rgb(244,244,244)
-	}
-</style>
+
 <section class="py-5">
 	<div style="width: 500px;height: 700px;margin-left: 100px; float:left;">
 		<img class="card-img-top" src="https://image.a-rt.com/art/product/2023/03/11678_1678179755820.jpg?shrink=388:388" alt="상품 이미지" />
@@ -21,13 +9,13 @@
 	<!-- 상품 정보 -->
 	<div style="float:left;margin-left: 100px;width:600px;height:700px;">
 		<div style="font-size: 1.5em;font-weight: bold;float:left;width:600px;">
-			<span style="float:left;">상품명 : </span><span>상품명</span>
+			<span style="float:left;">상품명</span><span>상품명</span>
 		</div>
 		<div style="font-size: 1.5em;font-weight: bold;clear:both;float:left;padding-bottom:30px;margin-top:50px;width:600px;">
-			<span style="float:left;">가격 : </span><span>99000원</span>
+			<span style="float:left;">가격</span><span>99000원</span>
 		</div>
 		<div style="font-size: 1.5em;font-weight: bold;clear:both;float:left;padding-bottom:30px;margin-top:50px;width:600px;">
-			<span style="float:left;">사이즈 : </span>
+			<span style="float:left;">사이즈</span>
 			<button class="btn" name="size">230</button>
 			<button class="btn" name="size">235</button>
 			<button class="btn" name="size">240</button>
@@ -85,6 +73,9 @@
 		         </div>
 	         <div style="float: left;margin-left: 50px;font-size: 1.2em;">99000원</div>
 	         <button class="btn" name="size">X</button>
+         </div>
+         <div>
+         	<span>총 결제 금액  </span>
          </div>
 	</div>				
 	

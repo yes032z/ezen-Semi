@@ -19,49 +19,7 @@
 		});
 	});
 </script>
-<style>
-.col.mb-5 {
-	width: 250px;
-	height: 500px;
-	float: left;
-}
 
-.div1 {
-	width: 1000px;
-	float: right;
-}
-#searchSort{
-	clear:both;
-	padding-top:10px;
-	width: 1000px;
-	height:50px;
-}
-#pdbox{
-	float: right;
-	width: 1000px;
-}
-.leftSort{
-	display:block;
-	text-align: right;
-	float: left;
-}
-.rightSort{
-	display:block;
-	text-align: right;
-	float: right;
-}
-#searchqty{
-	color: rgb(238,28,37);
-	font-weight: bold;
-}
-#span2{
-	margin-right: 20px;
-}
-#fiteradd{
-	width: 1000px;
-} 
-
-</style>
 <div>
 <section class="py-5">
 	
