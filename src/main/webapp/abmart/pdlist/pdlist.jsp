@@ -88,7 +88,6 @@ section {
 	</aside>
 <div id="pdbox">
 	<div id="fiteradd">
-		<button type="button" class="btn-close" disabled aria-label="Close">필터 초기화</button>
 		<button type="button" class="btn btn-secondary" style="float:left;">필터 초기화</button>
 	</div>
 	<div id="searchSort">
