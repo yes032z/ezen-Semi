@@ -11,7 +11,7 @@ section {
 }
 h4{
     font-weight: bold;
-    margin: 29px 0px 26px 37px;
+  	margin: 55px 0px 26px 50px;
     padding: 0 0 0 20px;
 }
 dl#leftNavi {
@@ -33,6 +33,9 @@ dl#leftNavi {
 }
 #leftNavi dd a:hover{
 	color: red;
+}
+footer{
+clear: both;
 }
 </style>
 <nav id="leftNav">
