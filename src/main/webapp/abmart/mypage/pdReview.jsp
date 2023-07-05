@@ -43,7 +43,7 @@ div#orderinfo-second div a{
 </style>
 <article id="mypage">
 	<div class="orderinfo">
-		<div id="orderinfo-first">주문 조회</div>
+		<div id="orderinfo-first">상품 리뷰</div>
 		<div id="orderinfo-second">
 			<div>
 			
