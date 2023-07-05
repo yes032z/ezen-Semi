@@ -13,7 +13,7 @@
 					<span class="m-0 text-center text-white">(주)에이비마트 | 대표이사 : 송영은 | 주소: 서울 서초구 서초대로77길 55 에이프로스퀘어 3층</span><br>
 					<span class="m-0 text-center text-white">사업자등록번호 : 123-45-67890 | 통신판매업신고:제 2023-서울서초구-1000호</span><br>
 					<span class="m-0 text-center text-white">개인정보보호 책임자:최곽두 | 이메일:abmart@abmart.com</span>
-				</div> 
+				</div>
 			</div>
 	</footer>
         <!-- Bootstrap core JS-->

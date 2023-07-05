@@ -43,7 +43,7 @@ div[name=pddetail]{
 	text-align: right;
 	float: right;
 }
-#searchqty{
+span[name=searchqty]{
 	color: rgb(238,28,37);
 	font-weight: bold;
 }
@@ -53,3 +53,13 @@ div[name=pddetail]{
 #fiteradd{
 	width: 1000px;
 } 
+footer{
+    clear:both;
+}
+    	
+section {
+	position: relative;
+	text-align: center;
+	margin: 0 auto;
+	width: 1500px;
+}
