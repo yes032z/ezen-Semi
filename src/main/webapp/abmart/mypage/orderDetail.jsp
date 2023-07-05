@@ -62,7 +62,7 @@
 						</td>
 						<td>1개</td>
 						<td>30,000원</td>
-						<td>5%</td>
+						<td>7%</td>
 						<td>2500원</td>
 						<td><input type="button" class="mypagebtn" value="리뷰 쓰기" /></td>
 					</tr>

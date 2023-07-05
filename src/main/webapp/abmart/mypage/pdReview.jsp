@@ -24,7 +24,7 @@
 						<th scope="row">1</th>
 						<td><a href="#">내용클릭시 상세정보ㄴ</a></td>
 						<td>Otto</td>
-						<td>@mdo</td>
+						<td>@dmdo</td>
 						<td>@mdo</td>
 						<td>@mdo</td>
 					</tr>

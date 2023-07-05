@@ -54,7 +54,7 @@
 						</div>
 						<!-- Product price-->
 						<span class="text-muted text-decoration-line-through">69,000원</span>
-						47,000원[31%]
+						47,000원[30%]
 					</div>
 				</div>
 				<!-- Product actions-->
