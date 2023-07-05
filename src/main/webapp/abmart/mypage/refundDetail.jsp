@@ -8,8 +8,8 @@
 		<div id="orderinfo-first">취소/환불</div>
 				
 		<div id="orderinfo-third">
-			<table class="table table-bordered">
-    <thead>
+			<table class="table table-hover">
+    <thead class="thead-dark">
         <tr>
             <th><input type="checkbox" name="all"></th>
             <th>상품명</th>
@@ -73,11 +73,7 @@
         </tr>                
     </tbody>                  
 </table>
-	<!-- 전체 삭제버튼, 선택삭제, 주문하기 버튼 -->
-	<input type="button" name="alldel" value="취소하기">
-	<input type="button" name="del" value="취소하기">
-	<input type="button" name="order" value="주문하기">
-
+	<input type="button" class="mypagebtn2" name="del" value="취소하기">
 			</div>
 		</div>
 

@@ -6,6 +6,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<link href="../../css/mypage.css" rel="stylesheet" type="text/css">
 <head>
 <meta charset="UTF-8">
 <%
@@ -109,7 +110,6 @@
 		});
 		
 	});
-
 </script>
 </head>
 <body>

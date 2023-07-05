@@ -11,30 +11,34 @@
 			<table class="table table-hover">
 				<thead class="thead-dark">
 					<tr>
-						<th scope="col">#</th>
-						<th scope="col">First</th>
-						<th scope="col">Last</th>
-						<th scope="col">Handle</th>
+						<th scope="col">번호</th>
+						<th scope="col">내용</th>
+						<th scope="col">상품명</th>
+						<th scope="col">조회수</th>
+						<th scope="col">등록일자</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<th scope="row">1</th>
-						<td>Mark</td>
+						<td><a href="#">Mark</a></td>
 						<td>Otto</td>
+						<td>@mdo</td>
 						<td>@mdo</td>
 					</tr>
 					<tr>
 						<th scope="row">2</th>
-						<td>Jacob</td>
+						<td><a href="#">Mark</a></td>
 						<td>Thornton</td>
 						<td>@fat</td>
+						<td>@mdo</td>
 					</tr>
 					<tr>
 						<th scope="row">3</th>
-						<td>Larry</td>
+						<td><a href="#">Mark</a></td>
 						<td>the Bird</td>
 						<td>@twitter</td>
+						<td>@mdo</td>
 					</tr>
 				</tbody>
 			</table>

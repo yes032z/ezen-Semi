@@ -89,3 +89,20 @@ div#orderinfo-third{
 .btnDate {
     margin: 0 5px 5px 0px;
 }
+.mypagebtn2 {
+    padding: 10px 10px 10px 10px;
+    width: 150px;
+    border: 1px solid gray;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background: #8080801c;
+}
+.mypagebtn3{
+	border: 1px solid gray;
+    border-radius: 10%;
+    margin-left: 5px;
+    margin-right: 5px;
+    height: 35px;
+}

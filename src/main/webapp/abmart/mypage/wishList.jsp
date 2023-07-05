@@ -21,9 +21,10 @@
 <article id="mypage">
 	<div class="orderinfo">
 		<div id="orderinfo-first">찜한 상품</div>
+		<div class="subtitle">나의 찜 목록</div>
 		<div id="orderinfo-third">
-			<table class="table table-bordered">
-    <thead>
+			<table class="table table-hover">
+    <thead class="thead-dark">
         <tr>
             <th><input type="checkbox" name="all"></th>
             <th>상품명</th>
@@ -47,9 +48,9 @@
             </td>
             <td>
            	 <div class="quantity-adjustment">
-	            <button class="plus_btn btn">+</button>
+	            <button class="plus_btn btn mypagebtn3">+</button>
 	            <input type="text" class="quantity-input" value="1" style="width: 45px">
-	            <button class="minus_btn btn">-</button>
+	            <button class="minus_btn btn mypagebtn3">-</button>
        		</div>
             </td>            
             <td>30,000원</td>
@@ -70,9 +71,9 @@
             </td>
             <td>
            	 <div class="quantity-adjustment">
-	            <button class="plus_btn btn">+</button>
+	            <button class="plus_btn btn mypagebtn3">+</button>
 	            <input type="text" class="quantity-input" value="1" style="width: 45px">
-	            <button class="minus_btn btn">-</button>
+	            <button class="minus_btn btn mypagebtn3">-</button>
        		</div>
             </td>
             <td>30,000원</td>
@@ -93,9 +94,9 @@
             </td>
             <td>
 	            <div class="quantity-adjustment">
-		            <button class="plus_btn btn">+</button>
+		            <button class="plus_btn btn mypagebtn3">+</button>
 		            <input type="text" class="quantity-input" value="1" style="width: 45px">
-		            <button class="minus_btn btn">-</button>
+		            <button class="minus_btn btn mypagebtn3">-</button>
         		</div>
         	</td>	
             <td>1개</td>
@@ -105,10 +106,8 @@
         </tr> 
     </tbody>                  
 </table>
-	<!-- 전체 삭제버튼, 선택삭제, 주문하기 버튼 -->
-	<input type="button" name="alldel" value="전체삭제">
-	<input type="button" name="del" value="선택삭제">
-	<input type="button" name="order" value="주문하기">
+	<input type="button" class="mypagebtn2" name="del" value="삭제하기">
+	<input type="button" class="mypagebtn2" name="order" value="주문하기">
 
 			</div>
 		</div>

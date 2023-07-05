@@ -6,71 +6,38 @@
 <article id="mypage">
 	<div class="orderinfo">
 		<div id="orderinfo-first">상품 리뷰</div>
-		<div class="subtitle">작성 가능한 리뷰</div>
+		<div class="subtitle">내가 작성한 리뷰</div>
 		<div id="orderinfo-third">
 			<table class="table table-hover">
 				<thead class="thead-dark">
 					<tr>
-						<th scope="col">#</th>
-						<th scope="col">First</th>
-						<th scope="col">Last</th>
-						<th scope="col">Handle</th>
+						<th scope="col">번호</th>
+						<th scope="col">내용</th>
+						<th scope="col">상품명</th>
+						<th scope="col">별점</th>
+						<th scope="col">등록일</th>
+						<th scope="col">좋아요</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr>
 						<th scope="row">1</th>
-						<td>Mark</td>
+						<td><a href="#">내용클릭시 상세정보ㄴ</a></td>
 						<td>Otto</td>
+						<td>@mdo</td>
+						<td>@mdo</td>
 						<td>@mdo</td>
 					</tr>
 					<tr>
 						<th scope="row">2</th>
-						<td>Jacob</td>
-						<td>Thornton</td>
-						<td>@fat</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td>Larry</td>
-						<td>the Bird</td>
-						<td>@twitter</td>
+						<td><a href="#">내용클릭시 상세정보ㄴ</a></td>
+						<td>Otto</td>
+						<td>@mdo</td>
+						<td>@mdo</td>
+						<td>@mdo</td>
 					</tr>
 				</tbody>
 			</table>
-			</div>
-			<div class="subtitle">내가 작성한 리뷰</div>
-			<div id="orderinfo-third">
-				<table class="table table-hover">
-					<thead class="thead-dark">
-						<tr>
-							<th scope="col">#</th>
-							<th scope="col">First</th>
-							<th scope="col">Last</th>
-							<th scope="col">Handle</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<th scope="row">1</th>
-							<td>Mark</td>
-							<td>Otto</td>
-							<td>@mdo</td>
-						</tr>
-						<tr>
-							<th scope="row">2</th>
-							<td>Jacob</td>
-							<td>Thornton</td>
-							<td>@fat</td>
-						</tr>
-						<tr>
-							<th scope="row">3</th>
-							<td>Larry</td>
-							<td>the Bird</td>
-							<td>@twitter</td>
-						</tr>
-					</tbody>
-				</table>
 			</div>
 			</div>
 </article>
