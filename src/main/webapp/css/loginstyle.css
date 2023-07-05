@@ -191,7 +191,7 @@ input[type=text], input[type=password] {
   width: 100%;
 }
 
-input[type=text]:disabled, input[type=password]:disabled {
+input[type=text]:disabled, input[type=password]:disabled , input[name=email1]:disabled {
   color: #999;
 }
 

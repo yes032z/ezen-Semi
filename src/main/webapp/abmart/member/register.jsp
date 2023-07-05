@@ -38,6 +38,18 @@ input#hp3 {
     width: 170px;
 }
 
+input#email1 {
+    width: 132px;
+}
+
+select#email2 {
+    width: 133px;
+    height: 31px;
+}
+
+input#email3 {
+    width: 155px;
+}
 </style>
 <script type="text/javascript">
 	
@@ -63,7 +75,6 @@ input#hp3 {
     </p>
     <p id="zip">
     <!-- 우편번호 검색 넣기 -->
-         
         <input type="text" name="zipcode" id="zipcode" ReadOnly  value ="우편번호">
         <input type="Button" value="우편번호 찾기" id="btnZipcode" ><br />
         <span class="sp1">&nbsp;</span>
@@ -84,8 +95,8 @@ input#hp3 {
         <input type="text" name="hp3" id="hp3" maxlength="4" title="휴대폰 뒷자리">
     </p>
     <p>
-     <label for="email1">이메일 주소</label>
-        <input type="text" name="email1"  id="email1" title="이메일주소 앞자리">@
+
+        <input type="text" name="email1"  id="email1" value="email">@
         <select name="email2" id="email2"  title="이메일주소 뒷자리">
             <option value="naver.com">naver.com</option>
             <option value="hanmail.net">hanmail.net</option>
