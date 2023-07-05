@@ -2,16 +2,12 @@
     pageEncoding="UTF-8"%>
 <style type="text/css">
 section {
-	display: flex;
-	text-align: center;
+	display: hidden;
 }
 #leftNav {
-	width:300px;
-}
-article {
-	flex-basis: 75%;
-	margin: 30px 10px 10px 25px;
-	width:700px;
+	width: 250px;
+	float: left;
+	text-align: center;
 }
 h4{
     font-weight: bold;
@@ -57,4 +53,5 @@ dl#leftNavi {
 		<dd><a href="#">비밀번호 변경</a><dd>
 	</dl>
 </nav>    
+
 

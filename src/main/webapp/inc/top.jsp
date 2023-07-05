@@ -19,6 +19,11 @@
         <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet" />
         <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
     </head>
+    <style>
+    	footer{
+    		clear:both;
+    	}
+    </style>
     <body>
     <!-- 한글 인코딩이 깨져서 영어로 표시  -->
         <!-- Navigation--> 
