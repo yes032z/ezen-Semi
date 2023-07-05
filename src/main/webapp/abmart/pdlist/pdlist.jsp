@@ -20,13 +20,6 @@
 	});
 </script>
 <style>
-section {
-	position: relative;
-	text-align: center;
-	margin: 0 auto;
-	width: 1500px;
-}
-
 .col.mb-5 {
 	width: 250px;
 	height: 500px;
@@ -71,19 +64,28 @@ section {
 </style>
 <div>
 <section class="py-5">
-	<!-- <div style="text-align: center">
-		<div style="width: 1300px;">
-			<ul class="nav nav-tabs">
-				<li class="nav-item" style="width: 650px"><a class="nav-link "
-					id="alink1" aria-current="page" href="#">선택</a></li>
-				<li class="nav-item" style="width: 650px"><a class="nav-link "
-					id="alink2" href="#">미선택</a></li>
-			</ul>
-		</div>
-	</div> -->
-	<aside style="border: 1px solid black;width:400px;height: 600px;float:left;margin-left:30px;">
+	
+	<aside style="width:300px;height: 400px;float:left;margin-left:150px;">
 		<div>
-			
+			<hr>
+			<h4>브랜드</h4>
+			<hr>
+			<div>
+				<button type="button" class="btn btn-secondary" style="float:left;margin-left: 50px;">뉴발란스</button>
+				<button type="button" class="btn btn-secondary" style="float:right;margin-right: 50px">아이다스</button><br><br>
+				<button type="button" class="btn btn-secondary" style="float:left;margin-left: 50px;">캔버스</button>
+				<button type="button" class="btn btn-secondary" style="float:right;margin-right: 50px">반스</button><br><br>
+				<button type="button" class="btn btn-secondary" style="float:left;margin-left: 50px;">나이키</button>
+				<button type="button" class="btn btn-secondary" style="float:right;margin-right: 50px">필라</button><br><br>
+			</div>
+			<hr>
+			<h4>종류</h4>
+			<hr>
+			<div>
+				<button type="button" class="btn btn-secondary">운동화</button><br><br>
+				<button type="button" class="btn btn-secondary">슬리퍼</button><br><br>
+				<button type="button" class="btn btn-secondary">샌들</button><br><br>
+			</div>
 		</div>
 	</aside>
 <div id="pdbox">
@@ -246,5 +248,5 @@ section {
 	</div>
 </div>
 </section>
-<div></div>
+</div>
 <%@include file="../../inc/bottom.jsp"%>
