@@ -21,8 +21,15 @@ total{
 	border: 1px solid #d3d3d3;
 	box-sizing: border-box;
 }
-
 </style>
+<script type="text/javascript">
+	$(".minus_btn").on("click", function()){
+		quantity-adjustment = $(this).parent("div").find("input").val();
+		$(this).parent("div").find("input").val(++quantity);
+	});
+
+
+</script>
 </head>
 <body>
     <div class = "header">        
@@ -52,14 +59,14 @@ total{
                     </div>
                 </div>
             </td>
-            <td>1개</td>
+            <td>1개</td>            
             <td>30,000원</td>
             <td>5%</td>
             <td>2500원</td>
             <td>28,500원</td>
         </tr>
         
-                <tr>
+        <tr>
             <td><input type="checkbox" name="1"></td>
             <td>
                 <div class="media">
@@ -86,6 +93,13 @@ total{
                     </div>
                 </div>
             </td>
+            <td>
+	            <div class="quantity-adjustment">
+		            <button class="plus_btn">+</button>
+		            <input type="text" class="quantity-input" value="1">
+		            <button class="minus_btn">-</button>
+        		</div>
+        	</td>	
             <td>1개</td>
             <td>30,000원</td>
             <td>5%</td>   
