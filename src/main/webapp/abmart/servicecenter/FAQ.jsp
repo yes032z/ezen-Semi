@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/top.jsp" %>
+
 <style type="text/css">
 	#txtsearch {width: 50%; height: 36px;}
 	
-	.main {margin-left: 490px;}
+	.main {margin: 90px 0 0 490px;}
 
-	.question {margin-top: 20px; width: 900px;}
+	.question {margin-top: 50px; width: 900px;}
 	
 	#btsearch {
 		background: black;
@@ -78,7 +79,7 @@
 	dd:nth-child(5) {color: #808080a6;}
 	
 </style>
-<script type="text/javascript" src="../../js/jquery-3.7.0.min.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-3.7.0.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$('#faqtab td').hover(function() {
@@ -127,8 +128,8 @@
 		</dl>
 	</nav>  
 	
-	<article class="main"><br>
-		<p style="font-size: 23px;">FAQ</p>
+	<article class="main">
+		<h3>FAQ</h3>
 		<div id="searchFaq">
 			<hr><br>
 			<a>FAQ 검색</a>
@@ -138,7 +139,7 @@
 		</div><br>
 		
 		<div>
-			<table summary="FAQ를 묶어놓은 것 입니다." id="faqtab" border="1">
+			<table summary="FAQ List" id="faqtab" border="1">
 				<tr>
 					<td><a href="#">상품정보</a></td>
 					<td><a href="#">배송현황</a></td>
