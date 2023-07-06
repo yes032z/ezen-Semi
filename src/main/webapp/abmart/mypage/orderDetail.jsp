@@ -96,8 +96,8 @@ $(function() {
 			<button type="button" id="datebtn2" class="btn btnDate" name="size">3개월</button>
 			<button type="button" id="datebtn3" class="btn btnDate" name="size">6개월</button>
 			<button type="button" id="datebtn4" class="btn btnDate" name="size">1년</button>
-			<input type="date" id="startDate" name="startDate" value="" /> ~ 
-			<input type="date" id="lastDate" name="lastDate" value="" />
+			<input type="date" id="startDate" name="startDate" value="<%=startDate %>" /> ~ 
+			<input type="date" id="lastDate" name="lastDate" value="<%=lastDate %>" />
 			<button type="submit" class="mypagebtn">조회</button>
 		</div>
 		<div id="searchSort" class="selectmyorders">
