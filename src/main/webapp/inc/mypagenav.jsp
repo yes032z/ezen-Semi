@@ -5,11 +5,11 @@ section {
 	display: hidden;
 }
 #leftNav {
-	width: 250px;
-	float: left;
-	text-align: center;
+    width: 300px;
+    float: left;
+    margin-left: 70px;
 }
-h4{
+h2{
     font-weight: bold;
   	margin: 55px 0px 26px 50px;
     padding: 0 0 0 20px;
@@ -26,6 +26,7 @@ dl#leftNavi {
 }
 #leftNavi dd{
 	font-size:15px;
+    margin-left: 0px;
 }
 #leftNavi dd a {
 	text-decoration: none;
@@ -39,7 +40,7 @@ clear: both;
 }
 </style>
 <nav id="leftNav">
-	<h4>마이페이지</h4>
+	<h2>마이페이지</h2>
 	<dl id="leftNavi">
 		<!-- category list -->
 		<dt>쇼핑 정보</dt>
