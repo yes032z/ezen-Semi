@@ -42,10 +42,20 @@
 		margin-left: 150px;
 	}
 	
-	#reviewdiv{
-		clear:both;
-		height: 40px;
+	.bottomborder{
 		border-bottom: 2px solid black;
+	}
+	
+	.clearboth{
+		clear: both;
+	}
+	
+	.reviewdiv{
+		height: 40px;
+	}
+	
+	.margintop30{
+		margin-top: 30px;
 	}
 	
 	span.gray{
@@ -166,17 +176,28 @@
 		<div class="div2">
 			<img src="../../images/review.png"/>
 		</div>
-		<div class="div2" id="reviewdiv">
+		<div class="div2 reviewdiv clearboth bottomborder">
 			<span style="float:left;">총 <span name="searchqty">990</span>개의 리뷰가 있습니다.</span>
-			<span class="rightSort" id="span2">&nbsp;|&nbsp;<a href="#">최근 등록순</a></span>
-			<span class="rightSort" id="span1">&nbsp;|&nbsp;<a href="#">평점 낮은순</a>&nbsp;</span>
-			<span class="rightSort" id="span1">&nbsp;<a href="#">평점 높은순</a>&nbsp;</span>
+			<span class="rightSort span2">&nbsp;|&nbsp;<a href="#">최근 등록순</a></span>
+			<span class="rightSort">&nbsp;|&nbsp;<a href="#">평점 낮은순</a>&nbsp;</span>
+			<span class="rightSort">&nbsp;<a href="#">평점 높은순</a>&nbsp;</span>
 		</div>
-		<div class="div2">
+		<div class="div2 reviewdiv clearboth" style="margin-top: 10px">
 			<span class="leftSort" style="margin-right: 30px">★★★★★</span>
 			<span class="leftSort gray" style="margin-right: 30px">black</span>
 			<span class="leftSort gray"> | </span>
 			<span class="leftSort gray" style="margin-left: 30px">사이즈</span>
+		</div>
+		<div class="div2 reviewdiv clearboth">
+			<span class="leftSort">제목</span>
+		</div>
+		<div class="div2 reviewdiv clearboth">
+<pre class="leftSort">내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용
+내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용
+내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용 내용</pre>
+		</div><br><br>
+		<div class="div2">
+			<span class="leftSort span2">아이디</span><span class="leftSort span2">&nbsp;|&nbsp;</span><span class="leftSort">등록 날짜</span>
 		</div>
 	</div>
 	<!-- 상품Q&A 탭 -->
