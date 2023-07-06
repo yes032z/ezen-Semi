@@ -49,7 +49,7 @@
             <td>
            	 <div class="quantity-adjustment">
 	            <button class="plus_btn btn mypagebtn3">+</button>
-	            <input type="text" class="quantity-input" value="1" style="width: 45px">
+	            <input type="text" class="quantity-input" value="1" style="width: 45px; height: 35px">
 	            <button class="minus_btn btn mypagebtn3">-</button>
        		</div>
             </td>            
@@ -72,7 +72,7 @@
             <td>
            	 <div class="quantity-adjustment">
 	            <button class="plus_btn btn mypagebtn3">+</button>
-	            <input type="text" class="quantity-input" value="1" style="width: 45px">
+	            <input type="text" class="quantity-input" value="1" style="width: 45px; height: 35px">
 	            <button class="minus_btn btn mypagebtn3">-</button>
        		</div>
             </td>
@@ -95,7 +95,7 @@
             <td>
 	            <div class="quantity-adjustment">
 		            <button class="plus_btn btn mypagebtn3">+</button>
-		            <input type="text" class="quantity-input" value="1" style="width: 45px">
+		            <input type="text" class="quantity-input" value="1" style="width: 45px; height: 35px">
 		            <button class="minus_btn btn mypagebtn3">-</button>
         		</div>
         	</td>	

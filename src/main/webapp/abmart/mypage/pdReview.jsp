@@ -45,7 +45,7 @@
 				</thead>
 				<tbody>
 				<%if(list==null || list.isEmpty()){ %>
-					<tr><th colspan="6">내가 작성한 리뷰가 존재하지 않습니다.</th></tr>
+					<tr class="mypagerow"><th colspan="6">내가 작성한 리뷰가 존재하지 않습니다.</th></tr>
 				<%}else{
 					for(int i=0;i<list.size();i++){
 						ViewVO viewVo=list.get(i);

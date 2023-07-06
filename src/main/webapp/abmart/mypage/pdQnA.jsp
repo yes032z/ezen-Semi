@@ -43,7 +43,7 @@
 				</thead>
 				<tbody>
 				<%if(list==null || list.isEmpty()){ %>
-					<tr><th colspan="5">내가 작성한 Q & A가 존재하지 않습니다.</th></tr>
+					<tr class="mypagerow"><th colspan="5">내가 작성한 Q & A가 존재하지 않습니다.</th></tr>
 				<%}else{
 					for(int i=0;i<list.size();i++){
 						ViewVO viewVo=list.get(i);%>
