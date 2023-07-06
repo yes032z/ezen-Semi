@@ -180,7 +180,7 @@
 	
 	<div class="orderinfo">
 		<div id="orderinfo-first">찜한 상품
-		<a href="#"><span class="exploreMore">더보기 ▶</span></a>
+		<a href="<%=request.getContextPath() %>/abmart/mypage/wishList.jsp"><span class="exploreMore">더보기 ▶</span></a>
 		</div>
 		<div class="col mb-5">
 			<div class="card h-100">

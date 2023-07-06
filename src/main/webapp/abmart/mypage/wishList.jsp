@@ -4,7 +4,7 @@
 <%@ include file="../../inc/mypagenav.jsp" %>
 <link href="../../css/mypage.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
-	$(document).ready(function() {
+	$(function() {
 	    $(".minus_btn").on("click", function() {
 	        var quantity = parseInt($(this).siblings(".quantity-input").val());
 	        if (quantity > 1) {
@@ -16,6 +16,11 @@
 	        var quantity = parseInt($(this).siblings(".quantity-input").val());
 	        $(this).siblings(".quantity-input").val(quantity + 1);
 	    });
+	    
+	    $('#chkAll').click(function(){
+			$('.chkItem').prop('checked',this.checked);
+		});
+	    
 	});
 </script>
 <article id="mypage">
@@ -26,7 +31,7 @@
 			<table class="table table-hover">
     <thead class="thead-dark">
         <tr>
-            <th><input type="checkbox" name="all"></th>
+            <th><input type="checkbox" name="all" id="chkAll"></th>
             <th>상품명</th>
             <th>총수량</th>
             <th>판매가</th>
@@ -37,7 +42,7 @@
     </thead>
     <tbody>
         <tr>
-            <td><input type="checkbox" name="1"></td>
+            <td><input type="checkbox" name="1" class="chkItem"></td>
             <td>
                 <div class="media">
                     <img src="../../images/test.jpg" class="mr-3 pdimgsize" alt="1">
@@ -49,7 +54,7 @@
             <td>
            	 <div class="quantity-adjustment">
 	            <button class="plus_btn btn mypagebtn3">+</button>
-	            <input type="text" class="quantity-input" value="1" style="width: 45px">
+	            <input type="text" class="quantity-input" value="1" style="width: 45px; height: 35px">
 	            <button class="minus_btn btn mypagebtn3">-</button>
        		</div>
             </td>            
@@ -60,7 +65,7 @@
         </tr>
         
         <tr>
-            <td><input type="checkbox" name="1"></td>
+            <td><input type="checkbox" name="1" class="chkItem"></td>
             <td>
                 <div class="media">
                     <img src="" class="mr-3" alt="1">
@@ -72,7 +77,7 @@
             <td>
            	 <div class="quantity-adjustment">
 	            <button class="plus_btn btn mypagebtn3">+</button>
-	            <input type="text" class="quantity-input" value="1" style="width: 45px">
+	            <input type="text" class="quantity-input" value="1" style="width: 45px; height: 35px">
 	            <button class="minus_btn btn mypagebtn3">-</button>
        		</div>
             </td>
@@ -83,7 +88,7 @@
         </tr>
         
         <tr>
-            <td><input type="checkbox" name="1"></td>
+            <td><input type="checkbox" name="1" class="chkItem"></td>
             <td>
                 <div class="media">
                     <img src="" class="mr-3" alt="1">
@@ -95,7 +100,7 @@
             <td>
 	            <div class="quantity-adjustment">
 		            <button class="plus_btn btn mypagebtn3">+</button>
-		            <input type="text" class="quantity-input" value="1" style="width: 45px">
+		            <input type="text" class="quantity-input" value="1" style="width: 45px; height: 35px">
 		            <button class="minus_btn btn mypagebtn3">-</button>
         		</div>
         	</td>	

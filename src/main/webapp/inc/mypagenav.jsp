@@ -24,10 +24,6 @@ dl#leftNavi {
 	font-size: 18px;
 	font-weight: bold;
 }
-#leftNavi dd{
-	font-size:15px;
-    margin-left: 0px;
-}
 #leftNavi dd a {
 	text-decoration: none;
 	color: #585721;
