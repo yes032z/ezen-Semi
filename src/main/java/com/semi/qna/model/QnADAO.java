@@ -51,7 +51,7 @@ public class QnADAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<ViewVO> selectByid(String id) throws SQLException{
+	public List<ViewVO> selectQnAByid(String id) throws SQLException{
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;

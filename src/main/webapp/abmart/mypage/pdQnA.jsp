@@ -12,10 +12,9 @@
 	//mypage.jsp에서 get방식 이동
 	String id=(String)session.getAttribute("id");
 
-	qnaService=new QnAService();
 	List<ViewVO> list=null;
 	try{
-		list=qnaService.selectByid(id);
+		list=qnaService.selectQnAByid(id);
 	}catch(SQLException e){
 		e.printStackTrace();
 	}
@@ -39,7 +38,7 @@
 						<th scope="col">내용</th>
 						<th scope="col">상품명</th>
 						<th scope="col">공개유무</th>
-						<th scope="col">등록일자</th>
+						<th scope="col">등록일</th>
 					</tr>
 				</thead>
 				<tbody>

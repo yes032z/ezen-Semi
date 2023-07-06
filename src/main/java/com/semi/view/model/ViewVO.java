@@ -9,6 +9,12 @@ public class ViewVO {
 	private String qnaview; /* 공개유무 */
 	private Timestamp qnaregdate; /* 등록일 */
 
+	private int reviewno; /* 리뷰번호 */
+	private String reviewbody; /* 내용 */
+	private int reviewgrade; /* 별점 */
+	private int good; /* 좋아요 */
+	private Timestamp reviewregdate; /* 등록일 */
+	
 	public ViewVO() {
 		super();
 	}
@@ -21,6 +27,17 @@ public class ViewVO {
 		this.qnaview = qnaview;
 		this.qnaregdate = qnaregdate;
 	}
+	//마이페이지 > 내가 쓴 상품리뷰 목록조회
+	public ViewVO(int reviewno, String reviewbody, String pdname, int reviewgrade, int good, Timestamp reviewregdate) {
+		super();
+		this.reviewno = reviewno;
+		this.reviewbody = reviewbody;
+		this.pdname = pdname;
+		this.reviewgrade = reviewgrade;
+		this.good = good;
+		this.reviewregdate = reviewregdate;
+	}
+	
 	public int getQnano() {
 		return qnano;
 	}
@@ -51,11 +68,41 @@ public class ViewVO {
 	public void setQnaregdate(Timestamp qnaregdate) {
 		this.qnaregdate = qnaregdate;
 	}
+	public int getReviewno() {
+		return reviewno;
+	}
+	public void setReviewno(int reviewno) {
+		this.reviewno = reviewno;
+	}
+	public String getReviewbody() {
+		return reviewbody;
+	}
+	public void setReviewbody(String reviewbody) {
+		this.reviewbody = reviewbody;
+	}
+	public int getReviewgrade() {
+		return reviewgrade;
+	}
+	public void setReviewgrade(int reviewgrade) {
+		this.reviewgrade = reviewgrade;
+	}
+	public int getGood() {
+		return good;
+	}
+	public void setGood(int good) {
+		this.good = good;
+	}
+	public Timestamp getReviewregdate() {
+		return reviewregdate;
+	}
+	public void setReviewregdate(Timestamp reviewregdate) {
+		this.reviewregdate = reviewregdate;
+	}
 	@Override
 	public String toString() {
 		return "ViewVO [qnano=" + qnano + ", qnabody=" + qnabody + ", pdname=" + pdname + ", qnaview=" + qnaview
-				+ ", qnaregdate=" + qnaregdate + "]";
+				+ ", qnaregdate=" + qnaregdate + ", reviewno=" + reviewno + ", reviewbody=" + reviewbody
+				+ ", reviewgrade=" + reviewgrade + ", good=" + good + ", reviewregdate=" + reviewregdate + "]";
 	}
-	
 	
 }
