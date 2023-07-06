@@ -17,11 +17,18 @@
 	
 	h3 {margin-bottom: 20px; font-weight: 550;}
 	
-	.noticeBody a {text-decoration: none; color: black;}
+	a {text-decoration: none; color: black;}
 	
 	.noticeBody th {text-align: center;}
 	
 	td:nth-child(odd) {text-align: center;}
+	
+	/* 페이징 */
+	.page {
+		font-size: 20px;
+		margin-left: 420px;;
+	}
+	
 
 	/* mypagenav */
 	#leftNav {width: 300px; float: left; margin-left: 70px;}
@@ -50,7 +57,14 @@
 <script type="text/javascript">
 
 </script>
-
+<%
+	/* 페이징 처리 */
+	int currentPage = 1;	//현재 페이지
+	
+	if (request.getParameter("currentPage") != null) {
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}
+%>
 	<!-- mypagenav -->
 	<nav id="leftNav">
 		<h2>고객센터</h2>
@@ -148,6 +162,11 @@
 					</tr>
 				</tbody>
 			</table>
+			<!-- 페이징 -->
+			<div class="page">
+				<a href="#">[1]</a>
+				<a href="#">[2]</a>
+			</div>
 		</div>
 	</article><br><br><br><br><br><br>
 
