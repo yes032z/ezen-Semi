@@ -4,9 +4,9 @@
 <style type="text/css">
 	#txtsearch {width: 50%; height: 36px;}
 	
-	.accordian {margin-left: 510px;}
+	.main {margin-left: 400px;}
 
-	.question {margin: 2% 0 0 510px; width: 900px;}
+	.question {margin-top: 20px; width: 900px;}
 	
 	#btsearch {
 		background: black;
@@ -17,7 +17,6 @@
 	}
 
 	#searchFaq {
-		margin-left: 510px;
 		background: #80808014;
 		width: 900px;
 	}
@@ -27,7 +26,7 @@
 		margin-right: 5%;
 	}
 	
-	#faqtab {margin-left: 510px; width: 900px;}
+	#faqtab {width: 900px;}
 	
 	#faqtab td {
 		padding: 15px 15px 15px 15px;
@@ -56,11 +55,11 @@
 	ol,ul,li {list-style: none; margin-left: -20px;}
 	
 	/* mypagenav */
-	#leftNav {width: 300px; float: left;}
+	#leftNav {width: 300px; float: left; margin-left: 70px;}
 	
-	h2 {font-weight: bold; margin: 29px 0px 26px 50px; padding-left: 20px;}
+	h2 {font-weight: bold; margin: 55px 0px 26px 50px; padding-left: 20px;}
 	
-	dl#leftNavi {margin: 10px 10px -11px 50px; padding: 0 0 0 23px;}
+	dl#leftNavi {margin: 10px 10px 0px 50px; padding-left: 23px;}
 	
 	#leftNavi dt {padding: 15px 0px 10px 0px; font-size: 18px; font-weight: bold;}
 	
@@ -111,7 +110,7 @@
 		<hr style="width: 170px;">
 	</nav>  
 	
-	<article><br>
+	<article class="main"><br>
 		<p style="font-size: 23px; margin-left: 510px">FAQ</p>
 		<div id="searchFaq">
 			<hr><br>
@@ -141,7 +140,7 @@
 		</div>
 		
 		<div class="question">
-			<p style="font-weight: bold;">자주 묻는 질문 BEST 10</p>
+			<p style="font-weight: bold;">자주 묻는 질문 BEST 5</p>
 			<div class="accordion">
 		      <ul id="secBox">
 		         <li class="header" style="border-top: 2px solid black;">
@@ -188,6 +187,15 @@
 		            </span>
 		            <ul class="contents">
 		               <li>교환의 경우 사이즈 교환만 가능하며, 색상 변경 및 다른상품으로의 교환은 반품(환불)후 재 주문 해주셔야 합니다.</li>
+		            </ul>
+		         </li>
+		         <li class="header">
+		            <span class="section">
+		            	<img alt="faqImg" src="../../images/faq.png"> &nbsp;같은날 주문했는데 배송이 따로 왔어요
+		            </span>
+		            <ul class="contents">
+		               <li>온라인쇼핑몰에서는 온라인과 오프라인 매장의 상품이 동시에 판매되고 있습니다.<br />
+이에 같은 날 주문을 했더라도, 발송처에 따라 상품을 받는 시기가 다를 수 있습니다.</li>
 		            </ul>
 		         </li>
 		      </ul>
