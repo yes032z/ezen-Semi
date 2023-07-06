@@ -1,14 +1,38 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="com.semi.view.model.ViewVO"%>
+<%@page import="java.util.List"%>
+<%@page import="com.semi.qna.model.QnAService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/top.jsp" %>
 <%@ include file="../../inc/mypagenav.jsp" %>
 <link href="../../css/mypage.css" rel="stylesheet" type="text/css">
+<jsp:useBean id="qnaService" class="com.semi.qna.model.QnAService" scope="session"></jsp:useBean>
+<%
+	//mypage.jsp에서 get방식 이동
+	String id=(String)session.getAttribute("id");
+
+	qnaService=new QnAService();
+	List<ViewVO> list=null;
+	try{
+		list=qnaService.selectByid(id);
+	}catch(SQLException e){
+		e.printStackTrace();
+	}
+%>
 <article id="mypage">
 	<div class="orderinfo">
 		<div id="orderinfo-first">상품 Q & A</div>
 		<div class="subtitle">내가 작성한 상품 Q & A</div>
 		<div id="orderinfo-third">
 			<table class="table table-hover">
+				<colgroup>
+				<col style="width:10%;" />
+				<col style="width:45%;" />
+				<col style="width:15%;" />
+				<col style="width:15%;" />
+				<col style="width:15%;" />		
+				</colgroup>
 				<thead class="thead-dark">
 					<tr>
 						<th scope="col">번호</th>
@@ -19,27 +43,20 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<th scope="row">1</th>
-						<td><a href="#">Maark</a></td>
-						<td>Otto</td>
-						<td>@mdo</td>
-						<td>@mdo</td>
-					</tr>
-					<tr>
-						<th scope="row">2</th>
-						<td><a href="#">Mark</a></td>
-						<td>Thornton</td>
-						<td>@fat</td>
-						<td>@mdo</td>
-					</tr>
-					<tr>
-						<th scope="row">3</th>
-						<td><a href="#">Mark</a></td>
-						<td>the Bird</td>
-						<td>@twitter</td>
-						<td>@mdo</td>
-					</tr>
+				<%if(list==null || list.isEmpty()){ %>
+					<tr><th colspan="5">내가 작성한 Q & A가 존재하지 않습니다.</th></tr>
+				<%}else{
+					for(int i=0;i<list.size();i++){
+						ViewVO viewVo=list.get(i);%>
+						<tr>
+							<th scope="row"><%=viewVo.getQnano() %></th>
+							<td><a href="#"><%=viewVo.getQnabody() %></a></td>
+							<td><%=viewVo.getPdname() %></td>
+							<td><%=viewVo.getQnaview() %></td>
+							<td><%=viewVo.getQnaregdate() %></td>
+						</tr>
+					<%}//for
+				}//if %>	
 				</tbody>
 			</table>
 			</div>
