@@ -5,7 +5,7 @@
 <style type="text/css">
 	#txtsearch {width: 50%; height: 36px;}
 	
-	.main {margin: 90px 0 0 490px;}
+	.main {margin: 90px 0 0 490px; font-family: 'Nanum Gothic';}
 
 	.question {margin-top: 50px; width: 900px;}
 	
