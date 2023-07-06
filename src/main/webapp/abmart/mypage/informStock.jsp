@@ -3,6 +3,14 @@
 <%@ include file="../../inc/top.jsp" %>
 <%@ include file="../../inc/mypagenav.jsp" %>
 <link href="../../css/mypage.css" rel="stylesheet" type="text/css">
+<script type="text/javascript">
+	$(function(){
+		 $('#chkAll').click(function(){
+				$('.chkItem').prop('checked',this.checked);
+			});
+	});
+
+</script>
 <article id="mypage">
 	<div class="orderinfo">
 		<div id="orderinfo-first">재고 알림</div>
@@ -10,7 +18,7 @@
 			<table class="table table-hover">
     <thead class="thead-dark">
         <tr>
-            <th><input type="checkbox" name="all"></th>
+            <th><input type="checkbox" name="all" id="chkAll"></th>
             <th>상품명</th>
             <th>판매가</th>
             <th>할인</th>
@@ -20,7 +28,7 @@
     </thead>
     <tbody>
         <tr>
-            <td><input type="checkbox" name="1"></td>
+            <td><input type="checkbox" name="1" class="chkItem"></td>
             <td>
                 <div class="media">
                     <img src="" class="mr-3 pdimgsize" alt="1">
@@ -36,7 +44,7 @@
         </tr>
         
         <tr>
-            <td><input type="checkbox" name="1"></td>
+            <td><input type="checkbox" name="1" class="chkItem"></td>
             <td>
                 <div class="media">
                     <img src="" class="mr-3" alt="1">
@@ -52,7 +60,7 @@
         </tr>
         
         <tr>
-            <td><input type="checkbox" name="1"></td>
+            <td><input type="checkbox" name="1" class="chkItem"></td>
             <td>
                 <div class="media">
                     <img src="" class="mr-3" alt="1">

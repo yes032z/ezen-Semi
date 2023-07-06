@@ -37,7 +37,9 @@ $(function() {
     //기본설정 startDate 한달전
     setDates(1);
     
-    
+    $('#chkAll').click(function(){
+		$('.chkItem').prop('checked',this.checked);
+	});
     
 });
 </script>
@@ -104,7 +106,7 @@ $(function() {
 			<table class="table table-hover">
    				 <thead class="thead-dark">
 					<tr>
-						<th><input type="checkbox" name="all"></th>
+						<th><input type="checkbox" name="all" id="chkAll"></th>
 						<th>상품명</th>
 						<th>총수량</th>
 						<th>판매가</th>
@@ -115,7 +117,7 @@ $(function() {
 				</thead>
 				<tbody>
 					<tr>
-						<td><input type="checkbox" name="1"></td>
+						<td><input type="checkbox" name="1" class="chkItem"></td>
 						<td>
 							<div class="media">
 								<img src="" class="mr-3 pdimgsize" alt="1">
@@ -133,7 +135,7 @@ $(function() {
 						<td><input type="button" class="mypagebtn" value="리뷰 쓰기" /></td>
 					</tr>
 						<tr>
-						<td><input type="checkbox" name="1"></td>
+						<td><input type="checkbox" name="1" class="chkItem"></td>
 						<td>
 							<div class="media">
 								<img src="" class="mr-3 pdimgsize" alt="1">
