@@ -14,7 +14,7 @@
 						<th scope="col">번호</th>
 						<th scope="col">내용</th>
 						<th scope="col">상품명</th>
-						<th scope="col">조회수</th>
+						<th scope="col">공개유무</th>
 						<th scope="col">등록일자</th>
 					</tr>
 				</thead>

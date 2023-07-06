@@ -2,7 +2,10 @@ package com.semi.qna.model;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.semi.db.ConnectionPoolMgr;
 
@@ -38,6 +41,39 @@ public class QnADAO {
 			return cnt;
 		}finally {
 			pool.dbClose(ps, con);
+		}
+	}
+	/**
+	 * 마이페이지> 내가작성한 Q&A 조회
+	 * @param no //회원번호
+	 * @return
+	 * @throws SQLException
+	 */
+	public List<QnAVO> selectByNo(int no) throws SQLException{
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		List<QnAVO> list=new ArrayList<>();
+		
+		try {
+			con=pool.getConnection();
+			
+			String sql=" select q.qnano, q.qnabody, p.pdname, q.qnaview, q.qnaregdate"
+					+ " from qna q left join product p"
+					+ " on q.pdno= p.pdno"
+					+ " where q.no= ?"
+					+ " order by q.qnaregdate desc";
+			ps=con.prepareStatement(sql);
+			
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				
+			}
+			
+			System.out.println();
+			return list;
+		}finally {
+			pool.dbClose(rs, ps, con);
 		}
 	}
 	
