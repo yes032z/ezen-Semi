@@ -100,10 +100,20 @@ div#orderinfo-third{
     border-bottom-right-radius: 10px;
     background: #8080801c;
 }
-.mypagebtn3{
-	border: 1px solid gray;
+.mypagebtn3 {
+    border: 1px solid gray;
     border-radius: 10%;
     margin-left: 5px;
     margin-right: 5px;
     height: 35px;
+    margin-bottom: 5px;
+}
+.selectmyorders{
+	margin-left: 20px;
+}
+.mypagerow {
+    height: 200px;
+    font-weight: bold;
+    font-size: 23px;
+    border-bottom: 1px solid #ececec;
 }

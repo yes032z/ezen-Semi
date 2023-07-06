@@ -87,14 +87,14 @@
 <script type="text/javascript">
 	$(function(){
 		$('input[name=rating]').click(function(){
-			$('.score').show();
-			$('.score').find('span').text($('input[name=rating]:checked').val());
+			$('.scorestar').show();
+			$('.scorestar').find('span').text($('input[name=rating]:checked').val());
 		});
 		
 		$('input[type=button]').click(function(){
 			if(confirm('리뷰 등록을 취소하시겠습니까?')){
 				self.close();
-			};
+			}
 		});
 		
 		$('input[type=submit]').click(function(){
@@ -134,7 +134,7 @@
 	  <input type="radio" id="1-star" name="rating" value="1" />
 	  <label for="1-star" class="star">&#9733;</label>
 	</div>
-	<p class="score" style="display: none"><span></span>점을 주셨네요!<br>
+	<p class="scorestar" style="display: none"><span></span>점을 주셨네요!<br>
 	상품에 대한 상세후기를 작성해주세요.</p>
 	<textarea id="reviewbody" name="reviewbody"><%=reviewbody %></textarea><br>
 	<label>사진 첨부</label><br>

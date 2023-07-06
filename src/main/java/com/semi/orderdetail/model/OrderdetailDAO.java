@@ -1,5 +1,12 @@
 package com.semi.orderdetail.model;
 
-public class OrderdetailDAO {
+import com.semi.db.ConnectionPoolMgr;
 
+public class OrderdetailDAO {
+	private ConnectionPoolMgr pool;
+	
+	public OrderdetailDAO() {
+		pool=new ConnectionPoolMgr();
+	}
+	
 }
