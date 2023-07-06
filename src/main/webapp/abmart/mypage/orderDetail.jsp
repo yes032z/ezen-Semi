@@ -101,10 +101,10 @@ $(function() {
 			<button type="submit" class="mypagebtn">조회</button>
 		</div>
 		<div id="searchSort" class="selectmyorders">
-		
+		 <%if(startDate!=null && !startDate.isEmpty() && lastDate!=null && !lastDate.isEmpty()){%>
 		   <span class="leftSort">총 </span><span class="leftSort" name="searchqty">10</span>
 		   <span class="leftSort">건이 조회되었습니다.</span>
-		   
+	     <%}%>
 		</div>
 		</form>
 		<div id="orderinfo-third">
