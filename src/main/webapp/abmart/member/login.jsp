@@ -5,7 +5,11 @@
 <head>
 <link rel="stylesheet" href="../../css/loginstyle.css">
 <script type="text/javascript">
-	
+	$(function(){
+		$('.go').click(function(){
+			loaction.href="../../index.jsp";
+		});
+	});
 </script>
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
@@ -35,9 +39,9 @@
   </div>
   <p class="p-container" >
   <!-- jq에서 클릭 링크걸기 -->
-     <input type="submit" name="Login" id="go" value="로그인" width="40%">
-     <input type="submit" name="register" id="register_go" value="회원가입" width="40%" >
+     <input type="submit" name="Login" id="go" value="로그인">
   </p>
 </form>
+
 </body>
 </html>
