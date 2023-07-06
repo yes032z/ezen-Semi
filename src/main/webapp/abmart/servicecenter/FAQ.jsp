@@ -4,7 +4,7 @@
 <style type="text/css">
 	#txtsearch {width: 50%; height: 36px;}
 	
-	.main {margin-left: 400px;}
+	.main {margin-left: 490px;}
 
 	.question {margin-top: 20px; width: 900px;}
 	
@@ -67,6 +67,16 @@
 	
 	#leftNavi dt a:hover{color: red;}
 	
+	dd:first-child {color: gray; font-size: 18px; font-weight: bold;}
+	
+	dd:nth-child(2) {font-size: 19px;}
+	
+	dd:nth-child(n+3) {font-size: 14px; margin-bottom: 0;}
+
+	dd:nth-child(4) {margin-left: 41px}
+
+	dd:nth-child(5) {color: #808080a6;}
+	
 </style>
 <script type="text/javascript" src="../../js/jquery-3.7.0.min.js"></script>
 <script type="text/javascript">
@@ -108,10 +118,17 @@
 			<dt><a href="#">매장 찾기</a></dt>
 		</dl>
 		<hr style="width: 170px;">
+		<dl id="leftNavi">
+			<dd><img alt="csImg" src="<%=request.getContextPath() %>/images/csImg.png"> &nbsp;CS CENTER</dd>
+			<dd>1588 - 9667 </dd>
+			<dd>월~금 09:00~12:00</dd>
+			<dd>13:00~18:00</dd>
+			<dd>(주말,공휴일 휴무)</dd>
+		</dl>
 	</nav>  
 	
 	<article class="main"><br>
-		<p style="font-size: 23px; margin-left: 510px">FAQ</p>
+		<p style="font-size: 23px;">FAQ</p>
 		<div id="searchFaq">
 			<hr><br>
 			<a>FAQ 검색</a>
@@ -201,6 +218,6 @@
 		      </ul>
 		   </div>
 	   </div>
-	</article>
+	</article><br><br><br><br><br><br>
 
 <%@ include file="../../inc/bottom.jsp" %>
