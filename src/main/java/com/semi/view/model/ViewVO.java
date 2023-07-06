@@ -15,6 +15,13 @@ public class ViewVO {
 	private int good; /* 좋아요 */
 	private Timestamp reviewregdate; /* 등록일 */
 	
+	private int orderno; /* 주문번호 */
+	private int orderqty; /* 수량 */
+	private int price; /* 금액 */
+	private String pickup; /* 픽업유무 */
+	private Timestamp orderregdate; /* 구매일 */
+	
+	
 	public ViewVO() {
 		super();
 	}
@@ -37,7 +44,16 @@ public class ViewVO {
 		this.good = good;
 		this.reviewregdate = reviewregdate;
 	}
-	
+	//마이페이지 > 주문 조회
+	public ViewVO(int orderno, String pdname,  int orderqty, int price, String pickup, Timestamp orderregdate) {
+		super();
+		this.orderno = orderno;
+		this.pdname = pdname;
+		this.orderqty = orderqty;
+		this.price = price;
+		this.pickup = pickup;
+		this.orderregdate = orderregdate;
+	}
 	public int getQnano() {
 		return qnano;
 	}
@@ -98,11 +114,43 @@ public class ViewVO {
 	public void setReviewregdate(Timestamp reviewregdate) {
 		this.reviewregdate = reviewregdate;
 	}
+	public int getOrderno() {
+		return orderno;
+	}
+	public void setOrderno(int orderno) {
+		this.orderno = orderno;
+	}
+	public int getOrderqty() {
+		return orderqty;
+	}
+	public void setOrderqty(int orderqty) {
+		this.orderqty = orderqty;
+	}
+	public int getPrice() {
+		return price;
+	}
+	public void setPrice(int price) {
+		this.price = price;
+	}
+	public String getPickup() {
+		return pickup;
+	}
+	public void setPickup(String pickup) {
+		this.pickup = pickup;
+	}
+	public Timestamp getOrderregdate() {
+		return orderregdate;
+	}
+	public void setOrderregdate(Timestamp orderregdate) {
+		this.orderregdate = orderregdate;
+	}
 	@Override
 	public String toString() {
 		return "ViewVO [qnano=" + qnano + ", qnabody=" + qnabody + ", pdname=" + pdname + ", qnaview=" + qnaview
 				+ ", qnaregdate=" + qnaregdate + ", reviewno=" + reviewno + ", reviewbody=" + reviewbody
-				+ ", reviewgrade=" + reviewgrade + ", good=" + good + ", reviewregdate=" + reviewregdate + "]";
+				+ ", reviewgrade=" + reviewgrade + ", good=" + good + ", reviewregdate=" + reviewregdate + ", orderno="
+				+ orderno + ", orderqty=" + orderqty + ", price=" + price + ", pickup=" + pickup + ", orderregdate="
+				+ orderregdate + "]";
 	}
 	
 }
