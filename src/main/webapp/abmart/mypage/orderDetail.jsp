@@ -97,7 +97,7 @@ $(function() {
 			<button type="button" id="datebtn3" class="btn btnDate" name="size">6개월</button>
 			<button type="button" id="datebtn4" class="btn btnDate" name="size">1년</button>
 			<input type="date" id="startDate" name="startDate" value="" /> ~ 
-			<input type="date" id='lastDate' name="lastDate" value="" />
+			<input type="date" id="lastDate" name="lastDate" value="" />
 			<button type="submit" class="mypagebtn">조회</button>
 		</div>
 		<div id="searchSort" class="selectmyorders">
@@ -154,15 +154,15 @@ $(function() {
 						<td>2023-07-06</td>
 						<td><input type="button" class="mypagebtn" value="리뷰 쓰기" /></td>
 					</tr>
-						
+					
 				</tbody>
 			</table>
-			<div class="divPage">
+	<div class="divPage">
 	<!-- 페이지 번호 추가 -->		
 	<!-- 이전 블럭으로 이동 -->
 	<%if(pageVo.getFirstPage()>1){%>
 		<a href="list.jsp?currentPage=<%=pageVo.getFirstPage()-1%>">
-			<img src="../images/first.JPG">
+			<img src="../../images/first.JPG">
 		</a>	
 	<%} %>
 						
@@ -173,14 +173,14 @@ $(function() {
 	    if(i == currentPage){ %>
          <span style="color: blue;font-weight: bold;font-size: 1em"><%=i%></span>
    <%   }else{   %>
-         <a href="list.jsp?currentPage=<%=i%>&startDate=<%=startDate%>&lastDate=<%=lastDate %>">[<%=i %>]</a>
+         <a href="orderDetail.jsp?currentPage=<%=i%>&startDate=<%=startDate%>&lastDate=<%=lastDate %>">[<%=i %>]</a>
    <%   }//if      
 	}//for %>
 	
 	<!-- 다음 블럭으로 이동 -->
 	<%if(pageVo.getLastPage()< pageVo.getTotalPage()){%>
 		<a href="list.jsp?currentPage=<%=pageVo.getLastPage()+1%>">
-			<img src="../images/last.JPG">
+			<img src="../../images/last.JPG">
 		</a>	
 	<%} %>
 	
