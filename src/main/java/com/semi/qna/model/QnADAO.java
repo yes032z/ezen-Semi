@@ -51,7 +51,7 @@ public class QnADAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<ViewVO> selectQnAByid(String id, String startDate,String lastDate) throws SQLException{
+	public List<ViewVO> selectQnAByid(String id, String startDate, String lastDate) throws SQLException{
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -65,8 +65,8 @@ public class QnADAO {
 					 +" on q.pdno= p.pdno"
 					 +" left join member m"
 					 +" on q.no= m.no"
-					 +" where m.id= ? and q.qnaregdate>=to_date( ? )"
-					 +" and q.qnaregdate<to_date( ? )+1"
+					 +" where m.id= ? and q.qnaregdate >=to_date( ? )"
+					 +" and q.qnaregdate< to_date( ? )+1"
 					 +" order by q.qnaregdate desc";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, id);
@@ -84,7 +84,8 @@ public class QnADAO {
 				ViewVO vo=new ViewVO(qnano, qnabody, pdname, qnaview, qnaregdate);
 				list.add(vo);
 			}
-			System.out.println("사용자 Q&A 목록 조회 결과, list.size="+list.size()+", 매개변수 id="+id);
+			System.out.println("사용자 Q&A 목록 조회 결과, list.size="+list.size()+", 매개변수 id="+id
+					+", startDate="+startDate+", lastDate="+lastDate);
 			return list;
 		}finally {
 			pool.dbClose(rs, ps, con);

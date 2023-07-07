@@ -87,7 +87,7 @@ public class ReviewDAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<ViewVO> selectReviewByid(String id) throws SQLException{
+	public List<ViewVO> selectReviewByid(String id,String startDate, String lastDate) throws SQLException{
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -102,10 +102,13 @@ public class ReviewDAO {
 					+" on r.pdno= p.pdno"
 					+" left join member m"
 					+" on r.no= m.no"
-					+" where m.id= ?"
+					+" where m.id= ? and r.reviewregdate >=to_date( ? )"
+					+" and r.reviewregdate< to_date( ? )+1"
 					+" order by r.reviewregdate desc";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, id);
+			ps.setString(2, startDate);
+			ps.setString(3, lastDate);
 			
 			rs=ps.executeQuery();
 			while(rs.next()) {
@@ -119,7 +122,8 @@ public class ReviewDAO {
 				ViewVO vo=new ViewVO(reviewno, reviewbody, pdname, reviewgrade, good, reviewregdate);
 				list.add(vo);
 			}
-			System.out.println("사용자 리뷰 목록 조회 결과, list.size="+list.size()+", 매개변수 id="+id);
+			System.out.println("사용자 리뷰 목록 조회 결과, list.size="+list.size()+", 매개변수 id="+id
+					+", startDate="+startDate+", lastDate="+lastDate);
 			return list;
 		}finally {
 			pool.dbClose(rs, ps, con);

@@ -20,8 +20,8 @@ public class ReviewService {
 		return reviewDao.updateReview(vo);
 	}
 	//마이페이지> 내가작성한 리뷰조회
-	public List<ViewVO> selectReviewByid(String id) throws SQLException{
-		return reviewDao.selectReviewByid(id);
+	public List<ViewVO> selectReviewByid(String id, String startDate, String lastDate) throws SQLException{
+		return reviewDao.selectReviewByid(id,startDate, lastDate);
 	}
 	
 	

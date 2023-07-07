@@ -126,9 +126,7 @@ $(function() {
 				<tbody>
 				<%if(list==null || list.isEmpty()){ %>
 					<tr class="mypagerow"><th colspan="5">내가 작성한 Q & A가 존재하지 않습니다.</th></tr>
-				<%}else{%>
-			  	<!--상품 Q & A 목록 조회 반복문 시작  -->	
-			  	<%
+				<%}else{
 			  	int num=pageVo.getNum();
 			  	int curPos=pageVo.getCurPos();
 			  	
@@ -147,7 +145,6 @@ $(function() {
 					<td><%=sdf.format(vo.getQnaregdate()) %></td>
 				</tr>
 					<%}//for%>
-			  	<!--반복처리 끝-->
 				<%}//if %>	
 				</tbody>
 			</table>
