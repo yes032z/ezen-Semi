@@ -73,7 +73,7 @@ input#size {
       <input type="password" name="password" id="pwdchk" placeholder="User pwdck">
     </p>
     <p>
-      <input type="text" name="size" id="size" placeholder="발 사이즈">
+  	  <input type="text" name="size" id="size" placeholder="발 사이즈">    
     </p>
     <p id="zip">
     <!-- 우편번호 검색 넣기 -->

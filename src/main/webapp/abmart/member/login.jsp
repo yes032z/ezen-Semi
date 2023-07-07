@@ -45,11 +45,11 @@
   <div class="inset">
     <p>
       <input type="text" name="id" id="id" placeholder="userid" value="<%= ck_value%>">
-         </div>
-    </p>
-    <p>
       <input type="password" name="pwd" id="pwd" placeholder="user pwd">
     </p>
+   </div>
+    
+   
     <div style="text-align: center;">
       <div class="checkboxouter">
         <input type="checkbox" name="rememberme" id="remember" value="Remember">
