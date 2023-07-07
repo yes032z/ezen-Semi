@@ -53,7 +53,8 @@
 		font-size:14px;
 	}
 	
-	ol,ul,li {list-style: none; margin-left: -20px;}
+	
+	#secBox {list-style: none; margin-left: -40px;}
 	
 	/* mypagenav */
 	#leftNav {width: 300px; float: left; margin-left: 70px;}
@@ -129,14 +130,16 @@
 	</nav>  
 	
 	<article class="main">
-		<h3>FAQ</h3>
-		<div id="searchFaq">
-			<hr><br>
-			<a>FAQ 검색</a>
-			<input type="text" id="txtsearch" placeholder="궁금한 내용을 입력해주세요.">
-			<button id="btsearch">검색</button><br><br>
-			<hr>
-		</div><br>
+	<form name="FAQfrm" method="get" action="FAQ.jsp">
+			<h3>FAQ</h3>
+			<div id="searchFaq">
+				<hr><br>
+				<a>FAQ 검색</a>
+				<input type="text" id="txtsearch" placeholder="궁금한 내용을 입력해주세요.">
+				<button id="btsearch">검색</button><br><br>
+				<hr>
+			</div><br>
+		</form>
 		
 		<div>
 			<table summary="FAQ List" id="faqtab" border="1">
