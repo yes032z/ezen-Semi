@@ -391,7 +391,7 @@ header{
 								<td><input type="text" name="addr1"></td>
 							</tr>
 							<tr>
-								<td>상세주소</td>
+								<td>상세주소.</td>
 								<td><input type="text" name="addr2"></td>
 							</tr>
 						</table>
