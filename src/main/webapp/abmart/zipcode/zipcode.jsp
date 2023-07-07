@@ -46,8 +46,8 @@
 
 	//부모창(회원가입 창)에 우편번호, 주소 셋팅하기
 	function setZipcode(zipcode, address){
-		$(opener.document).find('#zipcode').val(zipcode); /* 회원가입창 아이디가 zipcode인곳에 값 뿌리기 */
-		$(opener.document).find('input[name = address]').val(address); /* 회원가입창 name = address인 부분에 뿌리기 */
+		$(opener.document).find('#zipno').val(zipcode); /* 회원가입창 아이디가 zipcode인곳에 값 뿌리기 */
+		$(opener.document).find('input[name = detailaddress]').val(address); /* 회원가입창 name = address인 부분에 뿌리기 */
 		
 		self.close(); /* 검색창 닫기 */
 	}

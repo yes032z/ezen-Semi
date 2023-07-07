@@ -5,7 +5,7 @@
 <head>
 <style type="text/css">
 ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-4 {
-    font-size: 16px;
+    font-size: 15px;
 }
 
 
@@ -23,6 +23,13 @@ input.form-control.mr-sm-2 {
 </style>
 <meta charset="utf-8" />
     <head>
+<%
+	String j_userid=(String)session.getAttribute("id");
+	boolean j_isLogin=false;
+	if(j_userid!=null && !j_userid.isEmpty()){  //세션에 값이 있으면 로그인된 경우
+		j_isLogin=true;
+	}
+%>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
         <meta name="description" content="" />
@@ -47,7 +54,11 @@ input.form-control.mr-sm-2 {
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
+                      <%if(j_isLogin){ %>
+                        <li class="nav-item"><a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/abmart/member/logout.jsp">로그아웃</a></li>
+                        <%}else{ %>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/abmart/member/login.jsp">로그인</a></li>
+                        <%} %>
                         <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/abmart/member/register.jsp">회원가입</a></li>
                         <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/abmart/mypage/mypage.jsp">마이페이지</a></li>
                         <li class="nav-item dropdown">

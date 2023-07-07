@@ -62,10 +62,12 @@ public class MemberDAO {
 	   Connection con=null; 
 	   PreparedStatement ps=null;
 	  
-	  try { //1,2 con=pool.getConnection();
+	  try { //1,2 
+		  con=pool.getConnection();
 	  
 	  //3 
-	 String sql = "";
+	 String sql =  "insert into member(no,name,id,pwd,footsize,zipno,DETAILADDRESS,tel,email) "
+	 		+ "values(member_seq.nextval,?,?,?,?,?,?,?,?)";
 	  
 	  ps = con.prepareStatement(sql);
 	  ps.setString(1, vo.getName());

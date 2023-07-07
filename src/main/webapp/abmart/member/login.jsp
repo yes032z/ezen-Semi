@@ -36,10 +36,7 @@
 		}//for
 	}//if
 %>
-<!-- <div class="background-wrap">
-  <div class="background"></div>
-</div>
- -->
+
 <form id="accesspanel" action="login_ok.jsp" method="post">
   <h1 id="litheader">AB - MART</h1>
   <div class="inset">

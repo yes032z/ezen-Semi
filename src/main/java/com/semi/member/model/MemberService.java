@@ -19,8 +19,10 @@ public class MemberService {
 		memberDao=new MemberDAO();
 	}
 	
-	public int checkLogin(String userid, String pwd) throws SQLException {
-		return memberDao.checkLogin(userid, pwd);
+	public int checkLogin(String id, String pwd) throws SQLException {
+		return memberDao.checkLogin(id, pwd);
 	}
-	
+	  public int insertMember(MemberVO vo) throws SQLException  {
+	  return memberDao.insertMember(vo);
+	  }
 }

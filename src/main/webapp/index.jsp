@@ -3,14 +3,7 @@
 <%@include file="../inc/top.jsp" %>
 	<!-- Headerd이미지-->
 	<header class="bg-dark py-5">
-		< <!-- 기존 배너 -->
-	<!-- 	<!--  <div class="container px-5 px-lg-5 my-5">
-			<div class="text-center text-white">
-				<img class="card-img-top"
-					src="https://image.a-rt.com//art/display/gs/contents/202306/20230626115213680.jpg?fitting=large|1920:600"
-					alt="..." />
-			</div>
-		</div>   -->
+	
  <div id="carouselExample" class="carousel slide">
       <div class="carousel-inner">
         <div class="carousel-item active">
