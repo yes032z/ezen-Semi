@@ -7,6 +7,11 @@
 <meta charset="UTF-8">
 <title>OrderCompleted.jsp</title>
 <style type ="text/css">
+p {
+	font-size: 30px;
+	margin: 30px 0 0 50px;		
+}
+
 #product > .complete > article {
     margin-top: 16px;
 }
@@ -23,7 +28,7 @@
 #product > .complete > .message > p {
     font-size: 18px;
     font-weight: bold;
-    padding: 10px;
+    padding: 10px;"src/main/webapp/abmart/servicecenter/FAQ.jsp"
     text-align: center;
 }
 #product > .complete > article {
@@ -170,14 +175,15 @@
 <body> 
         <main id="product">      
             <section class="complete">
-                <nav>
-                    <h1>주문완료</h1>
+                <nav><br>
                     <p>
                         HOME > 장바구니 > 주문결제 > <strong>주문완료</strong>
-                    </p>
+                        <hr>
+                    </p>                    
                 </nav>
                 <article class="message">
                     <h2>
+                    	주문완료<br><br>
                         고객님의 주문이 정상적으로 완료되었습니다.
                         <i class="far fa-smile" aria-hidden="true"></i>
                     </h2>
@@ -352,7 +358,7 @@
                         </li>
                         <li>
                             <span>
-                                신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요
+                                신발 많이 사주세요. 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요
                             </span>
                         </li>
                     </ul>

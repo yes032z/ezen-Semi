@@ -48,8 +48,7 @@ clear: both;
 		<dd><a href="<%=request.getContextPath() %>/abmart/mypage/pdQnA.jsp">상품 Q & A</a></dd>
 		<dd><a href="<%=request.getContextPath() %>/abmart/mypage/pdReview.jsp">상품 리뷰</a></dd>
 		<dt>나의 정보</dt>
-		<dd><a href="#">회원정보 수정</a><dd>
-		<dd><a href="#">비밀번호 변경</a><dd>
+		<dd><a href="<%=request.getContextPath()%>/abmart/member/register.jsp">회원정보 수정</a><dd>
 	</dl>
 </nav>    
 

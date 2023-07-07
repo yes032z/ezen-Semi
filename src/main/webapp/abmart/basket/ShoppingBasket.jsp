@@ -5,19 +5,23 @@
 <head>
     <meta charset="UTF-8">
     <title>ShoppingBasket.jsp</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<style type ="text/css">
-.header{
-	margin-top: 30px;
+<style type="text/css">
+header {
+	font-size: 30px;
+	margin: 30px 0 0 50px;		
 }
 
-p{
+table {
+	margin: 30px;	
+}
+
+p {
 	text-align: left;
 	color: #777;
 	margin-top: 4px;
 }
 
-total{
+total {
 	width: 360px;
 	height: 412px;
 	padding: 20px;
@@ -27,140 +31,199 @@ total{
 	box-sizing: border-box;
 }
 
-img{
-	width : 100px;
-	hegiht :100px;
+img {
+	width: 100px;
+	height: 100px;
 }
 
-input[type="button"] {
-  margin-bottom: 100px;
+input[type="button"] {  
+	margin-bottom: 100px;
+}
+
+.delete_btn {
+	margin-left: 30px;       
+}
+
+.order_btn {
+	margin-left: 5px;
 }
 
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	var price = $('#price').html();
-	
-	$(".minus_btn").on("click", function() {
+    $(".minus_btn").on("click", function() {
         var quantity = parseInt($(this).siblings(".quantity-input").val());
-        $(this).siblings(".quantity-input").val(quantity - 1);
-        var qty=$(this).next('input').val();    
-        
-        var sumprice= parseInt(price)*parseInt(qty);
-        $('#sumprice').html(sumprice);
-	    
-	});
-	
-	//수량이 증가하면 총금액도 증가
+        if (quantity > 1) {
+            $(this).siblings(".quantity-input").val(quantity - 1);
+            quantity--;
+        }
+        updateSumPrice($(this));
+    });
+    
     $(".plus_btn").on("click", function() {
         var quantity = parseInt($(this).siblings(".quantity-input").val());
         $(this).siblings(".quantity-input").val(quantity + 1);
-        var qty=$(this).next('input').val();        
-        var sumprice= parseInt(qty)*parseInt(price);
-        $('#sumprice').html(sumprice);
+        quantity++;
+        updateSumPrice($(this));
     });
-	
+    
+    function updateSumPrice(btn) {
+        var quantity = parseInt(btn.siblings(".quantity-input").val());
+        var price = parseInt(btn.parents("tr").find(".price").text());
+        var sumprice = price * quantity;
+        btn.parents("tr").find(".sumprice").text(sumprice + "원");
+    };
+    
+    $(".delete_btn").on("click", function() {
+        var checkedRows = $("input[type='checkbox'][name!='all']:checked").parents("tr");
+        checkedRows.remove();
+    });  
+    
+    $(".order_btn").click(function() {
+    	location.href = "OrderPayment.jsp"
+    });   
 });
+
 </script>
 </head>
 <body>
-    <div class = "header">        
-  		<span>HOME > <strong>장바구니</strong> > 주문결제 > 주문완료</span>         
-    </div><br>
+    <div id="shopping">
+        <header>HOME > <strong>장바구니</strong> > 주문결제 > 주문완료</header>
+        <hr>
+    </div>
+    <br>
    
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th><input type="checkbox" name="all"></th>
-            <th>상품명</th>
-            <th>총수량</th>
-            <th>판매가</th>
-            <th>할인</th>
-            <th>배송비</th>
-            <th>금액</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr>
-            <td><input type="checkbox" name="1"></td>
-            <td>
-                <div class="media">
-                    <img src="https://image.a-rt.com/art/product/2023/06/18154_1686895862787.jpg?shrink=224:224" class="mr-3" alt="1">
-                    <div class="media-body">
-                        <h5 class="mt-0"><a href="#">척테일러올스타 1벨크로 하이</a></h5>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th><input type="checkbox" name="all" onclick="selectAll()"></th>
+                <th>상품명</th>
+                <th>총수량</th>
+                <th>판매가</th>
+                <th>할인</th>
+                <th>배송비</th>
+                <th>금액</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><input type="checkbox" name="1"></td>
+                <td>
+                    <div class="media">
+                        <img src="https://image.a-rt.com/art/product/2023/06/18154_1686895862787.jpg?shrink=224:224" class="mr-3" alt="1">
+                        <div class="media-body">
+                            <h5 class="mt-0"><a href="#">척테일러올스타 1벨크로 하이</a></h5>
+                        </div>
                     </div>
-                </div>
-            </td>
-            <td>
-            	<div class="quantity-adjustment">
-		            <button class="plus_btn">+</button>
-		            <input type="text" class="quantity-input" value="1" style=width:30px>
-		            <button class="minus_btn">-</button>
-        		</div>
-        	</td>	
-			<td><span id="price">28000</span>원</td>
-            <td>5%</td>  
-            <td>2500원</td>          
-            <td>
-            	<span id="sumprice"></span>
-            	<span id="divprice"></span>                    
-            </td>
-        </tr>
-  
-        <tr>
-            <td><input type="checkbox" name="1"></td>
-            <td>
-                <div class="media">
-                    <img src="https://image.a-rt.com/art/product/2023/06/14712_1687503790541.jpg?shrink=224:224" class="mr-3" alt="1">
-                    <div class="media-body">
-                        <h5 class="mt-0"><a href="#">코트 보로우 로우 리크래프트 보이그레이드</a></h5>
+                </td>
+                <td>
+                    <div class="quantity-adjustment">
+                        <button class="plus_btn">+</button>
+                        <input type="text" class="quantity-input" value="1" style=width:30px>
+                        <button class="minus_btn">-</button>
                     </div>
-                </div>
-            </td>
-            <td>
-            	<div class="quantity-adjustment">
-		            <button class="plus_btn">+</button>
-		            <input type="text" class="quantity-input" value="1" style=width:30px>
-		            <button class="minus_btn">-</button>
-        		</div>
-            </td>
-            <td>28,000원</td>
-            <td>5%</td>     
-            <td>2500원</td>       
-            <td>
-            	<input type="text" class="salesprice-input" value="1" style=width:30px>            
-            </td>
-        </tr>  
-        
-         <tr>
-            <td><input type="checkbox" name="1"></td>
-            <td>
-                <div class="media">
-                    <img src="https://image.a-rt.com/art/product/2023/06/91937_1688017522910.jpg?shrink=590:590" class="mr-3" alt="1">
-                    <div class="media-body">
-                        <h5 class="mt-0"><a href="#">듀엣 맥스 II 클로그</a></h5>
+                </td>
+                <td class="price">28000</td>
+                <td>5%</td>
+                <td>2500원</td>
+                <td class="sumprice">28000원</td>
+            </tr>
+            
+            <tr>
+                <td><input type="checkbox" name="1"></td>
+                <td>
+                    <div class="media">
+                        <img src="https://image.a-rt.com/art/product/2023/06/18154_1686895862787.jpg?shrink=224:224" class="mr-3" alt="1">
+                        <div class="media-body">
+                            <h5 class="mt-0"><a href="#">척테일러올스타 1벨크로 하이</a></h5>
+                        </div>
                     </div>
-                </div>
-            </td>
-            <td>
-            	<div class="quantity-adjustment">
-		            <button class="plus_btn">+</button>
-		            <input type="text" class="quantity-input" value="1" style=width:30px>
-		            <button class="minus_btn">-</button>
-        		</div>                   
-            </td>
-            <td>28,000원</td>
-            <td>5%</td>     
-            <td>2500원</td>       
-            <td>
-            	<input type="text" class="salesprice-input" value="1" style=width:30px>                                    	
-            </td>
-        </tr>                    
-    </tbody>                  
-</table>
-	<!-- 전체선택, 삭제, 주문하기 버튼 -->
-	<input type="button" name="allcheck_btn" value="전체선택">	
-	<input type="button" name="del_btn" value="삭제">
-	<input type="button" name="order_btn" value="주문하기">
+                </td>
+                <td>
+                    <div class="quantity-adjustment">
+                        <button class="plus_btn">+</button>
+                        <input type="text" class="quantity-input" value="1" style=width:30px>
+                        <button class="minus_btn">-</button>
+                    </div>
+                </td>
+                <td class="price">28000</td>
+                <td>5%</td>
+                <td>2500원</td>
+                <td class="sumprice">28000원</td>
+            </tr>            
+            
+            <tr>
+                <td><input type="checkbox" name="1"></td>
+                <td>
+                    <div class="media">
+                        <img src="https://image.a-rt.com/art/product/2023/06/18154_1686895862787.jpg?shrink=224:224" class="mr-3" alt="1">
+                        <div class="media-body">
+                            <h5 class="mt-0"><a href="#">척테일러올스타 1벨크로 하이</a></h5>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="quantity-adjustment">
+                        <button class="plus_btn">+</button>
+                        <input type="text" class="quantity-input" value="1" style=width:30px>
+                        <button class="minus_btn">-</button>
+                    </div>
+                </td>
+                <td class="price">28000</td>
+                <td>5%</td>
+                <td>2500원</td>
+                <td class="sumprice">28000원</td>
+            </tr>  
+            
+            <tr>
+                <td><input type="checkbox" name="1"></td>
+                <td>
+                    <div class="media">
+                        <img src="https://image.a-rt.com/art/product/2023/06/18154_1686895862787.jpg?shrink=224:224" class="mr-3" alt="1">
+                        <div class="media-body">
+                            <h5 class="mt-0"><a href="#">척테일러올스타 1벨크로 하이</a></h5>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="quantity-adjustment">
+                        <button class="plus_btn">+</button>
+                        <input type="text" class="quantity-input" value="1" style=width:30px>
+                        <button class="minus_btn">-</button>
+                    </div>
+                </td>
+                <td class="price">28000</td>
+                <td>5%</td>
+                <td>2500원</td>
+                <td class="sumprice">28000원</td>
+            </tr>
+            
+            <tr>
+                <td><input type="checkbox" name="1"></td>
+                <td>
+                    <div class="media">
+                        <img src="https://image.a-rt.com/art/product/2023/06/18154_1686895862787.jpg?shrink=224:224" class="mr-3" alt="1">
+                        <div class="media-body">
+                            <h5 class="mt-0"><a href="#">척테일러올스타 1벨크로 하이</a></h5>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <div class="quantity-adjustment">
+                        <button class="plus_btn">+</button>
+                        <input type="text" class="quantity-input" value="1" style=width:30px>
+                        <button class="minus_btn">-</button>
+                    </div>
+                </td>
+                <td class="price">28000</td>
+                <td>5%</td>
+                <td>2500원</td>
+                <td class="sumprice">28000원</td>
+            </tr>                        
+        </tbody>
+    </table>
+    <input type="button" class="delete_btn" name="del_btn" value="삭제">
+    <input type="button" class="order_btn" name="ord_btn" value="주문하기">
 <%@include file="../../inc/bottom.jsp" %>
-</body>               
+</body>

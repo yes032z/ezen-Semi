@@ -1,9 +1,86 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../../inc/top.jsp"%>
+
+<script type="text/javascript">
+	$(function() {
+		$('#alink1').addClass('active');
+		$('#alink1').click(function() {
+			$(this).addClass('active');
+			$('#alink2').removeClass('active');
+			$(this).text('선택');
+			$('#alink2').text('미선택');
+		});
+		$('#alink2').click(function() {
+			$(this).addClass('active');
+			$('#alink1').removeClass('active');
+			$(this).text('선택');
+			$('#alink1').text('미선택');
+		});
+	});
+</script>
+<style>
+section {
+	position: relative;
+	text-align: center;
+	margin: 0 auto;
+	width: 1500px;
+}
+
+.col.mb-5 {
+	width: 250px;
+	height: 500px;
+	float: left;
+}
+
+.div1 {
+	width: 1000px;
+	float: right;
+}
+#searchSort{
+	clear:both;
+	padding-top:10px;
+	width: 1000px;
+	height:50px;
+}
+#pdbox{
+	float: right;
+	width: 1000px;
+}
+.leftSort{
+	display:block;
+	text-align: right;
+	float: left;
+}
+.rightSort{
+	display:block;
+	text-align: right;
+	float: right;
+}
+#searchqty{
+	color: rgb(238,28,37);
+	font-weight: bold;
+}
+#span2{
+	margin-right: 20px;
+}
+#fiteradd{
+	width: 1000px;
+} 
+
+</style>
 <div>
 <section class="py-5">
-	
+	<!-- <div style="text-align: center">
+		<div style="width: 1300px;">
+			<ul class="nav nav-tabs">
+				<li class="nav-item" style="width: 650px"><a class="nav-link "
+					id="alink1" aria-current="page" href="#">선택</a></li>
+				<li class="nav-item" style="width: 650px"><a class="nav-link "
+					id="alink2" href="#">미선택</a></li>
+			</ul>
+		</div>
+	</div> -->
 	<aside style="width:300px;height: 400px;float:left;margin-left:150px;">
 		<div>
 			<hr>
@@ -32,7 +109,7 @@
 		<button type="button" class="btn btn-secondary" style="float:left;">필터 초기화</button>
 	</div>
 	<div id="searchSort">
-		<span class="leftSort">총 </span><span class="leftSort" name="searchqty">10</span><span class="leftSort">개의 상품이 있습니다.</span><span class="rightSort" id="span2">&nbsp;|&nbsp;<a href="#">가격순</a></span>  <span class="rightSort" id="span1">&nbsp;<a href="#">평점순</a>&nbsp;</span> 
+		<span class="leftSort">총 </span><span class="leftSort" id="searchqty">10</span><span class="leftSort">개의 상품이 있습니다.</span><span class="rightSort" id="span2">&nbsp;|&nbsp;<a href="#">가격순</a></span>  <span class="rightSort" id="span1">&nbsp;<a href="#">평점순</a>&nbsp;</span> 
 	</div>
 	<div class="div1">
 		<hr style="clear:both;">
@@ -68,7 +145,7 @@
 				<!-- Product actions-->
 				<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 					<div class="text-center">
-						<a class="btn btn-outline-dark mt-auto" href="#">장바구니</a>
+						<a class="btn btn-outline-dark mt-auto" href="../basket/ShoppingBasket.jsp">장바구니</a>
 					</div>
 				</div>
 			</div>
@@ -105,7 +182,7 @@
 				<!-- Product actions-->
 				<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 					<div class="text-center">
-						<a class="btn btn-outline-dark mt-auto" href="#">장바구니</a>
+						<a class="btn btn-outline-dark mt-auto" href="../basket/ShoppingBasket.jsp">장바구니</a>
 					</div>
 				</div>
 			</div>
@@ -142,7 +219,7 @@
 				<!-- Product actions-->
 				<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 					<div class="text-center">
-						<a class="btn btn-outline-dark mt-auto" href="#">장바구니</a>
+						<a class="btn btn-outline-dark mt-auto" href="../basket/ShoppingBasket.jsp">장바구니</a>
 					</div>
 				</div>
 			</div>
@@ -179,7 +256,7 @@
 				<!-- Product actions-->
 				<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 					<div class="text-center">
-						<a class="btn btn-outline-dark mt-auto" href="#">장바구니</a>
+						<a class="btn btn-outline-dark mt-auto" href="../basket/ShoppingBasket.jsp">장바구니</a>
 					</div>
 				</div>
 			</div>
@@ -187,5 +264,5 @@
 	</div>
 </div>
 </section>
-</div>
+<div></div>
 <%@include file="../../inc/bottom.jsp"%>
