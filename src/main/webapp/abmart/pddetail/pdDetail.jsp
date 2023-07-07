@@ -34,81 +34,7 @@
 	});
 </script>
 <style>
-	button[name=btn]{
-		width:290px;
-		height:50px;
-		color: white;
-		background: black;
-		font-weight: bold;
-		border-radius: 0.25rem;
-	}
-	
-	.div2{
-		width:1200px;
-		margin-left: 150px;
-	}
-	
-	.clearboth{
-		clear:both;
-	}
-	
-	.border-bottom{
-		border-bottom: 3px solid black;
-	}
-	
-	.reviewdiv{
-		height: 50px;
-	}
-	
-	.margin-right20{
-		margin-right: 20px;
-	}
-	
-	.margin-left20{
-		margin-left: 20px;
-	}
-	span.gray{
-		color: rgb(150,150,150);
-	}
-	#star{
-		color: red;
-	}
-	.small{
-		font-size: 12px;
-	}
-	.qnafirst{
-		border-top: 3px solid black;
-		border-bottom: 1px solid gray;
-		height: 70px;
-		margin-top: 50px;
-	}
-	.margin-top20{
-		margin-top: 20px;
-	}
-	
-	.bold{
-		font-weight: bold;
-	}
-	
-	.margin-left650{
-		margin-left: 650px;
-	}
-	
-	.margin-left100{
-		margin-left: 100px;
-	}
-	
-	.qnadiv{
-		border-bottom: 1px solid gray;
-		height:70px;
-	}
-	
-	.pdtab{
-		width: 1200px;
-		margin-left: 150px;
-		clear:both;
-		margin-top:200px;
-	}
+
 </style>
 <section class="py-5">
 	<div style="width: 500px;height: 700px;margin-left: 100px; float:left;">
@@ -202,8 +128,6 @@
 				 style="width: 400px">상품Q&A</a></li>
 		</ul>
 	</div>
-	
-	
 	
 	<!-- 상품후기 -->
 	<div class="pdtab">
