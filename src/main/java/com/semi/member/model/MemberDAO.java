@@ -57,36 +57,26 @@ public class MemberDAO {
 			pool.dbClose(rs, ps, con);
 		}
 	}
-	public int insertMember(MemberVO vo) throws SQLException {
-		Connection con=null;
-		PreparedStatement ps=null;
-
-		try {
-			//1,2
-			con=pool.getConnection();
-
-			//3
-			String sql = "";
-	
-			ps = con.prepareStatement(sql);
-			ps.setString(1, vo.getName());
-			ps.setString(2, vo.getId());
-			ps.setString(3, vo.getPwd());
-			ps.setInt(4, vo.getFootsize());
-			ps.setInt(5, vo.getZipno());
-			ps.setString(6, vo.getDetailaddress());
-			ps.setString(7, vo.getTel());
-			ps.setString(8, vo.getEmail());
-
-			//4
-			int cnt = ps.executeUpdate();
-			System.out.println("회원가입 결과 cnt = " + cnt + ", 매개변수 vo = " + vo);
-
-			return cnt;
-		}finally {
-			pool.dbClose(ps, con);
-		}
-	}
+	/*
+	  public int insertMember(MemberVO vo) throws SQLException {
+	   Connection con=null; 
+	   PreparedStatement ps=null;
+	  
+	  try { //1,2 con=pool.getConnection();
+	  
+	  //3 String sql = "";
+	  
+	  ps = con.prepareStatement(sql); ps.setString(1, vo.getName());
+	  ps.setString(2, vo.getId()); ps.setString(3, vo.getPwd()); ps.setInt(4,
+	  vo.getFootsize()); ps.setInt(5, vo.getZipno()); ps.setString(6,
+	  vo.getDetailaddress()); ps.setString(7, vo.getTel()); ps.setString(8,
+	  vo.getEmail());
+	  
+	  //4 int cnt = ps.executeUpdate(); System.out.println("회원가입 결과 cnt = " + cnt +
+	  ", 매개변수 vo = " + vo);
+	  
+	  return cnt; }finally { pool.dbClose(ps, con); } }
+	 */
 	
 	
 	

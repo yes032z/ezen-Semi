@@ -47,8 +47,11 @@ input#email3 {
     width: 155px;
 }
 input#size {
-    width: 285px;
+    width: 280px;
     margin-right: 12px;
+    height: 33px;
+    text-align: center;
+    font-size: 1.2em;
 }
 input#birth {
     width: 280px;
@@ -77,7 +80,7 @@ input#birth {
       <input type="password" name="pwd" id="pwdchk" placeholder="User pwdck">
     </p>
     <p>
-  	  <input type="text" name="size" id="size" placeholder="발 사이즈">    
+  	  <input type="number" name="size" id="size" placeholder="발 사이즈">    
   	  <input type="text" name="birth" id="birth" placeholder="생일">    
     </p>
     <p id="zip">
