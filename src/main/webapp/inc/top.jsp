@@ -28,6 +28,11 @@ input.form-control.mr-sm-2 {
         <meta name="description" content="" />
         <meta name="author" content="" />
         <title> Main Test </title>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="<%=request.getContextPath()%>/js/scripts.js"></script>
+    
         <!-- Favicon-->
         <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
         <!-- Bootstrap icons-->
@@ -35,11 +40,7 @@ input.form-control.mr-sm-2 {
         <!-- Core theme CSS (includes Bootstrap)-->
         <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" /> -->
         <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet" />
-<<<<<<< HEAD
         <link href="<%=request.getContextPath()%>/css/pdstyle.css" rel="stylesheet" />
-=======
-        <link href="<%=request.getContextPath()%>/css/pdstyle.css" rel="stylesheet"/>
->>>>>>> branch 'master' of https://github.com/pjm0209/semiProject.git
         <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
     </head>
     <body>

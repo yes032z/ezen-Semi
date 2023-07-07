@@ -4,71 +4,27 @@
 
 <script type="text/javascript">
 	$(function() {
-		$('#alink1').addClass('active');
-		$('#alink1').click(function() {
-			$(this).addClass('active');
-			$('#alink2').removeClass('active');
-			$(this).text('선택');
-			$('#alink2').text('미선택');
+		$('button[name=brand]').click(function(){
+			var brand=$(this).html();
+			
+			$('#filter').before("<button class='btn size' name='delete' style='float:left'>"+brand+"</button>");
 		});
-		$('#alink2').click(function() {
-			$(this).addClass('active');
-			$('#alink1').removeClass('active');
-			$(this).text('선택');
-			$('#alink1').text('미선택');
+		
+		$('button[name=kind]').click(function(){
+			var kind=$(this).html();
+			
+			$('#filter').before("<button class='btn size' name='delete' style='float:left'>"+kind+"</button>");
+		});
+		
+		$('button[name=delete]').click(function(){
+			$(this).remove();
+		});
+		
+		$('#filter').click(function(){
+			$(this).parent().find('*').not(this).remove();
 		});
 	});
 </script>
-<style>
-section {
-	position: relative;
-	text-align: center;
-	margin: 0 auto;
-	width: 1500px;
-}
-
-.col.mb-5 {
-	width: 250px;
-	height: 500px;
-	float: left;
-}
-
-.div1 {
-	width: 1000px;
-	float: right;
-}
-#searchSort{
-	clear:both;
-	padding-top:10px;
-	width: 1000px;
-	height:50px;
-}
-#pdbox{
-	float: right;
-	width: 1000px;
-}
-.leftSort{
-	display:block;
-	text-align: right;
-	float: left;
-}
-.rightSort{
-	display:block;
-	text-align: right;
-	float: right;
-}
-#searchqty{
-	color: rgb(238,28,37);
-	font-weight: bold;
-}
-#span2{
-	margin-right: 20px;
-}
-#fiteradd{
-	width: 1000px;
-} 
-
-</style>
 <div>
 <section class="py-5">
 	<!-- <div style="text-align: center">
@@ -87,29 +43,30 @@ section {
 			<h4>브랜드</h4>
 			<hr>
 			<div>
-				<button type="button" class="btn btn-secondary" style="float:left;margin-left: 50px;">뉴발란스</button>
-				<button type="button" class="btn btn-secondary" style="float:right;margin-right: 50px">아이다스</button><br><br>
-				<button type="button" class="btn btn-secondary" style="float:left;margin-left: 50px;">캔버스</button>
-				<button type="button" class="btn btn-secondary" style="float:right;margin-right: 50px">반스</button><br><br>
-				<button type="button" class="btn btn-secondary" style="float:left;margin-left: 50px;">나이키</button>
-				<button type="button" class="btn btn-secondary" style="float:right;margin-right: 50px">필라</button><br><br>
+				<button name="brand" class="btn btn-secondary" id="newbalance" style="float:left;margin-left: 50px;">뉴발란스</button>
+				<button name="brand" class="btn btn-secondary" id="adidas" style="float:right;margin-right: 50px">아디다스</button><br><br>
+				<button name="brand" class="btn btn-secondary" id="canvas" style="float:left;margin-left: 50px;">캔버스</button>
+				<button name="brand" class="btn btn-secondary" id="vans" style="float:right;margin-right: 50px">반스</button><br><br>
+				<button name="brand" class="btn btn-secondary" id="nike" style="float:left;margin-left: 50px;">나이키</button>
+				<button name="brand" class="btn btn-secondary" id="fila" style="float:right;margin-right: 50px">필라</button><br><br>
 			</div>
 			<hr>
 			<h4>종류</h4>
 			<hr>
 			<div>
-				<button type="button" class="btn btn-secondary">운동화</button><br><br>
-				<button type="button" class="btn btn-secondary">슬리퍼</button><br><br>
-				<button type="button" class="btn btn-secondary">샌들</button><br><br>
+				<button type="button" name="kind" class="btn btn-secondary">운동화</button><br><br>
+				<button type="button" name="kind" class="btn btn-secondary">슬리퍼</button><br><br>
+				<button type="button" name="kind" class="btn btn-secondary">샌들</button><br><br>
 			</div>
 		</div>
 	</aside>
 <div id="pdbox">
 	<div id="fiteradd">
-		<button type="button" class="btn btn-secondary" style="float:left;">필터 초기화</button>
+	
+		<button class="btn btn-secondary" id="filter" style="float:left;">필터 초기화</button>
 	</div>
 	<div id="searchSort">
-		<span class="leftSort">총 </span><span class="leftSort" id="searchqty">10</span><span class="leftSort">개의 상품이 있습니다.</span><span class="rightSort" id="span2">&nbsp;|&nbsp;<a href="#">가격순</a></span>  <span class="rightSort" id="span1">&nbsp;<a href="#">평점순</a>&nbsp;</span> 
+		<span class="leftSort">총 </span><span class="leftSort" name="searchqty">10</span><span class="leftSort">개의 상품이 있습니다.</span><span class="rightSort" id="span2">&nbsp;|&nbsp;<a href="#">가격순</a></span>  <span class="rightSort" id="span1">&nbsp;<a href="#">평점순</a>&nbsp;</span> 
 	</div>
 	<div class="div1">
 		<hr style="clear:both;">
