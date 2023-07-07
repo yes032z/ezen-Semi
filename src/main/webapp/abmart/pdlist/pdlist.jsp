@@ -81,9 +81,27 @@ section {
 			</ul>
 		</div>
 	</div> -->
-	<aside style="border: 1px solid black;width:400px;height: 600px;float:left;margin-left:30px;">
+	<aside style="width:300px;height: 400px;float:left;margin-left:150px;">
 		<div>
-			
+			<hr>
+			<h4>브랜드</h4>
+			<hr>
+			<div>
+				<button type="button" class="btn btn-secondary" style="float:left;margin-left: 50px;">뉴발란스</button>
+				<button type="button" class="btn btn-secondary" style="float:right;margin-right: 50px">아이다스</button><br><br>
+				<button type="button" class="btn btn-secondary" style="float:left;margin-left: 50px;">캔버스</button>
+				<button type="button" class="btn btn-secondary" style="float:right;margin-right: 50px">반스</button><br><br>
+				<button type="button" class="btn btn-secondary" style="float:left;margin-left: 50px;">나이키</button>
+				<button type="button" class="btn btn-secondary" style="float:right;margin-right: 50px">필라</button><br><br>
+			</div>
+			<hr>
+			<h4>종류</h4>
+			<hr>
+			<div>
+				<button type="button" class="btn btn-secondary">운동화</button><br><br>
+				<button type="button" class="btn btn-secondary">슬리퍼</button><br><br>
+				<button type="button" class="btn btn-secondary">샌들</button><br><br>
+			</div>
 		</div>
 	</aside>
 <div id="pdbox">
