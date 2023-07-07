@@ -9,6 +9,7 @@
 
 	.question {margin-top: 50px; width: 900px;}
 	
+	/* FAQ 검색 */
 	#btsearch {
 		background: black;
 		color: white;
@@ -27,6 +28,7 @@
 		margin-right: 5%;
 	}
 	
+	/* FAQ 분류 모음 */
 	#faqtab {width: 900px;}
 	
 	#faqtab td {
@@ -40,6 +42,7 @@
 		text-decoration: none;
 	}
 	
+	/* FAQ 질문, 내용 */
 	.header {
 		padding: 20px 0 20px 10px; 
 		font-weight: bold;

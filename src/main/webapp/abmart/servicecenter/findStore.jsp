@@ -3,9 +3,28 @@
 <%@ include file="../../inc/top.jsp" %>
 
 <style type="text/css">
+	.main {margin: 90px 0 0 490px; font-family: 'Nanum Gothic';}
+	
+	/* FAQ 검색 */
+	#btsearch {
+		background: black;
+		color: white;
+		font-weight: bold;
+		margin-left: 5px;
+		padding: 4px 22px 4px 22px;
+	}
 
+	#searchMap {
+		background: #80808014;
+		width: 900px;
+	}
+	
+	#searchMap a {
+		margin-left: 10%;
+		margin-right: 5%;
+	}
 
-/* mypagenav */
+	/* mypagenav */
 	#leftNav {width: 300px; float: left; margin-left: 70px;}
 	
 	h2 {font-weight: bold; margin: 55px 0px 26px 50px; padding-left: 20px;}
@@ -53,11 +72,11 @@
 	
 	<article class="main">
 	<form name="storefrm" method="post" action="findStore.jsp">
-		<h3 style="font-weight: bold;">FAQ</h3>
-		<div id="searchFaq">
+		<h4 style="font-weight: bold;">매장 찾기</h4>
+		<div id="searchMap">
 			<hr style="border: 1px solid black;"><br>
-			<a>FAQ 검색</a>
-			<input type="text" id="txtsearch" placeholder="궁금한 내용을 입력해주세요.">
+			<a style="font-size: 15px; font-weight: bold;">매장 검색</a>
+			<input type="text" id="txtsearch" placeholder="지역/매장명을 입력하세요.">
 			<button id="btsearch">검색</button><br><br>
 			<hr>
 		</div><br>

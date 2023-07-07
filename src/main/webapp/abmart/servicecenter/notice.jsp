@@ -15,7 +15,7 @@
 		border-bottom: 1px solid #80808073;
 	}
 	
-	h3 {margin-bottom: 20px; font-weight: 550;}
+	h4 {margin-bottom: 20px; font-weight: 550;}
 	
 	a {text-decoration: none; color: black;}
 	
@@ -86,7 +86,7 @@
 	
 	<article>
 		<div class="notice">
-			<h3>공지사항</h3>
+			<h4>공지사항</h4>
 			<table class="noticeBody" summary="공지사항 목록">
 				<colgroup>
 					<col style="width: 75px;">
