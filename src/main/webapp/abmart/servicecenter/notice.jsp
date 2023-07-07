@@ -70,9 +70,9 @@
 		<h2>고객센터</h2>
 		<dl id="leftNavi">
 			<!-- category list -->
-			<dt><a href="#">FAQ</a></dt>
-			<dt><a href="#">공지사항</a></dt>
-			<dt><a href="#">매장 찾기</a></dt>
+			<dt><a href="FAQ.jsp">FAQ</a></dt>
+			<dt><a href="notice.jsp">공지사항</a></dt>
+			<dt><a href="findStore.jsp">매장 찾기</a></dt>
 		</dl>
 		<hr style="width: 170px;">
 		<dl id="leftNavi">
@@ -103,7 +103,7 @@
 				<tbody id="noticeList">
 					<tr>
 						<td><img alt="noticeImg" src="<%=request.getContextPath() %>/images/noticeImg.jpg"></td>
-						<td><a href="#" class="notice-link">개인정보처리방침 개정 안내</a>
+						<td><a href="notice_detail.jsp" class="notice-link">개인정보처리방침 개정 안내</a>
 						<td>2023.06.22</td>
 					</tr>
 					

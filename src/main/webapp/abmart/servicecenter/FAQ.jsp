@@ -53,8 +53,9 @@
 		font-size:14px;
 	}
 	
-	
 	#secBox {list-style: none; margin-left: -40px;}
+	
+	.contents {list-style: none; margin-left: -40px;}
 	
 	/* mypagenav */
 	#leftNav {width: 300px; float: left; margin-left: 70px;}
@@ -80,7 +81,6 @@
 	dd:nth-child(5) {color: #808080a6;}
 	
 </style>
-<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-3.7.0.min.js"></script>
 <script type="text/javascript">
 	$(function() {
 		$('#faqtab td').hover(function() {
@@ -115,9 +115,9 @@
 		<h2>고객센터</h2>
 		<dl id="leftNavi">
 			<!-- category list -->
-			<dt><a href="#">FAQ</a></dt>
-			<dt><a href="#">공지사항</a></dt>
-			<dt><a href="#">매장 찾기</a></dt>
+			<dt><a href="FAQ.jsp">FAQ</a></dt>
+			<dt><a href="notice.jsp">공지사항</a></dt>
+			<dt><a href="findStore.jsp">매장 찾기</a></dt>
 		</dl>
 		<hr style="width: 170px;">
 		<dl id="leftNavi">
@@ -130,32 +130,32 @@
 	</nav>  
 	
 	<article class="main">
-	<form name="FAQfrm" method="get" action="FAQ.jsp">
-			<h3>FAQ</h3>
-			<div id="searchFaq">
-				<hr><br>
-				<a>FAQ 검색</a>
-				<input type="text" id="txtsearch" placeholder="궁금한 내용을 입력해주세요.">
-				<button id="btsearch">검색</button><br><br>
-				<hr>
-			</div><br>
-		</form>
+	<form name="FAQfrm" method="get" action="FAQ.jsp?faqtitle=">
+		<h3 style="font-weight: bold;">FAQ</h3>
+		<div id="searchFaq">
+			<hr><br>
+			<a>FAQ 검색</a>
+			<input type="text" id="txtsearch" placeholder="궁금한 내용을 입력해주세요.">
+			<button id="btsearch">검색</button><br><br>
+			<hr>
+		</div><br>
+	</form>
 		
 		<div>
 			<table summary="FAQ List" id="faqtab" border="1">
 				<tr>
-					<td><a href="#">상품정보</a></td>
-					<td><a href="#">배송현황</a></td>
-					<td><a href="#">교환/반품/환불</a></td>
-					<td><a href="#">주문/결제/취소</a></td>
-					<td><a href="#">AS</a></td>
+					<td><a href="FAQ.jsp">상품정보</a></td>
+					<td><a href="FAQ.jsp">배송현황</a></td>
+					<td><a href="FAQ.jsp">교환/반품/환불</a></td>
+					<td><a href="FAQ.jsp">주문/결제/취소</a></td>
+					<td><a href="FAQ.jsp">AS</a></td>
 				</tr>
 				<tr>
-					<td><a href="#">회원정보</a></td>
-					<td><a href="#">일반정보</a></td>
-					<td><a href="#">멤버십</a></td>
-					<td><a href="#">영수증/증빙서류</a></td>
-					<td><a href="#">입점/기타</a></td>
+					<td><a href="FAQ.jsp">회원정보</a></td>
+					<td><a href="FAQ.jsp">일반정보</a></td>
+					<td><a href="FAQ.jsp">멤버십</a></td>
+					<td><a href="FAQ.jsp">영수증/증빙서류</a></td>
+					<td><a href="FAQ.jsp">입점/기타</a></td>
 				</tr>
 			</table>
 		</div>
