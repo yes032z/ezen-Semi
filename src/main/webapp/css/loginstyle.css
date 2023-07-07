@@ -150,14 +150,9 @@ form h1 {
   text-shadow: 0 1px 0 #000;
  
 }
-
-/* form h1 {
-  font-family: Audiowide;
-  font-weight: normal;
-  font-size: 3.5em;
-} */
 h1#litheader {
 	 color: #d40000;
+	 font-size: 3.5em;
 }
 form h1.poweron {
   color: #ffffff;
