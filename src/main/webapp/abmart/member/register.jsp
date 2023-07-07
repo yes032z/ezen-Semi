@@ -47,7 +47,11 @@ input#email3 {
     width: 155px;
 }
 input#size {
-    width: 295px;
+    width: 285px;
+    margin-right: 12px;
+}
+input#birth {
+    width: 280px;
 }
 </style>
 <script type="text/javascript">
@@ -61,19 +65,20 @@ input#size {
   <h1 id="litheader">AB - MART</h1>
   <div class="inset">
     <p>
-      <input type="text" name="username" id="name" placeholder="Name">
+      <input type="text" name="name" id="name" placeholder="Name">
     </p>
     <p>
       <input type="text" name="userid" id="userid" placeholder="Userid">
     </p>
     <p>
-      <input type="password" name="password" id="pwd" placeholder="User pwd">
+      <input type="password" name="pwd" id="pwd" placeholder="User pwd">
     </p>
     <p>
-      <input type="password" name="password" id="pwdchk" placeholder="User pwdck">
+      <input type="password" name="pwd" id="pwdchk" placeholder="User pwdck">
     </p>
     <p>
   	  <input type="text" name="size" id="size" placeholder="발 사이즈">    
+  	  <input type="text" name="birth" id="birth" placeholder="생일">    
     </p>
     <p id="zip">
     <!-- 우편번호 검색 넣기 -->
