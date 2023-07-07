@@ -145,7 +145,7 @@ section {
 				<!-- Product actions-->
 				<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 					<div class="text-center">
-						<a class="btn btn-outline-dark mt-auto" href="#">장바구니</a>
+						<a class="btn btn-outline-dark mt-auto" href="../basket/ShoppingBasket.jsp">장바구니</a>
 					</div>
 				</div>
 			</div>
@@ -182,7 +182,7 @@ section {
 				<!-- Product actions-->
 				<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 					<div class="text-center">
-						<a class="btn btn-outline-dark mt-auto" href="#">장바구니</a>
+						<a class="btn btn-outline-dark mt-auto" href="../basket/ShoppingBasket.jsp">장바구니</a>
 					</div>
 				</div>
 			</div>
@@ -219,7 +219,7 @@ section {
 				<!-- Product actions-->
 				<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 					<div class="text-center">
-						<a class="btn btn-outline-dark mt-auto" href="#">장바구니</a>
+						<a class="btn btn-outline-dark mt-auto" href="../basket/ShoppingBasket.jsp">장바구니</a>
 					</div>
 				</div>
 			</div>
@@ -256,7 +256,7 @@ section {
 				<!-- Product actions-->
 				<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 					<div class="text-center">
-						<a class="btn btn-outline-dark mt-auto" href="#">장바구니</a>
+						<a class="btn btn-outline-dark mt-auto" href="../basket/ShoppingBasket.jsp">장바구니</a>
 					</div>
 				</div>
 			</div>
