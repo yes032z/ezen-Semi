@@ -33,9 +33,6 @@
 		});
 	});
 </script>
-<style>
-
-</style>
 <section class="py-5">
 	<div style="width: 500px;height: 700px;margin-left: 100px; float:left;">
 		<img class="card-img-top" src="https://image.a-rt.com/art/product/2023/03/11678_1678179755820.jpg?shrink=388:388" alt="상품 이미지" />
@@ -50,63 +47,63 @@
 		</div>
 		<div style="font-size: 1.5em;font-weight: bold;clear:both;float:left;padding-bottom:30px;margin-top:50px;width:600px;">
 			<span style="float:left;">사이즈</span>
-			<button class="btn" name="size">230</button>
-			<button class="btn" name="size">235</button>
-			<button class="btn" name="size">240</button>
-			<button class="btn" name="size">245</button>
-			<button class="btn" name="size">250</button>
-			<button class="btn" name="size">255</button>
-			<button class="btn" name="size">260</button>
+			<button class="btn size">230</button>
+			<button class="btn size">235</button>
+			<button class="btn size">240</button>
+			<button class="btn size">245</button>
+			<button class="btn size">250</button>
+			<button class="btn size">255</button>
+			<button class="btn size">260</button>
 		</div>
 		<div name="pddetail">
 			 <div style="float: left;margin-left: 50px;font-size: 1.2em;">230</div>
 			 	<div style="float: left;margin-left: 200px">
-			        <button class="btn plus_btn" name="size">+</button>
+			        <button class="btn plus_btn size">+</button>
 		         	<input type="text" class="quantity-input" value="1" style="width: 45px;">
-		         	<button class="btn minus_btn" name="size">-</button>
+		         	<button class="btn minus_btn size">-</button>
 		         </div>
 	         <div style="float: left;margin-left: 50px;font-size: 1.2em;">99000원</div>
-	         <button class="btn" name="size">X</button>
+	         <button class="btn size">X</button>
          </div>
          <div name="pddetail">
 			 <div style="float: left;margin-left: 50px;font-size: 1.2em;">230</div>
 			 	<div style="float: left;margin-left: 200px">
-			        <button class="btn plus_btn" name="size">+</button>
+			        <button class="btn plus_btn size">+</button>
 		         	<input type="text" class="quantity-input" value="1" style="width: 45px;">
-		         	<button class="btn minus_btn" name="size">-</button>
+		         	<button class="btn minus_btn size">-</button>
 		         </div>
 	         <div style="float: left;margin-left: 50px;font-size: 1.2em;">99000원</div>
-	         <button class="btn" name="size" name="size">X</button>
+	         <button class="btn size size">X</button>
          </div>
          <div name="pddetail">
 			 <div style="float: left;margin-left: 50px;font-size: 1.2em;">230</div>
 			 	<div style="float: left;margin-left: 200px">
-			        <button class="btn plus_btn" name="size">+</button>
+			        <button class="btn plus_btn size">+</button>
 		         	<input type="text" class="quantity-input" value="1" style="width: 45px;">
-		         	<button class="btn minus_btn" name="size">-</button>
+		         	<button class="btn minus_btn size">-</button>
 		         </div>
 	         <div style="float: left;margin-left: 50px;font-size: 1.2em;">99000원</div>
-	         <button class="btn" name="size" name="size">X</button>
+	         <button class="btn size size">X</button>
          </div>
          <div name="pddetail">
 			 <div style="float: left;margin-left: 50px;font-size: 1.2em;">230</div>
 			 	<div style="float: left;margin-left: 200px">
-			        <button class="btn plus_btn" name="size">+</button>
+			        <button class="btn plus_btn size">+</button>
 		         	<input type="text" class="quantity-input" value="1" style="width: 45px;">
-		         	<button class="btn minus_btn" name="size">-</button>
+		         	<button class="btn minus_btn size">-</button>
 		         </div>
 	         <div style="float: left;margin-left: 50px;font-size: 1.2em;">99000원</div>
-	         <button class="btn" name="size" name="size">X</button>
+	         <button class="btn size size">X</button>
          </div>
          <div name="pddetail" style="border-bottom: 1px solid gray;">
 			 <div style="float: left;margin-left: 50px;font-size: 1.2em;">230</div>
 			 	<div style="float: left;margin-left: 200px">
-			        <button class="btn plus_btn" name="size">+</button>
+			        <button class="btn plus_btn size">+</button>
 		         	<input type="text" class="quantity-input" value="1" style="width: 45px;">
-		         	<button class="btn minus_btn" name="size">-</button>
+		         	<button class="btn minus_btn size">-</button>
 		         </div>
 	         <div style="float: left;margin-left: 50px;font-size: 1.2em;">99000원</div>
-	         <button class="btn" name="size">X</button>
+	         <button class="btn size">X</button>
          </div>
          <div style="width:600px;height:100px;float:left;">
          	<span style="float:left;margin-top: 15px;margin-left: 20px">총 결제 금액</span><span style="float:right;margin-top: 15px">원</span><span name="searchqty" style="font-size: 2em;float:right;">0</span>
@@ -167,7 +164,7 @@
 			</div>
 			
 			<div class="div2 clearboth border-bottom reviewdiv">
-				<button class="btn leftSort" name="size" >좋아요</button>
+				<button class="btn leftSort size" >좋아요</button>
 			</div>
 	</div>
 		<div>
@@ -188,7 +185,7 @@
 			</div>
 			
 			<div class="div2 clearboth border-bottom reviewdiv">
-				<button class="btn leftSort" name="size" >좋아요</button>
+				<button class="btn leftSort size" >좋아요</button>
 			</div>
 		</div>
 		<div>
@@ -209,7 +206,7 @@
 			</div>
 			
 			<div class="div2 clearboth border-bottom reviewdiv">
-				<button class="btn leftSort" name="size" >좋아요</button>
+				<button class="btn leftSort size" >좋아요</button>
 			</div>
 		</div>
 	<!-- 상품Q&A 탭 -->
