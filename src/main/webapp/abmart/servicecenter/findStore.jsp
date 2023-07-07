@@ -50,5 +50,19 @@
 			<dd>(주말,공휴일 휴무)</dd>
 		</dl>
 	</nav>  
+	
+	<article class="main">
+	<form name="storefrm" method="post" action="findStore.jsp">
+		<h3 style="font-weight: bold;">FAQ</h3>
+		<div id="searchFaq">
+			<hr style="border: 1px solid black;"><br>
+			<a>FAQ 검색</a>
+			<input type="text" id="txtsearch" placeholder="궁금한 내용을 입력해주세요.">
+			<button id="btsearch">검색</button><br><br>
+			<hr>
+		</div><br>
+	</form>
+	
+	</article>
 
 <%@ include file="../../inc/bottom.jsp" %>

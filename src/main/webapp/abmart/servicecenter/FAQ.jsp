@@ -130,10 +130,10 @@
 	</nav>  
 	
 	<article class="main">
-	<form name="FAQfrm" method="get" action="FAQ.jsp?faqtitle=">
+	<form name="FAQfrm" method="post" action="FAQ.jsp?faqtitle=">
 		<h3 style="font-weight: bold;">FAQ</h3>
 		<div id="searchFaq">
-			<hr><br>
+			<hr style="border: 1px solid black;"><br>
 			<a>FAQ 검색</a>
 			<input type="text" id="txtsearch" placeholder="궁금한 내용을 입력해주세요.">
 			<button id="btsearch">검색</button><br><br>
