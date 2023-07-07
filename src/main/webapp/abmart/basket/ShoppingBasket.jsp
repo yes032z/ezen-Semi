@@ -8,7 +8,12 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 <style type ="text/css">
 .header{
-	margin-top: 30px;
+	margin-top: 50px;
+	margin-left: 30px;
+}
+
+table{
+	margin: 30px;	
 }
 
 p{
@@ -32,34 +37,49 @@ img{
 	hegiht :100px;
 }
 
-input[type="button"] {
+input[type="button"] {  
   margin-bottom: 100px;
+}
+
+
+.delete_btn{
+	margin-left: 30px;       
+}
+
+.order_btn{
+	margin-left: 5px;
 }
 
 </style>
 <script type="text/javascript">
 $(document).ready(function() {
-	var price = $('#price').html();
-	
-	$(".minus_btn").on("click", function() {
-        var quantity = parseInt($(this).siblings(".quantity-input").val());
-        $(this).siblings(".quantity-input").val(quantity - 1);
-        var qty=$(this).next('input').val();    
-        
-        var sumprice= parseInt(price)*parseInt(qty);
-        $('#sumprice').html(sumprice);
-	    
-	});
-	
-	//수량이 증가하면 총금액도 증가
-    $(".plus_btn").on("click", function() {
-        var quantity = parseInt($(this).siblings(".quantity-input").val());
-        $(this).siblings(".quantity-input").val(quantity + 1);
-        var qty=$(this).next('input').val();        
-        var sumprice= parseInt(qty)*parseInt(price);
-        $('#sumprice').html(sumprice);
+	//
+    var price = parseInt($('#price').html()); // 상품 가격을 가져와서 정수로 변환하여 price 변수에 저장함
+    var quantity = parseInt($('.quantity-input').val()); // 현재 수량을 가져와서 정수로 변환하여 quantity 변수에 저장함
+    var sumprice = price * quantity; // 초기 총 가격을 계산함 (가격 * 수량)
+    $('#sumprice').html(sumprice+"원"); // 초기 총 가격을 화면에 출력함
+
+    //수량감소하면, 금액도 감소
+    $(".minus_btn").on("click", function() {
+        var quantity = parseInt($(this).siblings(".quantity-input").val()); // 현재 수량을 가져와서 정수로 변환하여 quantity 변수에 저장함
+        if (quantity > 1) { // 수량이 1보다 큰 경우에만 실행함
+            $(this).siblings(".quantity-input").val(quantity - 1); // 수량을 1 감소시킴
+            quantity--; // 감소된 수량을 변수에 반영함
+        }
+        var sumprice = price * quantity; // 총 가격을 계산함 (가격 * 수량)
+        $('#sumprice').html(sumprice+"원"); // 총 가격을 화면에 출력함
     });
-	
+    
+	//수량증가하면, 금액도 증가
+    $(".plus_btn").on("click", function() {
+        var quantity = parseInt($(this).siblings(".quantity-input").val()); // 현재 수량을 가져와서 정수로 변환하여 quantity 변수에 저장함
+        $(this).siblings(".quantity-input").val(quantity + 1); // 수량을 1 증가시킴
+        quantity++; // 증가된 수량을 변수에 반영합니다.
+        var sumprice = price * quantity; // 총 가격을 계산함 (가격 * 수량)
+        $('#sumprice').html(sumprice+"원"); // 총 가격을 화면에 출력함
+    });
+
+ 
 });
 </script>
 </head>
@@ -71,7 +91,7 @@ $(document).ready(function() {
 <table class="table table-bordered">
     <thead>
         <tr>
-            <th><input type="checkbox" name="all"></th>
+            <th><input type="checkbox" name="all" onclick="selectAll()"></th>
             <th>상품명</th>
             <th>총수량</th>
             <th>판매가</th>
@@ -100,7 +120,7 @@ $(document).ready(function() {
         	</td>	
 			<td><span id="price">28000</span>원</td>
             <td>5%</td>  
-            <td>2500원</td>          
+            <td>2500</td>          
             <td>
             	<span id="sumprice"></span>
             	<span id="divprice"></span>                    
@@ -124,11 +144,12 @@ $(document).ready(function() {
 		            <button class="minus_btn">-</button>
         		</div>
             </td>
-            <td>28,000원</td>
+            <td><span id="price2">28000</span></td>
             <td>5%</td>     
-            <td>2500원</td>       
+            <td>2500</td>       
             <td>
-            	<input type="text" class="salesprice-input" value="1" style=width:30px>            
+            	<span id="sumprice2"></span>
+            	<span id="divprice2"></span>             
             </td>
         </tr>  
         
@@ -149,18 +170,18 @@ $(document).ready(function() {
 		            <button class="minus_btn">-</button>
         		</div>                   
             </td>
-            <td>28,000원</td>
+            <td><span id="price3">28000</span></td>
             <td>5%</td>     
-            <td>2500원</td>       
+            <td>2500</td>       
             <td>
-            	<input type="text" class="salesprice-input" value="1" style=width:30px>                                    	
+            	<span id="sumprice3"></span>
+            	<span id="divprice3"></span>                                   	
             </td>
         </tr>                    
     </tbody>                  
 </table>
-	<!-- 전체선택, 삭제, 주문하기 버튼 -->
-	<input type="button" name="allcheck_btn" value="전체선택">	
-	<input type="button" name="del_btn" value="삭제">
-	<input type="button" name="order_btn" value="주문하기">
+	<!--삭제, 주문하기 버튼 -->		
+	<input type="button" class="delete_btn" name="del_btn" value="삭제">
+	<input type="button" class="order_btn" name="ord_btn" value="주문하기.">
 <%@include file="../../inc/bottom.jsp" %>
 </body>               

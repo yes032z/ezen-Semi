@@ -23,7 +23,7 @@
 #product > .complete > .message > p {
     font-size: 18px;
     font-weight: bold;
-    padding: 10px;
+    padding: 10px;"src/main/webapp/abmart/servicecenter/FAQ.jsp"
     text-align: center;
 }
 #product > .complete > article {
@@ -170,7 +170,7 @@
 <body> 
         <main id="product">      
             <section class="complete">
-                <nav>
+                <nav><br>
                     <h1>주문완료</h1>
                     <p>
                         HOME > 장바구니 > 주문결제 > <strong>주문완료</strong>
@@ -352,7 +352,7 @@
                         </li>
                         <li>
                             <span>
-                                신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요
+                                신발 많이 사주세요. 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요
                             </span>
                         </li>
                     </ul>

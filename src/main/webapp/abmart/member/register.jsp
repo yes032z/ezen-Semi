@@ -7,11 +7,13 @@
 <link rel="stylesheet" href="../../css/loginstyle.css">
 <style type="text/css">
 form#accesspanel {
-    width: 624px;
+    width: 600px;
     padding-top: 109px;
-    height: 778px;
+    height: 740px;
 }
-
+input#btnZipcode {
+    float: right;
+}
 
 input#zipcode {
     width: 295px;
@@ -19,7 +21,9 @@ input#zipcode {
 input#address {
     width: 295px;
 }
-
+input#btnZipcode {
+    float: right;
+}
 select#hp1 {
     width: 78px;
     height: 38px;
@@ -46,9 +50,6 @@ select#email2 {
 input#email3 {
     width: 155px;
 }
-input#size {
-    width: 295px;
-}
 </style>
 <script type="text/javascript">
 	
@@ -57,7 +58,7 @@ input#size {
 <title>회원가입 페이지</title>
 </head>
 <body>
-<form id="accesspanel" action="register_ok.jsp" method="post">
+<form id="accesspanel" action="../../index.jsp" method="post">
   <h1 id="litheader">AB - MART</h1>
   <div class="inset">
     <p>
@@ -72,15 +73,12 @@ input#size {
     <p>
       <input type="password" name="password" id="pwdchk" placeholder="User pwdck">
     </p>
-    <p>
-      <input type="text" name="size" id="size" placeholder="발 사이즈">
-    </p>
     <p id="zip">
     <!-- 우편번호 검색 넣기 -->
-     	
-        <input type="text" name="zipcode" id="zipcode" ReadOnly  placeholder ="우편번호">
+        <input type="text" name="zipcode" id="zipcode" ReadOnly  value ="우편번호">
         <input type="Button" value="우편번호 찾기" id="btnZipcode" ><br />
-        <input type="text" name="address"id ="address" ReadOnly placeholder="주소" ><br />
+        <span class="sp1">&nbsp;</span>
+        <input type="text" name="address"id ="address" ReadOnly value="주소" ><br />
         <span class="sp1">&nbsp;</span>
     </p>
     <p id ="tel">
@@ -98,7 +96,7 @@ input#size {
     </p>
     <p>
 
-        <input type="text" name="email1"  id="email1" placeholder="email">@
+        <input type="text" name="email1"  id="email1" value="email">@
         <select name="email2" id="email2"  title="이메일주소 뒷자리">
             <option value="naver.com">naver.com</option>
             <option value="hanmail.net">hanmail.net</option>
