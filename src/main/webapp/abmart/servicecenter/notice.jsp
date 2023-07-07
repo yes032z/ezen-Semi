@@ -25,7 +25,7 @@
 	
 	/* 페이징 */
 	.page {
-		font-size: 20px;
+		font-size: 19px;
 		margin-left: 420px;;
 	}
 	
