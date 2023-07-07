@@ -51,7 +51,7 @@ public class QnADAO {
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<ViewVO> selectQnAByid(String id) throws SQLException{
+	public List<ViewVO> selectQnAByid(String id, String startDate,String lastDate) throws SQLException{
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -65,10 +65,13 @@ public class QnADAO {
 					 +" on q.pdno= p.pdno"
 					 +" left join member m"
 					 +" on q.no= m.no"
-					 +" where m.id= ?"
+					 +" where m.id= ? and q.qnaregdate>=to_date( ? )"
+					 +" and q.qnaregdate<to_date( ? )+1"
 					 +" order by q.qnaregdate desc";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, id);
+			ps.setString(2, startDate);
+			ps.setString(3, lastDate);
 			
 			rs=ps.executeQuery();
 			while(rs.next()) {

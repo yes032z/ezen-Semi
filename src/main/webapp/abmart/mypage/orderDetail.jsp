@@ -1,3 +1,4 @@
+<%@page import="com.semi.orderdetail.model.OrderdetailVO"%>
 <%@page import="com.semi.common.PagingVO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.sql.SQLException"%>
@@ -23,7 +24,14 @@ $(function() {
         $('#startDate').val(startDateValue);
         $('#lastDate').val(lastDateValue);
     }
-
+    
+    //첫 페이지 로딩 시, startDate와 lastDate에 값이 있는 경우에는 해당 값을 유지
+    var startDateValue = $('#startDate').val();
+    var lastDateValue = $('#lastDate').val();
+    if (!startDateValue || !lastDateValue) {
+        setDates(1);
+    }
+    
     $('#datebtn1').click(function() {
         setDates(1);
     });
@@ -39,13 +47,10 @@ $(function() {
     $('#datebtn4').click(function() {
         setDates(12);
     });
-    //기본설정 startDate 한달전
-    setDates(1);
-    
+   
     $('#chkAll').click(function(){
-		$('.chkItem').prop('checked',this.checked);
-	});
-    
+        $('.chkItem').prop('checked',this.checked);
+    });
 });
 </script>
 <jsp:useBean id="ODService" class="com.semi.orderdetail.model.OrderdetailService" scope="session"></jsp:useBean>
@@ -69,8 +74,7 @@ $(function() {
 	}
 	
 	//3
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");	
-	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 	//페이징 처리
 	int currentPage=1;  //현재 페이지
 	
@@ -89,7 +93,7 @@ $(function() {
 <article id="mypage">
 	<div class="orderinfo">
 		<div id="orderinfo-first">주문 조회</div>
-		<form name="frmDateSearch" method="post" action="orderDetail.jsp">
+		<form name="frmDateSearch" method="post" action="<%=request.getContextPath() %>/abmart/mypage/orderDetail.jsp">
 		<div id="orderinfo-third" class="orderbox">
 			온라인 쇼핑몰 구매 내역&nbsp;&nbsp;&nbsp;
 			<button type="button" id="datebtn1" class="btn btnDate" name="size">1개월</button>
@@ -102,7 +106,7 @@ $(function() {
 		</div>
 		<div id="searchSort" class="selectmyorders">
 		 <%if(startDate!=null && !startDate.isEmpty() && lastDate!=null && !lastDate.isEmpty()){%>
-		   <span class="leftSort">총 </span><span class="leftSort" name="searchqty">10</span>
+		   <span class="leftSort">총 </span><span class="leftSort" name="searchqty"><%=list.size() %></span>
 		   <span class="leftSort">건이 조회되었습니다.</span>
 	     <%}%>
 		</div>
@@ -134,26 +138,45 @@ $(function() {
 					</tr>
 				</thead>
 				<tbody>
-					<tr>
-						<td><input type="checkbox" name="1" class="chkItem"></td>
-						<td>주문번호</td>
-						<td>
-							<div class="media">
-								<img src="" class="mr-3 pdimgsize" alt="1">
-								<div class="media-body">
-									<h5 class="mt-0">
-										<a href="#"></a>
-									</h5>
-								</div>
-							</div>
-						</td>
-						<td>자세한 상품명</td>
-						<td>7개</td>
-						<td>25000원</td>
-						<td>배송</td>
-						<td>2023-07-06</td>
-						<td><input type="button" class="mypagebtn" value="리뷰 쓰기" /></td>
-					</tr>
+				  <%if(list==null || list.isEmpty()){ %>
+		  	<tr class="mypagerow"><th colspan="9">조회된 주문건이 없습니다.</th></tr>
+		  <%}else{ %>
+		  	<!--주문 목록 조회 반복문 시작  -->	
+		  	<%
+		  	
+		  	int num=pageVo.getNum();
+		  	int curPos=pageVo.getCurPos();
+		  	
+		  	//5번씩만 반복
+		  	for(int i=0;i<pageVo.getPageSize();i++){
+		  		if(num<1) break;
+		  		
+		  		ViewVO vo=list.get(curPos++);
+		  		num--;
+		  	%>	
+			<tr>
+				<td><input type="checkbox" name="1" class="chkItem"></td>
+				<td><%=vo.getOrderno() %></td>
+				<td>
+					<div class="media">
+						<img src="" class="mr-3 pdimgsize" alt="1">
+						<div class="media-body">
+							<h5 class="mt-0">
+								<a href="#"></a>
+							</h5>
+						</div>
+					</div>
+				</td>
+				<td><%=vo.getPdname() %></td>
+				<td><%=vo.getOrderqty() %></td>
+				<td><%=vo.getPrice() %></td>
+				<td><%=vo.getPickup() %></td>
+				<td><%=sdf.format(vo.getOrderregdate()) %></td>
+				<td><input type="button" class="mypagebtn" value="리뷰 쓰기" /></td>
+			</tr>
+		<%}//for %>
+	  	<!--반복처리 끝  -->
+	  <%}//if %>	
 					
 				</tbody>
 			</table>

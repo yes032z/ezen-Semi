@@ -16,8 +16,8 @@ public class QnAService {
 		return qnaDao.insertQnA(vo);
 	}
 	//마이페이지 > 내가 쓴 Q&A 목록조회
-	public List<ViewVO> selectQnAByid(String id) throws SQLException{
-		return qnaDao.selectQnAByid(id);
+	public List<ViewVO> selectQnAByid(String id, String startDate, String lastDate) throws SQLException{
+		return qnaDao.selectQnAByid(id, startDate, lastDate);
 	}
 	
 	
