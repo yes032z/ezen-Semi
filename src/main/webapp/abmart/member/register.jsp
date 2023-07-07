@@ -13,10 +13,10 @@ form#accesspanel {
 }
 
 
-input#zipcode {
+input#zipno {
     width: 295px;
 }
-input#address {
+input#detailaddress {
     width: 295px;
 }
 
@@ -46,7 +46,7 @@ select#email2 {
 input#email3 {
     width: 155px;
 }
-input#size {
+input#footsize {
     width: 280px;
     margin-right: 12px;
     height: 33px;
@@ -57,8 +57,13 @@ input#birth {
     width: 280px;
 }
 </style>
+<script src="../../js/jquery-3.7.0.min.js"></script>
 <script type="text/javascript">
-	
+	$(function(){
+		$('#btnZipcode').click(function(){
+			open("../zipcode/zipcode.jsp", "", "width=500, height=700, left=150, location=1");
+	});
+	});
 </script>
 <meta charset="EUC-KR">
 <title>회원가입 페이지</title>
@@ -71,7 +76,7 @@ input#birth {
       <input type="text" name="name" id="name" placeholder="Name">
     </p>
     <p>
-      <input type="text" name="userid" id="userid" placeholder="Userid">
+      <input type="text" name="id" id="id" placeholder="Userid">
     </p>
     <p>
       <input type="password" name="pwd" id="pwd" placeholder="User pwd">
@@ -80,15 +85,15 @@ input#birth {
       <input type="password" name="pwd" id="pwdchk" placeholder="User pwdck">
     </p>
     <p>
-  	  <input type="number" name="size" id="size" placeholder="발 사이즈">    
+  	  <input type="number" name="footsize" id="footsize" placeholder="발 사이즈">    
   	  <input type="text" name="birth" id="birth" placeholder="생일">    
     </p>
     <p id="zip">
     <!-- 우편번호 검색 넣기 -->
      	
-        <input type="text" name="zipcode" id="zipcode" ReadOnly  placeholder ="우편번호">
+        <input type="text" name="zipno" id=zipno ReadOnly  placeholder ="우편번호">
         <input type="Button" value="우편번호 찾기" id="btnZipcode" ><br />
-        <input type="text" name="address"id ="address" ReadOnly placeholder="주소" ><br />
+        <input type="text" name="detailaddress"id ="detailaddress" ReadOnly placeholder="주소" ><br />
         <span class="sp1">&nbsp;</span>
     </p>
     <p id ="tel">
