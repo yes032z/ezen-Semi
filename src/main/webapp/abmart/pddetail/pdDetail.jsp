@@ -1,6 +1,37 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="com.semi.product.model.ProductVO"%>
+<%@page import="java.sql.SQLException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../../inc/top.jsp" %>
+<jsp:useBean id="pdService" class="com.semi.product.model.ProductService" scope="session"></jsp:useBean>
+<%
+	String pdno=request.getParameter("pdno");
+	
+	if(pdno==null || pdno.isEmpty()){%>
+		<script>
+			alert("잘못된 url입니다.");
+			history.back();
+		</script>
+		<%return;	
+  	}
+	ProductVO vo=null;
+	try{
+		vo=pdService.selectPdByNo(Integer.parseInt(pdno));
+	}catch(SQLException e){
+		e.printStackTrace();
+	}
+	
+	if(vo==null){%>
+		<script>
+			alert("해당 상품이 존재하지 않습니다.");
+			history.back();
+		</script>
+	<%	return;
+	}
+	
+	DecimalFormat df=new DecimalFormat("#,###");
+%>
 <script type="text/javascript">
 	$(function() {
 		$('.alink1').eq(0).css('border','1px solid black');
@@ -31,82 +62,341 @@
 		$('#order').click(function(){
 			location.href="../basket/OrderPayment.jsp";
 		});
+		var bool1=false;
+		var bool2=false;
+		var bool3=false;
+		var bool4=false;
+		var bool5=false;
+		var bool6=false;
+		var bool7=false;
+		$('button[name=size]').click(function(){
+			var size=$(this).html();
+			if(!bool1){
+				if(size==230){
+					var tag="<div name='pddetail'>"
+						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
+						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
+						+" <input type='text' class='quantity-input' id='pd"+size+"' style='width: 45px;'>"
+						+"<button class='btn minus_btn size' name='minus'>-</button>"
+						+"</div>"
+						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
+						+"<%=vo.getPrice()%></div><span class='leftSort'>원</span>"
+						+"<button class='btn size' name='close'>X</button>"
+				        +"</div>";
+					$('div[name=pddetail-group]').prepend(tag);
+					$('#pd'+size).val(1);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
+					$('#sumprice').text(sumprice);
+					bool1=true;
+				}
+			}else{
+				if(size==230){
+					var pdsizeval=$('#pd'+size).val();
+					var qty=parseInt(pdsizeval)+1;
+					$('#pd'+size).val(qty);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(price)+parseInt(<%=vo.getPrice()%>);
+					$('#sumprice').text(sumprice);
+					
+					var result= parseInt(qty)*parseInt(<%=vo.getPrice()%>);
+					$(this).parent().parent().find('div[name=sumprice'+size+']').html(result);
+				}
+			}
+			
+			if(!bool2){
+				if(size==235){
+					var tag="<div name='pddetail'>"
+						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
+						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
+						+" <input type='text' class='quantity-input' id='pd"+size+"' style='width: 45px;'>"
+						+"<button class='btn minus_btn size' name='minus'>-</button>"
+						+"</div>"
+						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
+						+"<%=vo.getPrice()%></div><span class='leftSort'>원</span>"
+						+"<button class='btn size' name='close'>X</button>"
+				        +"</div>";
+					$('div[name=pddetail-group]').prepend(tag);
+					$('#pd'+size).val(1);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
+					$('#sumprice').text(sumprice);
+					bool2=true;
+				}
+			}else{
+				if(size==235){
+					var pdsizeval=$('#pd'+size).val();
+					var qty=parseInt(pdsizeval)+1;
+					$('#pd'+size).val(qty);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(price)+parseInt(<%=vo.getPrice()%>);
+					$('#sumprice').text(sumprice);
+					
+					var result= parseInt(qty)*parseInt(<%=vo.getPrice()%>);
+					$(this).parent().parent().find('div[name=sumprice'+size+']').html(result);
+				}
+			}
+			
+			if(!bool3){
+				if(size==240){
+					var tag="<div name='pddetail'>"
+						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
+						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
+						+" <input type='text' class='quantity-input' id='pd"+size+"' style='width: 45px;'>"
+						+"<button class='btn minus_btn size' name='minus'>-</button>"
+						+"</div>"
+						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
+						+"<%=vo.getPrice()%></div><span class='leftSort'>원</span>"
+						+"<button class='btn size' name='close'>X</button>"
+				        +"</div>";
+					$('div[name=pddetail-group]').prepend(tag);
+					$('#pd'+size).val(1);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
+					$('#sumprice').text(sumprice);
+					bool3=true;
+				}
+			}else{
+				if(size==240){
+					var pdsizeval=$('#pd'+size).val();
+					var qty=parseInt(pdsizeval)+1;
+					$('#pd'+size).val(qty);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(price)+parseInt(<%=vo.getPrice()%>);
+					$('#sumprice').text(sumprice);
+					
+					var result= parseInt(qty)*parseInt(<%=vo.getPrice()%>);
+					$(this).parent().parent().find('div[name=sumprice'+size+']').html(result);
+				}
+			}
+			
+			if(!bool4){
+				if(size==245){
+					var tag="<div name='pddetail'>"
+						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
+						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
+						+" <input type='text' class='quantity-input' id='pd"+size+"' style='width: 45px;'>"
+						+"<button class='btn minus_btn size' name='minus'>-</button>"
+						+"</div>"
+						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
+						+"<%=vo.getPrice()%></div><span class='leftSort'>원</span>"
+						+"<button class='btn size' name='close'>X</button>"
+				        +"</div>";
+					$('div[name=pddetail-group]').prepend(tag);
+					$('#pd'+size).val(1);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
+					$('#sumprice').text(sumprice);
+					bool4=true;
+				}
+			}else{
+				if(size==245){
+					var pdsizeval=$('#pd'+size).val();
+					var qty=parseInt(pdsizeval)+1;
+					$('#pd'+size).val(qty);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(price)+parseInt(<%=vo.getPrice()%>);
+					$('#sumprice').text(sumprice);
+					
+					var result= parseInt(qty)*parseInt(<%=vo.getPrice()%>);
+					$(this).parent().parent().find('div[name=sumprice'+size+']').html(result);
+				}
+			}
+			
+			if(!bool5){
+				if(size==250){
+					var tag="<div name='pddetail'>"
+						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
+						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
+						+" <input type='text' class='quantity-input' id='pd"+size+"' style='width: 45px;'>"
+						+"<button class='btn minus_btn size' name='minus'>-</button>"
+						+"</div>"
+						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
+						+"<%=vo.getPrice()%></div><span class='leftSort'>원</span>"
+						+"<button class='btn size' name='close'>X</button>"
+				        +"</div>";
+					$('div[name=pddetail-group]').prepend(tag);
+					$('#pd'+size).val(1);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
+					$('#sumprice').text(sumprice);
+					bool5=true;
+				}
+			}else{
+				if(size==250){
+					var pdsizeval=$('#pd'+size).val();
+					var qty=parseInt(pdsizeval)+1;
+					$('#pd'+size).val(qty);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(price)+parseInt(<%=vo.getPrice()%>);
+					$('#sumprice').text(sumprice);
+					
+					var result= parseInt(qty)*parseInt(<%=vo.getPrice()%>);
+					$(this).parent().parent().find('div[name=sumprice'+size+']').html(result);
+				}
+			}
+			
+			if(!bool6){
+				if(size==255){
+					var tag="<div name='pddetail'>"
+						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
+						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
+						+" <input type='text' class='quantity-input' id='pd"+size+"' style='width: 45px;'>"
+						+"<button class='btn minus_btn size' name='minus'>-</button>"
+						+"</div>"
+					    +"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
+					    +"<%=vo.getPrice()%></div><span class='leftSort'>원</span>"
+					    +"<button class='btn size' name='close'>X</button>"
+				        +"</div>";
+					$('div[name=pddetail-group]').prepend(tag);
+					$('#pd'+size).val(1);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
+					$('#sumprice').text(sumprice);
+					bool6=true;
+				}
+			}else{
+				if(size==255){
+					var pdsizeval=$('#pd'+size).val();
+					var qty=parseInt(pdsizeval)+1;
+					$('#pd'+size).val(qty);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(price)+parseInt(<%=vo.getPrice()%>);
+					$('#sumprice').text(sumprice);
+					
+					var result= parseInt(qty)*parseInt(<%=vo.getPrice()%>);
+					$(this).parent().parent().find('div[name=sumprice'+size+']').html(result);
+				}
+			}
+			
+			if(!bool7){
+				if(size==260){
+					var tag="<div name='pddetail'>"
+						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
+						+"<div style='float: left;margin-left: 200px'>"
+						+"<button class='btn plus_btn size' name='plus'>+</button>"
+						+" <input type='text' class='quantity-input' id='pd"+size+"' style='width: 45px;'>"
+						+"<button class='btn minus_btn size' name='minus'>-</button>"
+						+"</div>"
+					    +"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
+					    +"<%=vo.getPrice()%></div><span class='leftSort'>원</span>"
+					    +"<button class='btn size' name='close'>X</button>"
+				        +"</div>";
+					$('div[name=pddetail-group]').prepend(tag);
+					$('#pd'+size).val(1);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
+					$('#sumprice').text(sumprice);
+					bool7=true;
+				}
+			}else{
+				if(size==260){
+					var pdsizeval=$('#pd'+size).val();
+					var qty=parseInt(pdsizeval)+1;
+					$('#pd'+size).val(qty);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(price)+parseInt(<%=vo.getPrice()%>);
+					$('#sumprice').text(sumprice);
+					
+					var result= parseInt(qty)*parseInt(<%=vo.getPrice()%>);
+					$(this).parent().parent().find('div[name=sumprice'+size+']').html(result);
+				}
+			}
+		});
+
+		$('div[name=pddetail-group]').on('click', 'button[name=plus]',function(){
+			var size=$(this).parent().parent().find('div').eq(0).html();
+			var qty=$(this).parent().find('input').val();
+			var resultqty=parseInt(qty)+1;
+			$(this).parent().find('input').val(resultqty);
+			
+			var price= <%=vo.getPrice()%>;
+			var sumprice= parseInt(price)*parseInt(resultqty);
+			$(this).parent().parent().find('div[name=sumprice'+size+']').html(sumprice);
+			var result=$('#sumprice').html();
+			
+			var res=parseInt(result)+<%=vo.getPrice()%>;
+			$('#sumprice').html(res);
+		});
+		
+		$('div[name=pddetail-group]').on('click', 'button[name=minus]',function(){
+			var size=$(this).parent().parent().find('div').eq(0).html();
+			var qty=$(this).parent().find('input').val();
+			if(qty==1){
+				return;
+			}
+			var resultqty=parseInt(qty)-1;
+			$(this).parent().find('input').val(resultqty);
+			
+			var price=<%=vo.getPrice()%>;
+			var sumprice=parseInt(price)*parseInt(resultqty);
+			
+			$(this).parent().parent().find('div[name=sumprice'+size+']').html(sumprice);
+			var result=$('#sumprice').html();
+			
+			var res=result=parseInt(result)-<%=vo.getPrice()%>;
+			$('#sumprice').html(res);
+			
+		});
+		
+		$('div[name=pddetail-group]').on('click', 'button[name=close]',function(){
+			var size=$(this).parent('div[name=pddetail]').find('div').eq(0).html();
+			var sizesumprice=$(this).parent('div[name=pddetail]').find('div[name=sumprice'+size+']').html();
+			
+			var sumprice=$('#sumprice').html();
+			var result=parseInt(sumprice)-parseInt(sizesumprice);
+			$('#sumprice').html(result);
+			$(this).parent().remove();
+			
+			if(size==230){
+				bool1=false;
+			}else if(size==235){
+				bool2=false;
+			}else if(size==240){
+				bool3=false;
+			}else if(size==245){
+				bool4=false;
+			}else if(size==250){
+				bool5=false;
+			}else if(size==255){
+				bool6=false;
+			}else if(size==260){
+				bool7=false;
+			}
+			
+		});
+		
 	});
 </script>
 <section class="py-5">
-	<div style="width: 500px;height: 700px;margin-left: 100px; float:left;">
-		<img class="card-img-top" src="https://image.a-rt.com/art/product/2023/03/11678_1678179755820.jpg?shrink=388:388" alt="상품 이미지" />
+	<!-- 상품 이미지 -->
+	<div style="width: 500px;height: 900px;margin-left: 100px; float:left;">
+		<img class="card-img-top" src="../../images/<%=vo.getFilename()%>" alt="상품 이미지" />
 	</div>
 	<!-- 상품 정보 -->
 	<div style="float:left;margin-left: 100px;width:600px;height:700px;">
 		<div style="font-size: 1.5em;font-weight: bold;float:left;width:600px;">
-			<span style="float:left;">상품명</span><span>상품명</span>
+			<span style="float:left;">상품명</span><span><%=vo.getPdname() %></span>
 		</div>
 		<div style="font-size: 1.5em;font-weight: bold;clear:both;float:left;padding-bottom:30px;margin-top:50px;width:600px;">
-			<span style="float:left;">가격</span><span>99000원</span>
+			<span style="float:left;">가격</span><span><%=df.format(vo.getPrice())%>원</span>
 		</div>
 		<div style="font-size: 1.5em;font-weight: bold;clear:both;float:left;padding-bottom:30px;margin-top:50px;width:600px;">
 			<span style="float:left;">사이즈</span>
-			<button class="btn size">230</button>
-			<button class="btn size">235</button>
-			<button class="btn size">240</button>
-			<button class="btn size">245</button>
-			<button class="btn size">250</button>
-			<button class="btn size">255</button>
-			<button class="btn size">260</button>
+			<button class="btn size" name='size'>230</button>
+			<button class="btn size" name='size'>235</button>
+			<button class="btn size" name='size'>240</button>
+			<button class="btn size" name='size'>245</button>
+			<button class="btn size" name='size'>250</button>
+			<button class="btn size" name='size'>255</button>
+			<button class="btn size" name='size'>260</button>
 		</div>
-		<div name="pddetail">
-			 <div style="float: left;margin-left: 50px;font-size: 1.2em;">230</div>
-			 	<div style="float: left;margin-left: 200px">
-			        <button class="btn plus_btn size">+</button>
-		         	<input type="text" class="quantity-input" value="1" style="width: 45px;">
-		         	<button class="btn minus_btn size">-</button>
-		         </div>
-	         <div style="float: left;margin-left: 50px;font-size: 1.2em;">99000원</div>
-	         <button class="btn size">X</button>
-         </div>
-         <div name="pddetail">
-			 <div style="float: left;margin-left: 50px;font-size: 1.2em;">230</div>
-			 	<div style="float: left;margin-left: 200px">
-			        <button class="btn plus_btn size">+</button>
-		         	<input type="text" class="quantity-input" value="1" style="width: 45px;">
-		         	<button class="btn minus_btn size">-</button>
-		         </div>
-	         <div style="float: left;margin-left: 50px;font-size: 1.2em;">99000원</div>
-	         <button class="btn size size">X</button>
-         </div>
-         <div name="pddetail">
-			 <div style="float: left;margin-left: 50px;font-size: 1.2em;">230</div>
-			 	<div style="float: left;margin-left: 200px">
-			        <button class="btn plus_btn size">+</button>
-		         	<input type="text" class="quantity-input" value="1" style="width: 45px;">
-		         	<button class="btn minus_btn size">-</button>
-		         </div>
-	         <div style="float: left;margin-left: 50px;font-size: 1.2em;">99000원</div>
-	         <button class="btn size size">X</button>
-         </div>
-         <div name="pddetail">
-			 <div style="float: left;margin-left: 50px;font-size: 1.2em;">230</div>
-			 	<div style="float: left;margin-left: 200px">
-			        <button class="btn plus_btn size">+</button>
-		         	<input type="text" class="quantity-input" value="1" style="width: 45px;">
-		         	<button class="btn minus_btn size">-</button>
-		         </div>
-	         <div style="float: left;margin-left: 50px;font-size: 1.2em;">99000원</div>
-	         <button class="btn size size">X</button>
-         </div>
-         <div name="pddetail" style="border-bottom: 1px solid gray;">
-			 <div style="float: left;margin-left: 50px;font-size: 1.2em;">230</div>
-			 	<div style="float: left;margin-left: 200px">
-			        <button class="btn plus_btn size">+</button>
-		         	<input type="text" class="quantity-input" value="1" style="width: 45px;">
-		         	<button class="btn minus_btn size">-</button>
-		         </div>
-	         <div style="float: left;margin-left: 50px;font-size: 1.2em;">99000원</div>
-	         <button class="btn size">X</button>
-         </div>
+		<!-- 사이즈 버튼 누르면 추가되는 div -->
+		<div name="pddetail-group">
+			
+	    </div>
          <div style="width:600px;height:100px;float:left;">
-         	<span style="float:left;margin-top: 15px;margin-left: 20px">총 결제 금액</span><span style="float:right;margin-top: 15px">원</span><span name="searchqty" style="font-size: 2em;float:right;">0</span>
+         	<span style="float:left;margin-top: 15px;margin-left: 20px">총 결제 금액</span><span style="float:right;margin-top: 15px">원</span><span name="searchqty" id="sumprice" style="font-size: 2em;float:right;">0</span>
          </div>
          <div>
          	<button name="btn" id="basket">장바구니</button>
@@ -115,7 +405,7 @@
 	</div>
 	
 	<!-- 상품정보 -->
-	<div class="pdtab">
+	<div class="pdtab clearboth">
 		<ul class="nav nav-tabs">
 			<li class="nav-item"><button class="nav-link alink1"
 				 style="width: 400px">상품정보</a></li>
@@ -127,7 +417,7 @@
 	</div>
 	
 	<!-- 상품후기 -->
-	<div class="pdtab">
+	<div class="pdtab clearboth">
 		<ul class="nav nav-tabs">
 			<li class="nav-item"><button class="nav-link alink1"
 				 style="width: 400px">상품정보</a></li>

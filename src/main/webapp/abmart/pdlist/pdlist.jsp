@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="com.semi.product.model.ProductVO"%>
 <%@page import="java.util.List"%>
@@ -9,10 +10,12 @@
 <%
 	List<ProductVO> list=null;
 	try{
-		list=pdService.selectAllPd();
+		list=pdService.selectPdAll();
 	}catch(SQLException e){
 		e.printStackTrace();
 	}
+	
+	DecimalFormat df=new DecimalFormat("#,###");
 %>
 <script type="text/javascript">
 	$(function() {
@@ -106,8 +109,10 @@
 			</div>
 			<div class="div1">
 				<hr style="clear: both;">
-			<%for(int i=0;i<list.size();i++){ 
+				
+			<%for(int i=0;i<list.size();i++){
 					ProductVO vo=list.get(i);%>
+				<a href="../pddetail/pdDetail.jsp?pdno=<%=vo.getPdno()%>">
 				<div class="col mb-5">
 					<div class="card h-100">
 						<!-- Sale badge-->
@@ -132,9 +137,10 @@
 									<div class="bi-star-fill"></div>
 								</div>
 								<!-- Product price-->
-								<span class="text-muted text-decoration-line-through"><%=vo.getPrice() %>원</span>
+								<span class="text-muted text-decoration-line-through"><%=df.format(vo.getPrice())%>원</span>
 							</div>
 						</div>
+						</a>
 						<!-- Product actions-->
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center">
