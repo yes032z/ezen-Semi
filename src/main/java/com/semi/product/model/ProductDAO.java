@@ -48,7 +48,7 @@ public class ProductDAO {
 	}
 	
 	//상품 리스트
-	public List<ProductVO> selectAllPd() throws SQLException {
+	public List<ProductVO> selectPdAll() throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -83,5 +83,41 @@ public class ProductDAO {
 			pool.dbClose(rs, ps, con);
 		}
 		
+	}
+	
+	public ProductVO selectPdByNo(int pdno) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		ProductVO vo=null;
+		try {
+			con=pool.getConnection();
+			
+			String sql="select pdno,productno,pdname,price,brand,pdregdate,filename,filesize,originalfilename from product"
+					+ "	where pdno=?";
+			ps=con.prepareStatement(sql);
+			
+			ps.setInt(1, pdno);
+			
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				int pdno2=rs.getInt(1);
+				String productNo=rs.getString(2);
+				String pdname=rs.getString(3);
+				int price=rs.getInt(4);
+				String brand=rs.getString(5);
+				Timestamp pdRegdate=rs.getTimestamp(6);
+				String fileName=rs.getString(7);
+				Long fileSize=rs.getLong(8);
+				String originalFileName=rs.getString(9);
+				
+				vo=new ProductVO(pdno2, productNo, pdname, price, brand, pdRegdate, fileName, fileSize, originalFileName);
+			}
+			System.out.println("번호로 상품 검색 결과 vo="+vo+", 매개변수 pdno="+pdno);
+			return vo;
+		}finally {
+			pool.dbClose(rs, ps, con);
+		}
 	}
 }

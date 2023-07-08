@@ -14,8 +14,11 @@ public class ProductService {
 		return productDao.insertPd(vo);
 	}
 	
-	public List<ProductVO> selectAllPd() throws SQLException {
-		return productDao.selectAllPd();
+	public List<ProductVO> selectPdAll() throws SQLException {
+		return productDao.selectPdAll();
 	}
 	
+	public ProductVO selectPdByNo(int pdno) throws SQLException {
+		return productDao.selectPdByNo(pdno);
+	}
 }
