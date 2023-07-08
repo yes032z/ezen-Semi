@@ -161,7 +161,7 @@ $(function() {
 				<td><%=vo.getOrderno() %></td>
 				<td>
 					<div class="media">
-						<img src="" class="mr-3 pdimgsize" alt="1">
+						<img src="../../images/<%=vo.getFilename() %>" class="mr-3 pdimgsize" alt="1">
 						<div class="media-body">
 							<h5 class="mt-0">
 								<a href="#"></a>
@@ -174,7 +174,9 @@ $(function() {
 				<td><%=df.format(vo.getPrice()) %>원</td>
 				<td><%=vo.getPickup() %></td>
 				<td><%=sdf.format(vo.getOrderregdate()) %></td>
-				<td><input type="button" class="mypagebtn" value="리뷰 쓰기" /></td>
+				<td><input type="button" class="mypagebtn" value="리뷰 쓰기" /><br>
+				<input type="button" class="mypagebtn" name="del" value="반품 신청"> 
+				</td>
 			</tr>
 		<%}//for %>
 	  	<!--반복처리 끝  -->
@@ -186,9 +188,7 @@ $(function() {
 	<!-- 페이지 번호 추가 -->		
 	<!-- 이전 블럭으로 이동 -->
 	<%if(pageVo.getFirstPage()>1){%>
-		<a href="list.jsp?currentPage=<%=pageVo.getFirstPage()-1%>">
-			<img src="../../images/first.JPG">
-		</a>	
+		<a href="orderDetail.jsp?currentPage=<%=pageVo.getFirstPage()-1%>">◀</a>
 	<%} %>
 						
 	<!-- [1][2][3][4][5][6][7][8][9][10] -->
@@ -204,15 +204,12 @@ $(function() {
 	
 	<!-- 다음 블럭으로 이동 -->
 	<%if(pageVo.getLastPage()< pageVo.getTotalPage()){%>
-		<a href="list.jsp?currentPage=<%=pageVo.getLastPage()+1%>">
-			<img src="../../images/last.JPG">
-		</a>	
+		<a href="orderDetail.jsp?currentPage=<%=pageVo.getLastPage()+1%>">▶</a>	
 	<%} %>
 	
 	<!--  페이지 번호 끝 -->
 </div>
-			<input type="button" class="mypagebtn2" name="del" value="반품신청"> 
-			<input type="button" class="mypagebtn2" name="del" value="취소하기"> 
+
 		</div>
 	</div>
 

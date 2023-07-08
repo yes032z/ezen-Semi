@@ -20,8 +20,10 @@ public class ViewVO {
 	private int price; /* 금액 */
 	private String pickup; /* 픽업유무 */
 	private Timestamp orderregdate; /* 구매일 */
+	private String filename; /* 업로드파일명 */
 
 	private int favoriteno; /* 찜한상품번호 */
+	private int pdno; /* 상품고유번호 */
 	
 	public ViewVO() {
 		super();
@@ -46,9 +48,10 @@ public class ViewVO {
 		this.reviewregdate = reviewregdate;
 	}
 	//마이페이지 > 주문 조회
-	public ViewVO(int orderno, String pdname,  int orderqty, int price, String pickup, Timestamp orderregdate) {
+	public ViewVO(int orderno, String filename, String pdname,  int orderqty, int price, String pickup, Timestamp orderregdate) {
 		super();
 		this.orderno = orderno;
+		this.filename = filename;
 		this.pdname = pdname;
 		this.orderqty = orderqty;
 		this.price = price;
@@ -56,11 +59,13 @@ public class ViewVO {
 		this.orderregdate = orderregdate;
 	}
 	//마이페이지 > 찜목록
-	public ViewVO(int favoriteno, String pdname, int price) {
+	public ViewVO(int favoriteno, String filename, String pdname, int price, int pdno) {
 		super();
 		this.favoriteno = favoriteno;
+		this.filename = filename;
 		this.pdname = pdname;
 		this.price = price;
+		this.pdno = pdno;
 	}
 	public int getQnano() {
 		return qnano;
@@ -152,11 +157,23 @@ public class ViewVO {
 	public void setOrderregdate(Timestamp orderregdate) {
 		this.orderregdate = orderregdate;
 	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
+	}
 	public int getFavoriteno() {
 		return favoriteno;
 	}
 	public void setFavoriteno(int favoriteno) {
 		this.favoriteno = favoriteno;
+	}
+	public int getPdno() {
+		return pdno;
+	}
+	public void setPdno(int pdno) {
+		this.pdno = pdno;
 	}
 	@Override
 	public String toString() {
@@ -164,7 +181,7 @@ public class ViewVO {
 				+ ", qnaregdate=" + qnaregdate + ", reviewno=" + reviewno + ", reviewbody=" + reviewbody
 				+ ", reviewgrade=" + reviewgrade + ", good=" + good + ", reviewregdate=" + reviewregdate + ", orderno="
 				+ orderno + ", orderqty=" + orderqty + ", price=" + price + ", pickup=" + pickup + ", orderregdate="
-				+ orderregdate + ", favoriteno=" + favoriteno + "]";
+				+ orderregdate + ", filename=" + filename + ", favoriteno=" + favoriteno + ", pdno=" + pdno + "]";
 	}
 	
 }

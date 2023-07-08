@@ -153,9 +153,7 @@ $(function() {
 				<!-- 페이지 번호 추가 -->		
 				<!-- 이전 블럭으로 이동 -->
 				<%if(pageVo.getFirstPage()>1){%>
-					<a href="list.jsp?currentPage=<%=pageVo.getFirstPage()-1%>">
-						<img src="../../images/first.JPG">
-					</a>	
+					<a href="pdQnA.jsp?currentPage=<%=pageVo.getFirstPage()-1%>">◀</a>	
 				<%} %>
 									
 				<!-- [1][2][3][4][5][6][7][8][9][10] -->
@@ -165,21 +163,19 @@ $(function() {
 				    if(i == currentPage){ %>
 			         <span style="color: red;font-weight: bold;font-size: 1em"><%=i%></span>
 			   <%   }else{   %>
-			         <a href="orderDetail.jsp?currentPage=<%=i%>&startDate=<%=startDate%>&lastDate=<%=lastDate %>">[<%=i %>]</a>
+			         <a href="pdQnA.jsp?currentPage=<%=i%>&startDate=<%=startDate%>&lastDate=<%=lastDate %>">[<%=i %>]</a>
 			   <%   }//if      
 				}//for %>
 				
 				<!-- 다음 블럭으로 이동 -->
 				<%if(pageVo.getLastPage()< pageVo.getTotalPage()){%>
-					<a href="list.jsp?currentPage=<%=pageVo.getLastPage()+1%>">
-						<img src="../../images/last.JPG">
-					</a>	
+					<a href="pdQnA.jsp?currentPage=<%=pageVo.getLastPage()+1%>">▶</a>	
 				<%} %>
 				
 				<!--  페이지 번호 끝 -->
 			</div>
 		</div>
-</div>
+	</div>
 
 </article>
 <%@ include file="../../inc/bottom.jsp" %>
