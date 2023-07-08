@@ -1,3 +1,4 @@
+<%@page import="com.semi.common.Utility"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.semi.common.PagingVO"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -139,7 +140,7 @@ $(function() {
 			  	%>	
 				<tr>
 					<th scope="row"><%=vo.getQnano() %></th>
-					<td><a href="#"><%=vo.getQnabody() %></a></td>
+					<td><a href="#"><%=Utility.cutString(vo.getQnabody(), 30) %></a></td>
 					<td><%=vo.getPdname() %></td>
 					<td><%=vo.getQnaview() %></td>
 					<td><%=sdf.format(vo.getQnaregdate()) %></td>
@@ -162,7 +163,7 @@ $(function() {
 					if(i>pageVo.getTotalPage()) break;
 				
 				    if(i == currentPage){ %>
-			         <span style="color: blue;font-weight: bold;font-size: 1em"><%=i%></span>
+			         <span style="color: red;font-weight: bold;font-size: 1em"><%=i%></span>
 			   <%   }else{   %>
 			         <a href="orderDetail.jsp?currentPage=<%=i%>&startDate=<%=startDate%>&lastDate=<%=lastDate %>">[<%=i %>]</a>
 			   <%   }//if      

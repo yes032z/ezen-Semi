@@ -65,14 +65,18 @@ public class QnADAO {
 					 +" on q.pdno= p.pdno"
 					 +" left join member m"
 					 +" on q.no= m.no"
-					 +" where m.id= ? and q.qnaregdate >=to_date( ? )"
-					 +" and q.qnaregdate< to_date( ? )+1"
-					 +" order by q.qnaregdate desc";
+					 +" where m.id= ?";
+					 if(startDate!=null && !startDate.isEmpty() && lastDate!=null && !lastDate.isEmpty()) {
+					 sql +=" and q.qnaregdate >=to_date( ? )"
+						 +" and q.qnaregdate< to_date( ? )+1";
+					 }
+					 sql +=" order by q.qnaregdate desc";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, id);
-			ps.setString(2, startDate);
-			ps.setString(3, lastDate);
-			
+			if(startDate!=null && !startDate.isEmpty() && lastDate!=null && !lastDate.isEmpty()) {
+				ps.setString(2, startDate);
+				ps.setString(3, lastDate);
+			}
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				int qnano=rs.getInt("qnano");

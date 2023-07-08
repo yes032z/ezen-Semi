@@ -1,3 +1,4 @@
+<%@page import="com.semi.common.Utility"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.semi.common.PagingVO"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -87,7 +88,7 @@ $(function() {
 	<div class="orderinfo">
 		<div id="orderinfo-first">상품 리뷰</div>
 		<div class="subtitle">내가 작성한 리뷰</div>
-		<form name="frmDateSearch" method="post" action="<%=request.getContextPath() %>/abmart/mypage/pdQnA.jsp">
+		<form name="frmDateSearch" method="post" action="<%=request.getContextPath() %>/abmart/mypage/pdReview.jsp">
 		<div id="orderinfo-third" class="orderbox">
 			상품 리뷰 작성 기간&nbsp;&nbsp;&nbsp;
 			<button type="button" id="datebtn1" class="btn btn-outline-secondary" name="size">1개월</button>
@@ -142,7 +143,7 @@ $(function() {
 			  	%>	
 					<tr>
 						<th scope="row"><%=vo.getReviewno() %></th>
-						<td><a href="#"><%=vo.getReviewbody() %></a></td>
+						<td><a href="#"><%=Utility.cutString(vo.getReviewbody(),20) %></a></td>
 						<td><%=vo.getPdname() %></td>
 						<td>
 							<div class="d-flex justify-content-center small text-warning mb-2">
@@ -176,7 +177,7 @@ $(function() {
 					if(i>pageVo.getTotalPage()) break;
 				
 				    if(i == currentPage){ %>
-			         <span style="color: blue;font-weight: bold;font-size: 1em"><%=i%></span>
+			         <span style="color: red;font-weight: bold;font-size: 1em"><%=i%></span>
 			   <%   }else{   %>
 			         <a href="orderDetail.jsp?currentPage=<%=i%>&startDate=<%=startDate%>&lastDate=<%=lastDate %>">[<%=i %>]</a>
 			   <%   }//if      

@@ -102,14 +102,18 @@ public class ReviewDAO {
 					+" on r.pdno= p.pdno"
 					+" left join member m"
 					+" on r.no= m.no"
-					+" where m.id= ? and r.reviewregdate >=to_date( ? )"
-					+" and r.reviewregdate< to_date( ? )+1"
-					+" order by r.reviewregdate desc";
+					+" where m.id= ?";
+					if(startDate!=null && !startDate.isEmpty() && lastDate!=null && !lastDate.isEmpty()) {
+					sql +=" and r.reviewregdate >=to_date( ? )"
+						+" and r.reviewregdate< to_date( ? )+1";
+					}
+					sql +=" order by r.reviewregdate desc";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, id);
-			ps.setString(2, startDate);
-			ps.setString(3, lastDate);
-			
+			if(startDate!=null && !startDate.isEmpty() && lastDate!=null && !lastDate.isEmpty()) {
+				ps.setString(2, startDate);
+				ps.setString(3, lastDate);
+			}
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				int reviewno=rs.getInt("reviewno");
