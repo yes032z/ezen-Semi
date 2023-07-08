@@ -285,7 +285,7 @@ $(document).ready(function() {
 			<aside>
 			</aside>
 			<section class="order">
-				<nav>>
+				<nav>
 				</nav>
 				<form action="#">
 					<table border="0">
