@@ -20,7 +20,8 @@ public class ViewVO {
 	private int price; /* 금액 */
 	private String pickup; /* 픽업유무 */
 	private Timestamp orderregdate; /* 구매일 */
-	
+
+	private int favoriteno; /* 찜한상품번호 */
 	
 	public ViewVO() {
 		super();
@@ -53,6 +54,13 @@ public class ViewVO {
 		this.price = price;
 		this.pickup = pickup;
 		this.orderregdate = orderregdate;
+	}
+	//마이페이지 > 찜목록
+	public ViewVO(int favoriteno, String pdname, int price) {
+		super();
+		this.favoriteno = favoriteno;
+		this.pdname = pdname;
+		this.price = price;
 	}
 	public int getQnano() {
 		return qnano;
@@ -144,13 +152,19 @@ public class ViewVO {
 	public void setOrderregdate(Timestamp orderregdate) {
 		this.orderregdate = orderregdate;
 	}
+	public int getFavoriteno() {
+		return favoriteno;
+	}
+	public void setFavoriteno(int favoriteno) {
+		this.favoriteno = favoriteno;
+	}
 	@Override
 	public String toString() {
 		return "ViewVO [qnano=" + qnano + ", qnabody=" + qnabody + ", pdname=" + pdname + ", qnaview=" + qnaview
 				+ ", qnaregdate=" + qnaregdate + ", reviewno=" + reviewno + ", reviewbody=" + reviewbody
 				+ ", reviewgrade=" + reviewgrade + ", good=" + good + ", reviewregdate=" + reviewregdate + ", orderno="
 				+ orderno + ", orderqty=" + orderqty + ", price=" + price + ", pickup=" + pickup + ", orderregdate="
-				+ orderregdate + "]";
+				+ orderregdate + ", favoriteno=" + favoriteno + "]";
 	}
 	
 }

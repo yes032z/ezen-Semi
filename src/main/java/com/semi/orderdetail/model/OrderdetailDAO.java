@@ -26,21 +26,25 @@ public class OrderdetailDAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="select od.orderno, p.pdname, od.orderqty, p.price, o.pickup, o.orderregdate"
+			String sql="select o.orderno, p.pdname, od.orderqty, p.price, o.pickup, o.orderregdate"
 					+" from orderdetail od left join product p"
 					+" on od.pdno = p.pdno"
 					+" right join orders o"
 					+" on od.orderno = o.orderno"
 					+" left join member m"
 					+" on o.no= m.no"
-					+" where m.id= ? and o.orderregdate>=to_date( ? )"
-					+" and o.orderregdate<to_date( ? )+1"
-					+" order by o.orderregdate desc";
+					+" where m.id= ?";
+					if(startDate!=null && !startDate.isEmpty() && lastDate!=null && !lastDate.isEmpty()) {
+						sql +=" and o.orderregdate>=to_date( ? )"
+					         +" and o.orderregdate<to_date( ? )+1";
+					}
+					sql +=" order by o.orderregdate desc";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, id);
-			ps.setString(2, startDate);
-			ps.setString(3, lastDate);
-			
+			if(startDate!=null && !startDate.isEmpty() && lastDate!=null && !lastDate.isEmpty()) {
+				ps.setString(2, startDate);
+				ps.setString(3, lastDate);
+			}
 			rs=ps.executeQuery();
 			while(rs.next()) {
 				int orderno=rs.getInt("orderno");

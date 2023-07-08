@@ -1,3 +1,4 @@
+<%@page import="java.text.DecimalFormat"%>
 <%@page import="com.semi.orderdetail.model.OrderdetailVO"%>
 <%@page import="com.semi.common.PagingVO"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -9,6 +10,44 @@
 <%@ include file="../../inc/top.jsp"%>
 <%@ include file="../../inc/mypagenav.jsp"%>
 <link href="../../css/mypage.css" rel="stylesheet" type="text/css">
+<jsp:useBean id="ODService" class="com.semi.orderdetail.model.OrderdetailService" scope="session"></jsp:useBean>
+<%
+	
+	//orderDetail.jsp 에서 검색버튼 클릭하면 post방식으로 서브밋됨
+			
+	//1
+	//날짜 파라미터 읽어오기
+	request.setCharacterEncoding("utf-8");
+	String id=(String)session.getAttribute("id");
+	String startDate=request.getParameter("startDate");
+	String lastDate=request.getParameter("lastDate");
+	
+ 	//2
+	List<ViewVO> list=null;
+	try{
+		list=ODService.selectAll(id, startDate, lastDate);
+	}catch(SQLException e){
+		e.printStackTrace();
+	}
+	
+	//3
+	DecimalFormat df=new DecimalFormat("#,###");
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	//페이징 처리
+	int currentPage=1;  //현재 페이지
+	
+	if(request.getParameter("currentPage")!=null){
+		currentPage=Integer.parseInt(request.getParameter("currentPage"));
+	}
+	
+	//[1] 현재 페이지와 무관한 변수
+	int totalRecord=list.size(); //총 레코드 개수
+	int pageSize=5; //한 페이지에 보여주 레코드 수
+	int blockSize=10;  //한 블럭에 보여줄 페이지 수
+	
+	PagingVO pageVo=new PagingVO(currentPage, totalRecord, pageSize, blockSize);
+
+%>
 <script type="text/javascript" src="../../js/jquery-3.7.0.min.js"></script>
 <script type="text/javascript" src="../../js/jquery-ui.min.js"></script>
 <script type="text/javascript">
@@ -53,43 +92,6 @@ $(function() {
     });
 });
 </script>
-<jsp:useBean id="ODService" class="com.semi.orderdetail.model.OrderdetailService" scope="session"></jsp:useBean>
-<%
-	
-	//orderDetail.jsp 에서 검색버튼 클릭하면 post방식으로 서브밋됨
-			
-	//1
-	//날짜 파라미터 읽어오기
-	request.setCharacterEncoding("utf-8");
-	String id=(String)session.getAttribute("id");
-	String startDate=request.getParameter("startDate");
-	String lastDate=request.getParameter("lastDate");
-	
- 	//2
-	List<ViewVO> list=null;
-	try{
-		list=ODService.selectAll(id, startDate, lastDate);
-	}catch(SQLException e){
-		e.printStackTrace();
-	}
-	
-	//3
-	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-	//페이징 처리
-	int currentPage=1;  //현재 페이지
-	
-	if(request.getParameter("currentPage")!=null){
-		currentPage=Integer.parseInt(request.getParameter("currentPage"));
-	}
-	
-	//[1] 현재 페이지와 무관한 변수
-	int totalRecord=list.size(); //총 레코드 개수, 17
-	int pageSize=5; //한 페이지에 보여주 레코드 수
-	int blockSize=10;  //한 블럭에 보여줄 페이지 수
-	
-	PagingVO pageVo=new PagingVO(currentPage, totalRecord, pageSize, blockSize);
-
-%>
 <article id="mypage">
 	<div class="orderinfo">
 		<div id="orderinfo-first">주문 조회</div>
@@ -123,7 +125,7 @@ $(function() {
 				<col style="width:12.5%;" />	
 				<col style="width:12.5%;" />	
 				<col style="width:12.5%;" />		
-				</colgroup>
+			</colgroup>
    				 <thead class="thead-dark">
 					<tr>
 						<th><input type="checkbox" name="all" id="chkAll"></th>
@@ -138,7 +140,7 @@ $(function() {
 					</tr>
 				</thead>
 				<tbody>
-				  <%if(list==null || list.isEmpty()){ %>
+		  <%if(list==null || list.isEmpty()){ %>
 		  	<tr class="mypagerow"><th colspan="9">조회된 주문건이 없습니다.</th></tr>
 		  <%}else{ %>
 		  	<!--주문 목록 조회 반복문 시작  -->	
@@ -169,7 +171,7 @@ $(function() {
 				</td>
 				<td><%=vo.getPdname() %></td>
 				<td><%=vo.getOrderqty() %></td>
-				<td><%=vo.getPrice() %></td>
+				<td><%=df.format(vo.getPrice()) %>원</td>
 				<td><%=vo.getPickup() %></td>
 				<td><%=sdf.format(vo.getOrderregdate()) %></td>
 				<td><input type="button" class="mypagebtn" value="리뷰 쓰기" /></td>
@@ -194,7 +196,7 @@ $(function() {
 		if(i>pageVo.getTotalPage()) break;
 	
 	    if(i == currentPage){ %>
-         <span style="color: blue;font-weight: bold;font-size: 1em"><%=i%></span>
+         <span style="color: red;font-weight: bold;font-size: 1em"><%=i%></span>
    <%   }else{   %>
          <a href="orderDetail.jsp?currentPage=<%=i%>&startDate=<%=startDate%>&lastDate=<%=lastDate %>">[<%=i %>]</a>
    <%   }//if      

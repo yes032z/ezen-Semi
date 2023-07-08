@@ -67,8 +67,8 @@ public class QnADAO {
 					 +" on q.no= m.no"
 					 +" where m.id= ?";
 					 if(startDate!=null && !startDate.isEmpty() && lastDate!=null && !lastDate.isEmpty()) {
-					 sql +=" and q.qnaregdate >=to_date( ? )"
-						 +" and q.qnaregdate< to_date( ? )+1";
+						 sql +=" and q.qnaregdate >=to_date( ? )"
+						     +" and q.qnaregdate< to_date( ? )+1";
 					 }
 					 sql +=" order by q.qnaregdate desc";
 			ps=con.prepareStatement(sql);
