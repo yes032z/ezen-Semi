@@ -96,10 +96,10 @@ $(function() {
 		<form name="frmDateSearch" method="post" action="<%=request.getContextPath() %>/abmart/mypage/orderDetail.jsp">
 		<div id="orderinfo-third" class="orderbox">
 			온라인 쇼핑몰 구매 내역&nbsp;&nbsp;&nbsp;
-			<button type="button" id="datebtn1" class="btn btnDate" name="size">1개월</button>
-			<button type="button" id="datebtn2" class="btn btnDate" name="size">3개월</button>
-			<button type="button" id="datebtn3" class="btn btnDate" name="size">6개월</button>
-			<button type="button" id="datebtn4" class="btn btnDate" name="size">1년</button>
+			<button type="button" id="datebtn1" class="btn btn-outline-secondary" name="size">1개월</button>
+			<button type="button" id="datebtn2" class="btn btn-outline-secondary" name="size">3개월</button>
+			<button type="button" id="datebtn3" class="btn btn-outline-secondary" name="size">6개월</button>
+			<button type="button" id="datebtn4" class="btn btn-outline-secondary" name="size">1년</button>
 			<input type="date" id="startDate" name="startDate" value="<%=startDate %>" /> ~ 
 			<input type="date" id="lastDate" name="lastDate" value="<%=lastDate %>" />
 			<button type="submit" class="mypagebtn">조회</button>
