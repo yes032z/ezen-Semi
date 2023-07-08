@@ -7,8 +7,9 @@
     <title>ShoppingBasket.jsp</title>
 <style type="text/css">
 header {
-	font-size: 30px;
-	margin: 30px 0 0 50px;		
+	font-size: 20px;	
+	float: center;	
+	margin: 30px 0 0 50px;	
 }
 
 table {
@@ -47,6 +48,8 @@ input[type="button"] {
 .order_btn {
 	margin-left: 5px;
 }
+
+
 
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -89,11 +92,12 @@ $(document).ready(function() {
 </head>
 <body>
     <div id="shopping">
-        <header>HOME > <strong>장바구니</strong> > 주문결제 > 주문완료</header>
+        <header><strong>01.장바구니</strong> > 02.주문결제 > 03.주문완료</header>
         <hr>
     </div>
     <br>
    
+   <div class = "container">
     <table class="table table-bordered">
         <thead>
             <tr>
@@ -129,101 +133,11 @@ $(document).ready(function() {
                 <td>2500원</td>
                 <td class="sumprice">28000원</td>
             </tr>
-            
-            <tr>
-                <td><input type="checkbox" name="1"></td>
-                <td>
-                    <div class="media">
-                        <img src="https://image.a-rt.com/art/product/2023/06/18154_1686895862787.jpg?shrink=224:224" class="mr-3" alt="1">
-                        <div class="media-body">
-                            <h5 class="mt-0"><a href="#">척테일러올스타 1벨크로 하이</a></h5>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="quantity-adjustment">
-                        <button class="plus_btn">+</button>
-                        <input type="text" class="quantity-input" value="1" style=width:30px>
-                        <button class="minus_btn">-</button>
-                    </div>
-                </td>
-                <td class="price">28000</td>
-                <td>5%</td>
-                <td>2500원</td>
-                <td class="sumprice">28000원</td>
-            </tr>            
-            
-            <tr>
-                <td><input type="checkbox" name="1"></td>
-                <td>
-                    <div class="media">
-                        <img src="https://image.a-rt.com/art/product/2023/06/18154_1686895862787.jpg?shrink=224:224" class="mr-3" alt="1">
-                        <div class="media-body">
-                            <h5 class="mt-0"><a href="#">척테일러올스타 1벨크로 하이</a></h5>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="quantity-adjustment">
-                        <button class="plus_btn">+</button>
-                        <input type="text" class="quantity-input" value="1" style=width:30px>
-                        <button class="minus_btn">-</button>
-                    </div>
-                </td>
-                <td class="price">28000</td>
-                <td>5%</td>
-                <td>2500원</td>
-                <td class="sumprice">28000원</td>
-            </tr>  
-            
-            <tr>
-                <td><input type="checkbox" name="1"></td>
-                <td>
-                    <div class="media">
-                        <img src="https://image.a-rt.com/art/product/2023/06/18154_1686895862787.jpg?shrink=224:224" class="mr-3" alt="1">
-                        <div class="media-body">
-                            <h5 class="mt-0"><a href="#">척테일러올스타 1벨크로 하이</a></h5>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="quantity-adjustment">
-                        <button class="plus_btn">+</button>
-                        <input type="text" class="quantity-input" value="1" style=width:30px>
-                        <button class="minus_btn">-</button>
-                    </div>
-                </td>
-                <td class="price">28000</td>
-                <td>5%</td>
-                <td>2500원</td>
-                <td class="sumprice">28000원</td>
-            </tr>
-            
-            <tr>
-                <td><input type="checkbox" name="1"></td>
-                <td>
-                    <div class="media">
-                        <img src="https://image.a-rt.com/art/product/2023/06/18154_1686895862787.jpg?shrink=224:224" class="mr-3" alt="1">
-                        <div class="media-body">
-                            <h5 class="mt-0"><a href="#">척테일러올스타 1벨크로 하이</a></h5>
-                        </div>
-                    </div>
-                </td>
-                <td>
-                    <div class="quantity-adjustment">
-                        <button class="plus_btn">+</button>
-                        <input type="text" class="quantity-input" value="1" style=width:30px>
-                        <button class="minus_btn">-</button>
-                    </div>
-                </td>
-                <td class="price">28000</td>
-                <td>5%</td>
-                <td>2500원</td>
-                <td class="sumprice">28000원</td>
-            </tr>                        
+                                                                 
         </tbody>
     </table>
-    <input type="button" class="delete_btn" name="del_btn" value="삭제">
-    <input type="button" class="order_btn" name="ord_btn" value="주문하기">
+    </div>
+    <input type="button" class="delete_btn" name="del_btn" value="선택삭제">
+    <input type="button" class="order_btn" name="ord_btn" value="상품 주문하기">
 <%@include file="../../inc/bottom.jsp" %>
 </body>
