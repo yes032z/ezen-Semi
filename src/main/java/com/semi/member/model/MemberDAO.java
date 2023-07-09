@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
 
 import com.semi.db.ConnectionPoolMgr;
 
@@ -88,7 +89,52 @@ public class MemberDAO {
 		  } 
 	  
 	  }
-	 
+	  public MemberVO selectMember(String id) throws SQLException {
+			Connection con = null;
+			PreparedStatement ps = null;
+			ResultSet rs = null;
+
+			MemberVO vo = new MemberVO();
+			try {
+				con = pool.getConnection();
+
+				String sql = "select * from member where id = ?";
+				ps = con.prepareStatement(sql);
+				ps.setString(1, id);
+
+				rs = ps.executeQuery();
+				if(rs.next()) {            
+					int no = rs.getInt("no");
+					String name = rs.getString("name");
+					String pwd = rs.getString("pwd");
+					String email = rs.getString("email");
+					String tel = rs.getString("tel");
+					int zipno = rs.getInt("zipno");
+					int footsize = rs.getInt("footsize");
+					String birth = rs.getString("birth");
+					String detailaddress = rs.getString("detailaddress");
+					Timestamp regdate = rs.getTimestamp("regdate");	
+					Timestamp outdate = rs.getTimestamp("outdate");
+
+					vo.setName(name);
+					vo.setPwd(pwd);
+					vo.setTel(tel);
+					vo.setZipno(zipno);
+					vo.setBirth(birth);
+					vo.setFootsize(footsize);
+					vo.setDetailaddress(detailaddress);
+					vo.setEmail(email);
+					vo.setNo(no);
+					vo.setRegdate(regdate);
+					vo.setOutdate(outdate);
+				}
+				System.out.println("회원 정보: " + vo + ", 매개변수 id: " + id);
+
+				return vo;
+			} finally {
+				pool.dbClose(rs, ps, con);
+			}
+		}
 	
 	
 	
