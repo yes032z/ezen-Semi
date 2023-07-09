@@ -93,12 +93,16 @@ $(function() {
         isChecked = $(".chkItem:checked").length > 0;
     });
  	
-    $("#writeReview").on("click",function(){
+    $(".writeReview").on("click",function(){
+   	 	var checkedItems = $('.chkItem:checked');
     	if(!isChecked){
     		alert("리뷰를 작성할 상품을 선택해주세요.");
    			return false;
+    	}else if (checkedItems.length !== 1) {
+          alert("리뷰를 작성할 상품을 하나만 선택해주세요.");
+          return false;
     	}else{
-    		var value=$('.chkItem:checked').attr("value");
+    		var value=checkedItems.attr("value");
     		location.href="../pddetail/reviewWrite.jsp?pdno="+value;
     	}
     });
@@ -190,7 +194,7 @@ $(function() {
 				<td><%=df.format(vo.getPrice()) %>원</td>
 				<td><%=vo.getPickup() %></td>
 				<td><%=sdf.format(vo.getOrderregdate()) %></td>
-				<td><input type="button" class="mypagebtn" id="writeReview" value="리뷰 쓰기" /><br>
+				<td><input type="button" class="mypagebtn writeReview" value="리뷰 쓰기" /><br>
 				<input type="button" class="mypagebtn" name="del" value="반품 신청"> 
 				</td>
 			</tr>
