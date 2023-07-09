@@ -91,4 +91,44 @@ public class FavoritePdDAO {
 		return result;
 	}
 	
+	//마이페이지 최근찜 4건 조회
+		public List<ViewVO> select4FavoriteByid(String id) throws SQLException{
+			Connection con=null;
+			PreparedStatement ps=null;
+			ResultSet rs=null;
+			List<ViewVO> list=new ArrayList<>();
+			try {
+				con=pool.getConnection();
+				
+				String sql="select A.filename, A.pdname, A.price, A.brand, A.pdno"
+						  +" from("
+							   +" select f.favoriteno, p.filename, p.pdname, p.brand, p.price, f.pdno"
+							   +" from product p right join favoritepd f"
+							   +" on p.pdno = f.pdno"
+							   +" left join member m"
+							   +" on f.no= m.no"
+							   +" where m.id= ?"
+							   +" order by f.favoriteno desc"
+						   +" )A"
+						   +" where rownum<=4";
+				ps=con.prepareStatement(sql);
+				ps.setString(1, id);
+				rs=ps.executeQuery();
+				while(rs.next()) {
+					String filename=rs.getString("filename");
+					String pdname=rs.getString("pdname");
+					String brand=rs.getString("brand");
+					int price=rs.getInt("price");
+					int pdno=rs.getInt("pdno");
+					
+					ViewVO vo=new ViewVO(filename, pdname, brand, price, pdno);
+					list.add(vo);
+				}
+				System.out.println("찜목록 최신 4건 조회결과, list.size="+list.size()+", 매개변수 id="+id);
+				return list;
+			}finally {
+				pool.dbClose(rs, ps, con);
+			}
+		}
+	
 }

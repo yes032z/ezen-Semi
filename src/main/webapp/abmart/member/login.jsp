@@ -49,7 +49,10 @@
    
     <div style="text-align: center;">
       <div class="checkboxouter">
-        <input type="checkbox" name="rememberme" id="remember" value="Remember">
+        <input type="checkbox" name="rememberme" id="remember" value="Remember"
+        <%if(ck_value!=null && !ck_value.isEmpty()){ %>
+						checked="checked"
+					<%} %>>
         <label class="checkbox"></label>
       </div>
       <label for="remember">아이디를 기억하시겠습니까?</label>

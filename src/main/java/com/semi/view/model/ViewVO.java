@@ -24,6 +24,7 @@ public class ViewVO {
 
 	private int favoriteno; /* 찜한상품번호 */
 	private int pdno; /* 상품고유번호 */
+	private String brand; /* 브랜드 */
 	
 	public ViewVO() {
 		super();
@@ -65,6 +66,14 @@ public class ViewVO {
 		this.favoriteno = favoriteno;
 		this.filename = filename;
 		this.pdname = pdname;
+		this.price = price;
+		this.pdno = pdno;
+	}
+	//마이페이지 찜목록 최근 4건조회
+	public ViewVO(String filename, String pdname, String brand, int price, int pdno) {
+		this.filename = filename;
+		this.pdname = pdname;
+		this.brand = brand;
 		this.price = price;
 		this.pdno = pdno;
 	}
@@ -176,13 +185,22 @@ public class ViewVO {
 	public void setPdno(int pdno) {
 		this.pdno = pdno;
 	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
 	@Override
 	public String toString() {
 		return "ViewVO [qnano=" + qnano + ", qnabody=" + qnabody + ", pdname=" + pdname + ", qnaview=" + qnaview
 				+ ", qnaregdate=" + qnaregdate + ", reviewno=" + reviewno + ", reviewbody=" + reviewbody
 				+ ", reviewgrade=" + reviewgrade + ", good=" + good + ", reviewregdate=" + reviewregdate + ", orderno="
 				+ orderno + ", orderqty=" + orderqty + ", price=" + price + ", pickup=" + pickup + ", orderregdate="
-				+ orderregdate + ", filename=" + filename + ", favoriteno=" + favoriteno + ", pdno=" + pdno + "]";
+				+ orderregdate + ", filename=" + filename + ", favoriteno=" + favoriteno + ", pdno=" + pdno + ", brand="
+				+ brand + "]";
 	}
+	
+	
 	
 }
