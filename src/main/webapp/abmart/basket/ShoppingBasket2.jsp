@@ -26,13 +26,9 @@ span {
   margin: 0;
 }
 
-a {
-  color: black;
-}
-
 img {
   display: block;
-  width: 80%;
+  width: 50%;
   height: 80px;
   margin: auto;
 }
@@ -66,7 +62,7 @@ thead {
 }
 
 tbody {
-  font-size: 12px;
+  font-size: 15px;
 }
 
 td {
@@ -88,7 +84,7 @@ td {
 }
 
 .basket_list_smartstore {
-  font-size: 12px;
+  font-size: 20px;
   color: gray;
 }
 
@@ -159,7 +155,7 @@ td {
   margin: auto;
 }
 
-.basket_bigorderbtn {
+.basket_bigbtn {
   width: 200px;
   height: 50px;
   font-size: 16px;
@@ -167,12 +163,12 @@ td {
   border-radius: 5px;
 }
 
-.basket_bigorderbtn.left {
+.basket_bigbtn.left {
   background-color: white;
   border: 1px lightgray solid;
 }
 
-.basket_bigorderbtn.right {
+.basket_bigbtn.right {
   background-color: red;
   color: white;
   border: none;
@@ -185,23 +181,23 @@ td {
 .basket ul :first-child {
   color: red;
 }
-
-
-
 </style>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() { 		       
+$(document).ready(function() { 		 
+
+	
     $(".basket_list_optionbtn").on("click", function() {
         var checkedRows = $("input[type='checkbox'][name!='all']:checked").parents("tr");
         checkedRows.remove();
     }); 
         
-    $(".basket_bigorderbtn.left").click(function() {
-    	location.href = "index.jsp";
+    $(".basket_bigbtn.left").click(function() {
+    	location.href = "http://localhost:9090/semiProject/index.jsp";
     }); 
     
-    $(".basket_bigorderbtn.right").click(function() {
+    $(".basket_bigbtn.right").click(function() {
     	location.href = "OrderPayment.jsp";
     });
     
@@ -211,17 +207,13 @@ $(document).ready(function() {
         quantity++;
         updateSumPrice($(this));
     });
-
-
-
-    
-    
+ 
 });
 </script>
 </head>
 <body>
     <div id="shopping">
-        <header><strong>01.장바구니</strong> > 02.주문결제 > 03.주문완료</header>
+        <header><strong>01.장바구니 ></strong>02.주문결제 > 03.주문완료</header>
         <hr>
     </div>
     <section class="basket">
@@ -234,14 +226,15 @@ $(document).ready(function() {
                         <td colspan="2">상품정보</td>
                         <td>상품 주문 수량</td>
                         <td>상품금액</td>
-                        <td>배송비</td>                                               
+                        <td>배송비</td>      
+                        <td>합계</td>                                         
                     </tr>
                 </thead>
-                <tbody>
+                <tbody>                
                     <tr class="basket_list_detail">
-                        <td><input type="checkbox"></td>
+						<td><input type="checkbox"></td>
                         <td><img src="https://image.a-rt.com/art/product/2023/05/73554_1683853295803.jpg?shrink=590:590" alt="1"></td>
-                        <td><a href="#">아디다스</a><span class="basket_list_smartstore"></span>
+                        <td>아디다스<span class="basket_list_smartstore"></span>
                             <p>아디코드</p>                       
                         </td>
                        	<td class="basket_list_option">
@@ -249,16 +242,18 @@ $(document).ready(function() {
 	                        <input type="text" class="quantity-input" value="1" style=width:30px>
 	                        <button class="minus_btn">-</button>                        
                         </td>
-                        <td><span class="sumprice">63,000원</span><br>                            
+                        <td><span class="price">63,000원</span><br>                            
                         </td>
                         <td>무료</td>
+                        <td>63,000원</td>
                     </tr>
+                    
                     <tr class="basket_list_detail">
                         <td style="width: 2%;"><input type="checkbox"></td>
                         <td style="width: 13%;">
                             <img src="https://image.a-rt.com/art/product/2020/10/29855_1603086614649.jpg?shrink=590:590" alt="1">
                         </td>
-                        <td style="width: 27%;"><a href="#">나이키</a><span class="basket_list_smartstore"></span>
+                        <td style="width: 27%;">나이키<span class="basket_list_smartstore"></span>
                             <p>스탠 스미스</p>
                         </td>
                         <td class="basket_list_option" style="width: 27%;">
@@ -268,17 +263,19 @@ $(document).ready(function() {
 		                        <button class="minus_btn">-</button>    
 		                    </div>                       
                         </td>
-                        <td style="width: 15%;"><span class="sumprice">29,000원</span><br>                            
+                        <td style="width: 15%;"><span class="price">29,000원</span><br>                            
                         </td>
                         <td style="width: 15%;">무료</td>
-                    </tr>
+                        <td>29,000원</td>
+                    </tr>                                     
                 </tbody>                
             </form>
         </table>
         <div class="basket_mainbtns">
-            <input type="button" class="basket_bigorderbtn left" name="shop_btn" value="계속 쇼핑하기">                        
-            <input type="button" class="basket_bigorderbtn right" name="ord_btn" value="상품 주문하기">            
+            <input type="button" class="basket_bigbtn left" name="shop_btn" value="계속 쇼핑하기">                        
+            <input type="button" class="basket_bigbtn right" name="ord_btn" value="상품 주문하기">            
         </div>
+        
         <!-- 장바구니페이지 하단 설명 -->
         <div class="basket_information">
         	<ul>
