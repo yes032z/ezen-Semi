@@ -4,11 +4,7 @@
 <%@ include file="../../inc/mypagenav.jsp" %>
 <link href="../../css/mypage.css" rel="stylesheet" type="text/css">
 <script type="text/javascript">
-	$(function(){
-		 $('#chkAll').click(function(){
-				$('.chkItem').prop('checked',this.checked);
-			});
-	});
+	
 
 </script>
 <article id="mypage">
@@ -33,21 +29,6 @@
         </tr>
     </thead>
     <tbody>
-      <%if(list==null || list.isEmpty()){ %>
-	  	<tr class="mypagerow"><th colspan="5">신청한 알림이 없습니다.</th></tr>
-  	<%}else{ %>
-  	<!--알림 목록 조회 반복문 시작  -->
-  	<%
-  		int num=pageVo.getNum();
-		int curPos=pageVo.getCurPos();
-		
-		//10번씩만 반복
-		for(int i=0;i<pageVo.getPageSize();i++){
-			if(num<1) break;
-  		
-  		vo=list.get(curPos++);
-  		num--;
-  	%>	
         <tr>
             <td><input type="checkbox" name="1" class="chkItem" value=""></td>
             <td>
@@ -61,12 +42,7 @@
             <td>30,000원</td>
             <td>7%</td>
             <td>2500원</td>
-            <td>28,500원</td>
         </tr>
-       <%}//for %>
-	  	<!--반복처리 끝  -->
-	  <%}//if %> 
-       
     </tbody>                  
 </table>
 	<input type="button" class="mypagebtn2" name="del" value="알림삭제하기">
