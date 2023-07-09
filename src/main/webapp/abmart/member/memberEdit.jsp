@@ -156,7 +156,7 @@ input#birth {
         <input type="text" name="detailaddress"id ="detailaddress" ReadOnly placeholder="<%=detailaddress%>" ><br />
         <span class="sp1">&nbsp;</span>
     </p>
-    <p id ="tel">
+    <p id ="tel"><!--  -->
     <select name="hp1" id="hp1" title="휴대폰 앞자리">
             <option value="010">010</option>
             <option value="011">011</option>
