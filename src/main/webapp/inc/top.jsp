@@ -23,6 +23,7 @@ input.form-control.mr-sm-2 {
 </style>
 <meta charset="utf-8" />
     <head>
+
 <%
 	String j_userid=(String)session.getAttribute("id");
 	boolean j_isLogin=false;
@@ -57,7 +58,7 @@ input.form-control.mr-sm-2 {
         <!-- Navigation--> 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
-                <a class="navbar-brand" href="../../index.jsp">AB-MART</a>
+                <a class="navbar-brand" href="<%=request.getContextPath()%>/index.jsp">AB-MART</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0 ms-lg-4">
@@ -93,8 +94,9 @@ input.form-control.mr-sm-2 {
 
 
                     <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit" style="width:120px;height:65px">
-                            <i class="bi-cart-fill me-1"></i>장바구니
+                        <button class="btn btn-outline-dark" type="submit" style="width:120px;height:65px" 
+                        onclick="location.href='<%=request.getContextPath()%>/abmart/basket/ShoppingBasket2.jsp'"> 
+                            <i class="bi-cart-fill me-1" ></i>장바구니
                             <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> <!-- 장바구니 안에 담긴 수량 체크  -->
                         </button>
                     </form>
