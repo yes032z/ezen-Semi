@@ -1,6 +1,9 @@
 package com.semi.review.model;
 
 import java.sql.SQLException;
+import java.util.List;
+
+import com.semi.view.model.ViewVO;
 
 public class ReviewService {
 	private ReviewDAO reviewDao;
@@ -16,5 +19,10 @@ public class ReviewService {
 	public int updateReview(ReviewVO vo) throws SQLException {
 		return reviewDao.updateReview(vo);
 	}
-
+	//마이페이지> 내가작성한 리뷰조회
+	public List<ViewVO> selectReviewByid(String id, String startDate, String lastDate) throws SQLException{
+		return reviewDao.selectReviewByid(id,startDate, lastDate);
+	}
+	
+	
 }

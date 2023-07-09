@@ -266,6 +266,15 @@ header{
 	left: -6px;
 }
 </style>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+  	$(".final input[type='submit']").click(function(event) {
+	    event.preventDefault(); 
+	    location.href = "OrderCompleted.jsp"; 
+	 }); 
+});
+</script>
 </head>
 <body>
 	<div id="Payment">
@@ -276,7 +285,7 @@ header{
 			<aside>
 			</aside>
 			<section class="order">
-				<nav>>
+				<nav>
 				</nav>
 				<form action="#">
 					<table border="0">
@@ -391,7 +400,7 @@ header{
 								<td><input type="text" name="addr1"></td>
 							</tr>
 							<tr>
-								<td>상세주소.</td>
+								<td>상세주소</td>
 								<td><input type="text" name="addr2"></td>
 							</tr>
 						</table>

@@ -6,6 +6,7 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+<link href="../../css/mypage.css" rel="stylesheet" type="text/css">
 <head>
 <meta charset="UTF-8">
 <%
@@ -86,14 +87,14 @@
 <script type="text/javascript">
 	$(function(){
 		$('input[name=rating]').click(function(){
-			$('.score').show();
-			$('.score').find('span').text($('input[name=rating]:checked').val());
+			$('.scorestar').show();
+			$('.scorestar').find('span').text($('input[name=rating]:checked').val());
 		});
 		
 		$('input[type=button]').click(function(){
 			if(confirm('리뷰 등록을 취소하시겠습니까?')){
 				self.close();
-			};
+			}
 		});
 		
 		$('input[type=submit]').click(function(){
@@ -109,23 +110,9 @@
 		});
 		
 	});
-
 </script>
 </head>
 <body>
-	<nav>
-		<dl id="leftNavi">
-			<!-- category list -->
-			<dt>마이페이지</dt>
-			<dd><a href="#">주문조회</a></dd>
-			<dd><a href="#">취소/환불</a></dd>
-			<dd><a href="#">찜한상품</a></dd>
-			<dd><a href="#">재고알림</a></dd>
-			<dd><a href="#">상품QnA</a></dd>
-			<dd><a href="#">상품리뷰</a></dd>
-		</dl>
-	</nav>
-	<section>
 	<article>
 	<h3>리뷰 작성하기</h3><hr>
 	<h4>상품의 별점은 몇점인가요?</h4>
@@ -147,7 +134,7 @@
 	  <input type="radio" id="1-star" name="rating" value="1" />
 	  <label for="1-star" class="star">&#9733;</label>
 	</div>
-	<p class="score" style="display: none"><span></span>점을 주셨네요!<br>
+	<p class="scorestar" style="display: none"><span></span>점을 주셨네요!<br>
 	상품에 대한 상세후기를 작성해주세요.</p>
 	<textarea id="reviewbody" name="reviewbody"><%=reviewbody %></textarea><br>
 	<label>사진 첨부</label><br>
@@ -160,6 +147,5 @@
         </div>
 </form>	
 	</article>
-	</section>
 </body>
 </html>

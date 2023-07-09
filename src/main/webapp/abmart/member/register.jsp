@@ -7,23 +7,19 @@
 <link rel="stylesheet" href="../../css/loginstyle.css">
 <style type="text/css">
 form#accesspanel {
-    width: 600px;
+    width: 624px;
     padding-top: 109px;
-    height: 740px;
-}
-input#btnZipcode {
-    float: right;
+    height: 778px;
 }
 
-input#zipcode {
+
+input#zipno {
     width: 295px;
 }
-input#address {
+input#detailaddress {
     width: 295px;
 }
-input#btnZipcode {
-    float: right;
-}
+
 select#hp1 {
     width: 78px;
     height: 38px;
@@ -50,35 +46,54 @@ select#email2 {
 input#email3 {
     width: 155px;
 }
+input#footsize {
+    width: 280px;
+    margin-right: 12px;
+    height: 33px;
+    text-align: center;
+    font-size: 1.2em;
+}
+input#birth {
+    width: 280px;
+}
 </style>
+<script src="../../js/jquery-3.7.0.min.js"></script>
 <script type="text/javascript">
-	
+	$(function(){
+		$('#btnZipcode').click(function(){
+			open("../zipcode/zipcode.jsp", "", "width=500, height=700, left=150, location=1");
+	});
+	});
 </script>
 <meta charset="EUC-KR">
 <title>회원가입 페이지</title>
 </head>
 <body>
-<form id="accesspanel" action="../../index.jsp" method="post">
+<form id="accesspanel" action="register_ok.jsp" method="post">
   <h1 id="litheader">AB - MART</h1>
   <div class="inset">
     <p>
-      <input type="text" name="username" id="name" placeholder="Name">
+      <input type="text" name="name" id="name" placeholder="Name">
     </p>
     <p>
-      <input type="text" name="userid" id="userid" placeholder="Userid">
+      <input type="text" name="id" id="id" placeholder="Userid">
     </p>
     <p>
-      <input type="password" name="password" id="pwd" placeholder="User pwd">
+      <input type="password" name="pwd" id="pwd" placeholder="User pwd">
     </p>
     <p>
-      <input type="password" name="password" id="pwdchk" placeholder="User pwdck">
+      <input type="password" name="pwd" id="pwdchk" placeholder="User pwdck">
+    </p>
+    <p>
+  	  <input type="number" name="footsize" id="footsize" placeholder="발 사이즈">    
+  	  <input type="text" name="birth" id="birth" placeholder="생일">    
     </p>
     <p id="zip">
     <!-- 우편번호 검색 넣기 -->
-        <input type="text" name="zipcode" id="zipcode" ReadOnly  value ="우편번호">
+     	
+        <input type="text" name="zipno" id=zipno ReadOnly  placeholder ="우편번호">
         <input type="Button" value="우편번호 찾기" id="btnZipcode" ><br />
-        <span class="sp1">&nbsp;</span>
-        <input type="text" name="address"id ="address" ReadOnly value="주소" ><br />
+        <input type="text" name="detailaddress"id ="detailaddress" ReadOnly placeholder="주소" ><br />
         <span class="sp1">&nbsp;</span>
     </p>
     <p id ="tel">
@@ -96,7 +111,7 @@ input#email3 {
     </p>
     <p>
 
-        <input type="text" name="email1"  id="email1" value="email">@
+        <input type="text" name="email1"  id="email1" placeholder="email">@
         <select name="email2" id="email2"  title="이메일주소 뒷자리">
             <option value="naver.com">naver.com</option>
             <option value="hanmail.net">hanmail.net</option>
