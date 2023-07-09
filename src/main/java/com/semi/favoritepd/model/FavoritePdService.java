@@ -19,6 +19,9 @@ public class FavoritePdService {
 	public int deleteFavoriteByNo(String[] favoriteno) throws SQLException {
 		return favoritePdDao.deleteFavoriteByNo(favoriteno);
 	}
-	
+	//마이페이지 찜목록 최근 4건조회
+	public List<ViewVO> select4FavoriteByid(String id) throws SQLException{
+		return favoritePdDao.select4FavoriteByid(id);
+	}
 	
 }
