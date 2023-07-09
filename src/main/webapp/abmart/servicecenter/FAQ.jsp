@@ -157,7 +157,7 @@
 					<td><a href="FAQ.jsp">회원정보</a></td>
 					<td><a href="FAQ.jsp">일반정보</a></td>
 					<td><a href="FAQ.jsp">멤버십</a></td>
-					<td><a href="FAQ.jsp">영수증/증빙서류</a></td>
+					<td><a href="FAQ.jsp">영수증</a></td>
 					<td><a href="FAQ.jsp">입점/기타</a></td>
 				</tr>
 			</table>
