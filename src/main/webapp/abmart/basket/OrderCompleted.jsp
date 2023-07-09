@@ -18,44 +18,43 @@ p {
 	margin: 30px 0 0 50px;		
 }
 
-#product > .complete > article {
-    margin-top: 16px;
-}
-#product > .complete > .message > h2 {
+.message > h2 {
     font-size: 32px;
     font-weight: bold;
     text-align: center;
     color: #555;
     padding: 10px;
 }
-#product > .complete > .message > h2 > i {
+.message > h2 > i {
     font-size: 26px;
 }
-#product > .complete > .message > p {
+.message > p {
     font-size: 18px;
     font-weight: bold;
-    padding: 10px;"src/main/webapp/abmart/servicecenter/FAQ.jsp"
+    padding: 10px;"src/main/webapp/abmart/servicecenter/FAQ.jsp";
     text-align: center;
 }
-#product > .complete > article {
+
+.complete > article {
     margin-top: 16px;
 }
-#product > .complete > article > h1 {
+
+.complete > article > h1 {
     font-weight: bold;
     font-size: 14px;
     color: #111;
     padding: 6px 0;
 }
-#product > .complete table {
+.complete table {
     width: 100%;
     border-collapse: collapse;
     border-spacing: 0;
     border-top: 2px solid #000;
 }
-#product > .complete table tr {
+.complete table tr {
     border-bottom: 1px solid #d3d3d3;
 }
-#product > .complete table tr > th {
+.complete table tr > th {
     padding: 12px 0;
     background: #fff;
     color: #383838;
@@ -65,42 +64,42 @@ p {
 }
 
 /* 상품정보 */
-#product > .complete > .info > table tr > th:last-child {
+.info > table tr > th:last-child {
     width: 200px;
 }
-#product > .complete > .info table tr > td {
+.info table tr > td {
     text-align: center;
 }
-#product > .complete > .info table tr > td:last-child {
+.info table tr > td:last-child {
     color: #ff006c;
     font-weight: bold;
     text-align: right;
 }
-#product > .complete > .info table tr > td > article {
+.info table tr > td > article {
     overflow: hidden;
     padding: 6px;
 }
-#product > .complete > .info table tr > td img {
+.info table tr > td img {
     float: left;
     width: 80px;
 }
-#product > .complete > .info table tr > td div {
+ .info table tr > td div {
     float: left;
     margin-left: 10px;
     text-align: left;
 }
-#product > .complete > .info table tr > td div > p {
+.info table tr > td div > p {
     text-align: left;
     color: #777;
     margin-top: 4px;
 }
-#product > .complete > .info .total > td > table {
+.info .total > td > table {
     border: none;
 }
-#product > .complete > .info .total > td > table tr {
+.info .total > td > table tr {
     border: none;
 }
-#product > .complete > .info .total > td > table td {
+.info .total > td > table td {
     text-align: right;
     color: #111;
     background: #f2f2f2;
@@ -109,53 +108,53 @@ p {
     padding: 10px;
     box-sizing: border-box;
 }
-#product > .complete > .info .total > td > table tr:last-child span {
+.info .total > td > table tr:last-child span {
     font-weight: bold;
     color: #ff006c;
 }
 /* 주문정보 */
-#product > .complete > .order table tr > td {	
+.order table tr > td {	
     padding: 10px;
     box-sizing: border-box;
 }
-#product > .complete > .order > table tr > td:nth-child(1) {
+.order > table tr > td:nth-child(1) {
     width: 160px;
     background: #f2f2f2;
 }
-#product > .complete > .order table tr > td:nth-child(2) {
+.order table tr > td:nth-child(2) {
     width: auto;
 }
-#product > .complete > .order table tr > td:nth-child(3) {
+.order table tr > td:nth-child(3) {
     width: 100px;
     text-align: right;
     vertical-align: top;
     background: #f2f2f2;
 }
-#product > .complete > .order table tr > td:nth-child(4) {
+.order table tr > td:nth-child(4) {
     width: 100px;
     text-align: right;
     vertical-align: top;
     background: #f2f2f2;
 }
-#product > .complete > .order table span {
+.order table span {
     font-weight: bold;
     color: #ff006c;
 }
 /* 배송정보 */
-#product > .complete > .delivery table tr > td:nth-child(1) {
+.delivery table tr > td:nth-child(1) {
     width: 160px;
     background: #f2f2f2;
 }
-#product > .complete > .delivery table tr > td {
+.delivery table tr > td {
     padding: 10px;
     box-sizing: border-box;
 }
-#product > .complete > .delivery table tr > td:nth-child(3) {
+.delivery table tr > td:nth-child(3) {
     width: 200px;
     background: #f2f2f2;
 }
         
-#product > .complete > .alert {
+.alert {
     width: 100%;
     background-color: #f7f7f7;
     padding: 10px;
@@ -163,16 +162,16 @@ p {
     color: #999;
     box-sizing: border-box;
 }
-#product > .complete > .alert > h1 {
+.alert > h1 {
     margin-left: -12px;
 }
-#product > .complete > .alert > ul {
+.alert > ul {
     list-style: inherit;
 }
-#product > .complete > .alert > ul > li {
+.alert > ul > li {
     line-height: 20px;
 }
-#product > .complete > .alert > ul > li > span {
+.alert > ul > li > span {
     position: relative;
     left: -6px;
 }
