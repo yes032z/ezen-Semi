@@ -151,14 +151,12 @@
 					<td><a href="FAQ.jsp">배송현황</a></td>
 					<td><a href="FAQ.jsp">교환/반품/환불</a></td>
 					<td><a href="FAQ.jsp">주문/결제/취소</a></td>
-					<td><a href="FAQ.jsp">AS</a></td>
 				</tr>
 				<tr>
 					<td><a href="FAQ.jsp">회원정보</a></td>
 					<td><a href="FAQ.jsp">일반정보</a></td>
-					<td><a href="FAQ.jsp">멤버십</a></td>
+					<td><a href="FAQ.jsp">AS</a></td>
 					<td><a href="FAQ.jsp">영수증</a></td>
-					<td><a href="FAQ.jsp">입점/기타</a></td>
 				</tr>
 			</table>
 		</div>
