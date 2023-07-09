@@ -266,7 +266,7 @@ form>article {
 }
 
 .final>table td {
-	padding: 10px 0;
+	padding: 15px 0;
 	font-size: 14px;
 	color: #555;
 }
@@ -326,11 +326,11 @@ form input {
 }
 
 form>.delivery>table input[name=addr1] {
-	width: 400px;
+	width: 300px;
 }
 
 form>.delivery>table input[name=addr2] {
-	width: 400px;
+	width: 300px;
 }
 
 form>.discount>div {
@@ -418,14 +418,87 @@ li{
 	text-align: left;
 }
 
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 300px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#paymentPassword {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 10px;
+}
+
+#confirmPayment {
+  width: 100%;
+  padding: 10px;
+}
+
+
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-  	$(".final input[type='submit']").click(function(event) {
-	    event.preventDefault(); 
-	    location.href = "OrderCompleted.jsp"; 
-	 });  	  	 
+	$(function(){
+		$('#btnZipcode').click(function(){
+			open("../zipcode/zipcode.jsp", "", "width=500, height=700, left=150, location=1");
+		});
+	});
+
+    $(".final input[type='submit']").click(function(event) {
+      event.preventDefault();
+
+      var modal = document.getElementById("paymentModal");
+      modal.style.display = "block";
+    });
+
+
+    $(".close").click(function() {
+      var modal = document.getElementById("paymentModal");
+      modal.style.display = "none";
+    });
+
+    
+    $("#confirmPayment").click(function() {
+      
+      var paymentPassword = $("#paymentPassword").val();
+
+      if (paymentPassword !== "1234") {
+        alert("결제 비밀번호가 올바르지 않습니다. 다시 확인해주세요.");
+        return;
+      }
+
+      location.href = "OrderCompleted.jsp"; 
+    }); 
 });
 </script>
 </head>
@@ -445,7 +518,7 @@ $(document).ready(function() {
                 <thead>
                     <tr>
                         <td></td>
-                        <td colspan="2">상품정보</td>
+                        <td>상품정보</td>
                         <td>상품 주문 수량</td>
                         <td>총 상품금액</td>
                         <td>배송비</td>                                               
@@ -453,32 +526,23 @@ $(document).ready(function() {
                 </thead>
                 <tbody>
                     <tr class="basket_list_detail">
-                        <td><input type="checkbox"></td>
                         <td><img src="https://image.a-rt.com/art/product/2023/05/73554_1683853295803.jpg?shrink=590:590" alt="1"></td>
-                        <td><a href="#">아디다스</a><span class="basket_list_smartstore"></span>
+                        <td>아디다스<span class="basket_list_smartstore"></span>
                             <p>아디코드</p>                       
                         </td>
-                       	<td class="basket_list_option">                  
-                        </td>
+                       	<td>1개</td>                  
                         <td><span class="sumprice">63,000원</span><br>                            
                         </td>
                         <td>무료</td>
                     </tr>
                     <tr class="basket_list_detail">
-                        <td style="width: 2%;"><input type="checkbox"></td>
                         <td style="width: 13%;">
                             <img src="https://image.a-rt.com/art/product/2020/10/29855_1603086614649.jpg?shrink=590:590" alt="1">
                         </td>
-                        <td style="width: 27%;"><a href="#">나이키</a><span class="basket_list_smartstore"></span>
+                        <td style="width: 27%">나이키<span class="basket_list_smartstore"></span>
                             <p>스탠 스미스</p>
                         </td>
-                        <td class="basket_list_option" style="width: 27%;">
-                        	<div class="quantity-adjustment">
-	                           	<button class="plus_btn">+</button>
-		                        <input type="text" class="quantity-input" value="1" style=width:30px>
-		                        <button class="minus_btn">-</button>    
-		                    </div>                       
-                        </td>
+                        <td>1개</td>    
                         <td style="width: 15%;"><span class="sumprice">29,000원</span><br>                            
                         </td>
                         <td style="width: 15%;">무료</td>
@@ -493,23 +557,19 @@ $(document).ready(function() {
 			<table>
 				<tr>
 					<td>총</td>
-					<td>3 건</td>
+					<td>2 건</td>
 				</tr>
 				<tr>
 					<td>상품금액</td>
-					<td>84,000원</td>
-				</tr>
-				<tr>
-					<td>할인금액</td>
-					<td>-4,200원</td>
+					<td>92,000원</td>
 				</tr>
 				<tr>
 					<td>배송비</td>
-					<td>0원</td>
+					<td>무료</td>
 				</tr>
 				<tr>
 					<td>전체주문금액</td>
-					<td>79,800원</td>
+					<td>92,000원</td>
 				</tr>
 			</table>
 			<input type="submit" value="결제하기">
@@ -522,15 +582,15 @@ $(document).ready(function() {
 				<table>
 					<tr>
 						<td>이름</td>
-						<td><input type="text" name="orderer"></td>
+						<td style="text-align: left;"><input type="text" name="orderer"></td>
 					</tr>
 					<tr>
 						<td>휴대폰</td>
-						<td><input type="text" name="hp"></td>
+						<td style="text-align: left;"><input type="text" name="hp"></td>
 					</tr>
 					<tr>
 						<td>이메일</td>
-						<td><input type="text" name="email">
+						<td style="text-align: left;"><input type="text" name="email">
 						    <select name="email2" id="email2"  title="이메일주소 뒷자리">
 				            <option value="naver.com">naver.com</option>
 				            <option value="hanmail.net">hanmail.net</option>
@@ -543,16 +603,16 @@ $(document).ready(function() {
 					</tr>
 					<tr>
 						<td>우편번호</td>
-						<td><input type="text" name="zip"> <input
-							type="button" value="검색"></td>
+						<td style="text-align: left;"><input type="text" name="zip"> <input
+							type="button" value="우편번호찾기" id="btnZipcode"></td>
 					</tr>
 					<tr>
 						<td>기본주소</td>
-						<td><input type="text" name="addr1"></td>
+						<td style="text-align: left;"><input type="text" name="addr1"></td>
 					</tr>
 					<tr>
 						<td>상세주소</td>
-						<td><input type="text" name="addr2"></td>
+						<td style="text-align: left;"><input type="text" name="addr2"></td>
 					</tr>
 				</table>
 			</article>		
@@ -563,11 +623,21 @@ $(document).ready(function() {
 				<table>
 					<tr>
 						<td>카드사</td>
-						<td><input type="text" name="orderer"></td>
+						<td style="text-align: left;">
+						<select name="card_company" style="width: 200px;">
+							<option value="국민은행">국민은행</option>
+							<option value="하나은행">하나은행</option>
+							<option value="신한은행">신한은행</option>
+							<option value="우리은행">우리은행</option>
+						</select>
+						</td>	
 					</tr>
 					<tr>
 						<td>카드번호</td>
-						<td><input type="text" name="hp"></td>
+						<td style="text-align: left;">
+						<input type="text" name="card_number" id="card_number" maxlength="16" 
+						placeholder="&nbsp;&nbsp;&nbsp;&nbsp;(-)없이 카드번호를 입력하세요" style="width: 200px;">
+						</td>
 					</tr>
 				</table>
 			</article>		
@@ -584,6 +654,14 @@ $(document).ready(function() {
            </article>					
 		</form>
 	</section>
+</div>
+<div id="paymentModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>결제 비밀번호</h2>
+    <input type="password" id="paymentPassword" placeholder="결제 비밀번호를 입력하세요">
+    <button id="confirmPayment">확인</button>
+  </div>
 </div>
 </body>
 </html>
