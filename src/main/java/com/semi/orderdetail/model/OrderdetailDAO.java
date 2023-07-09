@@ -26,7 +26,7 @@ public class OrderdetailDAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="select o.orderno, p.filename, p.pdname, od.orderqty, p.price, o.pickup, o.orderregdate"
+			String sql="select o.orderno, p.filename, p.pdname, od.orderqty, p.price, o.pickup, o.orderregdate, p.pdno"
 					+" from orderdetail od left join product p"
 					+" on od.pdno = p.pdno"
 					+" right join orders o"
@@ -54,8 +54,9 @@ public class OrderdetailDAO {
 				int price=rs.getInt("price");
 				String pickup=rs.getString("pickup");
 				Timestamp orderregdate=rs.getTimestamp("orderregdate");
+				int pdno=rs.getInt("pdno");
 				
-				ViewVO vo=new ViewVO(orderno, filename, pdname, orderqty, price, pickup, orderregdate);
+				ViewVO vo=new ViewVO(orderno, filename, pdname, orderqty, price, pickup, orderregdate, pdno);
 				list.add(vo);
 			}
 			

@@ -48,7 +48,7 @@ public class ViewVO {
 		this.reviewregdate = reviewregdate;
 	}
 	//마이페이지 > 주문 조회
-	public ViewVO(int orderno, String filename, String pdname,  int orderqty, int price, String pickup, Timestamp orderregdate) {
+	public ViewVO(int orderno, String filename, String pdname,  int orderqty, int price, String pickup, Timestamp orderregdate, int pdno) {
 		super();
 		this.orderno = orderno;
 		this.filename = filename;
@@ -57,6 +57,7 @@ public class ViewVO {
 		this.price = price;
 		this.pickup = pickup;
 		this.orderregdate = orderregdate;
+		this.pdno = pdno;
 	}
 	//마이페이지> 찜목록
 	public ViewVO(int favoriteno, String filename, String pdname, int price, int pdno) {
