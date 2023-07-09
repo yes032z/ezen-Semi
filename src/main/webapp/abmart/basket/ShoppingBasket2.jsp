@@ -185,9 +185,35 @@ td {
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() { 		 
+$(document).ready(function() { 		
+    // 상품 주문 수량 증가
+    $(document).on("click", ".plus_btn", function() {
+        var quantityInput = $(this).siblings(".quantity-input");
+        var quantity = parseInt(quantityInput.val());
+        quantityInput.val(quantity + 1);
+        quantity++;
+        updateSumPrice($(this));
+    });
 
-	
+    // 상품 주문 수량 감소
+    $(document).on("click", ".minus_btn", function() {
+        var quantityInput = $(this).siblings(".quantity-input");
+        var quantity = parseInt(quantityInput.val());
+        if (quantity > 1) {
+            quantityInput.val(quantity - 1);
+            quantity--;
+            updateSumPrice($(this));
+        }
+    });
+    
+    // 합계 금액 업데이트 함수
+    function updateSumPrice(element) {
+        var quantity = parseInt(element.closest(".basket_list_detail").find(".quantity-input").val());
+        var price = parseInt(element.closest(".basket_list_detail").find(".price").text().replace(/,/g, "").replace("원", ""));
+        var sumPrice = quantity * price;
+        element.closest(".basket_list_detail").find(".sum-price").text(sumPrice.toLocaleString() + "원");
+    }
+		
     $(".basket_list_optionbtn").on("click", function() {
         var checkedRows = $("input[type='checkbox'][name!='all']:checked").parents("tr");
         checkedRows.remove();
@@ -245,7 +271,7 @@ $(document).ready(function() {
                         <td><span class="price">63,000원</span><br>                            
                         </td>
                         <td>무료</td>
-                        <td>63,000원</td>
+                         <td class="sum-price">63,000원</td>	
                     </tr>
                     
                     <tr class="basket_list_detail">
@@ -266,7 +292,7 @@ $(document).ready(function() {
                         <td style="width: 15%;"><span class="price">29,000원</span><br>                            
                         </td>
                         <td style="width: 15%;">무료</td>
-                        <td>29,000원</td>
+                        <td class="sum-price">29,000원</td>
                     </tr>                                     
                 </tbody>                
             </form>
