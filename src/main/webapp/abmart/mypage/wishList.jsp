@@ -65,31 +65,45 @@ $(function() {
       btn.parents("tr").find(".sumprice").text(sumprice.toLocaleString() + "원");
     };
 
-    $('#chkAll').click(function() {
-      $('.chkItem').prop('checked', this.checked);
+    var isChecked = false; 
+
+    $(".chkItem").on("click", function() {
+      isChecked = $(".chkItem:checked").length > 0;
     });
 
-    $('input[name=chkItem]').each(function(){
-	    var favoriteno="";
-    	$(this).click(function(){
-	    	 favoriteno = $(this).parent().parent().find('td:eq(1)').text();
-		});
-	    
-	    $('#del').click(function(){
-	    	 if(favoriteno!==null) {
-	             if (confirm("선택한 상품을 삭제하시겠습니까?")) {
-	                 var uri = "wishDelete.jsp?favoriteno=" + favoriteno;
-	                 location.href = uri;
-	             }
-	         }
-	    });
-	    
-	    $("#order").click(function() {
-	        location.href = "../basket/OrderPayment.jsp";
-	      });
-  	});
-    
-    
+    $("#del").click(function() {
+      if (!isChecked) {
+        alert("선택한 상품이 없습니다.");
+        return false;
+      } else if (!confirm("선택한 상품을 삭제하시겠습니까?")) {
+        return false;
+      } else {
+        var checkedItems = $(".chkItem:checked");
+        var values = "";
+        
+        checkedItems.each(function() {
+          values += "&chkItem=" + $(this).attr("value1");
+        });
+        var uri = "wishDelete.jsp?";
+        location.href = uri + values;
+      }
+    });
+
+    $("#order").click(function() {
+      if (!isChecked) {
+        alert("주문할 상품을 선택해주세요.");
+        return false;
+      } else {
+    	  var checkedItems = $(".chkItem:checked");
+          var values = "";
+          
+          checkedItems.each(function() {
+            values += "&chkItem=" + $(this).attr("value2");
+          });
+          var uri = "../basket/OrderPayment.jsp?";
+          location.href = uri + values;
+      }
+    });
     
 });  
 </script>
@@ -101,17 +115,15 @@ $(function() {
 			<table class="table table-hover">
 			<colgroup>
 				<col style="width:5%;" />
-				<col style="width:8%;" />
-				<col style="width:18%;" />	
-				<col style="width:19%;" />	
+				<col style="width:23%;" />	
+				<col style="width:21%;" />	
 				<col style="width:15%;" />	
 				<col style="width:20%;" />		
 				<col style="width:15%;" />		
 			</colgroup>
     <thead class="thead-dark">
         <tr>
-            <th><input type="checkbox" name="chkAll" id="chkAll"></th>
-            <th>번호</th>
+            <th></th>
             <th>이미지</th>
             <th>상품명</th>
             <th>판매가</th>
@@ -121,7 +133,7 @@ $(function() {
     </thead>
     <tbody>
     <%if(list==null || list.isEmpty()){ %>
-	  	<tr class="mypagerow"><th colspan="7">조회된 주문건이 없습니다.</th></tr>
+	  	<tr class="mypagerow"><th colspan="6">조회된 주문건이 없습니다.</th></tr>
   	<%}else{ %>
   	<!--찜 목록 조회 반복문 시작  -->	
   	<%
@@ -136,8 +148,10 @@ $(function() {
 	  		num--;
   	%>	
         <tr>
-            <td><input type="checkbox" name="chkItem" class="chkItem" value="<%=vo.getFavoriteno() %>"></td>
-            <td><%=vo.getFavoriteno() %></td>
+            <td>
+	            <input type="checkbox" name="chkItem" class="chkItem" 
+	            value1="<%=vo.getFavoriteno() %>" value2="<%=vo.getPdno() %>">
+            </td>
             <td>
                 <div class="media">
                     <img src="../../images/<%=vo.getFilename() %>" class="mr-3 pdimgsize" alt="1">

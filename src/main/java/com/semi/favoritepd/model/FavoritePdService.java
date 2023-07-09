@@ -15,4 +15,8 @@ public class FavoritePdService {
 	public List<ViewVO> selectFavoriteByid(String id) throws SQLException{
 		return favoritePdDao.selectFavoriteByid(id);
 	}
+	
+	public int deleteFavoriteByNo(String[] favoriteno) throws SQLException {
+		return favoritePdDao.deleteFavoriteByNo(favoriteno);
+	}
 }

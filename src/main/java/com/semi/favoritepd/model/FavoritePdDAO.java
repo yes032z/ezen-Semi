@@ -52,21 +52,43 @@ public class FavoritePdDAO {
 		}
 	}
 	
-	public int deleteFavoriteByNo(int favoriteno) throws SQLException {
+	public int deleteFavoriteByNo(String[] favoriteno) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
-		int cnt=0;
+		int result=0;
+		
 		try {
 			con=pool.getConnection();
+			con.setAutoCommit(false);
 			
-			String sql="";
+			String sql="delete from favoritepd where favoriteno= ?";
 			ps=con.prepareStatement(sql);
 			
-			System.out.println("찜 삭제결과, ");
-			return cnt;
+			for(int i=0;i<favoriteno.length;i++) {
+				ps.setString(1, favoriteno[i]);
+				ps.addBatch();
+			}
+			
+			int[] cnt=ps.executeBatch();
+			
+			for(int i=0;i<cnt.length;i++) {
+				if(cnt[i]>=0) {
+					result++;
+				}
+			}
+			if(favoriteno.length==result){
+				con.commit();
+			}
+			
+			System.out.println("찜 삭제결과, result="+result+", 매개변수 favoriteno="+favoriteno);
+		}catch (SQLException e) {
+			e.printStackTrace();
+			con.rollback();  	
 		}finally {
+			con.setAutoCommit(true);
 			pool.dbClose(ps, con);
 		}
+		return result;
 	}
 	
 }
