@@ -1,3 +1,5 @@
+<%@page import="com.semi.stock.model.StockVO"%>
+<%@page import="java.util.List"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="com.semi.product.model.ProductVO"%>
 <%@page import="java.sql.SQLException"%>
@@ -5,6 +7,7 @@
     pageEncoding="UTF-8"%>
 <%@include file="../../inc/top.jsp" %>
 <jsp:useBean id="pdService" class="com.semi.product.model.ProductService" scope="session"></jsp:useBean>
+<jsp:useBean id="stockService" class="com.semi.stock.model.StockService" scope="session"></jsp:useBean>
 <%
 	String pdno=request.getParameter("pdno");
 	
@@ -15,9 +18,16 @@
 		</script>
 		<%return;	
   	}
+	
 	ProductVO vo=null;
+	List<StockVO> list=null;
+	
 	try{
+		//사이즈 가져오기
+		list=stockService.stockSelectByPdNo(Integer.parseInt(pdno));
+		
 		vo=pdService.selectPdByNo(Integer.parseInt(pdno));
+		
 	}catch(SQLException e){
 		e.printStackTrace();
 	}
@@ -57,10 +67,16 @@
 			$('.alink3').eq(2).focus();
 		});
 		$('#basket').click(function(){
-			location.href="../basket/ShoppingBasket.jsp";
+			sumprice=$('#sumprice').html();
+			location.href="../basket/ShoppingBasket.jsp?sumprice="+sumprice;
 		});
 		$('#order').click(function(){
 			location.href="../basket/OrderPayment.jsp";
+		});
+		
+		$('#review').click(function(){
+			//'width=600,height=900,top=300,left=700' 뒤에 속성 추가
+			open('../reviewWrite.jsp?pdno=<%=pdno%>','review','width=600,height=900,top=300,left=700');
 		});
 		var bool1=false;
 		var bool2=false;
@@ -76,7 +92,7 @@
 					var tag="<div name='pddetail'>"
 						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
 						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
-						+" <input type='text' class='quantity-input' id='pd"+size+"' style='width: 45px;'>"
+						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
 						+"<button class='btn minus_btn size' name='minus'>-</button>"
 						+"</div>"
 						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
@@ -109,7 +125,7 @@
 					var tag="<div name='pddetail'>"
 						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
 						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
-						+" <input type='text' class='quantity-input' id='pd"+size+"' style='width: 45px;'>"
+						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
 						+"<button class='btn minus_btn size' name='minus'>-</button>"
 						+"</div>"
 						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
@@ -142,7 +158,7 @@
 					var tag="<div name='pddetail'>"
 						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
 						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
-						+" <input type='text' class='quantity-input' id='pd"+size+"' style='width: 45px;'>"
+						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
 						+"<button class='btn minus_btn size' name='minus'>-</button>"
 						+"</div>"
 						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
@@ -175,7 +191,7 @@
 					var tag="<div name='pddetail'>"
 						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
 						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
-						+" <input type='text' class='quantity-input' id='pd"+size+"' style='width: 45px;'>"
+						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
 						+"<button class='btn minus_btn size' name='minus'>-</button>"
 						+"</div>"
 						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
@@ -208,7 +224,7 @@
 					var tag="<div name='pddetail'>"
 						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
 						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
-						+" <input type='text' class='quantity-input' id='pd"+size+"' style='width: 45px;'>"
+						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
 						+"<button class='btn minus_btn size' name='minus'>-</button>"
 						+"</div>"
 						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
@@ -241,7 +257,7 @@
 					var tag="<div name='pddetail'>"
 						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
 						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
-						+" <input type='text' class='quantity-input' id='pd"+size+"' style='width: 45px;'>"
+						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
 						+"<button class='btn minus_btn size' name='minus'>-</button>"
 						+"</div>"
 					    +"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
@@ -275,7 +291,7 @@
 						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
 						+"<div style='float: left;margin-left: 200px'>"
 						+"<button class='btn plus_btn size' name='plus'>+</button>"
-						+" <input type='text' class='quantity-input' id='pd"+size+"' style='width: 45px;'>"
+						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
 						+"<button class='btn minus_btn size' name='minus'>-</button>"
 						+"</div>"
 					    +"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
@@ -383,13 +399,17 @@
 		</div>
 		<div style="font-size: 1.5em;font-weight: bold;clear:both;float:left;padding-bottom:30px;margin-top:50px;width:600px;">
 			<span style="float:left;">사이즈</span>
-			<button class="btn size" name='size'>230</button>
-			<button class="btn size" name='size'>235</button>
-			<button class="btn size" name='size'>240</button>
-			<button class="btn size" name='size'>245</button>
-			<button class="btn size" name='size'>250</button>
-			<button class="btn size" name='size'>255</button>
-			<button class="btn size" name='size'>260</button>
+			
+			<%for(int i=0;i<list.size();i++){ 
+				StockVO stockVo=list.get(i);
+				
+				//해당 사이즈의 재고가 0개면 멈추고 다음 사이즈 찾음
+				if(stockVo.getStockqty()==0){
+					continue;
+				}%>
+				<button class="btn size" name="size" id="<%=stockVo.getPdsize()%>"><%=stockVo.getPdsize() %></button>
+			<%} %>
+			
 		</div>
 		<!-- 사이즈 버튼 누르면 추가되는 div -->
 		<div name="pddetail-group">
@@ -498,6 +518,9 @@
 			<div class="div2 clearboth border-bottom reviewdiv">
 				<button class="btn leftSort size" >좋아요</button>
 			</div>
+		</div>
+		<div class="div2">
+			<button class="margin-top20" name="btn" id="review" style="float:right;">상품 후기 작성</button>
 		</div>
 	<!-- 상품Q&A 탭 -->
 	<div class="pdtab">
