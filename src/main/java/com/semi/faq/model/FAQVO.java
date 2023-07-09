@@ -1,55 +1,55 @@
 package com.semi.faq.model;
 
 public class FAQVO {
-	public int FAQNo;
-	public String FAQTitle;
-	public String FAQBody;
-	public String FAQCategory;
+	public int faqNo;
+	public String faqTitle;
+	public String faqBody;
+	public String faqCategory;
 	public int readCount;
 	
 	public FAQVO() {
 		super();
 	}
 
-	public FAQVO(int fAQNo, String fAQTitle, String fAQBody, String fAQCategory, int readCount) {
+	public FAQVO(int faqNo, String faqTitle, String faqBody, String faqCategory, int readCount) {
 		super();
-		FAQNo = fAQNo;
-		FAQTitle = fAQTitle;
-		FAQBody = fAQBody;
-		FAQCategory = fAQCategory;
+		faqNo = faqNo;
+		faqTitle = faqTitle;
+		faqBody = faqBody;
+		faqCategory = faqCategory;
 		this.readCount = readCount;
 	}
 
-	public int getFAQNo() {
-		return FAQNo;
+	public int getfaqNo() {
+		return faqNo;
 	}
 
-	public void setFAQNo(int fAQNo) {
-		FAQNo = fAQNo;
+	public void setfaqNo(int faqNo) {
+		faqNo = faqNo;
 	}
 
-	public String getFAQTitle() {
-		return FAQTitle;
+	public String getfaqTitle() {
+		return faqTitle;
 	}
 
-	public void setFAQTitle(String fAQTitle) {
-		FAQTitle = fAQTitle;
+	public void setfaqTitle(String faqTitle) {
+		faqTitle = faqTitle;
 	}
 
-	public String getFAQBody() {
-		return FAQBody;
+	public String getfaqBody() {
+		return faqBody;
 	}
 
-	public void setFAQBody(String fAQBody) {
-		FAQBody = fAQBody;
+	public void setfaqBody(String faqBody) {
+		faqBody = faqBody;
 	}
 
-	public String getFAQCategory() {
-		return FAQCategory;
+	public String getfaqCategory() {
+		return faqCategory;
 	}
 
-	public void setFAQCategory(String fAQCategory) {
-		FAQCategory = fAQCategory;
+	public void setfaqCategory(String faqCategory) {
+		faqCategory = faqCategory;
 	}
 
 	public int getReadCount() {
@@ -62,8 +62,8 @@ public class FAQVO {
 
 	@Override
 	public String toString() {
-		return "FAQVO [FAQNo=" + FAQNo + ", FAQTitle=" + FAQTitle + ", FAQBody=" + FAQBody + ", FAQCategory="
-				+ FAQCategory + ", readCount=" + readCount + "]";
+		return "FAQVO [faqNo=" + faqNo + ", faqTitle=" + faqTitle + ", faqBody=" + faqBody + ", faqCategory="
+				+ faqCategory + ", readCount=" + readCount + "]";
 	}
 	
 	

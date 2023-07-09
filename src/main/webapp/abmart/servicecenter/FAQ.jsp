@@ -1,9 +1,12 @@
+<%@page import="com.semi.faq.model.FAQVO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.sql.SQLException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/top.jsp" %>
 
 <style type="text/css">
-	#txtsearch {width: 50%; height: 36px;}
+	#search {width: 50%; height: 36px;}
 	
 	.main {margin: 90px 0 0 490px; font-family: 'Nanum Gothic';}
 
@@ -29,15 +32,15 @@
 	}
 	
 	/* FAQ 분류 모음 */
-	#faqtab {width: 900px;}
+	#category {width: 900px;}
 	
-	#faqtab td {
+	#category td {
 		padding: 15px 15px 15px 15px;
 		text-align: center;
 		width: 180px;
 	}
 	
-	#faqtab a {
+	#category a {
 		color: gray;
 		text-decoration: none;
 	}
@@ -86,7 +89,7 @@
 </style>
 <script type="text/javascript">
 	$(function() {
-		$('#faqtab td').hover(function() {
+		$('#category td').hover(function() {
 			$(this).css('background', 'black');
 			$(this).find('a').css('color', 'white');
 		}, function() {
@@ -94,7 +97,7 @@
 			$(this).find('a').css('color', '');
 		});
 		
-		$('#faqtab td').click(function() {
+		$('#category td').click(function() {
 			$(this).css('background', 'black');
 			$(this).find('a').css('color', 'white');
 		});
@@ -113,6 +116,27 @@
 	});
 
 </script>
+
+<jsp:useBean id="faqService" class="com.semi.faq.model.FAQService" scope="session"></jsp:useBean>
+<%
+	//검색일 떄 파라미터
+	request.setCharacterEncoding("utf-8");
+	String search = request.getParameter("search");
+	String category = request.getParameter("category");
+	
+	//자주 찾는 faq 상위 5건
+	List<FAQVO> list = null;
+	
+	try {
+		list = faqService.selectBest5();
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	
+	
+%>
+
 	<!-- mypagenav -->
 	<nav id="leftNav">
 		<h2>고객센터</h2>
@@ -138,14 +162,14 @@
 		<div id="searchFaq">
 			<hr style="border: 1px solid black;"><br>
 			<a>FAQ 검색</a>
-			<input type="text" id="txtsearch" placeholder="궁금한 내용을 입력해주세요.">
+			<input type="text" id="search" placeholder="궁금한 내용을 입력해주세요.">
 			<button id="btsearch">검색</button><br><br>
 			<hr>
 		</div><br>
 	</form>
 		
 		<div>
-			<table summary="FAQ List" id="faqtab" border="1">
+			<table summary="FAQ List" id="category" border="1">
 				<tr>
 					<td><a href="FAQ.jsp">상품정보</a></td>
 					<td><a href="FAQ.jsp">배송현황</a></td>
