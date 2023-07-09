@@ -7,6 +7,12 @@
 <meta charset="UTF-8">
 <title>OrderCompleted.jsp</title>
 <style type ="text/css">
+header {
+	font-size: 20px;	
+	float: center;	
+	margin: 30px 0 0 50px;	
+}
+
 p {
 	font-size: 30px;
 	margin: 30px 0 0 50px;		
@@ -108,7 +114,7 @@ p {
     color: #ff006c;
 }
 /* 주문정보 */
-#product > .complete > .order table tr > td {
+#product > .complete > .order table tr > td {	
     padding: 10px;
     box-sizing: border-box;
 }
@@ -170,16 +176,30 @@ p {
     position: relative;
     left: -6px;
 }
+
+.alert ul :first-child {
+  	color: red;
+  	font-weight:bold;
+}
+
+li{
+	text-align: left;
+}
+
+li.li{	
+	color:black;
+	font-weight:bold;
+}
+
 </style>
 </head>
 <body> 
         <main id="product">      
             <section class="complete">
                 <nav><br>
-                    <p>
-                        HOME > 장바구니 > 주문결제 > <strong>주문완료</strong>
-                        <hr>
-                    </p>                    
+				<!-- header  -->
+				<header>01.장바구니 > 2.주문결제 > <strong>03.주문완료</strong></header>
+				<hr>
                 </nav>
                 <article class="message">
                     <h2>
@@ -249,31 +269,31 @@ p {
                             <td>1,000원</td>
                             <td>1</td>
                             <td>16,000원</td>
-                        </tr>
+                        </tr>                                                                                             
                         <tr class="total">
                             <td colspan="4"></td>
                             <td>
                                 <table>
                                     <tr>
-                                        <td>총 상품금액</td>
+                                        <td>총 상품금액:</td>
                                         <td>
                                             <span>34,000원</span>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>총 할인금액</td>
+                                        <td>총 할인금액:</td>
                                         <td>
                                             <span>-2,000원</span>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>배송비</td>
+                                        <td>배송비:</td>
                                         <td>
-                                            <span>3,000원</span>
+                                            <span>무료</span>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>총 결제금액</td>
+                                        <td>총 결제금액:</td>
                                         <td>
                                             <span>35,000</span>원
                                         </td>
@@ -283,6 +303,7 @@ p {
                         </tr>
                     </table>
                 </article>
+                
                 <!-- 주문정보 -->
                 <article class="order">
                     <h1>주문정보</h1>
@@ -290,10 +311,6 @@ p {
                         <tr>
                             <td>주문번호</td>
                             <td>2008101324568</td>
-                            <td rowspan="3">총 결제금액</td>
-                            <td rowspan="3">
-                                <span>35,000</span>원
-                            </td>
                         </tr>
                         <tr>
                             <td>결제방법</td>
@@ -305,62 +322,40 @@ p {
                         </tr>
                     </table>
                 </article>
+                
                 <!-- 배송정보 -->
                 <article class="delivery">
                     <h1>배송정보</h1>
                     <table border="0">
                         <tr>
-                            <td>수취인</td>
-                            <td>홍길동</td>
-                            <td>주문자 정보</td>
+                            <td>받는사람</td>
+                            <td><%= request.getAttribute("name") %></td>                                                                                  
                         </tr>
                         <tr>
                             <td>연락처</td>
-                            <td>010-1234-1234</td>
-                            <td rowspan="2">
-                                홍길동
-                                <br> 010-1234-1234
-                            </td>
+                            <td><%= request.getAttribute("phone") %></td>    
                         </tr>
                         <tr>
                             <td>배송지 주소</td>
-                            <td>서울특별시 강남구 서초동 123 10층</td>
+                            <td><%= request.getAttribute("address") %></td>    
                         </tr>
                     </table>
                 </article>
-                <!-- 꼭 알아두세요 -->
+                
+                
+                <!-- 하단 설명 -->
                 <article class="alert">
                     <ul>
-                        <li>
-                            <span>
-                               	신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요
-                            </span>
-                        </li>
-                        <li>
-                            <span>
-                                신발 많이 사주세요. 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요 신발 많이 사주세요
-                            </span>
-                        </li>
+                <li>취소/반품/교환 신청전 확인해주세요!</li><br>
+				<li class="li">반품</li>
+				<li>- 상품 수령 후 7일 이내 신청하여 주세요.</li>
+				<li>- 설치상품/주문제작/해외배송/신선냉동 상품 등은 고객센터에서만 반품 신청이 가능합니다. </li><br>
+				<li class="li">교환</li>
+				<li>- 상품의 교환 신청은 고객센터로 문의하여 주세요.</li><br>
+				<li class="li">취소</li>
+				<li>- 여행/레저/숙박 상품은 취소 시 수수료가 발생할 수 있으며,</li>
+				<li>취소수수료를 확인하여 2일 이내(주말,공휴일 제외) 처리결과를 문자로 안내해드립니다.(당일 접수 기준, 마감시간 오후 4시)</li>
+				<li>- 문화 상품은 사용 전날 24시까지 취소 신청 시 취소수수료가 발생되지 않습니다.</li>
                     </ul>
                 </article>
             </section>
