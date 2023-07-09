@@ -32,9 +32,9 @@
 	}
 	
 	//[1] 현재 페이지와 무관한 변수
-	int totalRecord=list.size(); //총 레코드 개수
-	int pageSize=10; //한 페이지에 보여주 레코드 수
-	int blockSize=10;  //한 블럭에 보여줄 페이지 수
+	int totalRecord=list.size(); 
+	int pageSize=10; 
+	int blockSize=10; 
 	
 	PagingVO pageVo=new PagingVO(currentPage, totalRecord, pageSize, blockSize);
 	

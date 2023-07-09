@@ -11,12 +11,14 @@ public class FavoritePdService {
 	public FavoritePdService() {
 		favoritePdDao=new FavoritePdDAO();
 	}
-	
+	//마이페이지 > 찜목록 조회
 	public List<ViewVO> selectFavoriteByid(String id) throws SQLException{
 		return favoritePdDao.selectFavoriteByid(id);
 	}
-	
+	//마이페이지> 찜목록삭제(다중삭제포함)
 	public int deleteFavoriteByNo(String[] favoriteno) throws SQLException {
 		return favoritePdDao.deleteFavoriteByNo(favoriteno);
 	}
+	
+	
 }

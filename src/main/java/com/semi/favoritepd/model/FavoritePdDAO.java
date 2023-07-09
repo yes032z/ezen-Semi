@@ -51,7 +51,7 @@ public class FavoritePdDAO {
 			pool.dbClose(rs, ps, con);
 		}
 	}
-	
+	//마이페이지 > 찜목록삭제(다중삭제포함)
 	public int deleteFavoriteByNo(String[] favoriteno) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;

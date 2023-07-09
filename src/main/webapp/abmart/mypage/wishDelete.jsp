@@ -22,7 +22,7 @@
 		</script>
 		<%}else{%>
 		<script type="text/javascript">
-		alert("삭제처리 실패");
+		alert("찜목록 삭제에 실패했습니다.");
 		location.href="wishList.jsp";
 		</script>
 		<%}

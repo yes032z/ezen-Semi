@@ -58,7 +58,7 @@ public class ViewVO {
 		this.pickup = pickup;
 		this.orderregdate = orderregdate;
 	}
-	//마이페이지 > 찜목록
+	//마이페이지> 찜목록
 	public ViewVO(int favoriteno, String filename, String pdname, int price, int pdno) {
 		super();
 		this.favoriteno = favoriteno;
