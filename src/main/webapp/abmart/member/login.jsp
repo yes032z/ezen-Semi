@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+
 <head>
 <%
 	String t_id=(String)session.getAttribute("id");
@@ -18,6 +19,17 @@
 		});
 	});
 </script>
+<style type="text/css">
+  .links{
+        text-align: center;
+        margin-bottom: 10px;
+        font-size: 1.5em;
+        color:black;
+    }
+    a {
+    color: #7e4016;
+}
+</style>
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
 </head>
@@ -36,7 +48,7 @@
 		}//for
 	}//if
 %>
-<div>
+
 <form id="accesspanel" action="login_ok.jsp" method="post">
   <h1 id="litheader">AB - MART</h1>
   <div class="inset">
@@ -63,10 +75,12 @@
   <!-- jq에서 클릭 링크걸기 -->
      <input type="submit" name="Login" id="go" value="로그인">
   </p>
+  <p class ="links">
+  <a href="<%=request.getContextPath()%>/abmart/userfind/findid.jsp">아이디 찾기</a> | 
+  <a href="<%=request.getContextPath()%>/abmart/userfind/findpwdjsp.jsp">비밀번호 찾기</a> |
+  <a href="<%=request.getContextPath()%>/abmart/member/register.jsp">회원가입</a>
+  </p>
 </form>
-<div>
-<p>아이디찾기</p>
-</div>
-  </div>
+
 </body>
 </html>

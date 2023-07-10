@@ -13,5 +13,7 @@ public class ZipcodeService {
 	public List<ZipcodeVO> selectZipcode(String dong) throws SQLException{
 		return zipService.selectZipcode(dong);
 	}
-
+	public List<ZipcodeVO> szipe(int zipno) throws SQLException{
+		return zipService.szipe(zipno);
+	}
 }

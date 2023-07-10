@@ -10,6 +10,7 @@
 <body>
 	<jsp:useBean id="memService" class="com.semi.member.model.MemberService" scope="session"></jsp:useBean>
 	<jsp:useBean id="mVo" class="com.semi.member.model.MemberVO" scope="page"></jsp:useBean>
+	<jsp:useBean id="zipService" class="com.semi.zipcode.model.ZipcodeService" scope="session"></jsp:useBean>
 	<!--  -->
 	<%
 	//1	
@@ -18,7 +19,9 @@
 	String name = request.getParameter("name");
 	String id = (String) session.getAttribute("id"); //세션값
 	String pwd = request.getParameter("pwd");
-	String zipno = request.getParameter("zipno");
+	String zipno = request.getParameter("zipno"); 
+	String birth = request.getParameter("birth");
+	
 	String detailaddress = request.getParameter("detailaddress");
 	String footsize = request.getParameter("footsize");
 
@@ -51,6 +54,7 @@
 	mVo.setId(id);
 	mVo.setPwd(pwd);
 	mVo.setFootsize(Integer.parseInt(footsize));	
+	mVo.setBirth(birth);
 	mVo.setZipno(Integer.parseInt(zipno));
 	mVo.setDetailaddress(detailaddress);
 	mVo.setTel(hp);
@@ -67,6 +71,7 @@
 
 			if (cnt > 0) {
 		msg = " 회원정보 수정 성공";
+		url = "../mypage/mypage.jsp";
 			} else {
 		msg = " 회원정보 수정 실패";
 			}

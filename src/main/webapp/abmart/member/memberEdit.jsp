@@ -84,7 +84,8 @@ input#birth {
 	//3
 	String zipno = Integer.toString(vo.getZipno());
 	String detailaddress = vo.getDetailaddress();
-	
+	String birth = vo.getBirth();
+	if(birth ==null) birth ="";
 	if(zipno==null) zipno = "";
 	if(detailaddress==null) detailaddress = "";
 	
@@ -132,10 +133,10 @@ input#birth {
   <h1 id="litheader">AB - MART</h1>
   <div class="inset">
     <p>
-      <input type="text" name="name" id="name" placeholder="<%=vo.getName()%>">
+      <input type="text" name="name" id="name" value="<%=vo.getName()%>">
     </p>
     <p>
-      <input type="text" name="id" id="id" placeholder="<%=id%>">
+      <input type="text" name="id" id="id" value="<%=id%>">
     </p>
     <p>
       <input type="password" name="pwd" id="pwd" placeholder="User pwd">
@@ -143,16 +144,16 @@ input#birth {
     <p>
       <input type="password" name="pwd" id="pwdchk" placeholder="User pwdck">
     </p>
-    <p>
-  	  <input type="number" name="footsize" id="footsize" placeholder="<%=vo.getFootsize() %>">    
-  	  <input type="text" name="birth" id="birth" placeholder="<%=vo.getBirth()%>">    
+    <p><!--  placeholder= > value-->
+  	  <input type="number" name="footsize" id="footsize" value="<%=vo.getFootsize() %>">    
+  	  <input type="text" name="birth" id="birth" value="<%=vo.getBirth()%>">    
     </p>
     <p id="zip">
     <!-- 우편번호 검색 넣기 -->
      	
-        <input type="text" name="zipno" id=zipno ReadOnly  placeholder ="<%=vo.getZipno()%>">
+        <input type="text" name="zipno" id=zipno ReadOnly  value ="<%=vo.getZipno()%>">
         <input type="Button" value="우편번호 찾기" id="btnZipcode" ><br />
-        <input type="text" name="detailaddress"id ="detailaddress" ReadOnly placeholder="<%=vo.getDetailaddress()%>" ><br />
+        <input type="text" name="detailaddress"id ="detailaddress" ReadOnly value="<%=vo.getDetailaddress()%>" ><br />
         <span class="sp1">&nbsp;</span>
     </p>
     <p id ="tel"><!--  -->

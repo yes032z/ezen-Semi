@@ -106,6 +106,7 @@ public class MemberDAO {
 				if(rs.next()) {            
 					int no = rs.getInt("no");
 					String name = rs.getString("name");
+					String id2 = rs.getString("id");
 					String pwd = rs.getString("pwd");
 					String email = rs.getString("email");
 					String tel = rs.getString("tel");
@@ -117,6 +118,7 @@ public class MemberDAO {
 					Timestamp outdate = rs.getTimestamp("outdate");
 
 					vo.setName(name);
+					vo.setId(id2);
 					vo.setPwd(pwd);
 					vo.setTel(tel);
 					vo.setZipno(zipno);
@@ -145,22 +147,21 @@ public class MemberDAO {
 			con = pool.getConnection();
 			
 			String sql = "update member "
-					+ "set name = ?,id =?, pwd =?,birth=?, email =?, detailaddress=?, "
+					+ "set birth=?, email =?, detailaddress=?, "
 					+ "tel =?, footsize =?, zipno=? "
-					+ "where name =?";
+					+ "where id =?";
 			
 			ps = con.prepareStatement(sql);
 			
-			ps.setString(1,vo.getName());
-			ps.setString(2,vo.getId());
-			ps.setString(3,vo.getPwd());
-			ps.setString(4,vo.getBirth());
-			ps.setString(5,vo.getEmail());
-			ps.setString(6,vo.getDetailaddress());
-			ps.setString(7,vo.getTel());
-			ps.setInt(8,vo.getFootsize());
-			ps.setInt(9, vo.getZipno());
-			ps.setString(10,vo.getName());
+		
+			
+			ps.setString(1,vo.getBirth());
+			ps.setString(2,vo.getEmail());
+			ps.setString(3,vo.getDetailaddress());
+			ps.setString(4,vo.getTel());
+			ps.setInt(5,vo.getFootsize());
+			ps.setInt(6, vo.getZipno());
+			ps.setString(7,vo.getId());
 			
 			int cnt = ps.executeUpdate();
 			System.out.println("정보 수정 결과 cnt : " + cnt + ", 매개변수 vo : " + vo);
