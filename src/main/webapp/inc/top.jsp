@@ -46,6 +46,7 @@ input.form-control.mr-sm-2 {
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
+        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" /> -->
         <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet" />
 
         <link href="<%=request.getContextPath()%>/css/pdstyle.css" rel="stylesheet"/>
@@ -53,6 +54,7 @@ input.form-control.mr-sm-2 {
         <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
     </head>
     <body>
+    <!-- 한글 인코딩이 깨져서 영어로 표시  -->
         <!-- Navigation--> 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
@@ -66,7 +68,7 @@ input.form-control.mr-sm-2 {
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/abmart/member/login.jsp">로그인</a></li>
                         <%} %>
                         <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/abmart/member/register.jsp">회원가입</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/abmart/mypage/mypage.jsp">마이페이지</a></li>
+                        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/abmart/mypage/mypage.jsp">마이페이지</a></li>                        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">메뉴</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -83,21 +85,20 @@ input.form-control.mr-sm-2 {
 								<li><a class="dropdown-item" href="#1">슬리퍼</a></li>
 								<li><a class="dropdown-item" href="#1">샌들</a></li>
                             </ul>
-                        </li>
+                        </li>                         
                     </ul>
 
 					<!-- 검색창  -->
 				    <input class="form-control mr-sm-2" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" >
 				    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-
-
-                    <form class="d-flex">
-                        <button class="btn btn-outline-dark" type="submit" style="width:120px;height:65px" 
-                        onclick="location.href='<%=request.getContextPath()%>/abmart/basket/ShoppingBasket2.jsp'"> 
-                            <i class="bi-cart-fill me-1" ></i>장바구니
-                            <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> <!-- 장바구니 안에 담긴 수량 체크  -->
-                        </button>
-                    </form>
+				    
+					<!-- 장바구니 버튼-->		
+		            <form class="d-flex" action="<%=request.getContextPath()%>/abmart/basket/ShoppingBasket2.jsp">
+		                <button class="btn btn-outline-dark" type="submit" style="width:120px;height:65px"> 
+		                    <i class="bi-cart-fill me-1"></i>장바구니
+		                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> 
+		                </button>
+		            </form>
                 </div>
             </div>
         </nav>   
