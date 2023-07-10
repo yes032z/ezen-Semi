@@ -47,14 +47,11 @@ if (isEdit) {
 
 String reviewbody = reviewVo.getReviewbody();
 String reviewgrade = Integer.toString(reviewVo.getReviewgrade()); ///????
-String fileName = reviewVo.getFilename();
 
 if (reviewbody == null)
 	reviewbody = "";
 if (reviewgrade == null)
 	reviewgrade = "";
-if (fileName == null)
-	fileName = "";
 %>
 <title><%=pageTitle%></title>
 <style type="text/css">

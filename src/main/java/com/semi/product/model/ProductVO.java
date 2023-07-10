@@ -4,9 +4,9 @@ import java.sql.Timestamp;
 
 public class ProductVO {
 	private int pdno;
-	private String productNo;
 	private String pdname;
 	private int price;
+	private String kind;
 	private String brand;
 	private Timestamp pdregdate;
 	private String filename;
@@ -17,18 +17,28 @@ public class ProductVO {
 		super();
 	}
 
-	public ProductVO(int pdno, String productNo, String pdname, int price, String brand, Timestamp pdregdate,
+	public ProductVO(int pdno, String pdname, int price, String kind, String brand, Timestamp pdregdate,
 			String filename, long filesize, String originalfilename) {
 		super();
 		this.pdno = pdno;
-		this.productNo = productNo;
 		this.pdname = pdname;
 		this.price = price;
+		this.kind = kind;
 		this.brand = brand;
 		this.pdregdate = pdregdate;
 		this.filename = filename;
 		this.filesize = filesize;
 		this.originalfilename = originalfilename;
+	}
+
+	
+	
+	public String getKind() {
+		return kind;
+	}
+
+	public void setKind(String kind) {
+		this.kind = kind;
 	}
 
 	public int getPdno() {
@@ -37,14 +47,6 @@ public class ProductVO {
 
 	public void setPdno(int pdno) {
 		this.pdno = pdno;
-	}
-
-	public String getProductNo() {
-		return productNo;
-	}
-
-	public void setProductNo(String productNo) {
-		this.productNo = productNo;
 	}
 
 	public String getPdname() {
@@ -105,8 +107,9 @@ public class ProductVO {
 
 	@Override
 	public String toString() {
-		return "ProductVO [pdno=" + pdno + ", productNo=" + productNo + ", pdname=" + pdname + ", price=" + price
-				+ ", brand=" + brand + ", pdregdate=" + pdregdate + ", filename=" + filename + ", filesize=" + filesize
-				+ ", originalfilename=" + originalfilename + "]";
+		return "ProductVO [pdno=" + pdno + ", pdname=" + pdname + ", price=" + price
+				+ ", kind=" + kind + ", brand=" + brand + ", pdregdate=" + pdregdate + ", filename=" + filename
+				+ ", filesize=" + filesize + ", originalfilename=" + originalfilename + "]";
 	}
+
 }

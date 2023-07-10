@@ -8,9 +8,19 @@
 <%@include file="../../inc/top.jsp"%>
 <jsp:useBean id="pdService" class="com.semi.product.model.ProductService" scope="session"></jsp:useBean>
 <%
+	String brand=request.getParameter("brand");
+	String kind=request.getParameter("kind");
+
+	if(brand==null || brand.isEmpty()){
+		brand="";
+	}
+	if(kind==null || kind.isEmpty()){
+		kind="";
+	}
+	
 	List<ProductVO> list=null;
 	try{
-		list=pdService.selectPdAll();
+		list=pdService.selectPdAll(brand, kind);
 	}catch(SQLException e){
 		e.printStackTrace();
 	}
@@ -23,12 +33,14 @@
 			var brand=$(this).html();
 			
 			$('#filter').before("<button class='btn size' id='del' style='float:left'>"+brand+"</button>");
+			location.href="pdlist.jsp?brand="+brand;
 		});
 		
 		$('button[name=kind]').click(function(){
 			var kind=$(this).html();
 			
 			$('#filter').before("<button class='btn size' id='del' style='float:left'>"+kind+"</button>");
+			location.href="pdlist.jsp?kind="+kind;
 		});
 		
 		$(document).on('click', '#del', function() {
