@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../inc/top.jsp" %>
+
 	<!-- Headerd이미지-->
 	<header class="bg-dark py-5">
 		< <!-- 기존 배너 -->

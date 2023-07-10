@@ -36,7 +36,7 @@
 		}//for
 	}//if
 %>
-
+<div>
 <form id="accesspanel" action="login_ok.jsp" method="post">
   <h1 id="litheader">AB - MART</h1>
   <div class="inset">
@@ -64,6 +64,9 @@
      <input type="submit" name="Login" id="go" value="로그인">
   </p>
 </form>
-
+<div>
+<p>아이디찾기</p>
+</div>
+  </div>
 </body>
 </html>

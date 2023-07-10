@@ -150,36 +150,90 @@ input#birth {
     <p id="zip">
     <!-- 우편번호 검색 넣기 -->
      	
-        <input type="text" name="zipno" id=zipno ReadOnly  placeholder ="<%=zipno%>">
+        <input type="text" name="zipno" id=zipno ReadOnly  placeholder ="<%=vo.getZipno()%>">
         <input type="Button" value="우편번호 찾기" id="btnZipcode" ><br />
-        <input type="text" name="detailaddress"id ="detailaddress" ReadOnly placeholder="<%=detailaddress%>" ><br />
+        <input type="text" name="detailaddress"id ="detailaddress" ReadOnly placeholder="<%=vo.getDetailaddress()%>" ><br />
         <span class="sp1">&nbsp;</span>
     </p>
     <p id ="tel"><!--  -->
     <select name="hp1" id="hp1" title="휴대폰 앞자리">
-            <option value="010">010</option>
-            <option value="011">011</option>
-            <option value="016">016</option>
-            <option value="017">017</option>
-            <option value="018">018</option>
-            <option value="019">019</option>
+            <option value="010"
+            	<%if(hp1.equals("010")){ %>
+            		selected="selected"
+            	<%} %>
+            >010</option>
+            <option value="011"
+            	<%if(hp1.equals("011")){ %>
+            		selected="selected"
+            	<%} %>
+            >011</option>
+            <option value="016"
+            	<%if(hp1.equals("016")){ %>
+            		selected="selected"
+            	<%} %>
+            >016</option>
+            <option value="017"
+            	<%if(hp1.equals("017")){ %>
+            		selected="selected"
+            	<%} %>
+            >017</option>
+            <option value="018"
+            	<%if(hp1.equals("018")){ %>
+            		selected="selected"
+            	<%} %>
+            >018</option>
+            <option value="019"
+            	<%if(hp1.equals("019")){ %>
+            		selected="selected"
+            	<%} %>
+            >019</option>
        	</select>
         -
-        <input type="text" name="hp2" id="hp2" maxlength="4" title="휴대폰 가운데자리">-
-        <input type="text" name="hp3" id="hp3" maxlength="4" title="휴대폰 뒷자리">
+        <input type="text" name="hp2" id="hp2" maxlength="4" title="휴대폰 가운데자리"
+        	class="width_80" value="<%=hp2%>">-
+        <input type="text" name="hp3" id="hp3" maxlength="4" title="휴대폰 뒷자리"
+        	class="width_80" value="<%=hp3%>">
     </p>
     <p>
 
-        <input type="text" name="email1"  id="email1" placeholder="email">@
+   <input type="text" name="email1"  id="email1" title="이메일주소 앞자리"
+        	value="<%=email1 %>"
+        >@
         <select name="email2" id="email2"  title="이메일주소 뒷자리">
-            <option value="naver.com">naver.com</option>
-            <option value="hanmail.net">hanmail.net</option>
-            <option value="nate.com">nate.com</option>
-            <option value="gmail.com">gmail.com</option>
-            <option value="etc">직접입력</option>
+            <option value="naver.com"
+            	<%if(email2.equals("naver.com")){ %>
+            		selected="selected"
+            	<%} %>
+            >naver.com</option>
+            <option value="hanmail.net"
+            	<%if(email2.equals("hanmail.net")){ %>
+            		selected="selected"
+            	<%} %>
+            >hanmail.net</option>
+            <option value="nate.com"
+            	<%if(email2.equals("nate.com")){ %>
+            		selected="selected"
+            	<%} %>
+            >nate.com</option>
+            <option value="gmail.com"
+            	<%if(email2.equals("gmail.com")){ %>
+            		selected="selected"
+            	<%} %>
+            >gmail.com</option>
+            <option value="etc"
+            	<%if(isEtc){ %>
+            		selected="selected"
+            	<%} %>
+            >직접입력</option>
         </select>
         <input type="text" name="email3" id="email3" title="직접입력인 경우 이메일주소 뒷자리"
-        	style="visibility:hidden;">
+           	<%if(isEtc){ %>        	
+        		style="visibility:visible;"
+        		value="<%=email2 %>"
+        	<%}else{ %>
+        		style="visibility:hidden;"
+        	<%} %>
+        	>
     </p>
     
  	<p class="p-container" >

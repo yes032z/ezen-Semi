@@ -66,7 +66,7 @@ public class MemberDAO {
 		  con=pool.getConnection();
 	  
 	  //3 
-	 String sql =  "insert into member(no,name,id,pwd,footsize,zipno,DETAILADDRESS,tel,email) "
+	 String sql =  "insert into member(no,name,id,pwd,footsize,zipcono,DETAILADDRESS,tel,email) "
 	 		+ "values(member_seq.nextval,?,?,?,?,?,?,?,?)";
 	  
 	  ps = con.prepareStatement(sql);
