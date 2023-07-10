@@ -22,5 +22,10 @@ public class MemberService {
 	public int checkLogin(String id, String pwd) throws SQLException {
 		return memberDao.checkLogin(id, pwd);
 	}
-	
+	public int insertMember(MemberVO vo) throws SQLException  {
+		return memberDao.insertMember(vo);
+	}
+	public MemberVO selectMember(String id) throws SQLException {
+		return memberDao.selectMember(id);
+	}
 }

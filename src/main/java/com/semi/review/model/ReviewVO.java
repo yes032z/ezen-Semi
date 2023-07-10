@@ -10,16 +10,13 @@ public class ReviewVO {
 	private int good; /* 좋아요 */
 	private int no; /* 회원번호 */
 	private int pdno; /* 상품번호 */
-	private String filename; /* 업로드파일명 */
-	private long filesize; /* 파일사이즈 */
-	private String originalfilename; /* 변경전파일명 */
 	
 	public ReviewVO() {
 		super();
 	}
 
 	public ReviewVO(int reviewno, String reviewbody, Timestamp reviewregdate, int reviewgrade, int good, int no,
-			int pdno, String filename, long filesize, String originalfilename) {
+			int pdno) {
 		super();
 		this.reviewno = reviewno;
 		this.reviewbody = reviewbody;
@@ -28,9 +25,7 @@ public class ReviewVO {
 		this.good = good;
 		this.no = no;
 		this.pdno = pdno;
-		this.filename = filename;
-		this.filesize = filesize;
-		this.originalfilename = originalfilename;
+
 	}
 
 	public int getReviewno() {
@@ -89,35 +84,11 @@ public class ReviewVO {
 		this.pdno = pdno;
 	}
 
-	public String getFilename() {
-		return filename;
-	}
-
-	public void setFilename(String filename) {
-		this.filename = filename;
-	}
-
-	public long getFilesize() {
-		return filesize;
-	}
-
-	public void setFilesize(long filesize) {
-		this.filesize = filesize;
-	}
-
-	public String getOriginalfilename() {
-		return originalfilename;
-	}
-
-	public void setOriginalfilename(String originalfilename) {
-		this.originalfilename = originalfilename;
-	}
 
 	@Override
 	public String toString() {
 		return "ReviewVO [reviewno=" + reviewno + ", reviewbody=" + reviewbody + ", reviewregdate=" + reviewregdate
-				+ ", reviewgrade=" + reviewgrade + ", good=" + good + ", no=" + no + ", pdno=" + pdno + ", filename="
-				+ filename + ", filesize=" + filesize + ", originalfilename=" + originalfilename + "]";
+				+ ", reviewgrade=" + reviewgrade + ", good=" + good + ", no=" + no + ", pdno=" + pdno + "]";
 	}
 	
 }

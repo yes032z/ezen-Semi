@@ -1,3 +1,5 @@
+<%@page import="java.sql.SQLException"%>
+<%@page import="com.semi.member.model.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -57,26 +59,84 @@ input#birth {
     width: 280px;
 }
 </style>
+
 <script src="../../js/jquery-3.7.0.min.js"></script>
 <script type="text/javascript">
 	$(function(){
 		$('#btnZipcode').click(function(){
 			open("../zipcode/zipcode.jsp", "", "width=500, height=700, left=150, location=1");
 	});
-	});
+});
 </script>
-<meta charset="EUC-KR">
-<title>회원가입 페이지</title>
+<jsp:useBean id="memService" class="com.semi.member.model.MemberService" scope="session"></jsp:useBean>
+<%
+	//1
+	String id = (String)session.getAttribute("id");
+	
+	//2
+	MemberVO vo = null;
+	try{
+	    vo = memService.selectMember(id);
+	}catch(SQLException e){
+	   e.printStackTrace();
+	}
+	
+	//3
+	String zipno = Integer.toString(vo.getZipno());
+	String detailaddress = vo.getDetailaddress();
+	
+	if(zipno==null) zipno = "";
+	if(detailaddress==null) detailaddress = "";
+	
+	//010-100-2000, ""
+	String tel = vo.getTel();
+	String hp1="", hp2="", hp3="";
+	if(tel != null && !tel.isEmpty()){
+		String[] hpArr=tel.split("-");
+		hp1=hpArr[0];
+		hp2=hpArr[1];
+		hp3=hpArr[2];		
+	}
+	
+	//hh@nate.com, aa@herb.com, ""
+	String email = vo.getEmail();
+	String email1="", email2="";
+	  
+	String[] emailList={"naver.com", "hanmail.net","nate.com","gmail.com"};
+	boolean isEtc=false;
+    if(email!=null && !email.isEmpty()){
+    	String[] emailArr=email.split("@");
+    	email1=emailArr[0];
+    	email2=emailArr[1];         
+    	
+    	int count=0;
+    	for(int i=0;i<emailList.length;i++){
+    		if(email2.equals(emailList[i])){
+    			count++;
+    			break;
+    		}
+    	}//for
+    	
+    	if(count==0){
+    		isEtc=true;
+    	}
+    }
+   
+    
+%>
+
+<meta charset="UTF-8">
+<title>회원정보 수정 페이지</title>
 </head>
 <body>
-<form id="accesspanel" action="register_ok.jsp" method="post">
+<form id="accesspanel" action="memberEdit_ok.jsp" method="post">
   <h1 id="litheader">AB - MART</h1>
   <div class="inset">
     <p>
-      <input type="text" name="name" id="name" placeholder="Name">
+      <input type="text" name="name" id="name" placeholder="<%=vo.getName()%>">
     </p>
     <p>
-      <input type="text" name="id" id="id" placeholder="Userid">
+      <input type="text" name="id" id="id" placeholder="<%=id%>">
     </p>
     <p>
       <input type="password" name="pwd" id="pwd" placeholder="User pwd">
@@ -85,18 +145,18 @@ input#birth {
       <input type="password" name="pwd" id="pwdchk" placeholder="User pwdck">
     </p>
     <p>
-  	  <input type="number" name="footsize" id="footsize" placeholder="발 사이즈">    
-  	  <input type="text" name="birth" id="birth" placeholder="생일">    
+  	  <input type="number" name="footsize" id="footsize" placeholder="<%=vo.getFootsize() %>">    
+  	  <input type="text" name="birth" id="birth" placeholder="<%=vo.getBirth()%>">    
     </p>
     <p id="zip">
     <!-- 우편번호 검색 넣기 -->
      	
-        <input type="text" name="zipno" id=zipno ReadOnly  placeholder ="우편번호">
+        <input type="text" name="zipno" id=zipno ReadOnly  placeholder ="<%=zipno%>">
         <input type="Button" value="우편번호 찾기" id="btnZipcode" ><br />
-        <input type="text" name="detailaddress"id ="detailaddress" ReadOnly placeholder="주소" ><br />
+        <input type="text" name="detailaddress"id ="detailaddress" ReadOnly placeholder="<%=detailaddress%>" ><br />
         <span class="sp1">&nbsp;</span>
     </p>
-    <p id ="tel">
+    <p id ="tel"><!--  -->
     <select name="hp1" id="hp1" title="휴대폰 앞자리">
             <option value="010">010</option>
             <option value="011">011</option>
@@ -124,7 +184,7 @@ input#birth {
     </p>
     
  	<p class="p-container" >
-     <input type="submit" name="register" id="register_go" value="회원가입"  >
+     <input type="submit" name="member_edit" id="member_edit" value="회원정보수정"  >
   	</p> 
   </div>
 </form>
