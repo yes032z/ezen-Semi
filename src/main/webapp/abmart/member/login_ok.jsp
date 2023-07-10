@@ -24,7 +24,7 @@
 	//2 db작업
 	String msg="로그인 처리 실패", url="login.jsp";
 	try{
-		int result=memService.checkLogin(id, pwd);
+		int result=memService.checkLogin(id, pwd); 
 		
 	//3 결과처리
 		if(result==MemberService.LOGIN_OK){
