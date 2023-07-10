@@ -1,3 +1,7 @@
+<%@page import="com.semi.productdetail.model.ProductDetailVO"%>
+<%@page import="com.semi.productdetail.model.ProductDetailService"%>
+<%@page import="com.semi.productsize.model.ProductSizeVO"%>
+<%@page import="com.semi.productsize.model.ProductSizeService"%>
 <%@page import="com.semi.stock.model.StockVO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.text.DecimalFormat"%>
@@ -10,7 +14,8 @@
 <jsp:useBean id="stockService" class="com.semi.stock.model.StockService" scope="session"></jsp:useBean>
 <%
 	String pdno=request.getParameter("pdno");
-	
+	ProductSizeService productSizeService=new ProductSizeService();
+	ProductDetailService productDetailService=new ProductDetailService();
 	if(pdno==null || pdno.isEmpty()){%>
 		<script>
 			alert("잘못된 url입니다.");
@@ -21,12 +26,16 @@
 	
 	ProductVO vo=null;
 	List<StockVO> list=null;
-	
+	List<ProductSizeVO> sizeList=null;
+	List<ProductDetailVO> detailList=null;
 	try{
 		//사이즈 가져오기
 		list=stockService.stockSelectByPdNo(Integer.parseInt(pdno));
-		
+		sizeList=productSizeService.selectAllByNo(Integer.parseInt(pdno));
 		vo=pdService.selectPdByNo(Integer.parseInt(pdno));
+		
+		//상세이미지 가져오기
+		detailList=productDetailService.selectByPdNo(Integer.parseInt(pdno));
 		
 	}catch(SQLException e){
 		e.printStackTrace();
@@ -86,8 +95,75 @@
 		var bool5=false;
 		var bool6=false;
 		var bool7=false;
+		var bool8=false;
+		var bool9=false;
+		
 		$('button[name=size]').click(function(){
 			var size=$(this).html();
+			if(!bool8){
+				if(size==220){
+					var tag="<div name='pddetail'>"
+						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
+						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
+						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
+						+"<button class='btn minus_btn size' name='minus'>-</button>"
+						+"</div>"
+						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
+						+"<%=vo.getPrice()%></div><span class='leftSort'>원</span>"
+						+"<button class='btn size' name='close'>X</button>"
+				        +"</div>";
+					$('div[name=pddetail-group]').prepend(tag);
+					$('#pd'+size).val(1);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
+					$('#sumprice').text(sumprice);
+					bool8=true;
+				}
+			}else{
+				if(size==220){
+					var pdsizeval=$('#pd'+size).val();
+					var qty=parseInt(pdsizeval)+1;
+					$('#pd'+size).val(qty);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(price)+parseInt(<%=vo.getPrice()%>);
+					$('#sumprice').text(sumprice);
+					
+					var result= parseInt(qty)*parseInt(<%=vo.getPrice()%>);
+					$(this).parent().parent().find('div[name=sumprice'+size+']').html(result);
+				}
+			}
+			if(!bool9){
+				if(size==225){
+					var tag="<div name='pddetail'>"
+						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
+						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
+						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
+						+"<button class='btn minus_btn size' name='minus'>-</button>"
+						+"</div>"
+						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
+						+"<%=vo.getPrice()%></div><span class='leftSort'>원</span>"
+						+"<button class='btn size' name='close'>X</button>"
+				        +"</div>";
+					$('div[name=pddetail-group]').prepend(tag);
+					$('#pd'+size).val(1);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
+					$('#sumprice').text(sumprice);
+					bool9=true;
+				}
+			}else{
+				if(size==225){
+					var pdsizeval=$('#pd'+size).val();
+					var qty=parseInt(pdsizeval)+1;
+					$('#pd'+size).val(qty);
+					var price=$('#sumprice').html();
+					var sumprice=parseInt(price)+parseInt(<%=vo.getPrice()%>);
+					$('#sumprice').text(sumprice);
+					
+					var result= parseInt(qty)*parseInt(<%=vo.getPrice()%>);
+					$(this).parent().parent().find('div[name=sumprice'+size+']').html(result);
+				}
+			}
 			if(!bool1){
 				if(size==230){
 					var tag="<div name='pddetail'>"
@@ -403,12 +479,12 @@
 			
 			<%for(int i=0;i<list.size();i++){ 
 				StockVO stockVo=list.get(i);
-				
+				ProductSizeVO psVo=sizeList.get(i);
 				//해당 사이즈의 재고가 0개면 멈추고 다음 사이즈 찾음
 				if(stockVo.getStockqty()==0){
 					continue;
 				}%>
-				<button class="btn size" name="size" id="<%=stockVo.getPdsize()%>"><%=stockVo.getPdsize() %></button>
+				<button class="btn size" name="size" id="<%=psVo.getPdsize()%>"><%=psVo.getPdsize() %></button>
 			<%} %>
 			
 		</div>
@@ -436,6 +512,12 @@
 				 style="width: 400px">상품Q&A</a></li>
 		</ul>
 	</div>
+	<%for(int i=0;i<detailList.size();i++){ 
+			ProductDetailVO pdVo=detailList.get(i);%>
+		<div class="div2" style='margin-bottom: 5px;'>
+			<img alt="신발 상세이미지" src="../../images/<%=pdVo.getFilename()%>" >
+		</div>
+	<%} %>
 	
 	<!-- 상품후기 -->
 	<div class="pdtab clearboth">
@@ -557,6 +639,9 @@
 		<span class="leftSort margin-top20 margin-left650">i*****d</span>
 		<span class="leftSort margin-top20 margin-left100">2023-07-07</span>
 		<span class="leftSort margin-top20 margin-left100">답변완료</span>
+	</div>
+	<div class="div2">
+			<button class="margin-top20" name="btn" id="qna" style="float:right;">Q&A 작성</button>
 	</div>
 </section>
 <%@include file="../../inc/bottom.jsp" %>

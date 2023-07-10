@@ -17,7 +17,6 @@
 	if(kind==null || kind.isEmpty()){
 		kind="";
 	}
-	
 	List<ProductVO> list=null;
 	try{
 		list=pdService.selectPdAll(brand, kind);
@@ -65,7 +64,7 @@
 		</div>
 	</div> -->
 		<aside
-			style="width: 300px; height: 400px; float: left; margin-left: 150px;">
+			style="width: 300px; height: 600px; float: left; margin-left: 150px;">
 			<div>
 				<hr>
 				<h4>브랜드</h4>
