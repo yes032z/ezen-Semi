@@ -20,6 +20,7 @@
 </head>
 <body>
 <%
+	int no=(int)session.getAttribute("no");
 	List<String> fileNameArr=new ArrayList<>();
 	List<Long> fileSizeArr=new ArrayList<>();
 	List<String> originalFileNameArr=new ArrayList<>();
@@ -27,7 +28,8 @@
 	String upDir="images";
 	String saveDir=config.getServletContext().getRealPath(upDir);
 	saveDir=application.getRealPath(upDir);
-	saveDir="D:\\lecture\\workspace_list\\web_semi_ws\\semiProject\\src\\main\\webapp\\images";
+	//saveDir="D:\\lecture\\workspace_list\\web_semi_ws\\semiProject\\src\\main\\webapp\\images";
+	saveDir="C:\\workspace\\web_semi\\semiProject\\src\\main\\webapp\\images";
 	out.println("업로드 경로: "+saveDir);
 	
 	int maxSize= 10*1024*1024; //10메가
@@ -44,16 +46,18 @@
 		//업로드된 파일의 정보 읽어오기
 		Enumeration fileNames= multi.getFileNames();
 		
-		
 		String fileName="";
 		long fileSize=0;
 		String originalFileName="";
 		while(fileNames.hasMoreElements()){
 			//여러개 파일을 업로드하는 경우 파일이름 목록을 리턴
 			String fName=(String)fileNames.nextElement();
-			fileNameArr.add(fName);
 			//업로드된 파일의 이름(변경된 파일의 이름)
 			fileName=multi.getFilesystemName(fName);
+			if(fileName==null || fileName.isEmpty()){
+				break;
+			}
+			fileNameArr.add(fileName);
 			//변경전 원래 파일 이름
 			originalFileName= multi.getOriginalFileName(fName);
 			originalFileNameArr.add(originalFileName);
@@ -67,7 +71,6 @@
 		//1. post방식 요청 파라미터 읽어오기(한글인코딩 위에서 완료)
 		String reviewgrade=multi.getParameter("reviewgrade");
 		String reviewbody=multi.getParameter("reviewbody");
-		String no=(String)session.getAttribute("no");
 		String pdno=multi.getParameter("pdno");
 		
 		//2. db작업
@@ -76,15 +79,21 @@
 		
 		reviewVo.setReviewbody(reviewbody);
 		reviewVo.setReviewgrade(Integer.parseInt(reviewgrade));
-		reviewVo.setNo(Integer.parseInt(no));
+		reviewVo.setNo(no);
+		reviewVo.setPdno(Integer.parseInt(pdno));
 		
 		int cnt=reviewService.insertReview(reviewVo);
 		
-		int reviewno=reviewService.reviewFindNo(Integer.parseInt(no), Integer.parseInt(pdno));
+		int reviewno=reviewService.reviewFindNo(no, Integer.parseInt(pdno));
 		
 		
 		ReviewDetailService reviewDetailService=new ReviewDetailService();
 		ReviewDetailVO reviewDetailVo= new ReviewDetailVO();
+		
+		//여러개 파일에 넣는법 다시 파악하기
+		System.out.println("fileNameArr.get(0)="+fileNameArr.get(0));
+		System.out.println("fileSizeArr.get(0)="+fileSizeArr.get(0));
+		System.out.println("originalFileNameArr.get(0)="+originalFileNameArr.get(0));
 		
 		reviewDetailVo.setReviewno(reviewno);
 		for(int i=0;i<fileNameArr.size();i++){

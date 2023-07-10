@@ -16,17 +16,17 @@
 String pdno = request.getParameter("pdno");
 String reviewno = request.getParameter("reviewno");
 
-boolean isEdit = false;
-String pageTitle = "", btLabel = "";
-if (reviewno != null && !reviewno.isEmpty()) {
-	isEdit = true; //파라미터 reviewno가 있는경우 리뷰수정
-
-	pageTitle = "리뷰 수정하기";
-	btLabel = "수정";
-} else { //리뷰등록
-	pageTitle = "리뷰 등록하기";
-	btLabel = "등록";
-}
+	boolean isEdit = false;
+	String pageTitle = "", btLabel = "";
+	if (reviewno != null && !reviewno.isEmpty()) {
+		isEdit = true; //파라미터 reviewno가 있는경우 리뷰수정
+	
+		pageTitle = "리뷰 수정하기";
+		btLabel = "수정";
+	} else { //리뷰등록
+		pageTitle = "리뷰 등록하기";
+		btLabel = "등록";
+	}
 
 //2
 //리뷰수정인 경우만 db에서 데이터 조회해서 출력해준다
@@ -110,8 +110,8 @@ if (reviewgrade == null)
 
 		$('input[type=submit]').click(function() {
 			var reviewbody = CKEDITOR.instances.reviewbody.getData();
-			var result = $('<div>').html(reviewbody).text();
-			alert();
+			var result=reviewbody.replace(/<\/?p>/gi, '');
+			CKEDITOR.instances.reviewbody.setData(result);
 			if (!$('input[name=rating]:checked').val()) {
 				alert('별점을 체크해주세요.');
 				return false;
@@ -144,6 +144,7 @@ if (reviewgrade == null)
 					action="edit_ok.jsp" 
 				<%}%>>
 				<input type="hidden" name="reviewgrade" value="" />
+				<input type="hidden" name="pdno" value="<%=pdno %>" />
 				<div class="star-rating">
 					<input type="radio" id="5-stars" name="rating" value="5" />
 					<label for="5-stars" class="star">&#9733;</label>

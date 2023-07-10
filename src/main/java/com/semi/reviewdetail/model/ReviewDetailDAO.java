@@ -21,12 +21,13 @@ public class ReviewDetailDAO {
 			con=pool.getConnection();
 			
 			String sql="insert into reviewdetail(reviewno,filename,filesize,originalfilename)"
-					+ " values(reviewdetail_seq.nextval,?,?,?)";
+					+ " values(?,?,?,?)";
 			ps=con.prepareStatement(sql);
 			
-			ps.setString(1, vo.getFilename());
-			ps.setLong(2, vo.getFilesize());
-			ps.setString(1, vo.getOriginalfilename());
+			ps.setInt(1, vo.getReviewno());
+			ps.setString(2, vo.getFilename());
+			ps.setLong(3, vo.getFilesize());
+			ps.setString(4, vo.getOriginalfilename());
 			
 			int cnt=ps.executeUpdate();
 			

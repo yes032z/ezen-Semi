@@ -27,11 +27,8 @@
 	String msg="로그인 처리 실패", url="login.jsp";
 	try{
 		int result=memService.checkLogin(id, pwd); 
-		MemberVO vo=memService.selectMember(id);%>
-		<script>
-			alert(<%=vo.getNo()%>);
-		</script>
-		<%
+		MemberVO vo=memService.selectMember(id);
+
 	//3 결과처리
 		if(result==MemberService.LOGIN_OK){
 			//1 세션에 로그인 정보 저장
