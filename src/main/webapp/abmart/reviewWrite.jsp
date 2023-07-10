@@ -111,7 +111,7 @@ if (reviewgrade == null)
 		$('input[type=submit]').click(function() {
 			var reviewbody = CKEDITOR.instances.reviewbody.getData();
 			var result = $('<div>').html(reviewbody).text();
-			
+			alert();
 			if (!$('input[name=rating]:checked').val()) {
 				alert('별점을 체크해주세요.');
 				return false;
@@ -128,7 +128,6 @@ if (reviewgrade == null)
 </head>
 <body>
 	<section>
-		<input type="hidden" name="reviewgrade" value="" />
 		<h3>상품명</h3>
 		<hr>
 		<img src="../images/<%=pdVo.getFilename()%>" alt="신발이미지" width="150px"
@@ -140,10 +139,11 @@ if (reviewgrade == null)
 			<h4>상품의 별점은 몇점인가요?</h4>
 			<form name="frmWrite" method="post" enctype="multipart/form-data"
 				<%if (!isEdit) {%> 
-					action="write_ok.jsp" 
+					action="reviewWrite_ok.jsp" 
 				<%} else {%>
 					action="edit_ok.jsp" 
 				<%}%>>
+				<input type="hidden" name="reviewgrade" value="" />
 				<div class="star-rating">
 					<input type="radio" id="5-stars" name="rating" value="5" />
 					<label for="5-stars" class="star">&#9733;</label>

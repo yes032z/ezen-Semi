@@ -1,3 +1,5 @@
+<%@page import="javax.script.ScriptContext"%>
+<%@page import="com.semi.member.model.MemberVO"%>
 <%@page import="com.semi.member.model.MemberService"%>
 <%@page import="java.sql.SQLException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -25,11 +27,16 @@
 	String msg="로그인 처리 실패", url="login.jsp";
 	try{
 		int result=memService.checkLogin(id, pwd); 
-		
+		MemberVO vo=memService.selectMember(id);%>
+		<script>
+			alert(<%=vo.getNo()%>);
+		</script>
+		<%
 	//3 결과처리
 		if(result==MemberService.LOGIN_OK){
 			//1 세션에 로그인 정보 저장
 			session.setAttribute("id", id);
+			session.setAttribute("no", vo.getNo());
 			
 			//2 쿠키에 저장- 아이디 저장하기가 체크된 경우 on, null
 			if(remember!=null){ //체크한 경우

@@ -32,7 +32,7 @@ public class MemberDAO {
 			con=pool.getConnection();
 			
 			//3									//outdate is null => 탈퇴하지 않은 회원
-			String sql="select pwd from member where id= ? and outdate is null";
+			String sql="select pwd no from member where id= ? and outdate is null";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, id);
 			
