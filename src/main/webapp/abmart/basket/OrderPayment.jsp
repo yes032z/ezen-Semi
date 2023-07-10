@@ -10,7 +10,7 @@
 header {
 	font-size: 20px;	
 	float: center;	
-	margin: 30px 0 0 50px;	
+	margin: 30px 0 0 360px;	
 } 
 
 body {
@@ -75,7 +75,7 @@ td {
 }
 
 .basket_list_detail :nth-child(3) {
-  vertical-align: top;
+  vertical-align: center;
 }
 
 .basket_list_detail :nth-child(3) a {
@@ -160,10 +160,11 @@ td {
 }
 
 form>table {
-	width: 100%;
+	width: 80%;
 	border-top: 2px solid #000;
 	border-collapse: collapse;
 	border-spacing: 0;
+	margin: auto;
 }
 
 form>table tr {
@@ -233,9 +234,10 @@ form>article {
 .final {
 	float: right;
 	width: 360px;
-	height: 412px;
+	height: 450px;
 	padding: 20px;
-	margin-top: 12px;
+	margin-top: 120px;
+	margin-right: 200px;
 	background: #fff;
 	border: 1px solid #d3d3d3;
 	box-sizing: border-box;
@@ -303,6 +305,7 @@ form>article>div {
 
 form>.delivery>table {
 	margin-top: 10px;
+	margin-left: 150px;
 }
 
 form>.delivery>table tr>td:nth-child(1) {
@@ -330,6 +333,10 @@ form>.delivery>table input[name=addr1] {
 }
 
 form>.delivery>table input[name=addr2] {
+	width: 300px;
+}
+
+form>.delivery>table input[name=request] {
 	width: 300px;
 }
 
@@ -384,11 +391,18 @@ form>.payment>div input {
 	margin-right: 4px;
 }
 
+form>.Payment_method>table {
+	margin-top: 10px;
+	margin-left: 150px;
+}
+
+
 form>.alert {
 	width: 560px;
 	background-color: #f7f7f7;
 	padding: 6px;
 	padding-left: 20px;
+	margin-left: 150px;
 	color: #999;
 	box-sizing: border-box;
 }
@@ -494,11 +508,13 @@ $(document).ready(function() {
 
       if (paymentPassword !== "1234") {
         alert("결제 비밀번호가 올바르지 않습니다. 다시 확인해주세요.");
+        
+        $("#paymentPassword").val("");
         return;
-      }
-
+      }      
       location.href = "OrderCompleted.jsp"; 
-    }); 
+    });
+    
 });
 </script>
 </head>
@@ -549,27 +565,27 @@ $(document).ready(function() {
                     </tr>
                 </tbody>                
             </form>
-        </table>
+        </table><br><br>
         
         <!-- 최종 결제 정보 -->
 		<div class="final">
 			<h2>최종결제 정보</h2>
 			<table>
 				<tr>
-					<td>총</td>
-					<td>2 건</td>
+					<td>상품 수량</td>
+					<td><input type="text" name="qty" value=""></td>
 				</tr>
 				<tr>
-					<td>상품금액</td>
-					<td>92,000원</td>
+					<td>상품 금액</td>
+					<td><input type="text" name="price" value=""></td>
 				</tr>
 				<tr>
 					<td>배송비</td>
 					<td>무료</td>
 				</tr>
 				<tr>
-					<td>전체주문금액</td>
-					<td>92,000원</td>
+					<td>합계</td>
+					<td><input type="text" name="sumprice" value=""></td>
 				</tr>
 			</table>
 			<input type="submit" value="결제하기">
@@ -578,19 +594,19 @@ $(document).ready(function() {
 		
 		<!-- 배송정보 -->
 			<article class="delivery">
-				<h1>배송정보</h1>
+				<h1><< 배송정보 >></h1>	
 				<table>
 					<tr>
 						<td>이름</td>
-						<td style="text-align: left;"><input type="text" name="orderer"></td>
+						<td style="text-align: left;"><input type="text" name="name" value=""></td>
 					</tr>
 					<tr>
 						<td>휴대폰</td>
-						<td style="text-align: left;"><input type="text" name="hp"></td>
+						<td style="text-align: left;"><input type="text" name="tel" value=""></td>
 					</tr>
 					<tr>
 						<td>이메일</td>
-						<td style="text-align: left;"><input type="text" name="email">
+						<td style="text-align: left;"><input type="text" name="email" value="">
 						    <select name="email2" id="email2"  title="이메일주소 뒷자리">
 				            <option value="naver.com">naver.com</option>
 				            <option value="hanmail.net">hanmail.net</option>
@@ -603,23 +619,27 @@ $(document).ready(function() {
 					</tr>
 					<tr>
 						<td>우편번호</td>
-						<td style="text-align: left;"><input type="text" name="zip"> <input
+						<td style="text-align: left;"><input type="text" name="zip" value=""> <input
 							type="button" value="우편번호찾기" id="btnZipcode"></td>
 					</tr>
 					<tr>
 						<td>기본주소</td>
-						<td style="text-align: left;"><input type="text" name="addr1"></td>
+						<td style="text-align: left;"><input type="text" name="addr1" value=""></td>
 					</tr>
 					<tr>
 						<td>상세주소</td>
-						<td style="text-align: left;"><input type="text" name="addr2"></td>
+						<td style="text-align: left;"><input type="text" name="addr2" value=""></td>
 					</tr>
+                    <tr>
+                        <td><label>배송시 요청사항</label></td>
+                        <td style="text-align: left;"><input type="text" name="request"></td>
+                    </tr>					
 				</table>
 			</article>		
 			
 		<!-- 결제 수단선택 -->
-					<article class="Payment method">
-				<h1>결제정보</h1>
+			<article class="Payment_method"><br>
+				<h1><< 결제정보>> </h1>
 				<table>
 					<tr>
 						<td>카드사</td>
@@ -639,6 +659,34 @@ $(document).ready(function() {
 						placeholder="&nbsp;&nbsp;&nbsp;&nbsp;(-)없이 카드번호를 입력하세요" style="width: 200px;">
 						</td>
 					</tr>
+					<tr>
+                        <td>유효기간</td>                        
+                        <td>                        
+                            <select name="expiryMonth">
+                                <option value="01">01</option>
+                                <option value="02">02</option>
+                                <option value="03">03</option>
+                                <option value="04">04</option>
+                                <option value="05">05</option>
+                                <option value="06">06</option>
+                                <option value="07">07</option>
+                                <option value="08">08</option>
+                                <option value="09">09</option>
+                                <option value="10">10</option>
+                                <option value="11">11</option>
+                                <option value="12">12</option>
+                            </select>
+                            <span>월</span>
+                            <select name="expiryYear">
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                            </select>
+                            <span>년</span>
+                        </td>
+					</tr>				
 				</table>
 			</article>		
 		
