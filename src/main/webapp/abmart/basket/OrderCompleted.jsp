@@ -10,7 +10,7 @@
 header {
 	font-size: 20px;	
 	float: center;	
-	margin: 30px 0 0 50px;	
+	margin: 30px 1000px 0 0px;	
 }
 
 p {
@@ -31,7 +31,7 @@ p {
 .message > p {
     font-size: 18px;
     font-weight: bold;
-    padding: 10px;"src/main/webapp/abmart/servicecenter/FAQ.jsp";
+    padding: 10px;
     text-align: center;
 }
 

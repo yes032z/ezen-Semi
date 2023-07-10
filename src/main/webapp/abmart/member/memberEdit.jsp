@@ -98,7 +98,6 @@ input#birth {
 		hp3=hpArr[2];		
 	}
 	
-	//hh@nate.com, aa@herb.com, ""
 	String email = vo.getEmail();
 	String email1="", email2="";
 	  

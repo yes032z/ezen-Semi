@@ -28,4 +28,7 @@ public class MemberService {
 	public MemberVO selectMember(String id) throws SQLException {
 		return memberDao.selectMember(id);
 	}
+	public int editMember(MemberVO vo) throws SQLException {
+		return memberDao.editMember(vo);
+	}
 }
