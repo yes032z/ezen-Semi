@@ -124,15 +124,38 @@
 	String search = request.getParameter("search");
 	String category = request.getParameter("category");
 	
-	//자주 찾는 faq 상위 5건
+	//
+	int type = 0;
+	
+	//자주 찾는 faq 상위 5건  ( type = 1
+	//카테고리 선택 (type = 2
+	//사용자 직접 입력 검색 ( type = 3
 	List<FAQVO> list = null;
 	
-	try {
-		list = faqService.selectBest5();
+	if (type == 1) {
+		try {
+			list = faqService.selectBest5();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
-	} catch (SQLException e) {
-		e.printStackTrace();
+	} else if (type == 2) {
+		try {
+			list = faqService.selectByCategory(category);
+		} catch (SQLException e) {
+			
+		}
+		
+	} else if (type == 3) {
+		try {
+			list = faqService.selectBySearch(search);
+		} catch (SQLException e) {
+			
+		}
 	}
+	
+	
 	
 	
 %>
@@ -191,7 +214,7 @@
 		      <ul id="secBox">
 		         <li class="header" style="border-top: 2px solid black;">
 		            <span class="section">
-						<img alt="faqImg" src="../../images/faq.png"> &nbsp;결제방법(결제수단)을 변경하고 싶어요.
+						<img alt="faqImg" src="<%=request.getContextPath() %>/images/faq.png"> &nbsp;결제방법(결제수단)을 변경하고 싶어요.
 					</span>
 		            <ul class="contents">
 		               <li>결제완료 후 '배송완료' 상태까지만 결제수단 변경이 가능하므로 (구매확정 이후 변경 불가)<br />
@@ -208,7 +231,7 @@
 		         </li>
 		         <li class="header">
 		         	<span class="section">
-		            	<img alt="faqImg" src="../../images/faq.png"> &nbsp;포인트 사용은 어떻게 하나요?
+		            	<img alt="faqImg" src="<%=request.getContextPath() %>/images/faq.png"> &nbsp;포인트 사용은 어떻게 하나요?
 		            </span>
 		            <ul class="contents">
 		               <li>적립된 A-RT 포인트는 바로 사용 가능하며, 100 POINT단위로 사용할 수 있습니다.<br />
