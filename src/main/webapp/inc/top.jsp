@@ -46,7 +46,6 @@ input.form-control.mr-sm-2 {
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" /> -->
         <link href="<%=request.getContextPath()%>/css/bootstrap.min.css" rel="stylesheet" />
 
         <link href="<%=request.getContextPath()%>/css/pdstyle.css" rel="stylesheet"/>
@@ -54,7 +53,6 @@ input.form-control.mr-sm-2 {
         <script type="text/javascript" src="<%=request.getContextPath()%>/js/jquery-3.7.0.min.js"></script>
     </head>
     <body>
-    <!-- 한글 인코딩이 깨져서 영어로 표시  -->
         <!-- Navigation--> 
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container px-4 px-lg-5">
