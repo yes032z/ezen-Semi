@@ -68,15 +68,16 @@
 		});
 		$('#basket').click(function(){
 			sumprice=$('#sumprice').html();
+			
 			location.href="../basket/ShoppingBasket.jsp?sumprice="+sumprice;
 		});
 		$('#order').click(function(){
+			
 			location.href="../basket/OrderPayment.jsp";
 		});
 		
 		$('#review').click(function(){
-			//'width=600,height=900,top=300,left=700' 뒤에 속성 추가
-			open('../reviewWrite.jsp?pdno=<%=pdno%>','review','width=600,height=900,top=300,left=700');
+			open('../reviewWrite.jsp?pdno=<%=pdno%>','review','width=600,height=900,top=300,left=700,location=yes,resizable=yes');
 		});
 		var bool1=false;
 		var bool2=false;

@@ -14,8 +14,8 @@ public class ProductService {
 		return productDao.insertPd(vo);
 	}
 	
-	public List<ProductVO> selectPdAll() throws SQLException {
-		return productDao.selectPdAll();
+	public List<ProductVO> selectPdAll(String brand, String kind) throws SQLException {
+		return productDao.selectPdAll(brand,kind);
 	}
 	
 	public ProductVO selectPdByNo(int pdno) throws SQLException {
