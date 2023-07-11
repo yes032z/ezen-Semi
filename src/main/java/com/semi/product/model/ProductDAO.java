@@ -57,9 +57,12 @@ public class ProductDAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="select distinct p.pdno,p.pdname,p.price,p.kind,p.brand,p.pdregdate,p.filename,p.filesize,p.originalfilename,r.reviewgrade"
-					+ " from product p left join review r"
-					+ " on p.pdno = r.pdno";
+			String sql="select p.pdno, p.pdname,p.price,p.kind, p.brand,p.pdregdate,p.filename,p.filesize,p.originalfilename, nvl(r.reviewgrade,0) reviewgrade"
+					+ " from (\r\n"
+					+ "    select pdno, avg(reviewgrade) reviewgrade"
+					+ "    from review group by pdno"
+					+ " )r right join product p"
+					+ " on r.pdno = p.pdno";
 			if(brand!=null && !brand.isEmpty()) {
 				sql+=" where brand=? ";
 			}
@@ -67,7 +70,7 @@ public class ProductDAO {
 				sql+=" where kind=? ";
 			}
 			if(grade!=null && !grade.isEmpty()) {
-				sql+=" order by r.reviewgrade desc";
+				sql+=" order by reviewgrade desc";
 			}
 			if(pri!=null && !pri.isEmpty()) {
 				sql+=" order by p.price";
