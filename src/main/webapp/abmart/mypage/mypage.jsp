@@ -111,8 +111,6 @@ if (storedProducts.length === 0) {
   }
 }
 </script>
-</script>
-		
 	<div class="orderinfo">
 		<div id="orderinfo-first">찜한 상품
 		<a href="<%=request.getContextPath() %>/abmart/mypage/wishList.jsp"><span class="exploreMore">더보기 ▶</span></a>
