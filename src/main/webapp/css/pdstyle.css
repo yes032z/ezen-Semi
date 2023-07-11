@@ -17,6 +17,7 @@ div[name=pddetail]{
 .div1 {
 	width: 1000px;
 	float: right;
+	margin-right: 201px;
 }
 #searchSort{
 	clear:both;

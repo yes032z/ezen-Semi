@@ -12,6 +12,9 @@
 	String grade=request.getParameter("grade");
 	String price=request.getParameter("price");
 	
+	
+
+	
 	if(brand==null || brand.isEmpty()){
 		brand="";
 	}

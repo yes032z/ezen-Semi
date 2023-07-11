@@ -103,7 +103,7 @@ input.form-control.mr-sm-2 {
 		            <form class="d-flex" action="<%=request.getContextPath()%>/abmart/basket/ShoppingBasket2.jsp">
 		                <button class="btn btn-outline-dark" type="submit" style="width:120px;height:65px"> 
 		                    <i class="bi-cart-fill me-1"></i>장바구니
-		                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> 
+		                    <span class="badge bg-dark text-black ms-1 rounded-pill">0</span> 
 		                </button>
 		            </form>
                 </div>
