@@ -12,9 +12,6 @@
 	String grade=request.getParameter("grade");
 	String price=request.getParameter("price");
 	
-	
-
-	
 	if(brand==null || brand.isEmpty()){
 		brand="";
 	}
@@ -55,18 +52,7 @@
 </script>
 <div>
 	<section class="py-5">
-		<!-- <div style="text-align: center">
-		<div style="width: 1300px;">
-			<ul class="nav nav-tabs">
-				<li class="nav-item" style="width: 650px"><a class="nav-link "
-					id="alink1" aria-current="page" href="#">선택</a></li>
-				<li class="nav-item" style="width: 650px"><a class="nav-link "
-					id="alink2" href="#">미선택</a></li>
-			</ul>
-		</div>
-	</div> -->
-		<aside
-			style="width: 300px; height: 600px; float: left; margin-left: 150px;">
+		<aside style="width: 300px; height: 600px; float: left; margin-left: 150px;">
 			<div>
 				<hr>
 				<h4>브랜드</h4>
@@ -116,16 +102,20 @@
 						href="pdlist.jsp?brand=<%=brand%>&price=price"
 					<%}else if(kind!=null && !kind.isEmpty()){ %>
 						href="pdlist.jsp?kind=<%=kind%>&price=price"
+					<%}else{%>
+						href="pdlist.jsp?price=price"
 					<%}%>>가격낮은순</a></span>
 					<span class="rightSort" id="span1">&nbsp;<a 
 					<%if(brand!=null && !brand.isEmpty()){ %>
 						href="pdlist.jsp?brand=<%=brand%>&grade=grade"
 					<%}else if(kind!=null && !kind.isEmpty()){ %>
 						href="pdlist.jsp?kind=<%=kind%>&grade=grade"
+					<%}else{%>
+						href="pdlist.jsp?grade=grade"
 					<%}%>>평점높은순</a>&nbsp;
 				</span>
 			</div>
-			<div class="div1">
+			<div style="width: 1000px;float: right;margin-left: 500px;">
 				<hr style="clear: both;">
 				
 			<%for(int i=0;i<list.size();i++){
@@ -146,13 +136,28 @@
 								<!-- 상품 이름-->
 								<p><%=vo.getPdname() %></p>
 								<!-- 상품 별점-->
-								<div
-									class="d-flex justify-content-center small text-warning mb-2">
-									<div class="bi-star-fill"></div>
-									<div class="bi-star-fill"></div>
-									<div class="bi-star-fill"></div>
-									<div class="bi-star-fill"></div>
-									<div class="bi-star-fill"></div>
+								<div class="d-flex justify-content-center small text-warning mb-2">
+									<%if(vo.getGrade()<2){ %>
+										<div class="bi-star-fill"></div>
+									<%}else if(vo.getGrade()<3){ %>
+										<div class="bi-star-fill"></div>
+										<div class="bi-star-fill"></div>
+									<%}else if(vo.getGrade()<4){%>
+										<div class="bi-star-fill"></div>
+										<div class="bi-star-fill"></div>
+										<div class="bi-star-fill"></div>
+									<%}else if(vo.getGrade()<5){%>
+										<div class="bi-star-fill"></div>							
+										<div class="bi-star-fill"></div>							
+										<div class="bi-star-fill"></div>							
+										<div class="bi-star-fill"></div>							
+									<%}else{%>
+										<div class="bi-star-fill"></div>							
+										<div class="bi-star-fill"></div>							
+										<div class="bi-star-fill"></div>							
+										<div class="bi-star-fill"></div>							
+										<div class="bi-star-fill"></div>							
+									<%} %>
 								</div>
 								<!-- Product price-->
 								<span class="text-muted text-decoration-line-through"><%=df.format(vo.getPrice())%>원</span>
@@ -172,44 +177,3 @@
 		</div>
 	</section>
 	<%@include file="../../inc/bottom.jsp"%>
-
-<!-- 원래 상품 양식 
-	<div class="col mb-5">
-		<div class="card h-100">
-			Sale badge
-			<div class="badge bg-dark text-white position-absolute"
-				style="top: 0.5rem; right: 0.5rem">Sale</div>
-			Product image
-			<img class="card-img-top"
-				src="https://image.a-rt.com/art/product/2023/03/11678_1678179755820.jpg?shrink=388:388"
-				alt="..." />
-			Cart ins
-			<div class="card-body p-4">
-				<div class="text-center">
-					Product name
-					<h5 class="fw-bolder">나이키</h5>
-					상품 이름
-					<p>우먼스 나이키 코트 레거시 캔버스</p>
-					상품 별점
-					<div class="d-flex justify-content-center small text-warning mb-2">
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-					</div>
-					Product price
-					<span class="text-muted text-decoration-line-through">69,000원</span>
-					47,000원[31%]
-				</div>
-			</div>
-			Product actions
-			<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-				<div class="text-center">
-					<a class="btn btn-outline-dark mt-auto"
-						href="../basket/ShoppingBasket.jsp">장바구니</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</div> -->

@@ -59,14 +59,14 @@
 			reviewList=reviewService.selectLately(Integer.parseInt(pdno));
 		}
 		
-		if(grade.equals("high")){
-			//리뷰 평점 높은순
-			reviewList=reviewService.selectGradeHigh(Integer.parseInt(pdno));
-		}else if(grade.equals("low")){
+		
+		if(grade.equals("low")){
 			//리뷰 평점 낮은순
 			reviewList=reviewService.selectGradeLow(Integer.parseInt(pdno));	
+		}else{
+			//리뷰 평점 높은순
+			reviewList=reviewService.selectGradeHigh(Integer.parseInt(pdno));
 		}
-		
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
@@ -683,7 +683,7 @@
 			<img src="../../images/review.png" />
 		</div>
 		<div class="div2 clearboth border-bottom reviewdiv">
-			<span style="float: left;">총 <span name="searchqty">990</span>개의 리뷰가 있습니다.
+			<span style="float: left;">총 <span name="searchqty"><%=reviewList.size() %></span>개의 리뷰가 있습니다.
 			</span> <span class="rightSort" id="span2">&nbsp;|&nbsp;
 			<a href="pdDetail.jsp?pdno=<%=pdno %>&lately=lately">최근 등록순</a></span>
 			<span class="rightSort" id="span1">&nbsp;|&nbsp;
@@ -705,63 +705,32 @@
 		<div>
 			<div class="div2 clearboth">
 				<span id="star" class="leftSort" style="margin-right: 30px"><%=star %></span>
+				<%if(reviewVo.getPdsize()!=0){ %>
 				<span class="leftSort gray"> | </span>
-				<span class="leftSort gray" style="margin-left: 30px">사이즈</span>
+				<span class="leftSort gray" style="margin-left: 30px">
+					<%=reviewVo.getPdsize() %></span>
+				<%} %>
 			</div>
 			<div class="div2 clearboth">
-				<span class="leftSort">제목</span> <br> <br>
+				<%
+				String filename=reviewVo.getFilename();
+				if(filename!=null && !filename.isEmpty()){ %>
+					<img alt="리뷰이미지" src="../../images/<%=filename%>" width="200px" height="200px" style="float:left">
+				<%} %>
 			</div>
 			<div class="div2 clearboth">
-				<span class="leftSort gray margin-right20">i*****d</span> <span
+				<span class="leftSort"><%=reviewVo.getReviewbody() %></span> <br> <br>
+			</div>
+			<div class="div2 clearboth">
+				<span class="leftSort gray margin-right20"><%=reviewVo.getId() %></span> <span
 					class="leftSort gray margin-right20"> | </span> <span
-					class="leftSort gray">2023-07-07</span>
+					class="leftSort gray"><%=reviewVo.getReviewregdate() %></span>
 			</div>
-	
 			<div class="div2 clearboth border-bottom reviewdiv">
 				<button class="btn leftSort size">좋아요</button>
 			</div>
 		</div>
 	<%} %>
-	<div>
-		<div class="div2 clearboth">
-			<span id="star" class="leftSort" style="margin-right: 30px">★★★★★</span>
-			<span class="leftSort gray" style="margin-right: 30px">black</span> <span
-				class="leftSort gray"> | </span> <span class="leftSort gray"
-				style="margin-left: 30px">사이즈</span>
-		</div>
-		<div class="div2 clearboth">
-			<span class="leftSort">제목</span> <br> <br>
-		</div>
-		<div class="div2 clearboth">
-			<span class="leftSort gray margin-right20">i*****d</span> <span
-				class="leftSort gray margin-right20"> | </span> <span
-				class="leftSort gray">2023-07-07</span>
-		</div>
-
-		<div class="div2 clearboth border-bottom reviewdiv">
-			<button class="btn leftSort size">좋아요</button>
-		</div>
-	</div>
-	<div>
-		<div class="div2 clearboth">
-			<span id="star" class="leftSort" style="margin-right: 30px">★★★★★</span>
-			<span class="leftSort gray" style="margin-right: 30px">black</span> <span
-				class="leftSort gray"> | </span> <span class="leftSort gray"
-				style="margin-left: 30px">사이즈</span>
-		</div>
-		<div class="div2 clearboth">
-			<span class="leftSort">제목</span> <br> <br>
-		</div>
-		<div class="div2 clearboth">
-			<span class="leftSort gray margin-right20">i*****d</span> <span
-				class="leftSort gray margin-right20"> | </span> <span
-				class="leftSort gray">2023-07-07</span>
-		</div>
-
-		<div class="div2 clearboth border-bottom reviewdiv">
-			<button class="btn leftSort size">좋아요</button>
-		</div>
-	</div>
 	<div class="div2">
 		<button class="margin-top20" name="btn" id="review"
 			style="float: right;">상품 후기 작성</button>
