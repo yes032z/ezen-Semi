@@ -81,9 +81,18 @@
 		});
 		$('#basket').click(function(){
 			each();
+			if($('#pdqty2').val().length<1){
+				alert("장바구니에 담으실 상품을 고르세요");
+				event.preventDefault();
+			}
 		});
 		$('#order').click(function(){
 			each();
+			
+			if($('#pdqty2').val().length<1){
+				alert("구매하실 상품을 고르세요");
+				event.preventDefault();
+			}
 		});
 		
 		$('#review').click(function(){
