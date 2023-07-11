@@ -95,11 +95,6 @@
 		ReviewDetailService reviewDetailService=new ReviewDetailService();
 		ReviewDetailVO reviewDetailVo= new ReviewDetailVO();
 		
-		//여러개 파일에 넣는법 다시 파악하기
-		System.out.println("fileNameArr.get(0)="+fileNameArr.get(0));
-		System.out.println("fileSizeArr.get(0)="+fileSizeArr.get(0));
-		System.out.println("originalFileNameArr.get(0)="+originalFileNameArr.get(0));
-		
 		reviewDetailVo.setReviewno(reviewno);
 		for(int i=0;i<fileNameArr.size();i++){
 			reviewDetailVo.setFilename(fileNameArr.get(i));
