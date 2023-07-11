@@ -13,10 +13,11 @@ public class ProductVO {
 	private long filesize;
 	private String originalfilename;
 	
+	private int grade;
 	public ProductVO() {
 		super();
 	}
-
+	
 	public ProductVO(int pdno, String pdname, int price, String kind, String brand, Timestamp pdregdate,
 			String filename, long filesize, String originalfilename) {
 		super();
@@ -31,8 +32,31 @@ public class ProductVO {
 		this.originalfilename = originalfilename;
 	}
 
+	public ProductVO(int pdno, String pdname, int price, String kind, String brand, Timestamp pdregdate,
+			String filename, long filesize, String originalfilename, int grade) {
+		super();
+		this.pdno = pdno;
+		this.pdname = pdname;
+		this.price = price;
+		this.kind = kind;
+		this.brand = brand;
+		this.pdregdate = pdregdate;
+		this.filename = filename;
+		this.filesize = filesize;
+		this.originalfilename = originalfilename;
+		this.grade=grade;
+	}
+
 	
 	
+	public int getGrade() {
+		return grade;
+	}
+
+	public void setGrade(int grade) {
+		this.grade = grade;
+	}
+
 	public String getKind() {
 		return kind;
 	}
@@ -107,9 +131,9 @@ public class ProductVO {
 
 	@Override
 	public String toString() {
-		return "ProductVO [pdno=" + pdno + ", pdname=" + pdname + ", price=" + price
-				+ ", kind=" + kind + ", brand=" + brand + ", pdregdate=" + pdregdate + ", filename=" + filename
-				+ ", filesize=" + filesize + ", originalfilename=" + originalfilename + "]";
+		return "ProductVO [pdno=" + pdno + ", pdname=" + pdname + ", price=" + price + ", kind=" + kind + ", brand="
+				+ brand + ", pdregdate=" + pdregdate + ", filename=" + filename + ", filesize=" + filesize
+				+ ", originalfilename=" + originalfilename + ", grade=" + grade + "]";
 	}
 
 }

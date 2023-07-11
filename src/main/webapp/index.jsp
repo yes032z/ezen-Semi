@@ -53,7 +53,7 @@
 <%
 	List<ProductVO> list=null;
 	try{
-		list=pdService.selectPdAll(null, null);
+		list=pdService.selectPdAll(null, null,null,null);
 	}catch(SQLException e) {
 		e.printStackTrace();
 	}
