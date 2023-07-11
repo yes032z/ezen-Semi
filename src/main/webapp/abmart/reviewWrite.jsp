@@ -162,9 +162,9 @@ if (reviewgrade == null)
 				</p>
 				<textarea id="reviewbody" name="reviewbody"><%=reviewbody%></textarea>
 				<br> <label for='image'>사진 첨부</label><br> 
-				<input for='image' type="file"name="upfile1" /><br>
-				<input for='image' type="file" name="upfile2" /><br>
-				<input for='image' type="file" name="upfile3" /><br>
+				<input for='image' type="file"name="upfile1"/>
+				<input for='image' type="file" name="upfile2"/>
+				<input for='image' type="file" name="upfile3"/>
 				<br>
 				<div class="center">
 					<input type="submit" value="<%=btLabel%>" />
