@@ -147,4 +147,7 @@ public class ProductDAO {
 			pool.dbClose(rs, ps, con);
 		}
 	}
+	
+	
+	
 }

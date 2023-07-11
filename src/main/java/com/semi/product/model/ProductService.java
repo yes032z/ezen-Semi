@@ -21,4 +21,5 @@ public class ProductService {
 	public ProductVO selectPdByNo(int pdno) throws SQLException {
 		return productDao.selectPdByNo(pdno);
 	}
+
 }

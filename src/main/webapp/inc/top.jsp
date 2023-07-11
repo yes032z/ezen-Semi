@@ -94,15 +94,16 @@ input.form-control.mr-sm-2 {
                     </ul>
 
 					<!-- 검색창  -->
+					<!-- 값 입력해서 sql문에서 like로 일치하는거 찾기  -->
 					<form class ="frlist2" action="<%=request.getContextPath()%>/abmart/pdlist//pdlist.jsp">
-				    <input class="form-control mr-sm-2" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" >
+				    <input class="form-control mr-sm-2" id ="searchpd" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" >
 				    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 				    </form>
 					<!-- 장바구니 버튼-->		
 		            <form class="d-flex" action="<%=request.getContextPath()%>/abmart/basket/ShoppingBasket2.jsp">
 		                <button class="btn btn-outline-dark" type="submit" style="width:120px;height:65px"> 
 		                    <i class="bi-cart-fill me-1"></i>장바구니
-		                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> 
+		                    <span class="badge bg-dark text-black ms-1 rounded-pill">0</span> 
 		                </button>
 		            </form>
                 </div>
