@@ -169,8 +169,19 @@ public class ReviewDAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="select reviewno, reviewbody,reviewregdate,reviewgrade,good,no,pdno from review"
-					+ " where pdno=? order by reviewgrade desc";
+			String sql="select r.reviewno, r.reviewbody,r.reviewregdate,r.reviewgrade,r.good,r.no,r.pdno,rd.filename,rd.filesize,rd.originalfilename,m.id,ps.pdsize"
+					+ " from review r left join reviewdetail rd"
+					+ " on r.reviewno=rd.reviewno"
+					+ " left join member m"
+					+ " on r.no=m.no"
+					+ " left join orders o"
+					+ " on m.no=o.no"
+					+ " left join orderdetail od"
+					+ " on o.orderno=od.orderno"
+					+ " left join productsize ps"
+					+ " on od.pdsizeno=ps.pdsizeno"
+					+ " where r.pdno=?"
+					+ " order by reviewgrade desc";
 			ps=con.prepareStatement(sql);
 			
 			ps.setInt(1, pdno);
@@ -184,8 +195,13 @@ public class ReviewDAO {
 				int good=rs.getInt(5);
 				int no=rs.getInt(6);
 				int pdno2=rs.getInt(7);
+				String filename=rs.getString(8);
+				long filesize=rs.getLong(9);
+				String originalfilename=rs.getString(10);
+				String id=rs.getString(11);
+				int pdsize=rs.getInt(12);
 				
-				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, good, no, pdno2);
+				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, good, no, pdno2, filename, filesize, originalfilename, id,pdsize);
 				list.add(vo);
 			}
 			
@@ -206,8 +222,19 @@ public class ReviewDAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="select reviewno, reviewbody,reviewregdate,reviewgrade,good,no,pdno from review"
-					+ " where pdno=? order by reviewgrade";
+			String sql="select r.reviewno, r.reviewbody,r.reviewregdate,r.reviewgrade,r.good,r.no,r.pdno,rd.filename,rd.filesize,rd.originalfilename,m.id,ps.pdsize"
+					+ " from review r left join reviewdetail rd"
+					+ " on r.reviewno=rd.reviewno"
+					+ " left join member m"
+					+ " on r.no=m.no"
+					+ " left join orders o"
+					+ " on m.no=o.no"
+					+ " left join orderdetail od"
+					+ " on o.orderno=od.orderno"
+					+ " left join productsize ps"
+					+ " on od.pdsizeno=ps.pdsizeno"
+					+ " where r.pdno=?"
+					+ " order by reviewgrade";
 			ps=con.prepareStatement(sql);
 			
 			ps.setInt(1, pdno);
@@ -221,8 +248,13 @@ public class ReviewDAO {
 				int good=rs.getInt(5);
 				int no=rs.getInt(6);
 				int pdno2=rs.getInt(7);
+				String filename=rs.getString(8);
+				long filesize=rs.getLong(9);
+				String originalfilename=rs.getString(10);
+				String id=rs.getString(11);
+				int pdsize=rs.getInt(12);
 				
-				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, good, no, pdno2);
+				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, good, no, pdno2, filename, filesize, originalfilename, id,pdsize);
 				list.add(vo);
 			}
 			
@@ -243,8 +275,19 @@ public class ReviewDAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="select reviewno, reviewbody,reviewregdate,reviewgrade,good,no,pdno from review"
-					+ " where pdno=? order by reviewregdate desc";
+			String sql="select r.reviewno, r.reviewbody,r.reviewregdate,r.reviewgrade,r.good,r.no,r.pdno,rd.filename,rd.filesize,rd.originalfilename,m.id,ps.pdsize"
+					+ " from review r left join reviewdetail rd"
+					+ " on r.reviewno=rd.reviewno"
+					+ " left join member m"
+					+ " on r.no=m.no"
+					+ " left join orders o"
+					+ " on m.no=o.no"
+					+ " left join orderdetail od"
+					+ " on o.orderno=od.orderno"
+					+ " left join productsize ps"
+					+ " on od.pdsizeno=ps.pdsizeno"
+					+ " where r.pdno=?"
+					+ " order by reviewregdate desc";
 			ps=con.prepareStatement(sql);
 			
 			ps.setInt(1, pdno);
@@ -258,8 +301,13 @@ public class ReviewDAO {
 				int good=rs.getInt(5);
 				int no=rs.getInt(6);
 				int pdno2=rs.getInt(7);
+				String filename=rs.getString(8);
+				long filesize=rs.getLong(9);
+				String originalfilename=rs.getString(10);
+				String id=rs.getString(11);
+				int pdsize=rs.getInt(12);
 				
-				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, good, no, pdno2);
+				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, good, no, pdno2, filename, filesize, originalfilename, id,pdsize);
 				list.add(vo);
 			}
 			

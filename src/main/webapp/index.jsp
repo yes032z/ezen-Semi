@@ -77,13 +77,29 @@
 							<!-- 상품 이름-->
 							<p><%=vo.getPdname() %></p>
 							<!-- 상품 별점-->
-							<div
-								class="d-flex justify-content-center small text-warning mb-2">
+							<div class="d-flex justify-content-center small text-warning mb-2">
+							
+							<%if(vo.getGrade()<2){ %>
+								<div class="bi-star-fill"></div>
+							<%}else if(vo.getGrade()<3){ %>
+								<div class="bi-star-fill"></div>
+								<div class="bi-star-fill"></div>
+							<%}else if(vo.getGrade()<4){%>
 								<div class="bi-star-fill"></div>
 								<div class="bi-star-fill"></div>
 								<div class="bi-star-fill"></div>
-								<div class="bi-star-fill"></div>
-								<div class="bi-star-fill"></div>
+							<%}else if(vo.getGrade()<5){%>
+								<div class="bi-star-fill"></div>							
+								<div class="bi-star-fill"></div>							
+								<div class="bi-star-fill"></div>							
+								<div class="bi-star-fill"></div>							
+							<%}else{%>
+								<div class="bi-star-fill"></div>							
+								<div class="bi-star-fill"></div>							
+								<div class="bi-star-fill"></div>							
+								<div class="bi-star-fill"></div>							
+								<div class="bi-star-fill"></div>							
+							<%} %>
 							</div>
 							<!-- Product price-->
 							<span class="text-muted text-decoration-line-through"><%=df.format(vo.getPrice())%>원</span>
