@@ -103,7 +103,7 @@ $(function() {
           return false;
     	}else{
     		var value=checkedItems.attr("value");
-    		location.href="../pddetail/reviewWrite.jsp?pdno="+value;
+    		open('../reviewWrite.jsp?pdno='+value,'review','width=600,height=900,top=300,left=700,location=yes,resizable=yes');
     	}
     });
     
