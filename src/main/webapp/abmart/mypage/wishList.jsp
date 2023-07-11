@@ -81,10 +81,11 @@ $(function() {
         var checkedItems = $(".chkItem:checked");
         var values = "";
         
-        checkedItems.each(function() {
-          values += "&chkItem=" + $(this).attr("value1");
+        checkedItems.each(function(index) {
+        	 var str = (index === 0) ? "?" : "&";
+             values += str + "chkItem=" + $(this).attr("value1");
         });
-        var uri = "wishDelete.jsp?";
+        var uri = "wishDelete.jsp";
         location.href = uri + values;
       }
     });
@@ -97,10 +98,11 @@ $(function() {
     	  var checkedItems = $(".chkItem:checked");
           var values = "";
           
-          checkedItems.each(function() {
-            values += "&chkItem=" + $(this).attr("value2");
+          checkedItems.each(function(index) {
+        	  var str = (index === 0) ? "?" : "&";
+              values += str + "pdno=" + $(this).attr("value2");
           });
-          var uri = "../basket/OrderPayment.jsp?";
+          var uri = "../basket/OrderPayment.jsp";
           location.href = uri + values;
       }
     });

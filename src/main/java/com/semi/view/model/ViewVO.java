@@ -26,6 +26,10 @@ public class ViewVO {
 	private int pdno; /* 상품고유번호 */
 	private String brand; /* 브랜드 */
 	
+	private Timestamp regdate; /* 입고일 */
+	private int pdsize; /* 사이즈 */
+	private int stockqty; /* 수량 */
+	
 	public ViewVO() {
 		super();
 	}
@@ -71,11 +75,23 @@ public class ViewVO {
 	}
 	//마이페이지 찜목록 최근 4건조회
 	public ViewVO(String filename, String pdname, String brand, int price, int pdno) {
+		super();
 		this.filename = filename;
 		this.pdname = pdname;
 		this.brand = brand;
 		this.price = price;
 		this.pdno = pdno;
+	}
+	//사용자 발사이즈에 맞는 찜상품 입고 알림 조회
+	public ViewVO(int favoriteno, int pdno, Timestamp regdate, int stockqty, String pdname, int pdsize, String filename) {
+		super();
+		this.favoriteno = favoriteno;
+		this.pdno = pdno;
+		this.regdate = regdate;
+		this.stockqty = stockqty;
+		this.pdname = pdname;
+		this.pdsize = pdsize;
+		this.filename = filename;
 	}
 	public int getQnano() {
 		return qnano;
@@ -191,6 +207,24 @@ public class ViewVO {
 	public void setBrand(String brand) {
 		this.brand = brand;
 	}
+	public Timestamp getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(Timestamp regdate) {
+		this.regdate = regdate;
+	}
+	public int getPdsize() {
+		return pdsize;
+	}
+	public void setPdsize(int pdsize) {
+		this.pdsize = pdsize;
+	}
+	public int getStockqty() {
+		return stockqty;
+	}
+	public void setStockqty(int stockqty) {
+		this.stockqty = stockqty;
+	}
 	@Override
 	public String toString() {
 		return "ViewVO [qnano=" + qnano + ", qnabody=" + qnabody + ", pdname=" + pdname + ", qnaview=" + qnaview
@@ -198,9 +232,7 @@ public class ViewVO {
 				+ ", reviewgrade=" + reviewgrade + ", good=" + good + ", reviewregdate=" + reviewregdate + ", orderno="
 				+ orderno + ", orderqty=" + orderqty + ", price=" + price + ", pickup=" + pickup + ", orderregdate="
 				+ orderregdate + ", filename=" + filename + ", favoriteno=" + favoriteno + ", pdno=" + pdno + ", brand="
-				+ brand + "]";
+				+ brand + ", regdate=" + regdate + ", pdsize=" + pdsize + ", stockqty=" + stockqty + "]";
 	}
-	
-	
 	
 }
