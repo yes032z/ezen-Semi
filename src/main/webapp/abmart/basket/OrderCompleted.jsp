@@ -1,3 +1,5 @@
+<%@page import="com.semi.member.model.MemberService"%>
+<%@page import="com.semi.member.model.MemberVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../../inc/top.jsp" %>    
@@ -192,6 +194,13 @@ li.li{
 
 </style>
 </head>
+<%
+	String id = (String)session.getAttribute("id");
+
+	MemberService service = new MemberService();
+	MemberVO vo = service.selectMember(id); 
+		
+%>
 <body> 
         <main id="product">      
             <section class="complete">
@@ -278,7 +287,7 @@ li.li{
                                         <td>
                                             <span>34,000원</span>
                                         </td>
-                                    </tr>
+                                     </tr>
                                     <tr>
                                         <td>총 할인금액:</td>
                                         <td>
@@ -315,10 +324,6 @@ li.li{
                             <td>결제방법</td>
                             <td>신용카드</td>
                         </tr>
-                        <tr>
-                            <td>주문자/연락처</td>
-                            <td>홍길동/010-1234-1234</td>
-                        </tr>
                     </table>
                 </article>
                 
@@ -327,16 +332,16 @@ li.li{
                     <h1>배송정보</h1>
                     <table border="0">
                         <tr>
-                            <td>받는사람</td>
-                            <td><%= request.getAttribute("name") %></td>                                                                                  
+                            <td>주문인</td>
+                            <td><%=vo.getName()%></td>                                                                                  
                         </tr>
                         <tr>
                             <td>연락처</td>
-                            <td><%= request.getAttribute("phone") %></td>    
+                            <td><%=vo.getTel()%></td>    
                         </tr>
                         <tr>
                             <td>배송지 주소</td>
-                            <td><%= request.getAttribute("address") %></td>    
+                            <td><%=vo.getDetailaddress()%></td>    
                         </tr>
                     </table>
                 </article>
