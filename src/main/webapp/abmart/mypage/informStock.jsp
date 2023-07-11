@@ -60,22 +60,21 @@ location.href = uri + values;
 	<div class="orderinfo">
 		<div id="orderinfo-first">재고 알림</div>
 		<div class="subtitle">찜 상품 입고 알리미</div>
-		<%for(int i=0;i<1;i++){
-			vo=list.get(i); %>
-		<span class="exploreMore">나의 발사이즈 <%=vo.getPdsize() %> 에 맞는 입고 알림입니다.</span>
-		<%} %>
+		<span class="exploreMore">내 사이즈는 회원정보 수정에서 변경 가능합니다.</span>
 		<div id="orderinfo-third">
 			<table class="table table-hover">
 			<colgroup>
 				<col style="width:5%;" />
-				<col style="width:12%;" />	
-				<col style="width:20%;" />	
-				<col style="width:43%;" />	
+				<col style="width:17%;" />
+				<col style="width:10%;" />	
+				<col style="width:18%;" />	
+				<col style="width:50%;" />	
 			</colgroup>
     <thead class="thead-dark">
         <tr>
             <th></th>
             <th>알림일자</th>
+            <th>내 사이즈</th>
             <th></th>
             <th></th>
         </tr>
@@ -90,6 +89,7 @@ location.href = uri + values;
         <tr>
             <td><input type="checkbox" name="pdno" class="chkItem" value="<%=vo.getPdno() %>"></td>
             <td><%=sdf1.format(vo.getRegdate()) %></td>
+            <td><%=vo.getPdsize() %>
             <td>
                 <div class="media">
                    <img src="../../images/<%=vo.getFilename() %>" class="mr-3 pdimgsize" alt="1">
