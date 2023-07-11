@@ -48,7 +48,7 @@ public class ProductDAO {
 	}
 	
 	//상품 리스트
-	public List<ProductVO> selectPdAll(String brand, String kind) throws SQLException {
+	public List<ProductVO> selectPdAll(String brand, String kind,String grade,String pri) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -57,15 +57,28 @@ public class ProductDAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="select pdno,pdname,price,kind,brand,pdregdate,filename,filesize,originalfilename";
-			sql+=" from product";
+			String sql="select p.pdno, p.pdname,p.price,p.kind, p.brand,p.pdregdate,p.filename,p.filesize,p.originalfilename, nvl(r.reviewgrade,0) reviewgrade"
+					+ " from (\r\n"
+					+ "    select pdno, avg(reviewgrade) reviewgrade"
+					+ "    from review group by pdno"
+					+ " )r right join product p"
+					+ " on r.pdno = p.pdno";
 			if(brand!=null && !brand.isEmpty()) {
-				sql+=" where brand=?";
+				sql+=" where brand=? ";
 			}
 			if(kind!=null && !kind.isEmpty()) {
 				sql+=" where kind=? ";
 			}
-			sql+=" order by pdno desc";
+			if(grade!=null && !grade.isEmpty()) {
+				sql+=" order by reviewgrade desc";
+			}
+			if(pri!=null && !pri.isEmpty()) {
+				sql+=" order by p.price";
+			}
+			if((pri==null || pri.isEmpty()) && (grade==null || grade.isEmpty())) {
+				sql+=" order by p.pdno desc";
+			}
+			
 			ps=con.prepareStatement(sql);
 			
 			if(brand!=null && !brand.isEmpty()) {
@@ -87,8 +100,9 @@ public class ProductDAO {
 				String fileName=rs.getString(7);
 				Long fileSize=rs.getLong(8);
 				String originalFileName=rs.getString(9);
+				int reviewgrade=rs.getInt(10);
 				
-				ProductVO vo=new ProductVO(pdno, pdname, price, kind2, brand2, pdRegdate, fileName, fileSize, originalFileName);
+				ProductVO vo=new ProductVO(pdno, pdname, price, kind2, brand2, pdRegdate, fileName, fileSize, originalFileName,reviewgrade);
 				
 				list.add(vo);
 			}
@@ -136,4 +150,7 @@ public class ProductDAO {
 			pool.dbClose(rs, ps, con);
 		}
 	}
+	
+	
+	
 }

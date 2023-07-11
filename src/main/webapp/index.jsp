@@ -48,12 +48,10 @@
 	</div>
 </header>
 <!-- Section-->
-<jsp:useBean id="pdService"
-	class="com.semi.product.model.ProductService" scope="session"></jsp:useBean>
 <%
 	List<ProductVO> list=null;
 	try{
-		list=pdService.selectPdAll(null, null);
+		list=pdService.selectPdAll(null, null,null,null);
 	}catch(SQLException e) {
 		e.printStackTrace();
 	}
@@ -96,7 +94,7 @@
 		<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 			<div class="text-center">
 				<a class="btn btn-outline-dark mt-auto"
-					href="<%=request.getContextPath()%>/basket/ShoppingBasket.jsp">장바구니</a>
+					href="<%=request.getContextPath()%>/abmart/basket/ShoppingBasket.jsp">장바구니</a>
 			</div>
 		</div>
 	</div>

@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<jsp:useBean id="pdService" class="com.semi.product.model.ProductService" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,7 +10,9 @@ ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-4 {
     font-size: 15px;
 }
 
-
+form.frlist2 {
+    width: 494px;
+}
 button.btn.btn-outline-dark {
  	width: 120px;
     margin-left: 39px;
@@ -19,6 +23,7 @@ button.btn.btn-outline-dark {
 
 input.form-control.mr-sm-2 {
     width: 400px;
+    float: left;
 }
 </style>
 <meta charset="utf-8" />
@@ -89,14 +94,16 @@ input.form-control.mr-sm-2 {
                     </ul>
 
 					<!-- 검색창  -->
-				    <input class="form-control mr-sm-2" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" >
+					<!-- 값 입력해서 sql문에서 like로 일치하는거 찾기  -->
+					<form class ="frlist2" action="<%=request.getContextPath()%>/abmart/pdlist//pdlist.jsp">
+				    <input class="form-control mr-sm-2" id ="searchpd" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" >
 				    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-				    
+				    </form>
 					<!-- 장바구니 버튼-->		
 		            <form class="d-flex" action="<%=request.getContextPath()%>/abmart/basket/ShoppingBasket2.jsp">
 		                <button class="btn btn-outline-dark" type="submit" style="width:120px;height:65px"> 
 		                    <i class="bi-cart-fill me-1"></i>장바구니
-		                    <span class="badge bg-dark text-white ms-1 rounded-pill">0</span> 
+		                    <span class="badge bg-dark text-black ms-1 rounded-pill">0</span> 
 		                </button>
 		            </form>
                 </div>

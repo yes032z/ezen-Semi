@@ -6,20 +6,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../../inc/top.jsp"%>
-<jsp:useBean id="pdService" class="com.semi.product.model.ProductService" scope="session"></jsp:useBean>
 <%
 	String brand=request.getParameter("brand");
 	String kind=request.getParameter("kind");
+	String grade=request.getParameter("grade");
+	String price=request.getParameter("price");
+	
+	
 
+	
 	if(brand==null || brand.isEmpty()){
 		brand="";
 	}
 	if(kind==null || kind.isEmpty()){
 		kind="";
 	}
+	if(grade==null || grade.isEmpty()){
+		grade="";
+	}
+	if(price==null || price.isEmpty()){
+		price="";
+	}
+	
 	List<ProductVO> list=null;
 	try{
-		list=pdService.selectPdAll(brand, kind);
+		list=pdService.selectPdAll(brand, kind,grade,price);
 	}catch(SQLException e){
 		e.printStackTrace();
 	}
@@ -31,24 +42,15 @@
 		$('button[name=brand]').click(function(){
 			var brand=$(this).html();
 			
-			$('#filter').before("<button class='btn size' id='del' style='float:left'>"+brand+"</button>");
 			location.href="pdlist.jsp?brand="+brand;
 		});
 		
 		$('button[name=kind]').click(function(){
 			var kind=$(this).html();
 			
-			$('#filter').before("<button class='btn size' id='del' style='float:left'>"+kind+"</button>");
 			location.href="pdlist.jsp?kind="+kind;
 		});
 		
-		$(document).on('click', '#del', function() {
-			 $(this).remove();
-		});
-		
-		$('#filter').click(function(){
-			$(this).parent().find('*').not(this).remove();
-		});
 	});
 </script>
 <div>
@@ -106,16 +108,21 @@
 			</div>
 		</aside>
 		<div id="pdbox">
-			<div id="fiteradd">
-				<button class="btn btn-secondary" id="filter" style="float: left;">필터
-					초기화</button>
-			</div>
 			<div id="searchSort">
 				<span class="leftSort">총 </span><span class="leftSort"
 					name="searchqty"><%=list.size() %></span><span class="leftSort">개의 상품이
 					있습니다.</span><span class="rightSort" id="span2">&nbsp;|&nbsp;<a
-					href="#">가격낮은순</a></span> <span class="rightSort" id="span1">&nbsp;<a
-					href="#">평점높은순</a>&nbsp;
+					<%if(brand!=null && !brand.isEmpty()){ %>
+						href="pdlist.jsp?brand=<%=brand%>&price=price"
+					<%}else if(kind!=null && !kind.isEmpty()){ %>
+						href="pdlist.jsp?kind=<%=kind%>&price=price"
+					<%}%>>가격낮은순</a></span>
+					<span class="rightSort" id="span1">&nbsp;<a 
+					<%if(brand!=null && !brand.isEmpty()){ %>
+						href="pdlist.jsp?brand=<%=brand%>&grade=grade"
+					<%}else if(kind!=null && !kind.isEmpty()){ %>
+						href="pdlist.jsp?kind=<%=kind%>&grade=grade"
+					<%}%>>평점높은순</a>&nbsp;
 				</span>
 			</div>
 			<div class="div1">

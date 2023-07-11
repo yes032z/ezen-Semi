@@ -479,6 +479,14 @@ li{
 
 
 </style>
+<%
+	String pdsize=request.getParameter("pdsize");
+	String pdqty=request.getParameter("pdqty");
+	
+	String[] pdsizeArr=pdsize.split(" ");
+	String[] pdpriceArr=pdqty.split(" ");
+	
+%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {

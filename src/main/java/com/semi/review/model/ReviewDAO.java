@@ -154,4 +154,121 @@ public class ReviewDAO {
 		}
 	}
 	
+	/**
+	 * @param pdno
+	 * @return
+	 * @throws SQLException
+	 */
+	//평점 높은순
+	public List<ReviewVO> selectGradeHigh(int pdno) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<ReviewVO> list =new ArrayList<>();
+		try {
+			con=pool.getConnection();
+			
+			String sql="select reviewno, reviewbody,reviewregdate,reviewgrade,good,no,pdno from review"
+					+ " where pdno=? order by reviewgrade desc";
+			ps=con.prepareStatement(sql);
+			
+			ps.setInt(1, pdno);
+			
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				int reviewno=rs.getInt(1);
+				String reviewbody=rs.getString(2);
+				Timestamp reviewregdate=rs.getTimestamp(3);
+				int reviewgrade=rs.getInt(4);
+				int good=rs.getInt(5);
+				int no=rs.getInt(6);
+				int pdno2=rs.getInt(7);
+				
+				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, good, no, pdno2);
+				list.add(vo);
+			}
+			
+			System.out.println("리뷰 평점 높은순 조회 결과 list.size()="+list.size()+", 매개변수 pdno="+pdno);
+			return list;
+		}finally {
+			pool.dbClose(rs, ps, con);
+		}
+			
+	}
+	//평점 낮은순
+	public List<ReviewVO> selectGradeLow(int pdno) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<ReviewVO> list =new ArrayList<>();
+		try {
+			con=pool.getConnection();
+			
+			String sql="select reviewno, reviewbody,reviewregdate,reviewgrade,good,no,pdno from review"
+					+ " where pdno=? order by reviewgrade";
+			ps=con.prepareStatement(sql);
+			
+			ps.setInt(1, pdno);
+			
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				int reviewno=rs.getInt(1);
+				String reviewbody=rs.getString(2);
+				Timestamp reviewregdate=rs.getTimestamp(3);
+				int reviewgrade=rs.getInt(4);
+				int good=rs.getInt(5);
+				int no=rs.getInt(6);
+				int pdno2=rs.getInt(7);
+				
+				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, good, no, pdno2);
+				list.add(vo);
+			}
+			
+			System.out.println("리뷰 평점 낮은순 조회 결과 list.size()="+list.size()+", 매개변수 pdno="+pdno);
+			return list;
+		}finally {
+			pool.dbClose(rs, ps, con);
+		}
+			
+	}
+	//최근 등록순
+	public List<ReviewVO> selectLately(int pdno) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<ReviewVO> list =new ArrayList<>();
+		try {
+			con=pool.getConnection();
+			
+			String sql="select reviewno, reviewbody,reviewregdate,reviewgrade,good,no,pdno from review"
+					+ " where pdno=? order by reviewregdate desc";
+			ps=con.prepareStatement(sql);
+			
+			ps.setInt(1, pdno);
+			
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				int reviewno=rs.getInt(1);
+				String reviewbody=rs.getString(2);
+				Timestamp reviewregdate=rs.getTimestamp(3);
+				int reviewgrade=rs.getInt(4);
+				int good=rs.getInt(5);
+				int no=rs.getInt(6);
+				int pdno2=rs.getInt(7);
+				
+				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, good, no, pdno2);
+				list.add(vo);
+			}
+			
+			System.out.println("리뷰 최근 등록순 조회 결과 list.size()="+list.size()+", 매개변수 pdno="+pdno);
+			return list;
+		}finally {
+			pool.dbClose(rs, ps, con);
+		}
+			
+	}
+	
 }

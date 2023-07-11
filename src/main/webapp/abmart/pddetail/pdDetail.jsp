@@ -1,3 +1,6 @@
+<%@page import="com.semi.review.model.ReviewService"%>
+<%@page import="com.semi.stock.model.StockService"%>
+<%@page import="com.semi.review.model.ReviewVO"%>
 <%@page import="com.semi.productdetail.model.ProductDetailVO"%>
 <%@page import="com.semi.productdetail.model.ProductDetailService"%>
 <%@page import="com.semi.productsize.model.ProductSizeVO"%>
@@ -10,52 +13,73 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../../inc/top.jsp"%>
-<jsp:useBean id="pdService"
-	class="com.semi.product.model.ProductService" scope="session"></jsp:useBean>
-<jsp:useBean id="stockService" class="com.semi.stock.model.StockService"
-	scope="session"></jsp:useBean>
+
 <%
-String pdno = request.getParameter("pdno");
-ProductSizeService productSizeService = new ProductSizeService();
-ProductDetailService productDetailService = new ProductDetailService();
-if (pdno == null || pdno.isEmpty()) {
-%>
-<script>
+	String pdno = request.getParameter("pdno");
+	String grade=request.getParameter("grade");
+	String lately=request.getParameter("lately");
+	
+	ProductSizeService productSizeService = new ProductSizeService();
+	ProductDetailService productDetailService = new ProductDetailService();
+	
+	if (pdno == null || pdno.isEmpty()) {
+	%>
+		<script>
 			alert("잘못된 url입니다.");
 			history.back();
 		</script>
-<%
-return;
-}
-
-ProductVO vo = null;
-List<StockVO> list = null;
-List<ProductSizeVO> sizeList = null;
-List<ProductDetailVO> detailList = null;
-try {
-//사이즈 가져오기
-list = stockService.stockSelectByPdNo(Integer.parseInt(pdno));
-sizeList = productSizeService.selectAllByNo(Integer.parseInt(pdno));
-vo = pdService.selectPdByNo(Integer.parseInt(pdno));
-
-//상세이미지 가져오기
-detailList = productDetailService.selectByPdNo(Integer.parseInt(pdno));
-
-} catch (SQLException e) {
-e.printStackTrace();
-}
-
-if (vo == null) {
-%>
-<script>
+		<%return;
+	}
+	if(grade==null || grade.isEmpty()){
+		grade="";
+	}
+	if(lately==null || lately.isEmpty()){
+		lately="";
+	}
+	StockService stockService =new StockService();
+	ReviewService reviewService=new ReviewService();
+	
+	ProductVO vo = null;
+	List<StockVO> list = null;
+	List<ProductSizeVO> sizeList = null;
+	List<ProductDetailVO> detailList = null;
+	List<ReviewVO> reviewList=null;
+	
+	try {
+		//사이즈 가져오기
+		list = stockService.stockSelectByPdNo(Integer.parseInt(pdno));
+		sizeList = productSizeService.selectAllByNo(Integer.parseInt(pdno));
+		vo = pdService.selectPdByNo(Integer.parseInt(pdno));
+	
+		//상세이미지 가져오기
+		detailList = productDetailService.selectByPdNo(Integer.parseInt(pdno));
+		
+		if(lately.equals("lately")){
+			//리뷰 최근 등록순
+			reviewList=reviewService.selectLately(Integer.parseInt(pdno));
+		}
+		
+		if(grade.equals("high")){
+			//리뷰 평점 높은순
+			reviewList=reviewService.selectGradeHigh(Integer.parseInt(pdno));
+		}else if(grade.equals("low")){
+			//리뷰 평점 낮은순
+			reviewList=reviewService.selectGradeLow(Integer.parseInt(pdno));	
+		}
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	
+	if (vo==null) {%>
+		<script>
 			alert("해당 상품이 존재하지 않습니다.");
 			history.back();
 		</script>
-<%
-return;
-}
+	<%return;
+	}
 
-DecimalFormat df = new DecimalFormat("#,###");
+	DecimalFormat df = new DecimalFormat("#,###");
 %>
 <script type="text/javascript">
 	$(function() {
@@ -82,13 +106,19 @@ DecimalFormat df = new DecimalFormat("#,###");
 			$('.alink3').eq(2).focus();
 		});
 		$('#basket').click(function(){
-			sumprice=$('#sumprice').html();
-			
-			location.href="../basket/ShoppingBasket.jsp?sumprice="+sumprice;
+			each();
+			if($('#pdqty2').val().length<1){
+				alert("장바구니에 담으실 상품을 고르세요");
+				event.preventDefault();
+			}
 		});
 		$('#order').click(function(){
+			each();
 			
-			location.href="../basket/OrderPayment.jsp";
+			if($('#pdqty2').val().length<1){
+				alert("구매하실 상품을 고르세요");
+				event.preventDefault();
+			}
 		});
 		
 		$('#review').click(function(){
@@ -111,7 +141,7 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var tag="<div name='pddetail'>"
 						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
 						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
-						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
+						+" <input type='text' class='quantity-input' name=size id='pd"+size+"' style='width: 45px;'>"
 						+"<button class='btn minus_btn size' name='minus'>-</button>"
 						+"</div>"
 						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
@@ -124,6 +154,10 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
 					$('#sumprice').text(sumprice);
 					bool8=true;
+					
+					//누르면 input에 사이즈 입력
+					var pdsize=$('#pdsize').val();
+					$('#pdsize').val(pdsize+size+' ');
 				}
 			}else{
 				if(size==220){
@@ -143,7 +177,7 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var tag="<div name='pddetail'>"
 						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
 						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
-						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
+						+" <input type='text' class='quantity-input' name=size id='pd"+size+"' style='width: 45px;'>"
 						+"<button class='btn minus_btn size' name='minus'>-</button>"
 						+"</div>"
 						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
@@ -156,6 +190,9 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
 					$('#sumprice').text(sumprice);
 					bool9=true;
+					
+					var pdsize=$('#pdsize').val();
+					$('#pdsize').val(pdsize+size+' ');
 				}
 			}else{
 				if(size==225){
@@ -175,7 +212,7 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var tag="<div name='pddetail'>"
 						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
 						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
-						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
+						+" <input type='text' class='quantity-input' name=size id='pd"+size+"' style='width: 45px;'>"
 						+"<button class='btn minus_btn size' name='minus'>-</button>"
 						+"</div>"
 						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
@@ -188,6 +225,9 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
 					$('#sumprice').text(sumprice);
 					bool1=true;
+					
+					var pdsize=$('#pd'+size).val();
+					$('#pdsize').val(pdsize+size+' ');
 				}
 			}else{
 				if(size==230){
@@ -208,7 +248,7 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var tag="<div name='pddetail'>"
 						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
 						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
-						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
+						+" <input type='text' class='quantity-input' name=size id='pd"+size+"' style='width: 45px;'>"
 						+"<button class='btn minus_btn size' name='minus'>-</button>"
 						+"</div>"
 						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
@@ -221,6 +261,9 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
 					$('#sumprice').text(sumprice);
 					bool2=true;
+					
+					var pdsize=$('#pdsize').val();
+					$('#pdsize').val(pdsize+size+' ');
 				}
 			}else{
 				if(size==235){
@@ -241,7 +284,7 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var tag="<div name='pddetail'>"
 						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
 						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
-						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
+						+" <input type='text' class='quantity-input' name=size"+" id='pd"+size+"' style='width: 45px;'>"
 						+"<button class='btn minus_btn size' name='minus'>-</button>"
 						+"</div>"
 						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
@@ -254,6 +297,9 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
 					$('#sumprice').text(sumprice);
 					bool3=true;
+					
+					var pdsize=$('#pdsize').val();
+					$('#pdsize').val(pdsize+size+' ');
 				}
 			}else{
 				if(size==240){
@@ -274,7 +320,7 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var tag="<div name='pddetail'>"
 						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
 						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
-						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
+						+" <input type='text' class='quantity-input' name=size id='pd"+size+"' style='width: 45px;'>"
 						+"<button class='btn minus_btn size' name='minus'>-</button>"
 						+"</div>"
 						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
@@ -287,6 +333,9 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
 					$('#sumprice').text(sumprice);
 					bool4=true;
+					
+					var pdsize=$('#pdsize').val();
+					$('#pdsize').val(pdsize+size+' ');
 				}
 			}else{
 				if(size==245){
@@ -307,7 +356,7 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var tag="<div name='pddetail'>"
 						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
 						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
-						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
+						+" <input type='text' class='quantity-input' name=size id='pd"+size+"' style='width: 45px;'>"
 						+"<button class='btn minus_btn size' name='minus'>-</button>"
 						+"</div>"
 						+"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
@@ -320,6 +369,9 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
 					$('#sumprice').text(sumprice);
 					bool5=true;
+					
+					var pdsize=$('#pdsize').val();
+					$('#pdsize').val(pdsize+size+' ');
 				}
 			}else{
 				if(size==250){
@@ -340,7 +392,7 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var tag="<div name='pddetail'>"
 						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
 						+"<div style='float: left;margin-left: 200px'><button class='btn plus_btn size' name='plus'>+</button>"
-						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
+						+" <input type='text' class='quantity-input' name=size id='pd"+size+"' style='width: 45px;'>"
 						+"<button class='btn minus_btn size' name='minus'>-</button>"
 						+"</div>"
 					    +"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
@@ -353,6 +405,9 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
 					$('#sumprice').text(sumprice);
 					bool6=true;
+					
+					var pdsize=$('#pdsize').val();
+					$('#pdsize').val(pdsize+size+' ');
 				}
 			}else{
 				if(size==255){
@@ -374,7 +429,7 @@ DecimalFormat df = new DecimalFormat("#,###");
 						+"<div style='float: left;margin-left: 50px;font-size: 1.2em;'>"+size+"</div>"
 						+"<div style='float: left;margin-left: 200px'>"
 						+"<button class='btn plus_btn size' name='plus'>+</button>"
-						+" <input type='text' class='quantity-input' name="+size+" id='pd"+size+"' style='width: 45px;'>"
+						+" <input type='text' class='quantity-input' name=size id='pd"+size+"' style='width: 45px;'>"
 						+"<button class='btn minus_btn size' name='minus'>-</button>"
 						+"</div>"
 					    +"<div name='sumprice"+size+"' style='float: left;margin-left: 50px;font-size: 1.2em;'>"
@@ -387,6 +442,9 @@ DecimalFormat df = new DecimalFormat("#,###");
 					var sumprice=parseInt(<%=vo.getPrice()%>)+parseInt(price);
 					$('#sumprice').text(sumprice);
 					bool7=true;
+					
+					var pdsize=$('#pdsize').val();
+					$('#pdsize').val(pdsize+size+' ');
 				}
 			}else{
 				if(size==260){
@@ -447,6 +505,17 @@ DecimalFormat df = new DecimalFormat("#,###");
 			$('#sumprice').html(result);
 			$(this).parent().remove();
 			
+			var pdsize=$('#pdsize').val();
+			var resultSize='';
+			if(pdsize.indexOf(size)!=-1){
+				var pdsize1=pdsize.substr(0,pdsize.indexOf(size));
+				var pdsize2=pdsize.substr(pdsize.indexOf(size)+4);
+				
+				resultSize=pdsize1+pdsize2;
+				$('#pdsize').val(resultSize);
+			}
+			
+			
 			if(size==230){
 				bool1=false;
 			}else if(size==235){
@@ -461,34 +530,54 @@ DecimalFormat df = new DecimalFormat("#,###");
 				bool6=false;
 			}else if(size==260){
 				bool7=false;
+			}else if(size==220){
+				bool8=false;
+			}else if(size==225){
+				bool9=false;
 			}
 			
 		});
 		
-      const productData = {
-    	         pdno: <%=vo.getPdno() %>,
-    	         pdname: '<%=vo.getPdname() %>',
-    	         filename: '<%=vo.getFilename() %>',
-    	         brand: '<%=vo.getBrand() %>',
-    	         price: <%=vo.getPrice() %>
-    	      };
+      	const productData = {
+    	   pdno: <%=vo.getPdno() %>,
+    	   pdname: '<%=vo.getPdname() %>',
+    	   filename: '<%=vo.getFilename() %>',
+    	   brand: '<%=vo.getBrand() %>',
+    	   price: <%=vo.getPrice() %>
+    	};
 		
-	   const storedData = localStorage.getItem('products');
-	      let storedProducts = storedData ? JSON.parse(storedData) : [];
+	   	const storedData = localStorage.getItem('products');
+	    let storedProducts = storedData ? JSON.parse(storedData) : [];
 
-	      const targetIndex = storedProducts.findIndex((product) => product.pdno === productData.pdno);
+	    const targetIndex = storedProducts.findIndex((product) => product.pdno === productData.pdno);
 
-	      // 중복 제거
-	      if (targetIndex === -1) {
-	        storedProducts.unshift(productData); // 중복되지 않은 경우 배열의 첫 번째에 추가
+        // 중복 제거
+	    if (targetIndex === -1) {
+		    storedProducts.unshift(productData); // 중복되지 않은 경우 배열의 첫 번째에 추가
 
 	        if (storedProducts.length > 4) {
 	          storedProducts.pop(); // 4건 이상일 경우 마지막 항목 제거
 	        }
 	      }
 
-	      localStorage.setItem('products', JSON.stringify(storedProducts));
+	    localStorage.setItem('products', JSON.stringify(storedProducts));
+	    
 	});
+	
+	function each(){
+		var sumqty='';
+		var sumsize='';
+		$('input[name=size]').each(function(index){
+			var size=$(this).parent().parent().find('div').eq(0).html();
+	    	var qty=$(this).val();
+	    	sumsize+=size+' ';
+	    	sumqty+=qty+' ';
+	    });
+		$('#pdsize1').val(sumsize);
+		$('#pdsize2').val(sumsize);
+		$('#pdqty1').val(sumqty);
+		$('#pdqty2').val(sumqty);
+	}
 </script>
 <section class="py-5">
 	<!-- 상품 이미지 -->
@@ -535,8 +624,18 @@ DecimalFormat df = new DecimalFormat("#,###");
 				name="searchqty" id="sumprice" style="font-size: 2em; float: right;">0</span>
 		</div>
 		<div>
-			<button name="btn" id="basket">장바구니</button>
-			<button name="btn" id="order">바로구매</button>
+			 <form name="frmbasket" method="post" action="../basket/ShoppingBasket.jsp">
+			 	<input type="hidden" name="pdno" id="pdno" value="<%=pdno%>" />
+				<input type="hidden" name="pdsize" id="pdsize1" />
+				<input type="hidden" name="pdqty" id="pdqty1"/>
+				<button type="submit" name="btn" id="basket" style="float:left">장바구니</button>
+			 </form>
+			 <form name="frmorder" method="post" action="../basket/OrderPayment.jsp">
+			 	<input type="hidden" name="pdno" id="pdno" value="<%=pdno%>"/>
+			 	<input type="hidden" name="pdsize" id="pdsize2"/>
+				<input type="hidden" name="pdqty" id="pdqty2"/>
+				<button type="submit" name="btn" id="order">바로구매</button>
+			 </form>
 		</div>
 	</div>
 
@@ -557,11 +656,11 @@ DecimalFormat df = new DecimalFormat("#,###");
 	<%
 	for (int i = 0; i < detailList.size(); i++) {
 		ProductDetailVO pdVo = detailList.get(i);
-	%>
-	<div class="div2" style='margin-bottom: 5px;'>
-		<img alt="신발 상세이미지" src="../../images/<%=pdVo.getFilename()%>">
-	</div>
-	<%
+		%>
+		<div class="div2" style='margin-bottom: 5px;'>
+			<img alt="신발 상세이미지" src="../../images/<%=pdVo.getFilename()%>">
+		</div>
+		<%
 	}
 	%>
 
@@ -584,34 +683,45 @@ DecimalFormat df = new DecimalFormat("#,###");
 			<img src="../../images/review.png" />
 		</div>
 		<div class="div2 clearboth border-bottom reviewdiv">
-			<span style="float: left;">총 <span name="searchqty">990</span>개의
-				리뷰가 있습니다.
-			</span> <span class="rightSort" id="span2">&nbsp;|&nbsp;<a href="#">최근
-					등록순</a></span> <span class="rightSort" id="span1">&nbsp;|&nbsp;<a
-				href="#">평점 낮은순</a>&nbsp;
-			</span> <span class="rightSort" id="span1">&nbsp;<a href="#">평점
-					높은순</a>&nbsp;
-			</span>
-		</div>
-		<div class="div2 clearboth">
-			<span id="star" class="leftSort" style="margin-right: 30px">★★★★★</span>
-			<span class="leftSort gray" style="margin-right: 30px">black</span> <span
-				class="leftSort gray"> | </span> <span class="leftSort gray"
-				style="margin-left: 30px">사이즈</span>
-		</div>
-		<div class="div2 clearboth">
-			<span class="leftSort">제목</span> <br> <br>
-		</div>
-		<div class="div2 clearboth">
-			<span class="leftSort gray margin-right20">i*****d</span> <span
-				class="leftSort gray margin-right20"> | </span> <span
-				class="leftSort gray">2023-07-07</span>
-		</div>
-
-		<div class="div2 clearboth border-bottom reviewdiv">
-			<button class="btn leftSort size">좋아요</button>
+			<span style="float: left;">총 <span name="searchqty">990</span>개의 리뷰가 있습니다.
+			</span> <span class="rightSort" id="span2">&nbsp;|&nbsp;
+			<a href="pdDetail.jsp?pdno=<%=pdno %>&lately=lately">최근 등록순</a></span>
+			<span class="rightSort" id="span1">&nbsp;|&nbsp;
+			<a href="pdDetail.jsp?pdno=<%=pdno %>&grade=low">평점 낮은순</a>&nbsp;</span>
+			<span class="rightSort" id="span1">&nbsp;<a href="pdDetail.jsp?pdno=<%=pdno %>&grade=high">평점 높은순</a>&nbsp;</span>
 		</div>
 	</div>
+	<%
+		String star="";
+		for(int i=0;i<reviewList.size();i++){ 
+		 ReviewVO reviewVo=reviewList.get(i);
+		 int n=reviewVo.getReviewgrade();
+		 
+		 if(n==1) star="★";
+		 if(n==2) star="★★";
+		 if(n==3) star="★★★";
+		 if(n==4) star="★★★★";
+		 if(n==5) star="★★★★★";%>
+		<div>
+			<div class="div2 clearboth">
+				<span id="star" class="leftSort" style="margin-right: 30px"><%=star %></span>
+				<span class="leftSort gray"> | </span>
+				<span class="leftSort gray" style="margin-left: 30px">사이즈</span>
+			</div>
+			<div class="div2 clearboth">
+				<span class="leftSort">제목</span> <br> <br>
+			</div>
+			<div class="div2 clearboth">
+				<span class="leftSort gray margin-right20">i*****d</span> <span
+					class="leftSort gray margin-right20"> | </span> <span
+					class="leftSort gray">2023-07-07</span>
+			</div>
+	
+			<div class="div2 clearboth border-bottom reviewdiv">
+				<button class="btn leftSort size">좋아요</button>
+			</div>
+		</div>
+	<%} %>
 	<div>
 		<div class="div2 clearboth">
 			<span id="star" class="leftSort" style="margin-right: 30px">★★★★★</span>
