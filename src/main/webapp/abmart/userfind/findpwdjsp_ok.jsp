@@ -10,14 +10,14 @@
 	request.setCharacterEncoding("utf-8");
 
 	String name = request.getParameter("name");
-	String pwd = request.getParameter("pwd");
+	String id = request.getParameter("id");
 
 	
-	String id = memService.findId(name, pwd);
-	String msg="아이디 찾기 실패!", url="findid.jsp";	
+	String pwd = memService.finPwd(id, name);
+	String msg="비밀번호 찾기 실패!", url="findpwdjsp.jsp";	
 		
-		if(id !=null){		
-			msg = "아이디찾기 성공! 회원님의 아이디는 : " + id ;
+		if(pwd !=null){		
+			msg = "비밀번호찾기 성공! 회원님의 비밀번호 : " + pwd ;
 			url = "../member/login.jsp";
 	}
 

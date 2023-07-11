@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<jsp:useBean id="pdService" class="com.semi.product.model.ProductService" scope="session"></jsp:useBean>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -8,7 +10,9 @@ ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-4 {
     font-size: 15px;
 }
 
-
+form.frlist2 {
+    width: 494px;
+}
 button.btn.btn-outline-dark {
  	width: 120px;
     margin-left: 39px;
@@ -19,6 +23,7 @@ button.btn.btn-outline-dark {
 
 input.form-control.mr-sm-2 {
     width: 400px;
+    float: left;
 }
 </style>
 <meta charset="utf-8" />
@@ -66,9 +71,9 @@ input.form-control.mr-sm-2 {
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/abmart/member/logout.jsp">로그아웃</a></li>
                         <%}else{ %>
                         <li class="nav-item"><a class="nav-link active" aria-current="page" href="<%=request.getContextPath()%>/abmart/member/login.jsp">로그인</a></li>
-                        <%} %>
                         <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/abmart/member/register.jsp">회원가입</a></li>
-                        <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/abmart/mypage/mypage.jsp">마이페이지</a></li>                        
+                        <%} %>                 
+	                    <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/abmart/mypage/mypage.jsp">마이페이지</a></li>                        
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">메뉴</a>
                             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -89,9 +94,10 @@ input.form-control.mr-sm-2 {
                     </ul>
 
 					<!-- 검색창  -->
+					<form class ="frlist2" action="<%=request.getContextPath()%>/abmart/pdlist//pdlist.jsp">
 				    <input class="form-control mr-sm-2" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" >
 				    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-				    
+				    </form>
 					<!-- 장바구니 버튼-->		
 		            <form class="d-flex" action="<%=request.getContextPath()%>/abmart/basket/ShoppingBasket2.jsp">
 		                <button class="btn btn-outline-dark" type="submit" style="width:120px;height:65px"> 

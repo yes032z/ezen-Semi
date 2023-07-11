@@ -26,8 +26,8 @@
   <h1 id="litheader">AB - MART</h1>
   <div class="inset">
     <p>
-      <input type="text" name="id" id="id" placeholder="id" >
-      <input type="text" name="email" id="email" placeholder="email">
+      <input type="text" name="name" id="name" placeholder="name" >
+      <input type="text" name="id" id="id" placeholder="id">
     </p>
    </div>
   <p class="p-container" >

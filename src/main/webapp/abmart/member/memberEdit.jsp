@@ -66,7 +66,22 @@ input#birth {
 		$('#btnZipcode').click(function(){
 			open("../zipcode/zipcode.jsp", "", "width=500, height=700, left=150, location=1");
 	});
+		$("#member_edit").click(function() {			
+			if ($('#pwd').val().length < 1) {
+				alert("비밀번호를 입력하세요");
+				$('#pwd').focus();
+				return false;
+			}
+			if ($('#pwd').val() != $('#pwdchk').val()) {
+				alert("비밀번호가 일치하지 않습니다.확인하세요");
+				$("#pwdchk").focus();
+				return false;
+			}
+		});
 });
+
+	
+	
 </script>
 <jsp:useBean id="memService" class="com.semi.member.model.MemberService" scope="session"></jsp:useBean>
 <%
