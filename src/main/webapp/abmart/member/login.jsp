@@ -12,13 +12,7 @@
 	}
 %>
 <link rel="stylesheet" href="../../css/loginstyle.css">
-<script type="text/javascript">
-	$(function(){
-		$('.go').click(function(){
-			loaction.href="../../index.jsp";
-		});
-	});
-</script>
+
 <style type="text/css">
   .links{
         text-align: center;
