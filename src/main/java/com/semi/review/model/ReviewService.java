@@ -27,6 +27,17 @@ public class ReviewService {
 	public int reviewFindNo(int no,int pdno) throws SQLException {
 		return reviewDao.reviewFindNo(no, pdno);
 	}
-	
+	//평점 낮은순 조회
+	public List<ReviewVO> selectGradeLow(int pdno) throws SQLException {
+		return reviewDao.selectGradeLow(pdno);
+	}
+	//평점 높은순 조회
+	public List<ReviewVO> selectGradeHigh(int pdno) throws SQLException {
+		return reviewDao.selectGradeHigh(pdno);
+	}
+	//최근 등록순 조회
+	public List<ReviewVO> selectLately(int pdno) throws SQLException {
+		return reviewDao.selectLately(pdno);
+	}
 	
 }

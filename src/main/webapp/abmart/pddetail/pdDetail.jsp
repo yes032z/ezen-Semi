@@ -1,3 +1,6 @@
+<%@page import="com.semi.review.model.ReviewService"%>
+<%@page import="com.semi.stock.model.StockService"%>
+<%@page import="com.semi.review.model.ReviewVO"%>
 <%@page import="com.semi.productdetail.model.ProductDetailVO"%>
 <%@page import="com.semi.productdetail.model.ProductDetailService"%>
 <%@page import="com.semi.productsize.model.ProductSizeVO"%>
@@ -10,26 +13,38 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../../inc/top.jsp"%>
-<jsp:useBean id="stockService" class="com.semi.stock.model.StockService"
-	scope="session"></jsp:useBean>
+
 <%
 	String pdno = request.getParameter("pdno");
+	String grade=request.getParameter("grade");
+	String lately=request.getParameter("lately");
+	
 	ProductSizeService productSizeService = new ProductSizeService();
 	ProductDetailService productDetailService = new ProductDetailService();
-		if (pdno == null || pdno.isEmpty()) {
-		%>
-			<script>
-				alert("잘못된 url입니다.");
-				history.back();
-			</script>
-<%
-			return;
-		}
+	
+	if (pdno == null || pdno.isEmpty()) {
+	%>
+		<script>
+			alert("잘못된 url입니다.");
+			history.back();
+		</script>
+		<%return;
+	}
+	if(grade==null || grade.isEmpty()){
+		grade="";
+	}
+	if(lately==null || lately.isEmpty()){
+		lately="";
+	}
+	StockService stockService =new StockService();
+	ReviewService reviewService=new ReviewService();
 	
 	ProductVO vo = null;
 	List<StockVO> list = null;
 	List<ProductSizeVO> sizeList = null;
 	List<ProductDetailVO> detailList = null;
+	List<ReviewVO> reviewList=null;
+	
 	try {
 		//사이즈 가져오기
 		list = stockService.stockSelectByPdNo(Integer.parseInt(pdno));
@@ -38,19 +53,30 @@
 	
 		//상세이미지 가져오기
 		detailList = productDetailService.selectByPdNo(Integer.parseInt(pdno));
-	
+		
+		if(lately.equals("lately")){
+			//리뷰 최근 등록순
+			reviewList=reviewService.selectLately(Integer.parseInt(pdno));
+		}
+		
+		if(grade.equals("high")){
+			//리뷰 평점 높은순
+			reviewList=reviewService.selectGradeHigh(Integer.parseInt(pdno));
+		}else if(grade.equals("low")){
+			//리뷰 평점 낮은순
+			reviewList=reviewService.selectGradeLow(Integer.parseInt(pdno));	
+		}
+		
 	} catch (SQLException e) {
-	e.printStackTrace();
+		e.printStackTrace();
 	}
-
-	if (vo==null) {
-	%>
+	
+	if (vo==null) {%>
 		<script>
 			alert("해당 상품이 존재하지 않습니다.");
 			history.back();
 		</script>
-	<%
-	return;
+	<%return;
 	}
 
 	DecimalFormat df = new DecimalFormat("#,###");
@@ -606,7 +632,7 @@
 			 </form>
 			 <form name="frmorder" method="post" action="../basket/OrderPayment.jsp">
 			 	<input type="hidden" name="pdno" id="pdno" value="<%=pdno%>"/>
-			 	<input type="hidden" name="pdsize" id="pdsize2" />
+			 	<input type="hidden" name="pdsize" id="pdsize2"/>
 				<input type="hidden" name="pdqty" id="pdqty2"/>
 				<button type="submit" name="btn" id="order">바로구매</button>
 			 </form>
@@ -657,34 +683,45 @@
 			<img src="../../images/review.png" />
 		</div>
 		<div class="div2 clearboth border-bottom reviewdiv">
-			<span style="float: left;">총 <span name="searchqty">990</span>개의
-				리뷰가 있습니다.
-			</span> <span class="rightSort" id="span2">&nbsp;|&nbsp;<a href="#">최근
-					등록순</a></span> <span class="rightSort" id="span1">&nbsp;|&nbsp;<a
-				href="#">평점 낮은순</a>&nbsp;
-			</span> <span class="rightSort" id="span1">&nbsp;<a href="#">평점
-					높은순</a>&nbsp;
-			</span>
-		</div>
-		<div class="div2 clearboth">
-			<span id="star" class="leftSort" style="margin-right: 30px">★★★★★</span>
-			<span class="leftSort gray" style="margin-right: 30px">black</span> <span
-				class="leftSort gray"> | </span> <span class="leftSort gray"
-				style="margin-left: 30px">사이즈</span>
-		</div>
-		<div class="div2 clearboth">
-			<span class="leftSort">제목</span> <br> <br>
-		</div>
-		<div class="div2 clearboth">
-			<span class="leftSort gray margin-right20">i*****d</span> <span
-				class="leftSort gray margin-right20"> | </span> <span
-				class="leftSort gray">2023-07-07</span>
-		</div>
-
-		<div class="div2 clearboth border-bottom reviewdiv">
-			<button class="btn leftSort size">좋아요</button>
+			<span style="float: left;">총 <span name="searchqty">990</span>개의 리뷰가 있습니다.
+			</span> <span class="rightSort" id="span2">&nbsp;|&nbsp;
+			<a href="pdDetail.jsp?pdno=<%=pdno %>&lately=lately">최근 등록순</a></span>
+			<span class="rightSort" id="span1">&nbsp;|&nbsp;
+			<a href="pdDetail.jsp?pdno=<%=pdno %>&grade=low">평점 낮은순</a>&nbsp;</span>
+			<span class="rightSort" id="span1">&nbsp;<a href="pdDetail.jsp?pdno=<%=pdno %>&grade=high">평점 높은순</a>&nbsp;</span>
 		</div>
 	</div>
+	<%
+		String star="";
+		for(int i=0;i<reviewList.size();i++){ 
+		 ReviewVO reviewVo=reviewList.get(i);
+		 int n=reviewVo.getReviewgrade();
+		 
+		 if(n==1) star="★";
+		 if(n==2) star="★★";
+		 if(n==3) star="★★★";
+		 if(n==4) star="★★★★";
+		 if(n==5) star="★★★★★";%>
+		<div>
+			<div class="div2 clearboth">
+				<span id="star" class="leftSort" style="margin-right: 30px"><%=star %></span>
+				<span class="leftSort gray"> | </span>
+				<span class="leftSort gray" style="margin-left: 30px">사이즈</span>
+			</div>
+			<div class="div2 clearboth">
+				<span class="leftSort">제목</span> <br> <br>
+			</div>
+			<div class="div2 clearboth">
+				<span class="leftSort gray margin-right20">i*****d</span> <span
+					class="leftSort gray margin-right20"> | </span> <span
+					class="leftSort gray">2023-07-07</span>
+			</div>
+	
+			<div class="div2 clearboth border-bottom reviewdiv">
+				<button class="btn leftSort size">좋아요</button>
+			</div>
+		</div>
+	<%} %>
 	<div>
 		<div class="div2 clearboth">
 			<span id="star" class="leftSort" style="margin-right: 30px">★★★★★</span>
