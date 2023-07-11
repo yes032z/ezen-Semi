@@ -25,26 +25,23 @@
 	List<Long> fileSizeArr=new ArrayList<>();
 	List<String> originalFileNameArr=new ArrayList<>();
 
-	String upDir="images";
-	String saveDir=config.getServletContext().getRealPath(upDir);
-	saveDir=application.getRealPath(upDir);
+	String upPath="/images";
+	String saveDir=config.getServletContext().getRealPath(upPath);
+	saveDir=application.getRealPath(upPath);
 	//saveDir="D:\\lecture\\workspace_list\\web_semi_ws\\semiProject\\src\\main\\webapp\\images";
-	saveDir="C:\\workspace\\web_semi\\semiProject\\src\\main\\webapp\\images";
-	out.println("업로드 경로: "+saveDir);
+	saveDir="D:\\lecture\\workspace_list\\web_semi_ws\\semiProject\\src\\main\\webapp\\images";
+	System.out.println("업로드 경로: "+saveDir);
 	
 	int maxSize= 10*1024*1024; //10메가
 	String encoding="utf-8";
-	
+	DefaultFileRenamePolicy policy=new DefaultFileRenamePolicy();
 	try{
 		//동일한 이름이 있는 경우 이름 변경 abc.txt => abc1.txt
-		DefaultFileRenamePolicy policy=new DefaultFileRenamePolicy();
-		
-		MultipartRequest multi
-			=new MultipartRequest(request, saveDir, maxSize, encoding, policy);
-		out.println("파일 업로드 완료");
+		MultipartRequest mr=new MultipartRequest(request, saveDir, maxSize, encoding, policy);
+		System.out.println("파일 업로드 완료");
 		
 		//업로드된 파일의 정보 읽어오기
-		Enumeration fileNames= multi.getFileNames();
+		Enumeration fileNames= mr.getFileNames();
 		
 		String fileName="";
 		long fileSize=0;
@@ -52,26 +49,34 @@
 		while(fileNames.hasMoreElements()){
 			//여러개 파일을 업로드하는 경우 파일이름 목록을 리턴
 			String fName=(String)fileNames.nextElement();
+			
 			//업로드된 파일의 이름(변경된 파일의 이름)
-			fileName=multi.getFilesystemName(fName);
-			if(fileName==null || fileName.isEmpty()){
-				break;
-			}
-			fileNameArr.add(fileName);
+			fileName = mr.getFilesystemName(fName);
+			
 			//변경전 원래 파일 이름
-			originalFileName= multi.getOriginalFileName(fName);
-			originalFileNameArr.add(originalFileName);
-			File myFile= multi.getFile(fName);
-			if(myFile!=null){ //파일이 첨부된 경우만
-				fileSize=myFile.length();
+			originalFileName=mr.getOriginalFileName(fName);
+			
+			
+			File myfile = mr.getFile(fName);
+			
+			if(myfile!=null){
+				fileSize=myfile.length();
+			}
+			if(fileName!=null && !fileName.isEmpty()){
+				fileNameArr.add(fileName);
+				originalFileNameArr.add(originalFileName);
 				fileSizeArr.add(fileSize);
 			}
+			System.out.println("업로드 된 파일 이름 : "+ fileName);
+			System.out.println("원본 파일 이름 : "+ originalFileName);
+			System.out.println("file size : "+ fileSize);
 		}//while
 			
+			
 		//1. post방식 요청 파라미터 읽어오기(한글인코딩 위에서 완료)
-		String reviewgrade=multi.getParameter("reviewgrade");
-		String reviewbody=multi.getParameter("reviewbody");
-		String pdno=multi.getParameter("pdno");
+		String reviewgrade=mr.getParameter("reviewgrade");
+		String reviewbody=mr.getParameter("reviewbody");
+		String pdno=mr.getParameter("pdno");
 		
 		//2. db작업
 		ReviewService reviewService=new ReviewService();
@@ -90,11 +95,6 @@
 		ReviewDetailService reviewDetailService=new ReviewDetailService();
 		ReviewDetailVO reviewDetailVo= new ReviewDetailVO();
 		
-		//여러개 파일에 넣는법 다시 파악하기
-		System.out.println("fileNameArr.get(0)="+fileNameArr.get(0));
-		System.out.println("fileSizeArr.get(0)="+fileSizeArr.get(0));
-		System.out.println("originalFileNameArr.get(0)="+originalFileNameArr.get(0));
-		
 		reviewDetailVo.setReviewno(reviewno);
 		for(int i=0;i<fileNameArr.size();i++){
 			reviewDetailVo.setFilename(fileNameArr.get(i));
@@ -107,6 +107,7 @@
 		if(cnt>0){%>
 			<script type="text/javascript">
 			alert("리뷰 등록이 완료되었습니다.");
+			location.href="pdDetail.jsp?pdno=<%=pdno%>";
 			self.close();
 			</script>
 		<%}else{%>

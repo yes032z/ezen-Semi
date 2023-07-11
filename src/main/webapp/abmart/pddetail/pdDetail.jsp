@@ -465,6 +465,14 @@ DecimalFormat df = new DecimalFormat("#,###");
 			
 		});
 		
+      const productData = {
+    	         pdno: <%=vo.getPdno() %>,
+    	         pdname: '<%=vo.getPdname() %>',
+    	         filename: '<%=vo.getFilename() %>',
+    	         brand: '<%=vo.getBrand() %>',
+    	         price: <%=vo.getPrice() %>
+    	      };
+		
 	   const storedData = localStorage.getItem('products');
 	      let storedProducts = storedData ? JSON.parse(storedData) : [];
 

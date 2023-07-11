@@ -114,8 +114,8 @@
 				<span class="leftSort">총 </span><span class="leftSort"
 					name="searchqty"><%=list.size() %></span><span class="leftSort">개의 상품이
 					있습니다.</span><span class="rightSort" id="span2">&nbsp;|&nbsp;<a
-					href="#">가격순</a></span> <span class="rightSort" id="span1">&nbsp;<a
-					href="#">평점순</a>&nbsp;
+					href="#">가격낮은순</a></span> <span class="rightSort" id="span1">&nbsp;<a
+					href="#">평점높은순</a>&nbsp;
 				</span>
 			</div>
 			<div class="div1">
