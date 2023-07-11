@@ -360,4 +360,4 @@ li.li{
             </section>
         </main>
 </body>
-<%@include file="../../inc/bottom.jsp" %>    
+<%@include file="../../inc/bottom.jsp" %>  

@@ -26,12 +26,10 @@ public class ReviewDAO {
 	public int insertReview(ReviewVO vo) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
-		int cnt=0;
 		
 		try {
 			con=pool.getConnection();
-			String sql="insert into review(reviewno, reviewbody, reviewgrade,"
-					+ " no, pdno)"
+			String sql="insert into review(reviewno, reviewbody, reviewgrade, no, pdno)"
 					+ " values(review_seq.nextval, ?, ?, ?, ?)";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, vo.getReviewbody());
@@ -39,7 +37,7 @@ public class ReviewDAO {
 			ps.setInt(3, vo.getNo());
 			ps.setInt(4, vo.getPdno());
 			
-			cnt=ps.executeUpdate();
+			int cnt=ps.executeUpdate();
 			System.out.println("리뷰 등록 결과, cnt="+cnt+", 매개변수 vo="+vo);
 			return cnt;
 		}finally {

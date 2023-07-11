@@ -5,184 +5,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link href="../../css/basket.css" rel="stylesheet" type="text/css">
 <title>Insert title here</title>
-<style type="text/css">
-header {
-	font-size: 20px;	
-	float: center;	
-	margin: 30px 0 0 50px;	
-}
-
-body {
-  margin: 0;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-p,
-span {
-  margin: 0;
-}
-
-img {
-  display: block;
-  width: 50%;
-  height: 80px;
-  margin: auto;
-}
-
-.basket {
-  width: 80%;
-  margin: auto;
-  padding: 30px;
-}
-
-.basket ul {
-  background-color: whitesmoke;
-  padding: 30px;
-  margin-bottom: 50px;
-  border: whitesmoke solid 1px;
-  border-radius: 5px;
-  font-size: 13px;
-  font-weight: 300;
-}
-
-table {
-  border-top: solid 1.5px black;
-  border-collapse: collapse;
-  width: 100%;
-  font-size: 14px;
-}
-
-thead {
-  text-align: center;
-  font-weight: bold;
-}
-
-tbody {
-  font-size: 15px;
-}
-
-td {
-  padding: 15px 0px;
-  border-bottom: 1px solid lightgrey;
-}
-
-.basket_list_detail :nth-child(3) {
-  vertical-align: top;
-}
-
-.basket_list_detail :nth-child(3) a {
-  font-size: 12px;
-}
-
-.basket_list_detail :nth-child(3) p {
-  margin-top: 6px;
-  font-weight: bold;
-}
-
-.basket_list_smartstore {
-  font-size: 20px;
-  color: gray;
-}
-
-.basket_list_option {
-  vertical-align: top;
-  padding: 20px;
-}
-
-.basket_list_option > span {
-	float: center;
-	font-size : 20px;
-}
-
-.basket_list_option p {
-  margin-bottom: 25px;
-  position: relative;
-}
-
-.basket_list_option p::after {
-  content: "";
-  width: 90%;
-  height: 1px;
-  background-color: lightgrey;
-  left: 0px;
-  top: 25px;
-  position: absolute;
-}
-
-.basket_list_optionbtn {
-  background-color: white;
-  font-size: 15px;
-  border: lightgrey solid 1px;
-  padding: 15px;    
-  margin-right: 3000px;
-  margin-bottom: 20px;
-}
-
-.basket_list_detail :nth-child(4),
-.basket_list_detail :nth-child(5),
-.basket_list_detail :nth-child(6) {
-  border-left: 2px solid whitesmoke;
-}
-
-.basket_list_detail :nth-child(5),
-.basket_list_detail :nth-child(6) {
-  text-align: center;
-}
-
-.basket_list_detail :nth-child(5) button {
-  background-color: limegreen;
-  color: white;
-  border: none;
-  border-radius: 5px;
-  padding: 4px 8px;
-  font-size: 12px;
-  margin-top: 5px;
-}
-
-.price {
-  font-weight: bold;
-}
-
-.basket_mainbtns {
-  width: 420px;
-  height: 200px;
-  padding-top: 40px;
-  display: block;
-  margin: auto;
-}
-
-.basket_bigbtn {
-  width: 200px;
-  height: 50px;
-  font-size: 16px;
-  margin: auto;
-  border-radius: 5px;
-}
-
-.basket_bigbtn.left {
-  background-color: white;
-  border: 1px lightgray solid;
-}
-
-.basket_bigbtn.right {
-  background-color: red;
-  color: white;
-  border: none;
-}
-
-.basket_information{
-	 text-align: left;
-}
-
-.basket ul :first-child {
-  color: red;
-}
-</style>
-
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() { 		
@@ -206,7 +30,7 @@ $(document).ready(function() {
         }
     });
     
-    // 합계 금액 업데이트 함수
+    // 합계 금액 
     function updateSumPrice(element) {
         var quantity = parseInt(element.closest(".basket_list_detail").find(".quantity-input").val());
         var price = parseInt(element.closest(".basket_list_detail").find(".price").text().replace(/,/g, "").replace("원", ""));
@@ -231,7 +55,7 @@ $(document).ready(function() {
         var quantity = parseInt($(this).siblings(".quantity-input").val());
         $(this).siblings(".quantity-input").val(quantity + 1);
         quantity++;
-        updateSumPrice($(this));
+        updateSumPrice($(this));/
     });
  
 });

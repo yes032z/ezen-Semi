@@ -4,17 +4,17 @@ public class StockVO {
 	private int stockno;
 	private int stockqty;
 	private int pdno;
-	private int pdsize;
+	private int pdsizeno;
 	
 	public StockVO() {
 		super();
 	}
-	public StockVO(int stockno, int stockqty, int pdno, int pdsize) {
+	public StockVO(int stockno, int stockqty, int pdno, int pdsizeno) {
 		super();
 		this.stockno = stockno;
 		this.stockqty = stockqty;
 		this.pdno = pdno;
-		this.pdsize = pdsize;
+		this.pdsizeno = pdsizeno;
 	}
 	public int getStockno() {
 		return stockno;
@@ -35,14 +35,14 @@ public class StockVO {
 		this.pdno = pdno;
 	}
 	public int getPdsize() {
-		return pdsize;
+		return pdsizeno;
 	}
-	public void setPdsize(int pdsize) {
-		this.pdsize = pdsize;
+	public void setPdsizeno(int pdsizeno) {
+		this.pdsizeno = pdsizeno;
 	}
 	@Override
 	public String toString() {
-		return "StockVO [stockno=" + stockno + ", stockqty=" + stockqty + ", pdno=" + pdno + ", pdsize=" + pdsize + "]";
+		return "StockVO [stockno=" + stockno + ", stockqty=" + stockqty + ", pdno=" + pdno + ", pdsizeno=" + pdsizeno + "]";
 	}
 	
 }
