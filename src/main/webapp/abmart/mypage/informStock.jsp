@@ -14,8 +14,9 @@
 			<table class="table table-hover">
 			<colgroup>
 				<col style="width:5%;" />
-				<col style="width:30%;" />	
-				<col style="width:30%;" />	
+				<col style="width:20%;" />	
+				<col style="width:20%;" />	
+				<col style="width:20%;" />	
 				<col style="width:15%;" />	
 				<col style="width:20%;" />		
 			</colgroup>
@@ -24,7 +25,8 @@
             <th></th>
             <th>이미지</th>
             <th>상품명</th>
-            <th>수량</th>
+            <th>사이즈</th>
+            <th>온라인재고</th>
             <th>금액</th>
         </tr>
     </thead>
@@ -35,13 +37,14 @@
                 <div class="media">
                     <img src="" class="mr-3 pdimgsize" alt="1">
                     <div class="media-body">
-                        <h5 class="mt-0"><a href="#">상품명</a></h5>
+                        <h5 class="mt-0"><a href="#"></a></h5>
                     </div>
                 </div>
             </td> 
-            <td>30,000원</td>
-            <td>7%</td>
-            <td>2500원</td>
+            <td>상품명</td>
+            <td>260</td>
+            <td>0</td>
+            <td>25000원</td>
         </tr>
     </tbody>                  
 </table>

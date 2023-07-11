@@ -55,49 +55,63 @@
 			</div>
 		</div>
 	</div>
+	
 	<div class="orderinfo" id="orderinfo2">
 		<div id="orderinfo-first">최근 본 상품
+		<span class="exploreMore">나의 최근 조회 상품입니다.</span>		
 		</div>
-		<a href="../pddetail/pdDetail.jsp?pdno=<%=vo.getPdno()%>">
-		<div class="col mb-5">
-			<div class="card h-100">
-				<!-- Sale badge-->
-				<!-- <div class="badge bg-dark text-white position-absolute"
-			style="top: 0.5rem; right: 0.5rem">Sale</div> -->
-				<!-- Product image-->
-				<img class="card-img-top" src="../../images/<%=vo.getFilename()%>" alt="..." />
-				<!-- Cart ins-->
-				<div class="card-body p-4">
-					<div class="text-center">
-						<!-- Product name-->
-						<h5 class="fw-bolder"><%=vo.getBrand() %></h5>
-						<!-- 상품 이름-->
-						<p><%=vo.getPdname() %></p>
-						<!-- 상품 별점-->
-						<div
-							class="d-flex justify-content-center small text-warning mb-2">
-							<div class="bi-star-fill"></div>
-							<div class="bi-star-fill"></div>
-							<div class="bi-star-fill"></div>
-							<div class="bi-star-fill"></div>
-							<div class="bi-star-fill"></div>
-						</div>
-						<!-- Product price-->
-						<span class="text-muted text-decoration-line-through"><%=df.format(vo.getPrice())%>원</span>
-					</div>
-				</div>
-				</a>
-				<!-- Product actions-->
-				<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-					<div class="text-center">
-						<a class="btn btn-outline-dark mt-auto"
-							href="../basket/ShoppingBasket.jsp">장바구니</a>
-					</div>
-				</div>
-			</div>
-		</div>	
+<script type="text/javascript">
+const storedData = localStorage.getItem('products');
+let storedProducts = storedData ? JSON.parse(storedData) : [];
 
-		
+if (storedProducts.length === 0) {
+  document.write('<div class="mypagerow">최근 본 상품이 없습니다.</div>');
+}else {
+  for (let i = 0; i < storedProducts.length; i++) {
+    const product = storedProducts[i];
+    const values = Object.values(product);
+
+    const chunks = [];
+    for (let j = 0; j < values.length; j += 5) {
+      const chunk = values.slice(j, j + 5);
+      chunks.push(chunk);
+    }
+	
+    for (let k = 0; k < chunks.length; k++) {
+    const chunk = chunks[k];
+    const [pdno, pdname, filename, brand, price] = chunk;
+
+    document.write('<a href="../pddetail/pdDetail.jsp?pdno=' + pdno + '">');
+    document.write('<div class="col mb-5">');
+    document.write('<div class="card h-100">');
+    document.write('<img class="card-img-top" src="../../images/' + filename + '" alt="..." />');
+    document.write('<div class="card-body p-4">');
+    document.write('<div class="text-center">');
+    document.write('<h5 class="fw-bolder">' + brand + '</h5>');
+    document.write('<p>' + pdname + '</p>');
+    document.write('<div class="d-flex justify-content-center small text-warning mb-2">');
+    document.write('<div class="bi-star-fill"></div>');
+    document.write('<div class="bi-star-fill"></div>');
+    document.write('<div class="bi-star-fill"></div>');
+    document.write('<div class="bi-star-fill"></div>');
+    document.write('<div class="bi-star-fill"></div>');
+    document.write('</div>');
+    document.write('<span class="text-muted text-decoration-line-through">' + price + '원</span>');
+    document.write('</div>');
+    document.write('</div>');
+    document.write('</a>');
+    document.write('<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">');
+    document.write('<div class="text-center">');
+    document.write('<a class="btn btn-outline-dark mt-auto" href="../basket/ShoppingBasket.jsp">장바구니</a>');
+    document.write('</div>');
+    document.write('</div>');
+    document.write('</div>');
+    document.write('</div>');
+ 	 }
+  }
+}
+</script>
+</script>
 		
 	<div class="orderinfo">
 		<div id="orderinfo-first">찜한 상품
@@ -145,8 +159,9 @@
 							</div>
 						</div>
 					</div>
-				</div>	
+				</div>
 		<%}//for %>
 	<%}//if %>
+	</div>
 </article>   
 <%@ include file="../../inc/bottom.jsp" %>
