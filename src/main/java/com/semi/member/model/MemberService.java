@@ -31,4 +31,11 @@ public class MemberService {
 	public int editMember(MemberVO vo) throws SQLException {
 		return memberDao.editMember(vo);
 	}
+	
+	public String finPwd(String id, String name) throws SQLException {
+		return memberDao.finPwd(id, name);
+	}
+	public String findId(String name , String pwd) throws SQLException {
+		return memberDao.findId(name, pwd);
+	}
 }
