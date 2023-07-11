@@ -10,7 +10,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../../inc/top.jsp"%>
-<jsp:useBean id="pdService" class="com.semi.product.model.ProductService" scope="session"></jsp:useBean>
 <jsp:useBean id="stockService" class="com.semi.stock.model.StockService"
 	scope="session"></jsp:useBean>
 <%

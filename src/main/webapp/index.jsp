@@ -48,8 +48,6 @@
 	</div>
 </header>
 <!-- Section-->
-<jsp:useBean id="pdService"
-	class="com.semi.product.model.ProductService" scope="session"></jsp:useBean>
 <%
 	List<ProductVO> list=null;
 	try{
