@@ -479,6 +479,21 @@ li{
 
 
 </style>
+<%
+	String pdsize=request.getParameter("pdsize");
+	String pdqty=request.getParameter("pdqty");
+	
+	String[] pdsizeArr=pdsize.split(" ");
+	String[] pdpriceArr=pdqty.split(" ");
+	
+	String size="";
+	for(int i=0;i<pdsizeArr.length;i++){
+		size=pdsizeArr[i];%>
+		<script>
+			alert("<%=size%>");
+		</script><%
+	}
+%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -518,22 +533,6 @@ $(document).ready(function() {
 });
 </script>
 </head>
-<%
-	String pdsize=request.getParameter("pdsize");
-	String pdqty=request.getParameter("pdqty");
-	
-	String[] pdsizeArr=pdsize.split(" ");
-	String[] pdpriceArr=pdqty.split(" ");
-	
-	String size="";
-	for(int i=0;i<pdsizeArr.length;i++){
-		size=pdsizeArr[i];%>
-		<script>
-			alert(<%=pdqty%>);
-		</script><%
-	}
-
-%>
 <body>
 	<div id="Payment">
 	<!-- header  -->
