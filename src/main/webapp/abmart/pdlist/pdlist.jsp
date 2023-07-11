@@ -62,7 +62,6 @@
 			</ul>
 		</div>
 	</div> -->
-
 		<aside
 			style="width: 300px; height: 600px; float: left; margin-left: 150px;">
 			<div>
