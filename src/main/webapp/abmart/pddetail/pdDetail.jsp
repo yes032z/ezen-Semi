@@ -10,7 +10,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../../inc/top.jsp"%>
-<jsp:useBean id="pdService" class="com.semi.product.model.ProductService" scope="session"></jsp:useBean>
 <jsp:useBean id="stockService" class="com.semi.stock.model.StockService"
 	scope="session"></jsp:useBean>
 <%
@@ -539,8 +538,10 @@
 	    	sumsize+=size+' ';
 	    	sumqty+=qty+' ';
 	    });
-		$('#pdsize').val(sumsize);
-		$('#pdqty').val(sumqty);
+		$('#pdsize1').val(sumsize);
+		$('#pdsize2').val(sumsize);
+		$('#pdqty1').val(sumqty);
+		$('#pdqty2').val(sumqty);
 	}
 </script>
 <section class="py-5">
@@ -589,13 +590,13 @@
 		</div>
 		<div>
 			 <form name="frmbasket" method="post" action="../basket/ShoppingBasket.jsp">
-				<input type="hidden" name="pdsize" id="pdsize" />
-				<input type="hidden" name="pdqty" id="pdqty"/>
+				<input type="hidden" name="pdsize" id="pdsize1" />
+				<input type="hidden" name="pdqty" id="pdqty1"/>
 				<button type="submit" name="btn" id="basket" style="float:left">장바구니</button>
 			 </form>
 			 <form name="frmorder" method="post" action="../basket/OrderPayment.jsp">
-			 	<input type="hidden" name="pdsize" id="pdsize" />
-				<input type="hidden" name="pdqty" id="pdqty"/>
+			 	<input type="hidden" name="pdsize" id="pdsize2" />
+				<input type="hidden" name="pdqty" id="pdqty2"/>
 				<button type="submit" name="btn" id="order">바로구매</button>
 			 </form>
 		</div>
