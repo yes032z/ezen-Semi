@@ -599,11 +599,13 @@
 		</div>
 		<div>
 			 <form name="frmbasket" method="post" action="../basket/ShoppingBasket.jsp">
+			 	<input type="hidden" name="pdno" id="pdno" value="<%=pdno%>" />
 				<input type="hidden" name="pdsize" id="pdsize1" />
 				<input type="hidden" name="pdqty" id="pdqty1"/>
 				<button type="submit" name="btn" id="basket" style="float:left">장바구니</button>
 			 </form>
 			 <form name="frmorder" method="post" action="../basket/OrderPayment.jsp">
+			 	<input type="hidden" name="pdno" id="pdno" value="<%=pdno%>"/>
 			 	<input type="hidden" name="pdsize" id="pdsize2" />
 				<input type="hidden" name="pdqty" id="pdqty2"/>
 				<button type="submit" name="btn" id="order">바로구매</button>
