@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>findid_ok.jsp</title>
+<title>findpwdjsp_ok.jsp</title>
 </head>
 <body>
 
