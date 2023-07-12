@@ -38,4 +38,7 @@ public class MemberService {
 	public String findId(String name , String pwd) throws SQLException {
 		return memberDao.findId(name, pwd);
 	}
+	public int outMember(String id) throws SQLException {
+		return memberDao.outMember(id);
+	}
 }
