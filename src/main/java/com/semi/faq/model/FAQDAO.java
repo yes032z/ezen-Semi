@@ -71,11 +71,11 @@ public class FAQDAO {
 			
 			sql = "select * from faq ";
 			//사용자 직접 입력 검색인 경우
-			if (search != null || !search.isEmpty()) {
+			if (search != null && !search.isEmpty()) {
 				sql += "where faqtitle like '%' || ? || '%'";
 			}
 			//카테고리 선택일 경우
-			if (faqCategory != null || !faqCategory.isEmpty()) {
+			if (faqCategory != null && !faqCategory.isEmpty()) {
 				sql += "where faqcategory = ?";
 			}
 			ps = con.prepareStatement(sql);
@@ -87,10 +87,9 @@ public class FAQDAO {
 				int faqNo = rs.getInt("faqNo");
 				String faqTitle = rs.getString("faqTitle");
 				String faqbody = rs.getString("faqbody");
-				String faqCategory2 = rs.getString("faqCategory");
 				int readCount = rs.getInt("readCount");
 				
-				FAQVO vo = new FAQVO(faqNo, faqTitle, faqbody, faqCategory2, readCount);
+				FAQVO vo = new FAQVO(faqNo, faqTitle, faqbody, faqCategory, readCount);
 				list.add(vo);
 			}
 			

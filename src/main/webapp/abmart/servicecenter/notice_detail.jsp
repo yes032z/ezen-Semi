@@ -30,6 +30,8 @@
 		width: 180px;
 	}
 	
+	h4 {margin-bottom: 20px; font-weight: 550;}
+	
 /* mypagenav */
 	#leftNav {width: 300px; float: left; margin-left: 70px;}
 	

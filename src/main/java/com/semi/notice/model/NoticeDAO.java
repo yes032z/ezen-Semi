@@ -33,12 +33,11 @@ public class NoticeDAO {
 			
 			rs = ps.executeQuery();
 			if (rs.next()) {
-				int noticeNo = rs.getInt(no);
 				String noticeName = rs.getString("noticeName");
 				String noticeBody = rs.getString("noticeBody");
 				Timestamp noticeRegdate = rs.getTimestamp("noticeRegdate");
 				
-				vo = new NoticeVO(noticeNo, noticeName, noticeBody, noticeRegdate);
+				vo = new NoticeVO(no, noticeName, noticeBody, noticeRegdate);
 			}
 			
 			System.out.println("공지사항 번호로 조회결과, vo = " + vo + ", 매개변수 no = " + no);

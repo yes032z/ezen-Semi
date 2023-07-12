@@ -1,4 +1,3 @@
-<%@page import="com.semi.common.PagingVO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="java.util.List"%>
 <%@page import="com.semi.notice.model.NoticeVO"%>
@@ -81,8 +80,6 @@
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
-	
-	PagingVO pageVo = (PagingVO)request.getAttribute("pageVo");
 	
 	int currentPage = 1;	//현재 페이지
 	
@@ -170,7 +167,7 @@
 					if (i == currentPage) { %>
 					<span class="cur" style="color: white; background-color: black; font-size: 1em"><%=i%></span>
 				<%	} else { %>
-				<a class="pa" href="#" onclick="pageFunc(<%=i%>)"><%=i %></a>
+						<a class="pa" href="#" onclick="pageFunc(<%=i%>)"><%=i %></a>
 				<%   }//if      
 				}//for %>
 			</div> <!-- 페이징 -->

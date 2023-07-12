@@ -1,4 +1,3 @@
-<%@page import="com.semi.common.PagingVO"%>
 <%@page import="com.semi.faq.model.FAQVO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.SQLException"%>
@@ -70,6 +69,12 @@
 	
 	.contents li {padding: 20px 20px 20px 20px;}
 	
+	.page {
+	    font-size: 19px;
+	    margin: 20px 0 0 420px;
+	    height: 20px;
+	}
+	
 	/* mypagenav */
 	#leftNav {width: 300px; float: left; margin-left: 70px;}
 	
@@ -94,8 +99,70 @@
 	dd:nth-child(5) {color: #808080a6;}
 	
 </style>
+
+<jsp:useBean id="faqService" class="com.semi.faq.model.FAQService" scope="session"></jsp:useBean>
+<%
+	//검색일 떄 파라미터
+	request.setCharacterEncoding("utf-8");
+	String faqCategory = request.getParameter("faqCategory");
+	String search = request.getParameter("search");
+	
+	boolean bool = false;
+	if (faqCategory != null && !faqCategory.isEmpty() || search != null && !search.isEmpty()) {
+			bool = true;
+			
+	}//
+	
+	List<FAQVO> list = null;
+	
+	System.out.println("bool = " + bool);
+	if (bool) {
+		search = request.getParameter("search");
+		faqCategory = request.getParameter("faqCategory");
+		
+		list = faqService.selectBy(faqCategory, search);
+		
+		if (search == null) search = ""; 
+		if (faqCategory == null) faqCategory = ""; 
+	}
+	
+	//자주 찾는 faq 상위 5건  
+	if (!bool) {
+		try {
+			list = faqService.selectBest5();
+		} catch (SQLException e) {
+				e.printStackTrace();		
+		}
+		
+	}//
+	
+	
+	//
+	int currentPage = 1;	//현재 페이지
+	
+	if(request.getParameter("currentPage") != null) {
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}
+	
+	//
+	int totalRecord = list.size();	
+	int pageSize = 5;	
+	int blockSize = 10;
+	int totalPage = (int)Math.ceil((float)totalRecord / pageSize);
+	
+	int firstPage = currentPage - ((currentPage-1) % blockSize);	
+	int lastPage = firstPage + (blockSize - 1);
+	
+	int curPos = (currentPage - 1)* pageSize;
+	
+	int num = totalRecord - curPos;
+	
+	
+%>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-3.7.0.min.js"></script>
 <script type="text/javascript">
 	$(function() {
+		
 		$('#category td').hover(function() {
 			$(this).css('background', 'black');
 			$(this).find('a').css('color', 'white');
@@ -115,56 +182,28 @@
 	         $('.contents').slideUp();
 	         if ($(this).children('.contents').is(':hidden')){
 	            $(this).children('.contents').slideDown();
-	         } else{
+	         } else {
 	            $(this).children('.contents').slideUp();
 	         }
 		});
 		
-	});
+		$('#search')
+		
+	});//
+	
+	function pageFunc(curPage){
+		$('input[name="currentPage"]').val(curPage);
+		$('form[name="frmPage"]').submit();
+	}
 
 </script>
-
-<jsp:useBean id="faqService" class="com.semi.faq.model.FAQService" scope="session"></jsp:useBean>
-<%
-	//검색일 떄 파라미터
-	request.setCharacterEncoding("utf-8");
-	
-	List<FAQVO> list = null;
-	
-	boolean bool = false;
-	String search = "";
-	String faqCategory = "";
-	
-	if (search != null && !search.isEmpty() || faqCategory != null && !faqCategory.isEmpty()) {
-		bool = true;
-	}
-	
-	if (bool) {
-		search = request.getParameter("search");
-		faqCategory = request.getParameter("faqCategory");
-		
-		list = faqService.selectBy(faqCategory, search);
-		
-		if (search == null) search = ""; 
-		if (faqCategory == null) faqCategory = ""; 
-	}
-	
-	//자주 찾는 faq 상위 5건  
-	try {
-		list = faqService.selectBest5();
-	}catch (SQLException e) {
-			e.printStackTrace();		
-	}
-	
-	
-%>
 
 	<!-- mypagenav -->
 	<nav id="leftNav">
 		<h2>고객센터</h2>
 		<dl id="leftNavi">
 			<!-- category list -->
-			<dt><a href="FAQ.jsp?search=<%=search %>&faqCategory=<%=faqCategory %>">FAQ</a></dt>
+			<dt><a href="FAQ.jsp?">FAQ</a></dt>
 			<dt><a href="notice.jsp">공지사항</a></dt>
 			<dt><a href="findStore.jsp">매장 찾기</a></dt>
 		</dl>
@@ -178,19 +217,25 @@
 		</dl>
 	</nav>  
 	
+	<!-- 페이징 폼 -->
+	<form action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp" name="frmPage" method="post">
+		<input type="hidden" name="currentPage">
+	</form>
+	
 	<article class="main">
 	<form name="FAQfrm" method="post" 
 		<%if (bool == true) { %>
-			action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp?faqtitle=<%=search %>&faqCategory<%=faqCategory %>"
+			action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp?faqtitle=<%=search %>&faqCategory=<%=faqCategory %>"
 		<%} else { %>
 			action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp">
-		<%} %> >
+		<%} %> 
 		<h3 style="font-weight: bold;">FAQ</h3>
 		<div id="searchFaq">
 			<hr style="border: 1px solid black;"><br>
-			<a>FAQ 검색</a>
-			<input type="text" id="search" placeholder="궁금한 내용을 입력해주세요.">
-			<button id="btsearch">검색</button><br><br>
+			<a>FAQ 검색</a> 
+			<input type="text" name="search" id="search" placeholder="궁금한 내용을 입력해주세요." 
+				value="<%=search != null ? search : "" %>">
+			<input type="submit" value="검색" class="btsearch"/><br><br>
 			<hr>
 		</div><br>
 		
@@ -211,28 +256,44 @@
 			</table>
 		</div>
 		
-		<div class="question">
+		<div class="question"> 
+			<%if (!bool) { %>
 			<p style="font-weight: bold;">자주 묻는 질문 BEST 5</p>
+		<%	} %>
 			<div class="accordion">
 		      <ul id="secBox">
 			<% 
 				/* 질문 best5 반복 시작  */
-				for (int i = 0; i < list.size(); i++) {
-					FAQVO vo = list.get(i);
+				for (int i = 0; i < pageSize; i++) {
+					if (num < 1) break;
+					
+					FAQVO vo = list.get(curPos++);
+					num--;
 				%>
 		         <li class="header">
 		            <span class="section">
-						<img alt="faqImg" src="../../images/faq.png"> &nbsp;<%=vo.getfaqTitle() %>
+						<img alt="faqImg" src="../../images/FAQ.png"> &nbsp;<%=vo.getfaqTitle() %>
 					</span>
 		            <ul class="contents">
 		               <li><%=vo.getfaqBody() %></li>
 		            </ul>
 		     	</li>
 		     <%}//for %>
-	  	<!--반복처리 끝  -->
-	  <%//if %>        
 		      </ul>
 		   </div>
+		   <!-- 페이징 -->
+		   <div class="page">
+				<% for (int i = firstPage; i <= lastPage; i++) {
+					if (i > totalPage) break;
+					if (i == currentPage) { 
+						if (totalPage != 1) {%>
+						<span class="cur" style="color: white; background-color: black; font-size: 1em"><%=i%></span>
+				<%		}
+					} else { %>
+						<a class="pa" href="#" onclick="pageFunc(<%=i %>)"><%=i %></a>
+				<%  }//if      
+				}//for %>
+			</div> <!-- 페이징 -->
 	   </div>
 	</form>
 	</article><br><br><br><br><br><br>
