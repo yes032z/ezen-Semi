@@ -7,7 +7,7 @@
 <head>
 <style type="text/css">
 ul.navbar-nav.me-auto.mb-2.mb-lg-0.ms-lg-4 {
-    font-size: 15px;
+    font-size: 14px;
 }
 
 form.frlist2 {
@@ -74,28 +74,18 @@ input.form-control.mr-sm-2 {
                         <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/abmart/member/register.jsp">회원가입</a></li>
                         <%} %>                 
 	                    <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/abmart/mypage/mypage.jsp">마이페이지</a></li>                        
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">메뉴</a>
-                            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <li><a class="dropdown-item" href="#!">모든 상품</a></li>
-                                <li><hr class="dropdown-divider">브랜드</li>
-								<li><a class="dropdown-item" href="#!">나이키</a></li>
-								<li><a class="dropdown-item" href="#!">아디다스</a></li>
-								<li><a class="dropdown-item" href="#!">캔버스</a></li>
-								<li><a class="dropdown-item" href="#!">반스</a></li>
-								<li><a class="dropdown-item" href="#!">뉴발란스</a></li>
-								<li><a class="dropdown-item" href="#!">필라</a></li>
-								<li><hr class="dropdown-divider">종류</li>
-								<li><a class="dropdown-item" href="#1">운동화</a></li>
-								<li><a class="dropdown-item" href="#1">슬리퍼</a></li>
-								<li><a class="dropdown-item" href="#1">샌들</a></li>
-                            </ul>
-                        </li>                         
-                    </ul>
+	                    <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/abmart/servicecenter/FAQ.jsp">고객센터</a></li>                        
+                       
+                    </ul> 
 
 					<!-- 검색창  -->
+<<<<<<< HEAD
 					<!-- 값 입력해서 sql문에서 like로 일치하는거 찾기  -->
+					<form class ="frlist2" action="<%=request.getContextPath()%>/abmart/pdlist/pdlist.jsp">
+=======
+					<!-- 값 입력해서 sql문에서 like로 일치하는거 찾기 아닌듯..쩝  -->
 					<form class ="frlist2" action="<%=request.getContextPath()%>/abmart/pdlist//pdlist.jsp">
+>>>>>>> branch 'master' of https://github.com/pjm0209/semiProject.git
 				    <input class="form-control mr-sm-2" id ="searchpd" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" >
 				    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 				    </form>
