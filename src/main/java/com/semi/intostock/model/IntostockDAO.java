@@ -37,7 +37,7 @@ public class IntostockDAO {
 					+" on p.pdno = f.pdno"
 					+" left join member m"
 					+" on f.no = m.no"
-					+" where s.stockqty>0"
+					+" where it.intostockqty>0"
 					+" and pr.pdsize = (select footsize from member where id=? )"
 					+" and m.id= ?"
 					+" order by it.regdate asc";
