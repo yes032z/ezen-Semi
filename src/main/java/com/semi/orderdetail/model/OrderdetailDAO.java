@@ -69,6 +69,47 @@ public class OrderdetailDAO {
 		
 	}
 	
+	public ViewVO selectByOrderNo(String id, int ordernum) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		ViewVO vo=null;
+			
+		try {
+			con=pool.getConnection();
+			
+			String sql="select od.orderno, od.orderqty, p.pdname, p.price, p.filename"
+					+" from orderdetail od left join product p"
+					+" on od.pdno = p.pdno"
+					+" right join orders o"
+					+" on od.orderno = o.orderno"
+					+" left join member m"
+					+" on o.no = m.no"
+					+" where od.orderno= ?"
+					+" and m.id= ?";
+			ps=con.prepareStatement(sql);
+			ps.setInt(1, ordernum);
+			ps.setString(2, id);
+			
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				int orderno=rs.getInt("orderno");
+				int orderqty=rs.getInt("orderqty");
+				String pdname=rs.getString("pdname");
+				int price=rs.getInt("price");
+				String filename=rs.getString("filename");
+				
+				vo=new ViewVO(orderno, orderqty, pdname, price, filename);
+				
+			}
+			System.out.println("주문번호로 1건 조회 결과, vo="+vo+", 매개변수 ordernum="+ordernum);
+			return vo;
+		}finally {
+			pool.dbClose(rs, ps, con);
+		}
+	}
+	
+	
 	
 }
 

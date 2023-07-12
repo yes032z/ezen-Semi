@@ -16,5 +16,8 @@ public class OrderdetailService {
 		return orderdetailDao.selectAll(id, startDate, lastDate);
 	}
 	
+	public ViewVO selectByOrderNo(String id, int ordernum) throws SQLException {
+		return orderdetailDao.selectByOrderNo(id, ordernum);
+	}
 	
 }

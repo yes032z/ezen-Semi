@@ -30,6 +30,9 @@ public class ViewVO {
 	private int pdsize; /* 사이즈 */
 	private int stockqty; /* 수량 */
 	
+	private int refundno; /* 환불번호 */
+	private String refundbody; /* 환불사유 */
+	
 	public ViewVO() {
 		super();
 	}
@@ -93,6 +96,23 @@ public class ViewVO {
 		this.pdsize = pdsize;
 		this.filename = filename;
 	}
+	//환불 insert
+	public ViewVO(int refundno, String refundbody, int pdno, int orderno) {
+		this.refundno = refundno;
+		this.refundbody = refundbody;
+		this.pdno = pdno;
+		this.orderno = orderno;
+	}
+	//마이페이지 > 주문목록 > 환불신청전 내역띄우기
+	public ViewVO(int orderno, int orderqty, String pdname, int price, String filename) {
+		super();
+		this.orderno = orderno;
+		this.orderqty = orderqty;
+		this.pdname = pdname;
+		this.price = price;
+		this.filename = filename;
+	}
+	
 	public int getQnano() {
 		return qnano;
 	}
@@ -225,6 +245,18 @@ public class ViewVO {
 	public void setStockqty(int stockqty) {
 		this.stockqty = stockqty;
 	}
+	public int getRefundno() {
+		return refundno;
+	}
+	public void setRefundno(int refundno) {
+		this.refundno = refundno;
+	}
+	public String getRefundbody() {
+		return refundbody;
+	}
+	public void setRefundbody(String refundbody) {
+		this.refundbody = refundbody;
+	}
 	@Override
 	public String toString() {
 		return "ViewVO [qnano=" + qnano + ", qnabody=" + qnabody + ", pdname=" + pdname + ", qnaview=" + qnaview
@@ -232,7 +264,9 @@ public class ViewVO {
 				+ ", reviewgrade=" + reviewgrade + ", good=" + good + ", reviewregdate=" + reviewregdate + ", orderno="
 				+ orderno + ", orderqty=" + orderqty + ", price=" + price + ", pickup=" + pickup + ", orderregdate="
 				+ orderregdate + ", filename=" + filename + ", favoriteno=" + favoriteno + ", pdno=" + pdno + ", brand="
-				+ brand + ", regdate=" + regdate + ", pdsize=" + pdsize + ", stockqty=" + stockqty + "]";
+				+ brand + ", regdate=" + regdate + ", pdsize=" + pdsize + ", stockqty=" + stockqty + ", refundno="
+				+ refundno + ", refundbody=" + refundbody + "]";
 	}
+	
 	
 }

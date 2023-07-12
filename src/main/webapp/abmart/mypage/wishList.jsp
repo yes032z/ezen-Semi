@@ -206,10 +206,8 @@ $(function() {
 			
 			<!--  페이지 번호 끝 -->
 		</div>
-		
 <input type="submit" class="mypagebtn2" id="del" name="del" value="삭제하기">
 <input type="submit" class="mypagebtn2" id="order" name="order" value="주문하기">
-
 			</div>
 		</div>
 

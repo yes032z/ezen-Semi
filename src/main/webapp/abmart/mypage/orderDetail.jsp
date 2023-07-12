@@ -102,11 +102,24 @@ $(function() {
           alert("리뷰를 작성할 상품을 하나만 선택해주세요.");
           return false;
     	}else{
-    		var value=checkedItems.attr("value");
+    		var value=checkedItems.attr("value1");
     		open('../reviewWrite.jsp?pdno='+value,'review','width=600,height=900,top=300,left=700,location=yes,resizable=yes');
     	}
     });
     
+    $(".refund").on("click",function(){
+   	 	var checkedItems = $('.chkItem:checked');
+    	if(!isChecked){
+    		alert("환불할 상품을 선택해주세요.");
+   			return false;
+    	}else if (checkedItems.length !== 1) {
+          alert("환불할 상품을 하나만 선택해주세요.");
+          return false;
+    	}else{
+    		var value=checkedItems.attr("value2");
+    		open('refundWrite.jsp?orderno='+value,'refund','width=570,height=700,top=300,left=700,location=yes,resizable=yes');
+    	}
+    });
     
 });
 </script>
@@ -176,7 +189,8 @@ $(function() {
 		  	%>	
 			<tr>
 				<td>
-					<input type="checkbox" name="pdno" class="chkItem" value="<%=vo.getPdno() %>">
+					<input type="checkbox" name="pdno" class="chkItem" value1="<%=vo.getPdno() %>"
+					value2="<%=vo.getOrderno()%>">
 				</td>
 				<td><%=vo.getOrderno() %></td>
 				<td>
@@ -195,7 +209,7 @@ $(function() {
 				<td><%=vo.getPickup() %></td>
 				<td><%=sdf.format(vo.getOrderregdate()) %></td>
 				<td><input type="button" class="mypagebtn writeReview" value="리뷰 쓰기" /><br>
-				<input type="button" class="mypagebtn" name="del" value="반품 신청"> 
+				<input type="button" class="mypagebtn refund" name="del" value="반품 신청"> 
 				</td>
 			</tr>
 		<%}//for %>
