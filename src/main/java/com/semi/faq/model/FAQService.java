@@ -14,12 +14,9 @@ public class FAQService {
 		return faqDao.selectBest5();
 	}
 	
-	public List<FAQVO> selectByCategory(String category) throws SQLException {
-		return faqDao.selectByCategory(category);
+	public List<FAQVO> selectBy(String faqCategory, String search) throws SQLException {
+		return faqDao.selectBy(faqCategory, search);
 	}
 	
-	public List<FAQVO> selectBySearch(String search) throws SQLException {
-		return faqDao.selectBySearch(search);
-	}
 	
 }//

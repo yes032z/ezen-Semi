@@ -15,7 +15,6 @@ public class FAQDAO {
 	private Connection con = null;
 	private PreparedStatement ps = null;
 	ResultSet rs = null;
-	List<FAQVO> list = new ArrayList<>();
 	String sql = "";
 	
 	public FAQDAO() {
@@ -28,7 +27,7 @@ public class FAQDAO {
 	 * @throws SQLException
 	 */
 	public List<FAQVO> selectBest5() throws SQLException {
-		
+		List<FAQVO> list = new ArrayList<>();
 		
 		try {
 			con = pool.getConnection();
@@ -59,35 +58,44 @@ public class FAQDAO {
 	}//
 	
 	/**
-	 * faq 카테고리 별 검색
+	 * faq 검색
 	 * @param category
 	 * @return
 	 * @throws SQLException
 	 */
-	public List<FAQVO> selectByCategory(String category) throws SQLException {
+	public List<FAQVO> selectBy(String faqCategory, String search) throws SQLException {
+		List<FAQVO> list = new ArrayList<>();
 		
 		try {
 			con = pool.getConnection();
 			
-			sql = "select * from faq "
-					+ "where faqcategory = ?";
+			sql = "select * from faq ";
+			//사용자 직접 입력 검색인 경우
+			if (search != null || !search.isEmpty()) {
+				sql += "where faqtitle like '%' || ? || '%'";
+			}
+			//카테고리 선택일 경우
+			if (faqCategory != null || !faqCategory.isEmpty()) {
+				sql += "where faqcategory = ?";
+			}
 			ps = con.prepareStatement(sql);
 			
-			ps.setString(1, category);
+			ps.setString(1, faqCategory);
 			
 			rs = ps.executeQuery();
 			while (rs.next()) {
 				int faqNo = rs.getInt("faqNo");
 				String faqTitle = rs.getString("faqTitle");
 				String faqbody = rs.getString("faqbody");
-				String faqCategory = rs.getString("faqCategory");
+				String faqCategory2 = rs.getString("faqCategory");
 				int readCount = rs.getInt("readCount");
 				
-				FAQVO vo = new FAQVO(faqNo, faqTitle, faqbody, faqCategory, readCount);
+				FAQVO vo = new FAQVO(faqNo, faqTitle, faqbody, faqCategory2, readCount);
 				list.add(vo);
 			}
 			
-			System.out.println("faq 카테고리별 검색결과, list.size = " + list.size() + ", 매개변수 category = " + category);
+			System.out.println("faq 검색결과, list.size = " + list.size() + ", 매개변수 category = " + faqCategory
+					+ ", search = " + search);
 			return list;
 			
 		} finally {
@@ -95,42 +103,6 @@ public class FAQDAO {
 		}
 	}//
 	
-	/**
-	 * 사용자가 직접 검색어 입력해서 검색
-	 * @param search
-	 * @return
-	 * @throws SQLException
-	 */
-	public List<FAQVO> selectBySearch(String search) throws SQLException {
-		
-		try {
-			con = pool.getConnection();
-			
-			sql = "select * from faq "
-					+ "where faqtitle like '%' || ? || '%'";
-			ps = con.prepareStatement(sql);
-			
-			ps.setString(1, search);
-			
-			rs = ps.executeQuery();
-			while (rs.next()) {
-				int faqNo = rs.getInt("faqNo");
-				String faqTitle = rs.getString("faqTitle");
-				String faqBody = rs.getString("faqBody");
-				String faqCategory = rs.getString("faqCategory");
-				int readcount = rs.getInt("readcount");
-				
-				FAQVO vo = new FAQVO(faqNo, faqTitle, faqBody, faqCategory, readcount);
-				list.add(vo);
-			}
-			
-			System.out.println("faq 검색으로 조회결과, list.size = " + list.size() + ", 매개변수 search = " + search);
-			return list;
-			
-		} finally {
-			pool.dbClose(rs, ps, con);
-		}
-	}
 	
 	/**
 	 * FAQ 작성

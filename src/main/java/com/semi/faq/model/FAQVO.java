@@ -13,10 +13,10 @@ public class FAQVO {
 
 	public FAQVO(int faqNo, String faqTitle, String faqBody, String faqCategory, int readCount) {
 		super();
-		faqNo = faqNo;
-		faqTitle = faqTitle;
-		faqBody = faqBody;
-		faqCategory = faqCategory;
+		this.faqNo = faqNo;
+		this.faqTitle = faqTitle;
+		this.faqBody = faqBody;
+		this.faqCategory = faqCategory;
 		this.readCount = readCount;
 	}
 
@@ -25,7 +25,7 @@ public class FAQVO {
 	}
 
 	public void setfaqNo(int faqNo) {
-		faqNo = faqNo;
+		this.faqNo = faqNo;
 	}
 
 	public String getfaqTitle() {
@@ -33,7 +33,7 @@ public class FAQVO {
 	}
 
 	public void setfaqTitle(String faqTitle) {
-		faqTitle = faqTitle;
+		this.faqTitle = faqTitle;
 	}
 
 	public String getfaqBody() {
@@ -41,7 +41,7 @@ public class FAQVO {
 	}
 
 	public void setfaqBody(String faqBody) {
-		faqBody = faqBody;
+		this.faqBody = faqBody;
 	}
 
 	public String getfaqCategory() {
@@ -49,7 +49,7 @@ public class FAQVO {
 	}
 
 	public void setfaqCategory(String faqCategory) {
-		faqCategory = faqCategory;
+		this.faqCategory = faqCategory;
 	}
 
 	public int getReadCount() {

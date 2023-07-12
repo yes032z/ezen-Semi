@@ -1,3 +1,4 @@
+<%@page import="com.semi.common.PagingVO"%>
 <%@page import="com.semi.faq.model.FAQVO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.SQLException"%>
@@ -8,7 +9,7 @@
 <style type="text/css">
 	#search {width: 50%; height: 36px;}
 	
-	.main {margin: 90px 0 0 490px; font-family: 'Nanum Gothic';}
+	.main {margin: 90px 0 0 400px}
 
 	.question {margin-top: 50px; width: 900px;}
 	
@@ -59,9 +60,15 @@
 		font-size:14px;
 	}
 	
-	#secBox {list-style: none; margin-left: -40px;}
+	.accordion ul, li {margin: 0px; padding:0px;}
 	
-	.contents {list-style: none; margin-left: -40px;}
+	#secBox {list-style: none;}
+	
+	.accordion ul:first-child {border-top: 2px solid black;}
+	
+	.contents {list-style: none;}
+	
+	.contents li {padding: 20px 20px 20px 20px;}
 	
 	/* mypagenav */
 	#leftNav {width: 300px; float: left; margin-left: 70px;}
@@ -121,41 +128,33 @@
 <%
 	//검색일 떄 파라미터
 	request.setCharacterEncoding("utf-8");
-	String search = request.getParameter("search");
-	String category = request.getParameter("category");
 	
-	//
-	int type = 0;
-	
-	//자주 찾는 faq 상위 5건  ( type = 1
-	//카테고리 선택 (type = 2
-	//사용자 직접 입력 검색 ( type = 3
 	List<FAQVO> list = null;
 	
-	if (type == 1) {
-		try {
-			list = faqService.selectBest5();
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-	} else if (type == 2) {
-		try {
-			list = faqService.selectByCategory(category);
-		} catch (SQLException e) {
-			
-		}
-		
-	} else if (type == 3) {
-		try {
-			list = faqService.selectBySearch(search);
-		} catch (SQLException e) {
-			
-		}
+	boolean bool = false;
+	String search = "";
+	String faqCategory = "";
+	
+	if (search != null && !search.isEmpty() || faqCategory != null && !faqCategory.isEmpty()) {
+		bool = true;
 	}
 	
+	if (bool) {
+		search = request.getParameter("search");
+		faqCategory = request.getParameter("faqCategory");
+		
+		list = faqService.selectBy(faqCategory, search);
+		
+		if (search == null) search = ""; 
+		if (faqCategory == null) faqCategory = ""; 
+	}
 	
+	//자주 찾는 faq 상위 5건  
+	try {
+		list = faqService.selectBest5();
+	}catch (SQLException e) {
+			e.printStackTrace();		
+	}
 	
 	
 %>
@@ -165,7 +164,7 @@
 		<h2>고객센터</h2>
 		<dl id="leftNavi">
 			<!-- category list -->
-			<dt><a href="FAQ.jsp">FAQ</a></dt>
+			<dt><a href="FAQ.jsp?search=<%=search %>&faqCategory=<%=faqCategory %>">FAQ</a></dt>
 			<dt><a href="notice.jsp">공지사항</a></dt>
 			<dt><a href="findStore.jsp">매장 찾기</a></dt>
 		</dl>
@@ -180,7 +179,12 @@
 	</nav>  
 	
 	<article class="main">
-	<form name="FAQfrm" method="post" action="FAQ.jsp?faqtitle=">
+	<form name="FAQfrm" method="post" 
+		<%if (bool == true) { %>
+			action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp?faqtitle=<%=search %>&faqCategory<%=faqCategory %>"
+		<%} else { %>
+			action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp">
+		<%} %> >
 		<h3 style="font-weight: bold;">FAQ</h3>
 		<div id="searchFaq">
 			<hr style="border: 1px solid black;"><br>
@@ -189,21 +193,20 @@
 			<button id="btsearch">검색</button><br><br>
 			<hr>
 		</div><br>
-	</form>
 		
 		<div>
 			<table summary="FAQ List" id="category" border="1">
 				<tr>
-					<td><a href="FAQ.jsp">상품정보</a></td>
-					<td><a href="FAQ.jsp">배송현황</a></td>
-					<td><a href="FAQ.jsp">교환/반품/환불</a></td>
-					<td><a href="FAQ.jsp">주문/결제/취소</a></td>
+					<td><a href="FAQ.jsp?faqCategory=<%="상품정보" %>">상품정보</a></td>
+					<td><a href="FAQ.jsp?faqCategory=<%="배송현황" %>">배송현황</a></td>
+					<td><a href="FAQ.jsp?faqCategory=<%="환불" %>">환불</a></td>
+					<td><a href="FAQ.jsp?faqCategory=<%="주문/결제/취소" %>">주문/결제/취소</a></td>
 				</tr>
 				<tr>
-					<td><a href="FAQ.jsp">회원정보</a></td>
-					<td><a href="FAQ.jsp">일반정보</a></td>
-					<td><a href="FAQ.jsp">AS</a></td>
-					<td><a href="FAQ.jsp">영수증</a></td>
+					<td><a href="FAQ.jsp?faqCategory=<%="회원정보" %>">회원정보</a></td>
+					<td><a href="FAQ.jsp?faqCategory=<%="일반정보" %>">일반정보</a></td>
+					<td><a href="FAQ.jsp?faqCategory=<%="AS" %>">AS</a></td>
+					<td><a href="FAQ.jsp?faqCategory=<%="영수증" %>">영수증</a></td>
 				</tr>
 			</table>
 		</div>
@@ -212,64 +215,26 @@
 			<p style="font-weight: bold;">자주 묻는 질문 BEST 5</p>
 			<div class="accordion">
 		      <ul id="secBox">
-		         <li class="header" style="border-top: 2px solid black;">
+			<% 
+				/* 질문 best5 반복 시작  */
+				for (int i = 0; i < list.size(); i++) {
+					FAQVO vo = list.get(i);
+				%>
+		         <li class="header">
 		            <span class="section">
-						<img alt="faqImg" src="<%=request.getContextPath() %>/images/faq.png"> &nbsp;결제방법(결제수단)을 변경하고 싶어요.
+						<img alt="faqImg" src="../../images/faq.png"> &nbsp;<%=vo.getfaqTitle() %>
 					</span>
 		            <ul class="contents">
-		               <li>결제완료 후 '배송완료' 상태까지만 결제수단 변경이 가능하므로 (구매확정 이후 변경 불가)<br />
-	주문상태를 확인하신 후 고객센터(1588-9667)로 요청해 주시면 재결제 가능하도록 처리해 드리고 있습니다.<br />
-	<br />
-	<결제수단 변경 안내><br />
-	 - 신용카드, 계좌이체 결제건에 한해서 결제수단 변경이 가능합니다. (이외 결제수단은 처리 불가능)<br />
-	   (포인트, 기프트카드를 같이 사용한 경우 제외)<br />
-	 - 주문건에 입점사 상품이 포함된 경우 결제수단 변경이 불가능 합니다.<br />
-	 - 아트배송으로 주문하신 상품은 결제수단 변경이 불가능 합니다.<br />
-	<br />
-	*재 결제 경로 : [마이페이지 > 주문/배송 현황 조회 > 주문상세 > 결제수단 변경 버튼 클릭]</li>
+		               <li><%=vo.getfaqBody() %></li>
 		            </ul>
-		         </li>
-		         <li class="header">
-		         	<span class="section">
-		            	<img alt="faqImg" src="<%=request.getContextPath() %>/images/faq.png"> &nbsp;포인트 사용은 어떻게 하나요?
-		            </span>
-		            <ul class="contents">
-		               <li>적립된 A-RT 포인트는 바로 사용 가능하며, 100 POINT단위로 사용할 수 있습니다.<br />
-	온라인 홈페이지에서는 상품 결제시 포인트를 함께 사용 할 수 있으며<br />
-	ABC-MART 오프라인 매장에서는 멤버십 카드를 사용하시거나<br />
-	개인정보 인증으로 포인트 사용 비밀번호 입력 후 가능합니다.<br />
-	최초의 비밀번호는 고객님의 생월일 4자리입니다.<br />
-	예) 생일이 1월 1일인 경우 비밀번호는 <u>0101</u> 입니다.</li>
-		            </ul>
-		         </li>
-		         <li class="header">
-		            <span class="section">
-		            	<img alt="faqImg" src="../../images/faq.png"> &nbsp;교환/반품/AS 신청 시 택배비는 어떻게 결제 해야 하나요?
-		            </span>
-		            <ul class="contents">
-		               <li>택배비는 교환/반품/AS 신청 시 선결제 하실 수 있습니다.</li>
-		            </ul>
-		         </li>
-		         <li class="header">
-		            <span class="section">
-		            	<img alt="faqImg" src="../../images/faq.png"> &nbsp;다른 상품으로 교환할 수 있나요?
-		            </span>
-		            <ul class="contents">
-		               <li>교환의 경우 사이즈 교환만 가능하며, 색상 변경 및 다른상품으로의 교환은 반품(환불)후 재 주문 해주셔야 합니다.</li>
-		            </ul>
-		         </li>
-		         <li class="header">
-		            <span class="section">
-		            	<img alt="faqImg" src="../../images/faq.png"> &nbsp;같은날 주문했는데 배송이 따로 왔어요
-		            </span>
-		            <ul class="contents">
-		               <li>온라인쇼핑몰에서는 온라인과 오프라인 매장의 상품이 동시에 판매되고 있습니다.<br />
-이에 같은 날 주문을 했더라도, 발송처에 따라 상품을 받는 시기가 다를 수 있습니다.</li>
-		            </ul>
-		         </li>
+		     	</li>
+		     <%}//for %>
+	  	<!--반복처리 끝  -->
+	  <%//if %>        
 		      </ul>
 		   </div>
 	   </div>
+	</form>
 	</article><br><br><br><br><br><br>
 
 <%@ include file="../../inc/bottom.jsp" %>
