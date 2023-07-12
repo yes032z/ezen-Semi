@@ -1,3 +1,4 @@
+<%@page import="com.semi.common.PagingVO"%>
 <%@page import="com.semi.review.model.ReviewService"%>
 <%@page import="com.semi.stock.model.StockService"%>
 <%@page import="com.semi.review.model.ReviewVO"%>
@@ -26,7 +27,7 @@
 	%>
 		<script>
 			alert("잘못된 url입니다.");
-			history.back();
+			location.href="../pdlist/pdlist.jsp";
 		</script>
 		<%return;
 	}
@@ -80,6 +81,15 @@
 	}
 
 	DecimalFormat df = new DecimalFormat("#,###");
+	
+	int currentPage=1;
+	if(request.getParameter("currentPage")!=null && !request.getParameter("currentPage").isEmpty()){
+		currentPage=Integer.parseInt(request.getParameter("currentPage"));
+	}
+	int totalRecord=reviewList.size();
+	int pageSize=5;
+	int blockSize=10;
+	PagingVO pagingVo=new PagingVO(currentPage,totalRecord,pageSize,blockSize);
 %>
 <script type="text/javascript">
 	$(function() {
@@ -692,30 +702,29 @@
 		</div>
 	</div>
 	<%
+		int num=pagingVo.getNum();
+		int curPos=pagingVo.getCurPos();
 		String star="";
-		for(int i=0;i<reviewList.size();i++){ 
-		 ReviewVO reviewVo=reviewList.get(i);
-		 int n=reviewVo.getReviewgrade();
-		 
-		 if(n==1) star="★";
-		 if(n==2) star="★★";
-		 if(n==3) star="★★★";
-		 if(n==4) star="★★★★";
-		 if(n==5) star="★★★★★";%>
+		for(int i=0;i<pagingVo.getPageSize();i++){ 
+			if(num<1) break;
+			 ReviewVO reviewVo=reviewList.get(curPos++);
+			 num--;
+			 int n=reviewVo.getReviewgrade();
+			 
+			 if(n==1) star="★";
+			 if(n==2) star="★★";
+			 if(n==3) star="★★★";
+			 if(n==4) star="★★★★";
+			 if(n==5) star="★★★★★";%>
 		<div>
 			<div class="div2 clearboth">
 				<span id="star" class="leftSort" style="margin-right: 30px"><%=star %></span>
-				<%if(reviewVo.getPdsize()!=0){ %>
-				<span class="leftSort gray"> | </span>
-				<span class="leftSort gray" style="margin-left: 30px">
-					<%=reviewVo.getPdsize() %></span>
-				<%} %>
 			</div>
 			<div class="div2 clearboth">
 				<%
 				String filename=reviewVo.getFilename();
 				if(filename!=null && !filename.isEmpty()){ %>
-					<img alt="리뷰이미지" src="../../images/<%=filename%>" width="200px" height="200px" style="float:left">
+					<img alt="리뷰이미지" src="<%=request.getContextPath() %>/images/<%=filename%>" width="200px" height="200px" style="float:left">
 				<%} %>
 			</div>
 			<div class="div2 clearboth">
@@ -731,6 +740,38 @@
 			</div>
 		</div>
 	<%} %>
+	<div class="divPage">
+   <!-- 페이지 번호 추가 -->      
+   <!-- 이전 블럭으로 이동 -->
+   <%if(pagingVo.getFirstPage()>1){%>
+      <a href="<%=request.getContextPath()%>/abmart/pddetail/pdDetail.jsp?currentPage=<%=pagingVo.getFirstPage()-1%>">
+         <img src="<%=request.getContextPath() %>/images/first.JPG">
+      </a>   
+   <%} %>
+                  
+   <!-- [1][2][3][4][5][6][7][8][9][10] -->
+   <%for(int i=pagingVo.getFirstPage();i<=pagingVo.getLastPage();i++){
+      	if(i>pagingVo.getTotalPage()) break;
+   %>
+   		<%if(i==pagingVo.getCurrentPage()){%>
+            <span style="color: blue;font-weight:bold;font-size:1.1em"><%=i %></span>
+     	<%}else{ %>
+      		<a href="<%=request.getContextPath() %>/abmart/pddetail/pdDetail.jsp?pdno=<%=pdno %>&currentPage=<%=i%>">[<%=i %>]</a>
+      		
+     	<%} %>
+   <%}//for %>
+   
+   <!-- 다음 블럭으로 이동 -->
+   <%if(pagingVo.getLastPage()< pagingVo.getTotalPage()){%>
+      <a href="<%=request.getContextPath()%>/board/list.do?pdno=<%=pdno %>&currentPage=<%=pagingVo.getLastPage()+1%>">
+         <img src="<%=request.getContextPath() %>/images/last.JPG">
+      </a>   
+   <%} %>
+   
+   <!--  페이지 번호 끝 -->
+
+</div>
+	
 	<div class="div2">
 		<button class="margin-top20" name="btn" id="review"
 			style="float: right;">상품 후기 작성</button>

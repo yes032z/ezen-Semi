@@ -142,3 +142,11 @@ span.gray{
 	margin-top:200px;
 	margin-bottom: 20px;
 }
+
+.div3{
+	clear:both;
+	width:1000px;
+	height:100px;
+	margin-bottom: 20px;
+	text-align: center;
+}

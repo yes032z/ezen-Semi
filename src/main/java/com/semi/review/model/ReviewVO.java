@@ -15,14 +15,13 @@ public class ReviewVO {
 	private long filesize;
 	private String originalfilename;
 	private String id;
-	private int pdsize;
 	
 	public ReviewVO() {
 		super();
 	}
 
 	public ReviewVO(int reviewno, String reviewbody, Timestamp reviewregdate, int reviewgrade, int good, int no,
-			int pdno,String filename,long filesize,String originalfilename,String id,int pdsize) {
+			int pdno,String filename,long filesize,String originalfilename,String id) {
 		super();
 		this.reviewno = reviewno;
 		this.reviewbody = reviewbody;
@@ -35,16 +34,6 @@ public class ReviewVO {
 		this.filesize=filesize;
 		this.originalfilename=originalfilename;
 		this.id=id;
-		this.pdsize=pdsize;
-	}
-
-	
-	public int getPdsize() {
-		return pdsize;
-	}
-
-	public void setPdsize(int pdsize) {
-		this.pdsize = pdsize;
 	}
 
 	public String getFilename() {
@@ -140,7 +129,7 @@ public class ReviewVO {
 		return "ReviewVO [reviewno=" + reviewno + ", reviewbody=" + reviewbody + ", reviewregdate=" + reviewregdate
 				+ ", reviewgrade=" + reviewgrade + ", good=" + good + ", no=" + no + ", pdno=" + pdno + ", filename="
 				+ filename + ", filesize=" + filesize + ", originalfilename=" + originalfilename + ", id=" + id
-				+ ", pdsize=" + pdsize + "]";
+				+ ", pdsize=" + "]";
 	}
 
 }
