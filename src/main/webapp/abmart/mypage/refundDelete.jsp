@@ -8,22 +8,22 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:useBean id="favoriteService" class="com.semi.favoritepd.model.FavoritePdService" scope="session"></jsp:useBean>
+<jsp:useBean id="refService" class="com.semi.refund.model.RefundService" scope="session"></jsp:useBean>
 <%
-	String[] favoriteno=request.getParameterValues("chkItem");
+	String[] refundno=request.getParameterValues("refundno");
 
 	try{
-		int result=favoriteService.deleteFavoriteByNo(favoriteno);
+		int result=refService.deleterefundByRNo(refundno);
 		
 		if(result>0){%>
 		<script type="text/javascript">
-			alert("삭제처리가 정상적으로 완료되었습니다.");
-			location.href="wishList.jsp";
+			alert("환불요청 취소가 정상적으로 완료되었습니다.");
+			location.href="orderDetail.jsp";
 		</script>
 		<%}else{%>
 		<script type="text/javascript">
-		alert("찜목록 삭제에 실패했습니다.");
-		location.href="wishList.jsp";
+		alert("환불요청 취소에 실패했습니다. 재시도 바랍니다. ");
+		location.href="refundDetail.jsp";
 		</script>
 		<%}
 	}catch(SQLException e){

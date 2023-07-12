@@ -19,5 +19,5 @@ public class OrderdetailService {
 	public ViewVO selectByOrderNo(String id, int ordernum) throws SQLException {
 		return orderdetailDao.selectByOrderNo(id, ordernum);
 	}
-	
+
 }

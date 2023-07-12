@@ -18,23 +18,33 @@
 $(function() {
     $("#refund1").click(function() {
      	if(confirm("해당 내용으로 환불을 진행하시겠습니까?")) {
-        	location.href="refund_ok.jsp"
+	     	var str=$('#refundbody').val();
+	     	if (str.length < 10) {
+				alert('10글자 이상 입력 바랍니다.');
+				return false;
+			}
      	}
     });
 
     $("#refund2").click(function() {
-    	return false;
+    	self.close();
     });
     
 });  
-
-
 </script>
 </head>
 <body>
 <%
 	String id=(String)session.getAttribute("id");
 	String orderno=request.getParameter("orderno");
+	
+	if(orderno==null || orderno.isEmpty()){%>
+	<script type="text/javascript">
+		alert('잘못된 url입니다.');
+		location.href="<%=request.getContextPath()%>/index.jsp";
+	</script>
+	<%	return;
+	}
 
 	ViewVO vo=null;
 	try{
@@ -42,6 +52,8 @@ $(function() {
 	}catch(SQLException e){
 		e.printStackTrace();
 	}
+	
+	String refundbody="";
 	
 	DecimalFormat df=new DecimalFormat("#,###");
 %>
@@ -56,10 +68,12 @@ $(function() {
 		<p>금액 : <%=df.format(vo.getPrice()) %>원</p>
 		<hr>
 		<h4>환불 사유를 작성해 주세요.</h4>
-			<form name="frmWrite" method="post" enctype="multipart/form-data">
-				<textarea id="refundbody" name="reviewbody" style="width: 600px; height: 200px; "></textarea>
-					<input type="submit" class="mypagebtn2" id="refund1" value="등록" />
-					<input type="Button" class="mypagebtn2" id="refund2" value="취소" />
+			<form name="frmWrite" method="post" action="refundWrite_ok.jsp">
+			<input type="hidden" name="orderno" value="<%=orderno%>">
+			<input type="hidden" name="pdno" value="<%=vo.getPdno()%>">
+				<textarea id="refundbody" name="refundbody" style="width: 600px; height: 200px; "><%=refundbody %></textarea>
+					<input type="submit" class="mypagebtn2 btn btn-secondary" id="refund1" value="등록" />
+					<input type="Button" class="mypagebtn2 btn btn-secondary" id="refund2" value="취소" />
 			</form>
 		</article>
 	</section>

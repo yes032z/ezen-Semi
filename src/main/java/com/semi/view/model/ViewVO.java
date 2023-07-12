@@ -104,13 +104,27 @@ public class ViewVO {
 		this.orderno = orderno;
 	}
 	//마이페이지 > 주문목록 > 환불신청전 내역띄우기
-	public ViewVO(int orderno, int orderqty, String pdname, int price, String filename) {
+	public ViewVO(int orderno, int orderqty, String pdname, int price, String filename,int pdno) {
 		super();
 		this.orderno = orderno;
 		this.orderqty = orderqty;
 		this.pdname = pdname;
 		this.price = price;
 		this.filename = filename;
+		this.pdno = pdno;
+	}
+	//마이페이지 > 환불목록 조회
+	public ViewVO(int refundno, int orderno, String filename, String pdname,  int orderqty, int price, String pickup, Timestamp orderregdate, int pdno) {
+		super();
+		this.refundno = refundno;
+		this.orderno = orderno;
+		this.filename = filename;
+		this.pdname = pdname;
+		this.orderqty = orderqty;
+		this.price = price;
+		this.pickup = pickup;
+		this.orderregdate = orderregdate;
+		this.pdno = pdno;
 	}
 	
 	public int getQnano() {

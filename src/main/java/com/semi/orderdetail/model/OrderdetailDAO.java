@@ -27,13 +27,16 @@ public class OrderdetailDAO {
 			con=pool.getConnection();
 			
 			String sql="select o.orderno, p.filename, p.pdname, od.orderqty, p.price, o.pickup, o.orderregdate, p.pdno"
-					+" from orderdetail od left join product p"
-					+" on od.pdno = p.pdno"
-					+" right join orders o"
-					+" on od.orderno = o.orderno"
-					+" left join member m"
-					+" on o.no= m.no"
-					+" where m.id= ?";
+					 +" from orderdetail od left join product p"
+					 +" on od.pdno = p.pdno"
+					 +" left join refund r"
+					 +" on od.pdno = r.pdno"
+					 +" right join orders o"
+					 +" on od.orderno = o.orderno"
+					 +" left join member m"
+					 +" on o.no= m.no"
+					 +" where not exists (select 1 from refund r where r.orderno= od.orderno and r.pdno= od.pdno)"
+					 +" and m.id= ?";
 					if(startDate!=null && !startDate.isEmpty() && lastDate!=null && !lastDate.isEmpty()) {
 						sql +=" and o.orderregdate>=to_date( ? )"
 					         +" and o.orderregdate<to_date( ? )+1";
@@ -78,7 +81,7 @@ public class OrderdetailDAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="select od.orderno, od.orderqty, p.pdname, p.price, p.filename"
+			String sql="select od.orderno, od.orderqty, p.pdname, p.price, p.filename,p.pdno"
 					+" from orderdetail od left join product p"
 					+" on od.pdno = p.pdno"
 					+" right join orders o"
@@ -98,8 +101,9 @@ public class OrderdetailDAO {
 				String pdname=rs.getString("pdname");
 				int price=rs.getInt("price");
 				String filename=rs.getString("filename");
+				int pdno=rs.getInt("pdno");
 				
-				vo=new ViewVO(orderno, orderqty, pdname, price, filename);
+				vo=new ViewVO(orderno, orderqty, pdname, price, filename, pdno);
 				
 			}
 			System.out.println("주문번호로 1건 조회 결과, vo="+vo+", 매개변수 ordernum="+ordernum);
