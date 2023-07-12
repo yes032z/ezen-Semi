@@ -229,6 +229,33 @@ public class MemberDAO {
 
 		}
 	}
+	
+	public int outMember(String id) throws SQLException {
+		 
+		 Connection con = null; 
+		 PreparedStatement ps = null;
+
+	  try {
+
+		  con = pool.getConnection();
+		  
+		  String sql="update member set outdate = sysdate where id=?";
+		  
+		  ps=con.prepareStatement(sql);
+		  ps.setString(1,id);
+
+		  int cnt = ps.executeUpdate();
+
+		  System.out.println("탈퇴 결과 : cnt " + cnt +", 매개변수 id : " + id);
+
+		  return cnt;
+	  }finally { 
+		  pool.dbClose(ps, con); 
+	  }
+	  
+	 }
+	
+	
 }
 
 
