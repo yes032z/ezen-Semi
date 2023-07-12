@@ -20,5 +20,8 @@ public class QnAService {
 		return qnaDao.selectQnAByid(id, startDate, lastDate);
 	}
 	
-	
+	//상품 디테일에 Q&A 전체 조회
+	public List<QnAVO> selectQnAAll() throws SQLException {
+		return qnaDao.selectQnAAll();
+	}
 }

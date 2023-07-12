@@ -1,3 +1,6 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="com.semi.qna.model.QnAVO"%>
+<%@page import="com.semi.qna.model.QnAService"%>
 <%@page import="com.semi.common.PagingVO"%>
 <%@page import="com.semi.review.model.ReviewService"%>
 <%@page import="com.semi.stock.model.StockService"%>
@@ -79,7 +82,7 @@
 		</script>
 	<%return;
 	}
-
+	SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
 	DecimalFormat df = new DecimalFormat("#,###");
 	
 	int currentPage=1;
@@ -90,6 +93,10 @@
 	int pageSize=5;
 	int blockSize=10;
 	PagingVO pagingVo=new PagingVO(currentPage,totalRecord,pageSize,blockSize);
+	
+	List<QnAVO> qnaList=null;
+	QnAService qnaService=new QnAService();
+	qnaList=qnaService.selectQnAAll();
 %>
 <script type="text/javascript">
 	$(function() {
@@ -133,6 +140,10 @@
 		
 		$('#review').click(function(){
 			open('../reviewWrite.jsp?pdno=<%=pdno%>','review','width=600,height=900,top=300,left=700,location=yes,resizable=yes');
+		});
+		
+		$('#qna').click(function(){
+			open('../qnaWrite.jsp?pdno=<%=pdno%>','qna','width=960,height=700,top=200,left=500,location=yes,resizable=yes');
 		});
 		var bool1=false;
 		var bool2=false;
@@ -669,8 +680,7 @@
 		%>
 		<div class="div2" style='margin-bottom: 5px;'>
 			<img alt="신발 상세이미지" src="../../images/<%=pdVo.getFilename()%>">
-		</div>
-		<%
+		</div><%
 	}
 	%>
 
@@ -695,10 +705,10 @@
 		<div class="div2 clearboth border-bottom reviewdiv">
 			<span style="float: left;">총 <span name="searchqty"><%=reviewList.size() %></span>개의 리뷰가 있습니다.
 			</span> <span class="rightSort" id="span2">&nbsp;|&nbsp;
-			<a href="pdDetail.jsp?pdno=<%=pdno %>&lately=lately">최근 등록순</a></span>
+			<a href="pdDetail.jsp?pdno=<%=pdno %>&lately=lately&currentPage=<%=currentPage%>">최근 등록순</a></span>
 			<span class="rightSort" id="span1">&nbsp;|&nbsp;
-			<a href="pdDetail.jsp?pdno=<%=pdno %>&grade=low">평점 낮은순</a>&nbsp;</span>
-			<span class="rightSort" id="span1">&nbsp;<a href="pdDetail.jsp?pdno=<%=pdno %>&grade=high">평점 높은순</a>&nbsp;</span>
+			<a href="pdDetail.jsp?pdno=<%=pdno %>&grade=low&currentPage=<%=currentPage%>">평점 낮은순</a>&nbsp;</span>
+			<span class="rightSort" id="span1">&nbsp;<a href="pdDetail.jsp?pdno=<%=pdno %>&grade=high&currentPage=<%=currentPage%>">평점 높은순</a>&nbsp;</span>
 		</div>
 	</div>
 	<%
@@ -744,7 +754,7 @@
    <!-- 페이지 번호 추가 -->      
    <!-- 이전 블럭으로 이동 -->
    <%if(pagingVo.getFirstPage()>1){%>
-      <a href="<%=request.getContextPath()%>/abmart/pddetail/pdDetail.jsp?currentPage=<%=pagingVo.getFirstPage()-1%>">
+      <a href="<%=request.getContextPath()%>/abmart/pddetail/pdDetail.jsp?currentPage=<%=pagingVo.getFirstPage()-1%>&grade=<%=grade%>&lately=<%=lately%>">
          <img src="<%=request.getContextPath() %>/images/first.JPG">
       </a>   
    <%} %>
@@ -756,14 +766,14 @@
    		<%if(i==pagingVo.getCurrentPage()){%>
             <span style="color: blue;font-weight:bold;font-size:1.1em"><%=i %></span>
      	<%}else{ %>
-      		<a href="<%=request.getContextPath() %>/abmart/pddetail/pdDetail.jsp?pdno=<%=pdno %>&currentPage=<%=i%>">[<%=i %>]</a>
+      		<a href="<%=request.getContextPath() %>/abmart/pddetail/pdDetail.jsp?pdno=<%=pdno %>&currentPage=<%=i%>&grade=<%=grade%>&lately=<%=lately%>">[<%=i %>]</a>
       		
      	<%} %>
    <%}//for %>
    
    <!-- 다음 블럭으로 이동 -->
    <%if(pagingVo.getLastPage()< pagingVo.getTotalPage()){%>
-      <a href="<%=request.getContextPath()%>/board/list.do?pdno=<%=pdno %>&currentPage=<%=pagingVo.getLastPage()+1%>">
+      <a href="<%=request.getContextPath()%>/board/list.do?pdno=<%=pdno %>&currentPage=<%=pagingVo.getLastPage()+1%>&grade=<%=grade%>&lately=<%=lately%>">
          <img src="<%=request.getContextPath() %>/images/last.JPG">
       </a>   
    <%} %>
@@ -801,27 +811,58 @@
 			바랍니다.</span><br> <span class="leftSort small">- (상품 자체에 대한 문의가
 			아닌 주문/배송/반품 및 AS 등의 기타문의를 작성하실 경우 나의상담 메뉴로 글이 이동될 수 있습니다.)</span>
 	</div>
-	<div class="div2 qnafirst clearboth">
-		<span class="leftSort margin-top20 margin-left20 bold">QnA 질문
-			제목</span> <span class="leftSort margin-top20 margin-left650">i*****d</span>
-		<span class="leftSort margin-top20 margin-left100">2023-07-07</span> <span
-			class="leftSort margin-top20 margin-left100">답변완료</span>
-	</div>
-	<div class="div2 clearboth qnadiv">
-		<span class="leftSort margin-top20 margin-left20 bold">QnA 질문
-			제목</span> <span class="leftSort margin-top20 margin-left650">i*****d</span>
-		<span class="leftSort margin-top20 margin-left100">2023-07-07</span> <span
-			class="leftSort margin-top20 margin-left100">답변완료</span>
-	</div>
-	<div class="div2 clearboth qnadiv">
-		<span class="leftSort margin-top20 margin-left20 bold">QnA 질문
-			제목</span> <span class="leftSort margin-top20 margin-left650">i*****d</span>
-		<span class="leftSort margin-top20 margin-left100">2023-07-07</span> <span
-			class="leftSort margin-top20 margin-left100">답변완료</span>
-	</div>
+	<%for(int i=0;i<qnaList.size();i++){ 
+		QnAVO qnaVo=qnaList.get(i);
+		String userId=qnaVo.getId();
+		int index=userId.length();
+		String str=userId.substring(1,index-1);
+		String first=userId.substring(0,1);
+		String last=userId.substring(index-1);
+		index=str.length();
+		String hide="";
+		for(int j=0;j<index;j++){
+			hide+="*";
+		}
+		String result=first+hide+last;
+		String view=qnaVo.getQnaview();
+		if(view.equalsIgnoreCase("Y")){
+			view="답변완료";
+		}else if(view.equalsIgnoreCase("N")){
+			view="답변대기중";
+		}
+		String qnaBody=qnaVo.getQnabody();
+		if(qnaBody.length()>40){
+			qnaBody=qnaBody.substring(0,40);
+			qnaBody=qnaBody+"...";
+		}
+		
+		
+		if(i==0){%>
+			<div class="div2 qnafirst clearboth" >
+				<span class="margin-top20 margin-left20 bold" style="width:750px;float: left;text-align: left;"><%=qnaBody %></span>
+				<span class="leftSort margin-top20"><%=result %></span>
+				<div>
+					<span class="leftSort margin-top20 margin-left100"><%=sdf.format(qnaVo.getQnaregdat()) %></span>
+				</div>
+				<div>
+					<span class="leftSort margin-top20 margin-left100"><%=view %></span>
+				</div>
+			</div>
+	  <%}else{%>
+		  <div class="div2 qnadiv clearboth" >
+			<span class="margin-top20 margin-left20 bold" style="width:750px;float: left;text-align: left;"><%=qnaBody %></span>
+			<span class="leftSort margin-top20"><%=result %></span>
+			<div>
+				<span class="leftSort margin-top20 margin-left100"><%=sdf.format(qnaVo.getQnaregdat()) %></span>
+			</div>
+			<div>
+				<span class="leftSort margin-top20 margin-left100"><%=view %></span>
+			</div>
+		</div>
+	  <%}
+	}%>
 	<div class="div2">
-		<button class="margin-top20" name="btn" id="qna" style="float: right;">Q&A
-			작성</button>
+		<button class="margin-top20" name="btn" id="qna" style="float: right;margin-bottom: 100px;">Q&A 작성</button>
 	</div>
 </section>
 <%@include file="../../inc/bottom.jsp"%>

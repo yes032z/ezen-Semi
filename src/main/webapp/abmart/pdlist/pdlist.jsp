@@ -201,7 +201,6 @@
 			            <span style="color: blue;font-weight:bold;font-size:1.1em"><%=i %></span>
 			     	<%}else{ %>
 			      		<a href="<%=request.getContextPath() %>/abmart/pdlist/pdlist.jsp?currentPage=<%=i%>">[<%=i %>]</a>
-			      		
 			     	<%} %>
 			   <%}//for %>
 			   
