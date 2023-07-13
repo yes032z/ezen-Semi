@@ -289,12 +289,6 @@ li.li{
                                         </td>
                                      </tr>
                                     <tr>
-                                        <td>총 할인금액:</td>
-                                        <td>
-                                            <span>-2,000원</span>
-                                        </td>
-                                    </tr>
-                                    <tr>
                                         <td>배송비:</td>
                                         <td>
                                             <span>무료</span>
@@ -343,6 +337,7 @@ li.li{
                             <td>배송지 주소</td>
                             <td><%=vo.getDetailaddress()%></td>    
                         </tr>
+
                     </table>
                 </article>
                 
