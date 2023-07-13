@@ -61,8 +61,8 @@ $(function() {
 		<article>
 		<h2>환불 신청하기</h2>
 		<h4>상품명 : <%=vo.getPdname()%></h4>
-		<img src="../../images/<%=vo.getFilename()%>" alt="신발이미지" width="600px"
-			height="200px">
+		<img src="../../images/<%=vo.getFilename()%>" alt="신발이미지" width="530px"
+			height="150px">
 		<hr>
 		<p>수량 : <%=vo.getOrderqty() %></p>
 		<p>금액 : <%=df.format(vo.getPrice()) %>원</p>
@@ -71,7 +71,7 @@ $(function() {
 			<form name="frmWrite" method="post" action="refundWrite_ok.jsp">
 			<input type="hidden" name="orderno" value="<%=orderno%>">
 			<input type="hidden" name="pdno" value="<%=vo.getPdno()%>">
-				<textarea id="refundbody" name="refundbody" style="width: 600px; height: 200px; "><%=refundbody %></textarea>
+				<textarea id="refundbody" name="refundbody" style="width: 530px; height: 150px; "><%=refundbody %></textarea>
 					<input type="submit" class="mypagebtn2 btn btn-secondary" id="refund1" value="등록" />
 					<input type="Button" class="mypagebtn2 btn btn-secondary" id="refund2" value="취소" />
 			</form>

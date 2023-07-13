@@ -32,21 +32,23 @@ public class ViewVO {
 	
 	private int refundno; /* 환불번호 */
 	private String refundbody; /* 환불사유 */
+	private Timestamp refundregdate; /*환불신청일 */
 	
 	public ViewVO() {
 		super();
 	}
 	//마이페이지 > 내가 쓴 Q&A 목록조회
-	public ViewVO(int qnano, String qnabody, String pdname, String qnaview, Timestamp qnaregdate) {
+	public ViewVO(int qnano, String qnabody, String pdname, String qnaview, Timestamp qnaregdate,int pdno) {
 		super();
 		this.qnano = qnano;
 		this.qnabody = qnabody;
 		this.pdname = pdname;
 		this.qnaview = qnaview;
 		this.qnaregdate = qnaregdate;
+		this.pdno = pdno;
 	}
 	//마이페이지 > 내가 쓴 상품리뷰 목록조회
-	public ViewVO(int reviewno, String reviewbody, String pdname, int reviewgrade, int good, Timestamp reviewregdate) {
+	public ViewVO(int reviewno, String reviewbody, String pdname, int reviewgrade, int good, Timestamp reviewregdate, int pdno) {
 		super();
 		this.reviewno = reviewno;
 		this.reviewbody = reviewbody;
@@ -54,6 +56,7 @@ public class ViewVO {
 		this.reviewgrade = reviewgrade;
 		this.good = good;
 		this.reviewregdate = reviewregdate;
+		this.pdno = pdno;
 	}
 	//마이페이지 > 주문 조회
 	public ViewVO(int orderno, String filename, String pdname,  int orderqty, int price, String pickup, Timestamp orderregdate, int pdno) {
@@ -114,7 +117,7 @@ public class ViewVO {
 		this.pdno = pdno;
 	}
 	//마이페이지 > 환불목록 조회
-	public ViewVO(int refundno, int orderno, String filename, String pdname,  int orderqty, int price, String pickup, Timestamp orderregdate, int pdno) {
+	public ViewVO(int refundno, int orderno, String filename, String pdname,  int orderqty, int price, String refundbody, Timestamp orderregdate, int pdno, Timestamp refundregdate) {
 		super();
 		this.refundno = refundno;
 		this.orderno = orderno;
@@ -122,11 +125,11 @@ public class ViewVO {
 		this.pdname = pdname;
 		this.orderqty = orderqty;
 		this.price = price;
-		this.pickup = pickup;
+		this.refundbody = refundbody;
 		this.orderregdate = orderregdate;
 		this.pdno = pdno;
+		this.refundregdate = refundregdate;
 	}
-	
 	public int getQnano() {
 		return qnano;
 	}
@@ -271,6 +274,12 @@ public class ViewVO {
 	public void setRefundbody(String refundbody) {
 		this.refundbody = refundbody;
 	}
+	public Timestamp getRefundregdate() {
+		return refundregdate;
+	}
+	public void setRefundregdate(Timestamp refundregdate) {
+		this.refundregdate = refundregdate;
+	}
 	@Override
 	public String toString() {
 		return "ViewVO [qnano=" + qnano + ", qnabody=" + qnabody + ", pdname=" + pdname + ", qnaview=" + qnaview
@@ -279,8 +288,7 @@ public class ViewVO {
 				+ orderno + ", orderqty=" + orderqty + ", price=" + price + ", pickup=" + pickup + ", orderregdate="
 				+ orderregdate + ", filename=" + filename + ", favoriteno=" + favoriteno + ", pdno=" + pdno + ", brand="
 				+ brand + ", regdate=" + regdate + ", pdsize=" + pdsize + ", stockqty=" + stockqty + ", refundno="
-				+ refundno + ", refundbody=" + refundbody + "]";
+				+ refundno + ", refundbody=" + refundbody + ", refundregdate=" + refundregdate + "]";
 	}
-	
 	
 }

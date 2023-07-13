@@ -34,12 +34,12 @@
 		      isChecked = $(".refundno:checked").length > 0;
 	    });
 		
-		$('input[name=del]').click(function(){
+		$('#del').click(function(){
 			 if (!isChecked) {
 		        alert("선택한 상품이 없습니다.");
 		        return false;
 		      }else {
-		        var checkedItems = $(".chkItem:checked");
+		        var checkedItems = $(".refundno:checked");
 		        var values = "";
 		        
 		        checkedItems.each(function(index) {
@@ -60,13 +60,14 @@
 			<table class="table table-hover">
 			<colgroup>
 				<col style="width:5%;" />
-				<col style="width:12.5%;" />
-				<col style="width:20%;" />
+				<col style="width:11%;" />
+				<col style="width:13%;" />
 				<col style="width:13%;" />
 				<col style="width:7%;" />	
+				<col style="width:10%;" />	
+				<col style="width:16%;" />	
 				<col style="width:12.5%;" />	
-				<col style="width:15%;" />	
-				<col style="width:15%;" />	
+				<col style="width:12.5%;" />	
 			</colgroup>
     <thead class="thead-dark">
         <tr>
@@ -77,8 +78,9 @@
 				<th>상품명</th>
 				<th>수량</th>
 				<th>금액</th>
-				<th>픽업유무</th>
+				<th>환불사유</th>
 				<th>구매일자</th>
+				<th>환불신청일자</th>
        		 </tr>
     	</thead>
     <tbody>
@@ -106,14 +108,16 @@
 			<td><%=vo.getPdname() %></td>
 			<td><%=vo.getOrderqty() %></td>
 			<td><%=df.format(vo.getPrice()) %>원</td>
-			<td><%=vo.getPickup() %></td>
+			<td><%=vo.getRefundbody() %></td>
 			<td><%=sdf.format(vo.getOrderregdate()) %></td>
+			<td><%=sdf.format(vo.getRefundregdate()) %></td>
 		</tr>             
         <%}//for %>
 	  <%}//if %>
     </tbody>                  
 </table>
-	<input type="button" class="mypagebtn2" name="del" value="취소하기">
+	<input type="button" id="del" class="mypagebtn2" name="del" value="취소하기">
+
 			</div>
 		</div>
 

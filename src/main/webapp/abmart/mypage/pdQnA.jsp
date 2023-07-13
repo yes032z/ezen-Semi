@@ -120,7 +120,7 @@ $(function() {
 						<th scope="col">번호</th>
 						<th scope="col">내용</th>
 						<th scope="col">상품명</th>
-						<th scope="col">공개유무</th>
+						<th scope="col">답변완료</th>
 						<th scope="col">등록일</th>
 					</tr>
 				</thead>
@@ -140,7 +140,7 @@ $(function() {
 			  	%>	
 				<tr>
 					<th scope="row"><%=vo.getQnano() %></th>
-					<td><a href="#"><%=Utility.cutString(vo.getQnabody(), 30) %></a></td>
+					<td><a href="<%=request.getContextPath() %>/abmart/pddetail/pdDetail.jsp?pdno=<%=vo.getPdno() %>"><%=Utility.cutString(vo.getQnabody(), 200) %></a></td>
 					<td><%=vo.getPdname() %></td>
 					<td><%=vo.getQnaview() %></td>
 					<td><%=sdf.format(vo.getQnaregdate()) %></td>
