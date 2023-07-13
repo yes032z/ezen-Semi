@@ -546,40 +546,43 @@ $(document).ready(function() {
     //배송요청사항 - 직접입력
     $("#deliveryRequest").change(function() {
         var selectedOption = $(this).val();
-        if (selectedOption === "request5") {
-            $("#deliveryRequestInput").css("display", "inline-block");
+        if (selectedOption === "직접입력") {
+            $("#deliveryRequestInput").show(); 
         } else {
-            $("#deliveryRequestInput").css("display", "none");
+            $("#deliveryRequestInput").hide(); 
         }
     });
-              
+    
+    //결제비밀번호입력
     $(".final input[type='submit']").click(function(event) {
-      event.preventDefault();
+        event.preventDefault();
 
-      var modal = document.getElementById("paymentModal");
-      modal.style.display = "block";
-    });
+        var modal = document.getElementById("paymentModal");
+        modal.style.display = "block";
+      });
 
 
-    $(".close").click(function() {
-      var modal = document.getElementById("paymentModal");
-      modal.style.display = "none";
-    });
+      $(".close").click(function() {
+        var modal = document.getElementById("paymentModal");
+        modal.style.display = "none";
+      });
 
-    
-    $("#confirmPayment").click(function() {
       
-      var paymentPassword = $("#paymentPassword").val();
-
-      if (paymentPassword !== "1234") {
-        alert("결제 비밀번호가 올바르지 않습니다. 다시 확인해주세요.");
+      $("#confirmPayment").click(function() {
         
-        $("#paymentPassword").val("");
-        return;
-      }      
-      location.href = "OrderCompleted.jsp"; 
-    });
+        var paymentPassword = $("#paymentPassword").val();
+
+        if (paymentPassword !== "1234") {
+          alert("결제 비밀번호가 올바르지 않습니다. 다시 확인해주세요.");
+          
+          $("#paymentPassword").val("");
+          return;
+        }      
+        location.href = "OrderCompleted.jsp"; 
+      });
     
+    
+                 
 });
 </script>
 <body>
@@ -592,9 +595,7 @@ $(document).ready(function() {
 		<section class="pt_table">
 				<nav>
 				</nav>
-				<form action="#">
-        <table class="basket_list">
-            <form>            	             	
+        <table class="basket_list">    	
                 <thead>
                     <tr>
                         <td></td>
@@ -631,10 +632,10 @@ $(document).ready(function() {
                         <td style="width: 15%;">무료</td>
                     </tr>
                 </tbody>                
-            </form>
         </table><br><br>
         
         <!-- 최종 결제 정보 -->
+        <form action="OrderCompleted.jsp" method="post">
 		<div class="final">
 			<h2>&& 최종결제 정보 &&</h2>
 			<table>
@@ -709,16 +710,16 @@ $(document).ready(function() {
                     <tr>
                         <td>배송시 요청사항</td>
                         <td style="text-align: left;">
-                        <select name="request" id="deliveryRequest" style="width: 300px; height:25px;">
+                        <select name="deliveryRequest" id="deliveryRequest1" style="width: 300px; height:25px;">
 							<option value="request1">배송전에 연락주세요</option>
 							<option value="request2">부재실 경비실에 맡겨주세요</option>
 							<option value="request3">부재실 문앞에 놓아주세요</option>
 							<option value="request4">직접 수령 하겠습니다</option>							
 							<option value="request5">직접입력</option>							
 						</select><br>
-                        <input type="text" name="requestInput" id="deliveryRequestInput" style="display: none; width:300px;">                                              
+                          <input type="text" name="requestInput" id="deliveryRequestInput" style="display: none; width:300px;">                                                 
                         </td>
-                    </tr>					
+                    </tr>                  		
 				</table>
 			</article>		
 			
@@ -795,8 +796,8 @@ $(document).ready(function() {
 					<li>품절 보상 쿠폰을 발급해드립니다. (일부 상품은 쿠폰 발급이 제외될 수 있습니다.) </li>
 					<li>※ 결제하신 수단으로 환불이 불가능할 경우 별도 안내드립니다.</li>
                 </ul>
-           </article>					
-		</form>
+           </article>
+           </form>	      
 	</section>
 </div>
 <div id="paymentModal" class="modal">
