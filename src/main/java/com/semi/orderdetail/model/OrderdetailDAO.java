@@ -36,6 +36,7 @@ public class OrderdetailDAO {
 					 +" left join member m"
 					 +" on o.no= m.no"
 					 +" where not exists (select 1 from refund r where r.orderno= od.orderno and r.pdno= od.pdno)"
+					 +" and o.orderno > 0"
 					 +" and m.id= ?";
 					if(startDate!=null && !startDate.isEmpty() && lastDate!=null && !lastDate.isEmpty()) {
 						sql +=" and o.orderregdate>=to_date( ? )"

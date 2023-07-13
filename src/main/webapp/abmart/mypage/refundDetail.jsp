@@ -85,7 +85,7 @@
     	</thead>
     <tbody>
      <%if(list==null || list.isEmpty()){ %>
-		  	<tr class="mypagerow"><th colspan="8">조회된 환불요청건이 없습니다.</th></tr>
+		  	<tr class="mypagerow"><th colspan="9">조회된 환불요청건이 없습니다.</th></tr>
      <%}else{
      	for(int i=0;i<list.size();i++){ 
      		ViewVO vo=list.get(i);
