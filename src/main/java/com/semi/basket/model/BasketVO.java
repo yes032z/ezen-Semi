@@ -5,17 +5,19 @@ public class BasketVO {
 	private int basketqty; 	//수량
 	private int pdno; 		//상품번호
 	private int no;			//회원번호
+	private	int pdsizeno;	//상품사이즈번호
 	
 	public BasketVO() {
 		super();				
 	}
 	
-	public BasketVO(int basketeno, int basketqty, int pdno, int no) {
+	public BasketVO(int basketeno, int basketqty, int pdno, int no, int pdsizeno) {
 		super();
 		this.basketno = basketeno;
 		this.basketqty = basketqty;
 		this.pdno = pdno;
 		this.no = no;
+		this.pdsizeno = pdsizeno;
 	}
 
 	public int getBasketno() {
@@ -50,8 +52,20 @@ public class BasketVO {
 		this.no = no;
 	}
 
+	public int getPdsizeno() {
+		return pdsizeno;
+	}
+
+	public void setPdsizeno(int pdsizeno) {
+		this.pdsizeno = pdsizeno;
+	}
+
 	@Override
 	public String toString() {
-		return "BasketVO [basketno=" + basketno + ", basketqty=" + basketqty + ", pdno=" + pdno + ", no=" + no + "]";
-	}	
+		return "BasketVO [basketno=" + basketno + ", basketqty=" + basketqty + ", pdno=" + pdno + ", no=" + no
+				+ ", pdsizeno=" + pdsizeno + "]";
+	}
+	
+	
 }
+
