@@ -3,7 +3,6 @@
 <!DOCTYPE html>
 <html>
 <head>
-
 <link rel="stylesheet" href="../../css/loginstyle.css">
 <style type="text/css">
 form#accesspanel {
@@ -56,6 +55,9 @@ input#footsize {
 input#birth {
     width: 280px;
 }
+.inset {
+    color: black;
+}
 </style>
 <script src="../../js/jquery-3.7.0.min.js"></script>
 <script type="text/javascript">
@@ -63,7 +65,16 @@ input#birth {
 		$('#btnZipcode').click(function(){
 			open("../zipcode/zipcode.jsp", "", "width=500, height=700, left=150, location=1");
 	});
+		 $("#email2").change(function() {
+		        var selectedOption = $(this).val();
+		        if (selectedOption === "etc") {
+		            $("#email3").css("visibility", "visible");
+		        } else {
+		            $("#email3").css("visibility", "hidden");
+		        }
+		    });
 	});
+
 </script>
 <meta charset="EUC-KR">
 <title>회원가입 페이지</title>
@@ -105,13 +116,13 @@ input#birth {
             <option value="018">018</option>
             <option value="019">019</option>
        	</select>
-        -
-        <input type="text" name="hp2" id="hp2" maxlength="4" title="휴대폰 가운데자리">-
+       &nbsp - &nbsp
+        <input type="text" name="hp2" id="hp2" maxlength="4" title="휴대폰 가운데자리">&nbsp - &nbsp
         <input type="text" name="hp3" id="hp3" maxlength="4" title="휴대폰 뒷자리">
     </p>
     <p>
 
-        <input type="text" name="email1"  id="email1" placeholder="email">@
+        <input type="text" name="email1"  id="email1" placeholder="email">&nbsp @ &nbsp
         <select name="email2" id="email2"  title="이메일주소 뒷자리">
             <option value="naver.com">naver.com</option>
             <option value="hanmail.net">hanmail.net</option>

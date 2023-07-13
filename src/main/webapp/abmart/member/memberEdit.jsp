@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-
+<%@include file="../../inc/loginCheck.jsp"%>
 <link rel="stylesheet" href="../../css/loginstyle.css">
 <style type="text/css">
 form#accesspanel {
@@ -58,6 +58,9 @@ input#footsize {
 input#birth {
     width: 280px;
 }
+.inset {
+    color: black;
+}
 </style>
 
 <script src="../../js/jquery-3.7.0.min.js"></script>
@@ -78,8 +81,17 @@ input#birth {
 				return false;
 			}
 		});
+		 $("#email2").change(function() {
+		        var selectedOption = $(this).val();
+		        if (selectedOption === "etc") {
+		            $("#email3").css("visibility", "visible");
+		        } else {
+		            $("#email3").css("visibility", "hidden");
+		        }
+		    });
+		
 });
-
+	
 	
 	
 </script>
@@ -204,9 +216,9 @@ input#birth {
             	<%} %>
             >019</option>
        	</select>
-        -
+        -&nbsp
         <input type="text" name="hp2" id="hp2" maxlength="4" title="휴대폰 가운데자리"
-        	class="width_80" value="<%=hp2%>">-
+        	class="width_80" value="<%=hp2%>">-&nbsp
         <input type="text" name="hp3" id="hp3" maxlength="4" title="휴대폰 뒷자리"
         	class="width_80" value="<%=hp3%>">
     </p>

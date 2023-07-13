@@ -670,8 +670,9 @@ $(document).ready(function() {
 					</tr>
 					<tr>
 						<td>우편번호</td>
-						<td style="text-align: left;"><input type="text" name="zip" value="<%=vo.getZipno()%>">
-							<input type="button" value="우편번호찾기" id="btnZipcode">
+						<td style="text-align: left;">
+						<input type="text" name="zip" value="<%=vo.getZipno()%>">
+						<input type="button" value="우편번호찾기" id="btnZipcode">
 						</td>
 					</tr>
 					<tr>

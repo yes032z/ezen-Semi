@@ -7,6 +7,7 @@
 	scope="session"></jsp:useBean>
 <%@ include file="../../inc/top.jsp"%>
 <%@ include file="../../inc/mypagenav.jsp"%>
+<%@include file="../../inc/loginCheck.jsp"%>
 <style>
 p.p {
 	font-size: 1.1em;

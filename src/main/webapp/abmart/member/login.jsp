@@ -23,6 +23,9 @@
     a {
     color: #7e4016;
 }
+.inset {
+    color: black;
+}
 </style>
 <meta charset="UTF-8">
 <title>로그인 페이지</title>
