@@ -110,10 +110,9 @@ $(function() {
 			<table class="table table-hover">
 				<colgroup>
 				<col style="width:10%;" />
-				<col style="width:30%;" />
+				<col style="width:45%;" />
 				<col style="width:15%;" />
 				<col style="width:15%;" />
-				<col style="width:15%;" />		
 				<col style="width:15%;" />		
 				</colgroup>
 				<thead class="thead-dark">
@@ -122,13 +121,12 @@ $(function() {
 						<th scope="col">내용</th>
 						<th scope="col">상품명</th>
 						<th scope="col">별점</th>
-						<th scope="col">좋아요</th>
 						<th scope="col">등록일</th>
 					</tr>
 				</thead>
 				<tbody>
 				<%if(list==null || list.isEmpty()){ %>
-					<tr class="mypagerow"><th colspan="6">내가 작성한 리뷰가 존재하지 않습니다.</th></tr>
+					<tr class="mypagerow"><th colspan="5">내가 작성한 리뷰가 존재하지 않습니다.</th></tr>
 				<%}else{
 			  	int num=pageVo.getNum();
 			  	int curPos=pageVo.getCurPos();
@@ -156,7 +154,6 @@ $(function() {
       						}//for%>
       						</div>
 						</td>
-						<td><%=vo.getGood() %></td>
 						<td><%=sdf.format(vo.getReviewregdate()) %></td>
 					</tr>
 					<%}//for
