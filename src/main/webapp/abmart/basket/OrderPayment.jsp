@@ -483,6 +483,14 @@ expiryMonth{
 }
 
 </style>
+</head>
+<%	
+	String id = (String)session.getAttribute("id");
+
+	MemberService service = new MemberService();
+	MemberVO vo = service.selectMember(id); 
+	
+%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -492,6 +500,7 @@ $(document).ready(function() {
 		});
 	});
 	
+	//이메일 직접입력
     $("#email2").change(function() {
         var selectedOption = $(this).val();
         if (selectedOption === "etc") {
@@ -501,24 +510,49 @@ $(document).ready(function() {
         }
     });
     
-    $(".delivery select[name='request']").change(function() {
+    $("#sameAsMemberInfo").change(function() {
+    	  var isChecked = $(this).is(":checked");
+    	  if (isChecked) {
+    	    // 회원정보와 동일하게 체크박스가 선택된 경우    	        	   
+    	    // 회원정보를 가져와서 배송정보 텍스트 필드에 값 설정
+    	    var name = "<%=vo.getName()%>";
+    	    var phone = "<%=vo.getTel()%>";
+    	    var email = "<%=vo.getEmail()%>";
+    	    var zip = "<%=vo.getZipno()%>";
+    	    var addr = "<%=vo.getDetailaddress()%>";
+    	    
+    	    $("input[name='name']").val(name);
+    	    $("select[name='phone']").val(phone.substring(0, 3));
+    	    $("#phone2").val(phone.substring(4, 8));
+    	    $("#phone3").val(phone.substring(9));
+    	    $("input[name='email']").val(email.substring(0, 4));
+    	    $("input[name='zipno']").val(zip);
+    	    $("input[name='detailaddress']").val(addr);
+    	  } else {
+    	    // 체크박스가 선택되지 않은 경우, 배송정보 필드 초기화
+    	    $("input[name='name']").val("");
+    	    $("select[name='phone']").val("010");
+    	    $("#phone2").val("");
+    	    $("#phone3").val("");
+   	        $("input[name='email']").val("");
+   	        $("select[name='email2']").val("");
+   	        $("#email3").css("visibility", "hidden");
+   	        $("#email3").val("");
+    	    $("input[name='zipno']").val("");
+    	    $("input[name='detailaddress']").val("");
+    	  }
+    	});
+    
+    //배송요청사항 - 직접입력
+    $("#deliveryRequest").change(function() {
         var selectedOption = $(this).val();
         if (selectedOption === "request5") {
-            $(".delivery input[name='request']").css("display", "block");
+            $("#deliveryRequestInput").css("display", "inline-block");
         } else {
-            $(".delivery input[name='request']").css("display", "none");
+            $("#deliveryRequestInput").css("display", "none");
         }
     });
-    
-	$("#sameAsMemberInfo").change(function() {
-		var isChecked = $(this).is(":checked");
-		if (isChecked) {
-			$(".deliveryInfo").hide();
-		} else {
-			$(".deliveryInfo").show();
-		}
-	});
-    
+              
     $(".final input[type='submit']").click(function(event) {
       event.preventDefault();
 
@@ -545,18 +579,9 @@ $(document).ready(function() {
       }      
       location.href = "OrderCompleted.jsp"; 
     });
- 
+    
 });
 </script>
-</head>
-
-<%	
-	String id = (String)session.getAttribute("id");
-
-	MemberService service = new MemberService();
-	MemberVO vo = service.selectMember(id); 
-	
-%>
 <body>
 	<div id="Payment">
 	<!-- header  -->
@@ -593,14 +618,14 @@ $(document).ready(function() {
                         <td>무료</td>
                     </tr>
                     <tr class="basket_list_detail">
-                        <td style="width: 13%;">
+                        <td style="width: 15%;">
                             <img src="https://image.a-rt.com/art/product/2020/10/29855_1603086614649.jpg?shrink=590:590" alt="1">
                         </td>
-                        <td style="width: 27%">나이키<span class="basket_list_smartstore"></span>
+                        <td style="width: 25%;">나이키<span class="basket_list_smartstore"></span>
                             <p>스탠 스미스</p>
                         </td>
-                        <td>사이즈</td>
-                        <td>1개</td>    
+                        <td style="width: 15%;">사이즈</td>
+                        <td style="width: 15%;">1개</td>    
                         <td style="width: 15%;"><span class="sumprice">29,000원</span><br>                            
                         </td>
                         <td style="width: 15%;">무료</td>
@@ -636,11 +661,12 @@ $(document).ready(function() {
 		
 		<!-- 배송정보 -->
 			<article class="delivery">
-				<h1>&& 배송정보 &&</h1><input type="checkbox"> 회원정보와 동일하게
+				<h1>&& 배송정보 &&</h1>		
+				<input type="checkbox" id="sameAsMemberInfo"> 회원정보와 동일하게	
 				<table>
 					<tr>					
 						<td>주문인</td>
-						<td style="text-align: left;"><input type="text" name="name" value="<%=vo.getName()%>"></td>
+						<td style="text-align: left;"><input type="text" name="name" value=""></td>
 					</tr>
 					<tr>
 						<td>휴대폰</td>
@@ -657,7 +683,7 @@ $(document).ready(function() {
 					<tr>
 						<td>이메일</td>
 						<td style="text-align: left;">
-							<input type="text" name="email" value="<%=vo.getEmail() %>">@	
+							<input type="text" name="email" value="">
 						    <select name="email2" id="email2"  title="이메일주소 뒷자리">
 				            <option value="naver.com">naver.com</option>
 				            <option value="hanmail.net">hanmail.net</option>
@@ -670,28 +696,27 @@ $(document).ready(function() {
 					</tr>
 					<tr>
 						<td>우편번호</td>
-						<td style="text-align: left;">
-						<input type="text" name="zip" value="<%=vo.getZipno()%>">
-						<input type="button" value="우편번호찾기" id="btnZipcode">
+						<td style="text-align: left;"><input type="text" name="zipno" id="zipno" value="">
+							<input type="button" value="우편번호찾기" id="btnZipcode">
 						</td>
 					</tr>
 					<tr>
 						<td>주소</td>
 						<td style="text-align: left;">
-						<input type="text" name="addr" value="<%=vo.getDetailaddress()%>">
+						<input type="text" name="detailaddress" id="detailaddress" value="">
 						</td>
 					</tr>
                     <tr>
                         <td>배송시 요청사항</td>
                         <td style="text-align: left;">
-                        <select name="request" style="width: 300px; height:25px;">
+                        <select name="request" id="deliveryRequest" style="width: 300px; height:25px;">
 							<option value="request1">배송전에 연락주세요</option>
 							<option value="request2">부재실 경비실에 맡겨주세요</option>
 							<option value="request3">부재실 문앞에 놓아주세요</option>
 							<option value="request4">직접 수령 하겠습니다</option>							
 							<option value="request5">직접입력</option>							
 						</select><br>
-                        <input type="text" name="request" style="display: none;">                                                
+                        <input type="text" name="requestInput" id="deliveryRequestInput" style="display: none; width:300px;">                                              
                         </td>
                     </tr>					
 				</table>

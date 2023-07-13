@@ -1,3 +1,5 @@
+<%@page import="com.semi.productdetail.model.ProductDetailService"%>
+<%@page import="com.semi.productsize.model.ProductSizeService"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="java.util.List"%>
@@ -193,7 +195,7 @@ td {
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() { 	
+$(document).ready(function() {
     $(document).on("click", ".plus_btn", function() {
         var input = $(this).siblings(".quantity-input");
         var quantity = parseInt(input.val());
