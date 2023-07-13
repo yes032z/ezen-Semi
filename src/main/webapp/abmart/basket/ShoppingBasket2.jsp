@@ -1,3 +1,8 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.util.List"%>
+<%@page import="com.semi.product.model.ProductVO"%>
+<%@page import="com.semi.product.model.ProductService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../../inc/top.jsp" %>
@@ -235,10 +240,39 @@ $(document).ready(function() {
 </script>
 </head>
 <%
-	String id=(String)session.getAttribute("id");
-	String pdno=request.getParameter("pdno");	
-	String favoriteno=request.getParameter("favoriteno");
 
+	String brand=request.getParameter("brand");
+	String kind=request.getParameter("kind");
+	String grade=request.getParameter("grade");
+	String price=request.getParameter("price");
+
+	if(brand==null || brand.isEmpty()){
+		brand="";
+	}
+	if(kind==null || kind.isEmpty()){
+		kind="";
+	}
+	if(grade==null || grade.isEmpty()){
+		grade="";
+	}
+	if(price==null || price.isEmpty()){
+		price="";
+	}
+	
+	List<ProductVO> list=null;
+	try{
+		list=pdService.selectPdAll(brand, kind,grade,price);
+	}catch(SQLException e){
+		e.printStackTrace();
+	}
+	
+	DecimalFormat df=new DecimalFormat("#,###");
+
+%>
+<%
+	
+
+			
 %>
 <body>
     <div id="shopping">
@@ -265,10 +299,10 @@ $(document).ready(function() {
                         <td style="width: 13%;">
                             <img src="https://image.a-rt.com/art/product/2020/10/29855_1603086614649.jpg?shrink=590:590" alt="1">
                         </td>
-                        <td style="width: 20%;"><p>나이키</p><br>
+                        <td style="width: 20%;"><p>스미스</p><br>                 
                         <span class="basket_list_smartstore"></span>스탠 스미스                            
                         </td>
-                         <td style="width: 10%;"><span class="size">260</span><br>
+                         <td style="width: 10%;">280<span class="size"></span><br>
                         <td class="basket_list_option" style="width: 20%;">
                         	<div class="quantity-adjustment">
 			                    <button class="plus_btn">+</button>
