@@ -31,7 +31,6 @@ public class MemberService {
 	public int editMember(MemberVO vo) throws SQLException {
 		return memberDao.editMember(vo);
 	}
-	
 	public String finPwd(String id, String name) throws SQLException {
 		return memberDao.finPwd(id, name);
 	}
@@ -41,4 +40,8 @@ public class MemberService {
 	public int outMember(String id) throws SQLException {
 		return memberDao.outMember(id);
 	}
+	public int duId(String id) throws SQLException {
+		return memberDao.duId(id);
+	}
+	
 }

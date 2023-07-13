@@ -255,6 +255,39 @@ public class MemberDAO {
 	  
 	 }
 	
+	public int duId(String id) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+
+		try {
+			//1,2
+			con=pool.getConnection();
+
+			//3
+			String sql="select count(*) from member where id=?";
+			ps=con.prepareStatement(sql);
+			ps.setString(1, id);
+
+			//4
+			int result=0;
+
+			rs=ps.executeQuery();
+			if(rs.next()) {
+				int count=rs.getInt(1);
+				if(count>0) {  //이미 존재-> 사용불가
+					result=MemberService.UNUSABLE_ID;
+				}else { //해당 아이디는 없다 - 사용가능
+					result=MemberService.USABLE_ID;					
+				}
+			}
+			System.out.println("아이디 중복확인 결과, result="+result+", 매개변수 userid="+id);
+
+			return result;
+		}finally {
+			pool.dbClose(rs, ps, con);
+		}
+	}
 	
 }
 

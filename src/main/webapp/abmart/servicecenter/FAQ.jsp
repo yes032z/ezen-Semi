@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.semi.faq.model.FAQVO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.SQLException"%>
@@ -113,7 +114,7 @@
 			
 	}//
 	
-	List<FAQVO> list = null;
+	List<FAQVO> list = new ArrayList<>();
 	
 	System.out.println("bool = " + bool);
 	if (bool) {
@@ -189,11 +190,6 @@
 		
 	});//
 	
-	function pageFunc(curPage){
-		$('input[name="currentPage"]').val(curPage);
-		$('form[name="frmPage"]').submit();
-	}
-
 </script>
 
 	<!-- mypagenav -->
@@ -223,10 +219,9 @@
 	<article class="main">
 	<form name="FAQfrm" method="post" 
 		<%if (bool == true) { %>
-			action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp?faqTitle=<%=search %>&faqCategory=<%=faqCategory %>"
-		<%} else { %>
-			action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp">
-		<%} %> 
+			action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp?faqTitle=<%=search %>">
+		<%} %>
+			
 		<h3 style="font-weight: bold;">FAQ</h3>
 		<div id="searchFaq">
 			<hr style="border: 1px solid black;"><br>
@@ -270,7 +265,7 @@
 				%>
 		         <li class="header">
 		            <span class="section">
-						<img alt="faqImg" src="../../images/FAQ.png"> &nbsp;<%=vo.getfaqTitle() %>
+						<img alt="faqImg" src="../../images/FAQ.png"> &nbsp;<%=vo.getfaqTitle() %></a>
 					</span>
 		            <ul class="contents">
 		               <li><%=vo.getfaqBody() %></li>
