@@ -59,7 +59,7 @@
 	List<QnAVO> qnaList=null;
 	
 	try {
-		qnaList=qnaService.selectQnAAll();
+		qnaList=qnaService.selectQnAAll(no,Integer.parseInt(pdno));
 		
 		//사이즈 가져오기
 		list = stockService.stockSelectByPdNo(Integer.parseInt(pdno));
@@ -870,11 +870,11 @@
 		}
 		
 		String result=first+hide+last;
-		String view=qnaVo.getQnaview();
-		if(view.equalsIgnoreCase("Y")){
-			view="답변완료";
-		}else if(view.equalsIgnoreCase("N")){
-			view="답변대기중";
+		String boolReplyBody="";
+		if(qnaReplyVo!=null){
+			boolReplyBody="답변완료";
+		}else{
+			boolReplyBody="미등록";
 		}
 		String qnaBody=qnaVo.getQnabody();
 		if(qnaBody.length()>40){
@@ -897,7 +897,7 @@
 					<span class="leftSort margin-top20 margin-left100"><%=sdf.format(qnaVo.getQnaregdat()) %></span>
 				</div>
 				<div>
-					<span class="leftSort margin-top20 margin-left100"><%=view %></span>
+					<span class="leftSort margin-top20 margin-left100"><%=boolReplyBody %></span>
 				</div>
 			</div>
 		<%if(qnaReplyVo!=null){ %>
@@ -917,7 +917,7 @@
 				<span class="leftSort margin-top20 margin-left100"><%=sdf.format(qnaVo.getQnaregdat()) %></span>
 			</div>
 			<div>
-				<span class="leftSort margin-top20 margin-left100"><%=view %></span>
+				<span class="leftSort margin-top20 margin-left100"><%=boolReplyBody %></span>
 			</div>
 			<%if(qnaReplyVo!=null){ %>
 				<div class="div2" id="div5" style="clear:both;float:left;border-bottom: 1px solid gray;background: rgb(248,248,248);">
@@ -926,7 +926,7 @@
 				<div style="width:500px;padding-top: 50px;padding-left: 50px;padding-bottom: 50px;">
 					<p><%=qnaReplyBody %></p>
 				</div>
-			<%} %>
+			<%}%>
 			</div>
 		</div>
 	  <%}

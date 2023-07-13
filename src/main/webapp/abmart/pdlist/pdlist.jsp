@@ -41,7 +41,7 @@
 		currentPage=Integer.parseInt(cp);
 	}
 	int totalRecord=list.size();
-	int pageSize=5;
+	int pageSize=12;
 	int blockSize=10;
 	PagingVO pagingVo=new PagingVO(currentPage,totalRecord,pageSize,blockSize);
 	
@@ -133,7 +133,7 @@
 			<%
 				int num=pagingVo.getNum();
 				int curPos=pagingVo.getCurPos();
-				for(int i=0;i<list.size();i++){
+				for(int i=0;i<pageSize;i++){
 					if(num<1) break;
 					ProductVO vo=list.get(curPos++);
 					num--;
@@ -188,7 +188,7 @@
 		</div>
 		<div class="div3">
 			   <%if(pagingVo.getFirstPage()>1){%>
-			      <a href="<%=request.getContextPath()%>/abmart/pdlist/pdlist.jsp?currentPage=<%=pagingVo.getFirstPage()-1%>">
+			      <a href="<%=request.getContextPath()%>/abmart/pdlist/pdlist.jsp?currentPage=<%=pagingVo.getFirstPage()-1%>&grade=<%=grade%>&price=<%=price%>&brand=<%=brand%>">
 			         <img src="<%=request.getContextPath() %>/images/first.JPG">
 			      </a>   
 			   <%} %>
@@ -200,13 +200,13 @@
 			   		<%if(i==pagingVo.getCurrentPage()){%>
 			            <span style="color: blue;font-weight:bold;font-size:1.1em"><%=i %></span>
 			     	<%}else{ %>
-			      		<a href="<%=request.getContextPath() %>/abmart/pdlist/pdlist.jsp?currentPage=<%=i%>">[<%=i %>]</a>
+			      		<a href="<%=request.getContextPath() %>/abmart/pdlist/pdlist.jsp?currentPage=<%=i%>&grade=<%=grade%>&price=<%=price%>&brand=<%=brand%>">[<%=i %>]</a>
 			     	<%} %>
 			   <%}//for %>
 			   
 			   <!-- 다음 블럭으로 이동 -->
 			   <%if(pagingVo.getLastPage()< pagingVo.getTotalPage()){%>
-			      <a href="<%=request.getContextPath()%>/abmart/pdlist/pdlist.jsp?currentPage=<%=pagingVo.getLastPage()+1%>">
+			      <a href="<%=request.getContextPath()%>/abmart/pdlist/pdlist.jsp?currentPage=<%=pagingVo.getLastPage()+1%>&grade=<%=grade%>&price=<%=price%>&brand=<%=brand%>">
 			         <img src="<%=request.getContextPath() %>/images/last.JPG">
 			      </a>   
    				<%} %>
