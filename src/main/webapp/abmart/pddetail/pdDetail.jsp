@@ -1,3 +1,4 @@
+<%@page import="com.semi.favoritepd.model.FavoritePdService"%>
 <%@page import="com.semi.qnareply.model.QnAReplyService"%>
 <%@page import="com.semi.qnareply.model.QnAReplyVO"%>
 <%@page import="java.text.SimpleDateFormat"%>
@@ -21,6 +22,7 @@
 <%@include file="../../inc/top.jsp"%>
 
 <%
+	int no=(int)session.getAttribute("no");
 	String pdno = request.getParameter("pdno");
 	String grade=request.getParameter("grade");
 	String lately=request.getParameter("lately");
@@ -28,7 +30,8 @@
 	ProductSizeService productSizeService = new ProductSizeService();
 	ProductDetailService productDetailService = new ProductDetailService();
 	QnAService qnaService=new QnAService();
-	
+	FavoritePdService favoritePdService=new FavoritePdService();
+	boolean bool=favoritePdService.selectByNo(no, Integer.parseInt(pdno));
 	
 	if (pdno == null || pdno.isEmpty()) {
 	%>
@@ -70,7 +73,6 @@
 			//리뷰 최근 등록순
 			reviewList=reviewService.selectLately(Integer.parseInt(pdno));
 		}
-		
 		
 		if(grade.equals("low")){
 			//리뷰 평점 낮은순
@@ -153,9 +155,23 @@
 				event.preventDefault();
 			}
 		});
+		var bool10=<%=bool%>;
+		if(bool10){
+			$('#heartimg').attr('src','../../images/hearton.png');
+		}else{
+			$('#heartimg').attr('src','../../images/heartoff.png');
+		}
 		
 		$('#heart').click(function(){
-			$(this).find('img').attr('src','../../images/hearton.png');
+			if(bool10){
+				$(this).find('img').attr('src','../../images/heartoff.png');
+				if(confirm("찜한 상품을 삭제하시겠습니까?")){
+					location.href="favoritepd_off.jsp?pdno=<%=pdno%>";
+				}
+			}else{
+				$(this).find('img').attr('src','../../images/hearton.png');
+				location.href="favoritepd_ok.jsp?pdno=<%=pdno%>";
+			}
 		});
 		
 		$('#review').click(function(){
@@ -631,7 +647,8 @@
 	
 	<div
 		style="float: left; margin-left: 100px;width: 600px; height: 700px;">
-		<a href="#" id="heart" style="float: right;"><img id="heartimg" alt="찜 이미지" src="../../images/heartoff.png"></a>
+		<a href="#" id="heart" style="float: right;">
+			<img id="heartimg" width="50px" height="50px" alt="찜 이미지" src=""></a>
 		<div
 			style="font-size: 1.5em; font-weight: bold; float: left; width: 600px;">
 			<span style="float: left;">상품명</span><span><%=vo.getPdname()%></span>
@@ -654,9 +671,7 @@
 				}
 			%>
 			<button class="btn size" name="size" id="<%=psVo.getPdsize()%>"><%=psVo.getPdsize()%></button>
-			<%
-			}
-			%>
+			<%}%>
 
 		</div>
 		<!-- 사이즈 버튼 누르면 추가되는 div -->
@@ -677,7 +692,7 @@
 			 	<input type="hidden" name="pdno" id="pdno" value="<%=pdno%>"/>
 			 	<input type="hidden" name="pdsize" id="pdsize2"/>
 				<input type="hidden" name="pdqty" id="pdqty2"/>
-				<button type="submit" name="btn" id="order">바로구매</button>
+				<button type="submit" name="btn" id="order" style="float:left;margin-left: 5px">바로구매</button>
 			 </form>
 		</div>
 	</div>

@@ -24,4 +24,16 @@ public class FavoritePdService {
 		return favoritePdDao.select4FavoriteByid(id);
 	}
 	
+	//찜한상품 등록
+	public int insertFavoritePd(int no,int pdno) throws SQLException {
+		return favoritePdDao.insertFavoritePd(no, pdno);
+	}
+	//찜한상품 등록 결과 여부
+	public Boolean selectByNo(int no,int pdno) throws SQLException {
+		return favoritePdDao.selectByNo(no, pdno);
+	}
+	//상품 디테일 찜한 상품 삭제
+	public int deleteFavoriteByNo(int no,int pdno) throws SQLException {
+		return favoritePdDao.deleteFavoriteByNo(no, pdno);
+	}
 }
