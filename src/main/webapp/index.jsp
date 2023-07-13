@@ -61,6 +61,7 @@
 	<div class="div1">
 		<h1 class="leftSort">전체 상품</h1>
 		<hr style="clear: both;">
+		<!--반복문 -->
 		<%for(int i=0;i<list.size();i++){
 			ProductVO vo=list.get(i);%>
 		<a href="abmart/pddetail/pdDetail.jsp?pdno=<%=vo.getPdno()%>">
@@ -108,7 +109,7 @@
 		</a>
 	</div>
 	</div>
-	<%} %>
+	<%} %> <!-- for -->
 	</div>
 
 	</div>
