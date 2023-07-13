@@ -264,7 +264,7 @@
 				%>
 		         <li class="header">
 		            <span class="section">
-						<img alt="faqImg" src="../../images/FAQ.png"> &nbsp;<%=vo.getfaqTitle() %>
+						<img alt="faqImg" src="../../images/FAQ.png"> &nbsp;<%=vo.getfaqTitle() %></a>
 					</span>
 		            <ul class="contents">
 		               <li><%=vo.getfaqBody() %></li>
