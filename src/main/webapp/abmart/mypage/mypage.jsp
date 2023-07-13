@@ -102,7 +102,6 @@ if (storedProducts.length === 0) {
     document.write('</a>');
     document.write('<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">');
     document.write('<div class="text-center">');
-    document.write('<a class="btn btn-outline-dark mt-auto" href="../basket/ShoppingBasket.jsp">장바구니</a>');
     document.write('</div>');
     document.write('</div>');
     document.write('</div>');
@@ -152,8 +151,6 @@ if (storedProducts.length === 0) {
 						<!-- Product actions-->
 						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
 							<div class="text-center">
-								<a class="btn btn-outline-dark mt-auto"
-									href="../basket/ShoppingBasket.jsp">장바구니</a>
 							</div>
 						</div>
 					</div>
