@@ -189,11 +189,6 @@
 		
 	});//
 	
-	function pageFunc(curPage){
-		$('input[name="currentPage"]').val(curPage);
-		$('form[name="frmPage"]').submit();
-	}
-
 </script>
 
 	<!-- mypagenav -->
@@ -223,10 +218,9 @@
 	<article class="main">
 	<form name="FAQfrm" method="post" 
 		<%if (bool == true) { %>
-			action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp?faqTitle=<%=search %>&faqCategory=<%=faqCategory %>"
-		<%} else { %>
-			action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp">
-		<%} %> 
+			action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp?faqTitle=<%=search %>">
+		<%} %>
+			
 		<h3 style="font-weight: bold;">FAQ</h3>
 		<div id="searchFaq">
 			<hr style="border: 1px solid black;"><br>
