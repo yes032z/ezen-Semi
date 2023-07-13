@@ -223,7 +223,7 @@
 	<article class="main">
 	<form name="FAQfrm" method="post" 
 		<%if (bool == true) { %>
-			action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp?faqtitle=<%=search %>&faqCategory=<%=faqCategory %>"
+			action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp?faqTitle=<%=search %>&faqCategory=<%=faqCategory %>"
 		<%} else { %>
 			action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp">
 		<%} %> 
@@ -281,16 +281,25 @@
 		   </div>
 		   <!-- 페이징 -->
 		   <div class="page">
+		   		<%if (firstPage > 1) {%>
+					<a href = "FAQ.jsp?currentPage=<%=firstPage-1 %>">[이전]</a>
+				<%} %>
+				
 				<% for (int i = firstPage; i <= lastPage; i++) {
 					if (i > totalPage) break;
+					
 					if (i == currentPage) { 
 						if (totalPage != 1) {%>
 						<span class="cur" style="color: white; background-color: black; font-size: 1em"><%=i%></span>
 				<%		}
 					} else { %>
-						<a class="pa" href="#" onclick="pageFunc(<%=i %>)"><%=i %></a>
+						<a href="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp?currentPage=<%=i %>&faqTitle=<%=search %>&faqCategory=<%=faqCategory %>"><%=i %></a>
 				<%  }//if      
 				}//for %>
+				
+				<%if (lastPage < totalPage) {%>
+					<a href = "FAQ.jsp?currentPage=<%=lastPage+1 %>">[다음]</a>
+				<%} System.out.println("현재 페이지" + currentPage);%>
 			</div> <!-- 페이징 -->
 	   </div>
 	</form>
