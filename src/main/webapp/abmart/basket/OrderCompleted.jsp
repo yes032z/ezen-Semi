@@ -10,14 +10,14 @@
 <title>OrderCompleted.jsp</title>
 <style type ="text/css">
 header {
-	font-size: 20px;	
-	float: center;	
-	margin: 30px 1000px 0 0px;	
+   font-size: 20px;   
+   float: center;   
+   margin: 30px 1000px 0 0px;   
 }
 
 p {
-	font-size: 30px;
-	margin: 30px 0 0 50px;		
+   font-size: 30px;
+   margin: 30px 0 0 50px;      
 }
 
 .message > h2 {
@@ -115,7 +115,7 @@ p {
     color: #ff006c;
 }
 /* 주문정보 */
-.order table tr > td {	
+.order table tr > td {   
     padding: 10px;
     box-sizing: border-box;
 }
@@ -179,39 +179,39 @@ p {
 }
 
 .alert ul :first-child {
-  	color: red;
-  	font-weight:bold;
+     color: red;
+     font-weight:bold;
 }
 
 li{
-	text-align: left;
+   text-align: left;
 }
 
-li.li{	
-	color:black;
-	font-weight:bold;
+li.li{   
+   color:black;
+   font-weight:bold;
 }
 
 </style>
 </head>
 <%
-	String id = (String)session.getAttribute("id");
+   String id = (String)session.getAttribute("id");
 
-	MemberService service = new MemberService();
-	MemberVO vo = service.selectMember(id); 
-		
+   MemberService service = new MemberService();
+   MemberVO vo = service.selectMember(id); 
+      
 %>
 <body> 
         <main id="product">      
             <section class="complete">
                 <nav><br>
-				<!-- header  -->
-				<header>01.장바구니 > 2.주문결제 > <strong>03.주문완료</strong></header>
-				<hr>
+            <!-- header  -->
+            <header>01.장바구니 > 2.주문결제 > <strong>03.주문완료</strong></header>
+            <hr>
                 </nav>
                 <article class="message">
                     <h2>
-                    	주문완료<br><br>
+                       주문완료<br><br>
                         고객님의 주문이 정상적으로 완료되었습니다.
                         <i class="far fa-smile" aria-hidden="true"></i>
                     </h2>
@@ -346,15 +346,15 @@ li.li{
                 <article class="alert">
                     <ul>
                 <li>취소/반품/교환 신청전 확인해주세요!</li><br>
-				<li class="li">반품</li>
-				<li>- 상품 수령 후 7일 이내 신청하여 주세요.</li>
-				<li>- 설치상품/주문제작/해외배송/신선냉동 상품 등은 고객센터에서만 반품 신청이 가능합니다. </li><br>
-				<li class="li">교환</li>
-				<li>- 상품의 교환 신청은 고객센터로 문의하여 주세요.</li><br>
-				<li class="li">취소</li>
-				<li>- 여행/레저/숙박 상품은 취소 시 수수료가 발생할 수 있으며,</li>
-				<li>취소수수료를 확인하여 2일 이내(주말,공휴일 제외) 처리결과를 문자로 안내해드립니다.(당일 접수 기준, 마감시간 오후 4시)</li>
-				<li>- 문화 상품은 사용 전날 24시까지 취소 신청 시 취소수수료가 발생되지 않습니다.</li>
+            <li class="li">반품</li>
+            <li>- 상품 수령 후 7일 이내 신청하여 주세요.</li>
+            <li>- 설치상품/주문제작/해외배송/신선냉동 상품 등은 고객센터에서만 반품 신청이 가능합니다. </li><br>
+            <li class="li">교환</li>
+            <li>- 상품의 교환 신청은 고객센터로 문의하여 주세요.</li><br>
+            <li class="li">취소</li>
+            <li>- 여행/레저/숙박 상품은 취소 시 수수료가 발생할 수 있으며,</li>
+            <li>취소수수료를 확인하여 2일 이내(주말,공휴일 제외) 처리결과를 문자로 안내해드립니다.(당일 접수 기준, 마감시간 오후 4시)</li>
+            <li>- 문화 상품은 사용 전날 24시까지 취소 신청 시 취소수수료가 발생되지 않습니다.</li>
                     </ul>
                 </article>
             </section>
