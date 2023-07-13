@@ -75,7 +75,6 @@ input.form-control.mr-sm-2 {
                         <%} %>                 
 	                    <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/abmart/mypage/mypage.jsp">마이페이지</a></li>                        
 	                    <li class="nav-item"><a class="nav-link" href="<%=request.getContextPath()%>/abmart/servicecenter/FAQ.jsp">고객센터</a></li>                        
-                       
                     </ul> 
 
 					<!-- 검색창  -->

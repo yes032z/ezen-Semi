@@ -13,5 +13,9 @@ public class QnAReplyService {
 		return qnaReplyDao.insertQnAReply(vo);
 	}
 	
+	public QnAReplyVO selectByQnANo(int qnaNo) throws SQLException {
+		return qnaReplyDao.selectByQnANo(qnaNo);
+	}
+	
 	
 }

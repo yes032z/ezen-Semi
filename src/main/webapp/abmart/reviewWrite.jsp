@@ -116,8 +116,8 @@ if (reviewgrade == null)
 				alert('별점을 체크해주세요.');
 				return false;
 			}
-			if (result.length < 10) {
-				alert('10글자 이상 입력 바랍니다.');
+			if (result.length < 5) {
+				alert('5글자 이상 입력 바랍니다.');
 				return false;
 			}
 

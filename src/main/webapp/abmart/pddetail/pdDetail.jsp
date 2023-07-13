@@ -1,3 +1,5 @@
+<%@page import="com.semi.qnareply.model.QnAReplyService"%>
+<%@page import="com.semi.qnareply.model.QnAReplyVO"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page import="com.semi.qna.model.QnAVO"%>
 <%@page import="com.semi.qna.model.QnAService"%>
@@ -25,6 +27,8 @@
 	
 	ProductSizeService productSizeService = new ProductSizeService();
 	ProductDetailService productDetailService = new ProductDetailService();
+	QnAService qnaService=new QnAService();
+	
 	
 	if (pdno == null || pdno.isEmpty()) {
 	%>
@@ -42,19 +46,23 @@
 	}
 	StockService stockService =new StockService();
 	ReviewService reviewService=new ReviewService();
+	QnAReplyService qnaReplyService=new QnAReplyService();
 	
 	ProductVO vo = null;
 	List<StockVO> list = null;
 	List<ProductSizeVO> sizeList = null;
 	List<ProductDetailVO> detailList = null;
 	List<ReviewVO> reviewList=null;
+	List<QnAVO> qnaList=null;
 	
 	try {
+		qnaList=qnaService.selectQnAAll();
+		
 		//사이즈 가져오기
 		list = stockService.stockSelectByPdNo(Integer.parseInt(pdno));
 		sizeList = productSizeService.selectAllByNo(Integer.parseInt(pdno));
 		vo = pdService.selectPdByNo(Integer.parseInt(pdno));
-	
+		
 		//상세이미지 가져오기
 		detailList = productDetailService.selectByPdNo(Integer.parseInt(pdno));
 		
@@ -94,10 +102,18 @@
 	int blockSize=10;
 	PagingVO pagingVo=new PagingVO(currentPage,totalRecord,pageSize,blockSize);
 	
-	List<QnAVO> qnaList=null;
-	QnAService qnaService=new QnAService();
-	qnaList=qnaService.selectQnAAll();
+	
+	
 %>
+<style>
+	div#div5 {
+	    margin-left: auto;
+	    margin-top: 26px;
+	}
+	.heart{
+		background-image: url("../../images/hearton.png");
+	}
+</style>
 <script type="text/javascript">
 	$(function() {
 		$('.alink1').eq(0).css('border','1px solid black');
@@ -136,6 +152,10 @@
 				alert("구매하실 상품을 고르세요");
 				event.preventDefault();
 			}
+		});
+		
+		$('#heart').click(function(){
+			$(this).find('img').attr('src','../../images/hearton.png');
 		});
 		
 		$('#review').click(function(){
@@ -608,8 +628,10 @@
 			alt="상품 이미지" />
 	</div>
 	<!-- 상품 정보 -->
+	
 	<div
-		style="float: left; margin-left: 100px; width: 600px; height: 700px;">
+		style="float: left; margin-left: 100px;width: 600px; height: 700px;">
+		<a href="#" id="heart" style="float: right;"><img id="heartimg" alt="찜 이미지" src="../../images/heartoff.png"></a>
 		<div
 			style="font-size: 1.5em; font-weight: bold; float: left; width: 600px;">
 			<span style="float: left;">상품명</span><span><%=vo.getPdname()%></span>
@@ -819,10 +841,19 @@
 		String first=userId.substring(0,1);
 		String last=userId.substring(index-1);
 		index=str.length();
+		
+		
+		QnAReplyVO qnaReplyVo=null;
+		try{
+			qnaReplyVo=qnaReplyService.selectByQnANo(qnaVo.getQnano());
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
 		String hide="";
 		for(int j=0;j<index;j++){
 			hide+="*";
 		}
+		
 		String result=first+hide+last;
 		String view=qnaVo.getQnaview();
 		if(view.equalsIgnoreCase("Y")){
@@ -834,6 +865,12 @@
 		if(qnaBody.length()>40){
 			qnaBody=qnaBody.substring(0,40);
 			qnaBody=qnaBody+"...";
+		}
+		
+		String qnaReplyBody="";
+		if(qnaReplyVo!=null){
+			qnaReplyBody=qnaReplyVo.getQnareplybody();
+			qnaReplyBody=qnaReplyBody.replace("\\r\\n", "<br>");
 		}
 		
 		
@@ -848,6 +885,15 @@
 					<span class="leftSort margin-top20 margin-left100"><%=view %></span>
 				</div>
 			</div>
+		<%if(qnaReplyVo!=null){ %>
+			<div class="div2" style="border-bottom: 1px solid gray;background: rgb(248,248,248);">
+				<img alt="Q&A답변 이미지" src="../../images/qna1.png" style="float:left;margin-top: 40px;margin-left: 20px">
+				
+				<div style="width:500px;padding-top: 50px;padding-left: 50px;padding-bottom: 50px;">
+				<p><%=qnaReplyBody %></p>
+				</div>
+		<%} %>
+			</div>
 	  <%}else{%>
 		  <div class="div2 qnadiv clearboth" >
 			<span class="margin-top20 margin-left20 bold" style="width:750px;float: left;text-align: left;"><%=qnaBody %></span>
@@ -858,10 +904,19 @@
 			<div>
 				<span class="leftSort margin-top20 margin-left100"><%=view %></span>
 			</div>
+			<%if(qnaReplyVo!=null){ %>
+				<div class="div2" id="div5" style="clear:both;float:left;border-bottom: 1px solid gray;background: rgb(248,248,248);">
+					<img alt="Q&A답변 이미지" src="../../images/qna1.png" style="float:left;margin-top: 40px;margin-left: 20px">
+					
+				<div style="width:500px;padding-top: 50px;padding-left: 50px;padding-bottom: 50px;">
+					<p><%=qnaReplyBody %></p>
+				</div>
+			<%} %>
+			</div>
 		</div>
 	  <%}
 	}%>
-	<div class="div2">
+	<div class="div2 clearboth">
 		<button class="margin-top20" name="btn" id="qna" style="float: right;margin-bottom: 100px;">Q&A 작성</button>
 	</div>
 </section>
