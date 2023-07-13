@@ -79,13 +79,10 @@ input.form-control.mr-sm-2 {
                     </ul> 
 
 					<!-- 검색창  -->
-<<<<<<< HEAD
 					<!-- 값 입력해서 sql문에서 like로 일치하는거 찾기  -->
 					<form class ="frlist2" action="<%=request.getContextPath()%>/abmart/pdlist/pdlist.jsp">
-=======
 					<!-- 값 입력해서 sql문에서 like로 일치하는거 찾기 아닌듯..쩝  -->
-					<form class ="frlist2" action="<%=request.getContextPath()%>/abmart/pdlist//pdlist.jsp">
->>>>>>> branch 'master' of https://github.com/pjm0209/semiProject.git
+					<form class ="frlist2" action="<%=request.getContextPath()%>/abmart/pdlist/pdlist.jsp">
 				    <input class="form-control mr-sm-2" id ="searchpd" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" >
 				    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 				    </form>
