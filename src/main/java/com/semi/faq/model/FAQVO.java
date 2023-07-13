@@ -5,17 +5,19 @@ public class FAQVO {
 	public String faqTitle;
 	public String faqBody;
 	public String faqCategory;
+	public int readCount;
 	
 	public FAQVO() {
 		super();
 	}
 
-	public FAQVO(int faqNo, String faqTitle, String faqBody, String faqCategory) {
+	public FAQVO(int faqNo, String faqTitle, String faqBody, String faqCategory, int readCount) {
 		super();
 		this.faqNo = faqNo;
 		this.faqTitle = faqTitle;
 		this.faqBody = faqBody;
 		this.faqCategory = faqCategory;
+		this.readCount = readCount;
 	}
 
 	public int getfaqNo() {
@@ -50,10 +52,18 @@ public class FAQVO {
 		this.faqCategory = faqCategory;
 	}
 
+	public int getReadCount() {
+		return readCount;
+	}
+
+	public void setReadCount(int readCount) {
+		this.readCount = readCount;
+	}
+
 	@Override
 	public String toString() {
 		return "FAQVO [faqNo=" + faqNo + ", faqTitle=" + faqTitle + ", faqBody=" + faqBody + ", faqCategory="
-				+ faqCategory + "]";
+				+ faqCategory + ", readCount=" + readCount + "]";
 	}
 	
 	

@@ -45,7 +45,7 @@ public class FAQDAO {
 				String faqCategory = rs.getString("faqCategory");
 				int readCount = rs.getInt("readCount");
 				
-				FAQVO vo = new FAQVO(faqNo, faqTitle, faqBody, faqCategory);
+				FAQVO vo = new FAQVO(faqNo, faqTitle, faqBody, faqCategory, readCount);
 				list.add(vo);
 			}
 			
@@ -94,7 +94,7 @@ public class FAQDAO {
 				String faqbody = rs.getString("faqbody");
 				int readCount = rs.getInt("readCount");
 				
-				FAQVO vo = new FAQVO(faqNo, faqTitle, faqbody, faqCategory);
+				FAQVO vo = new FAQVO(faqNo, faqTitle, faqbody, faqCategory, readCount);
 				list.add(vo);
 			}
 			
@@ -156,6 +156,7 @@ public class FAQDAO {
 			pool.dbClose(ps, con);
 		}
 	}//
+	
 	
 	
 	
