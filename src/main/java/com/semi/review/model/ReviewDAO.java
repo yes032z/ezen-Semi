@@ -88,7 +88,7 @@ public class ReviewDAO {
 			con=pool.getConnection();
 			
 			String sql="select r.reviewno, r.reviewbody, p.pdname, r.reviewgrade,"
-					+" r.good, reviewregdate"
+					+" r.good, reviewregdate, p.pdno"
 					+" from review r left join product p"
 					+" on r.pdno= p.pdno"
 					+" left join member m"
@@ -113,8 +113,9 @@ public class ReviewDAO {
 				int reviewgrade=rs.getInt("reviewgrade");
 				int good=rs.getInt("good");
 				Timestamp reviewregdate=rs.getTimestamp("reviewregdate");
+				int pdno=rs.getInt("pdno");
 				
-				ViewVO vo=new ViewVO(reviewno, reviewbody, pdname, reviewgrade, good, reviewregdate);
+				ViewVO vo=new ViewVO(reviewno, reviewbody, pdname, reviewgrade, good, reviewregdate, pdno);
 				list.add(vo);
 			}
 			System.out.println("사용자 리뷰 목록 조회 결과, list.size="+list.size()+", 매개변수 id="+id

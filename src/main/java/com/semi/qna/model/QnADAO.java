@@ -60,7 +60,7 @@ public class QnADAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="select q.qnano, q.qnabody, p.pdname, q.qnaview, q.qnaregdate"
+			String sql="select q.qnano, q.qnabody, p.pdname, q.qnaview, q.qnaregdate,p.pdno"
 					 +" from qna q left join product p"
 					 +" on q.pdno= p.pdno"
 					 +" left join member m"
@@ -82,10 +82,11 @@ public class QnADAO {
 				int qnano=rs.getInt("qnano");
 				String qnabody=rs.getString("qnabody");
 				String pdname=rs.getString("pdname");
-				String qnaview=rs.getString("qnaview"); //공개유무
+				String qnaview=rs.getString("qnaview"); //답변완료유무
 				Timestamp qnaregdate=rs.getTimestamp("qnaregdate");
+				int pdno=rs.getInt("pdno");
 				
-				ViewVO vo=new ViewVO(qnano, qnabody, pdname, qnaview, qnaregdate);
+				ViewVO vo=new ViewVO(qnano, qnabody, pdname, qnaview, qnaregdate,pdno);
 				list.add(vo);
 			}
 			System.out.println("사용자 Q&A 목록 조회 결과, list.size="+list.size()+", 매개변수 id="+id

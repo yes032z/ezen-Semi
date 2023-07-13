@@ -143,7 +143,7 @@ $(function() {
 			  	%>	
 					<tr>
 						<th scope="row"><%=vo.getReviewno() %></th>
-						<td><a href="#"><%=Utility.cutString(vo.getReviewbody(),20) %></a></td>
+						<td><a href="<%=request.getContextPath() %>/abmart/pddetail/pdDetail.jsp?pdno=<%=vo.getPdno() %>"><%=Utility.cutString(vo.getReviewbody(),200) %></a></td>
 						<td><%=vo.getPdname() %></td>
 						<td>
 							<div class="d-flex justify-content-center small text-warning mb-2">

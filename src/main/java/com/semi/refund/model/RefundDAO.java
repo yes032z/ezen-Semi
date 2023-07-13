@@ -49,7 +49,7 @@ public class RefundDAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="select r.refundno, o.orderno, p.filename, p.pdname, od.orderqty, p.price, o.pickup, o.orderregdate, p.pdno"
+			String sql="select r.refundno, o.orderno, p.filename, p.pdname, od.orderqty, p.price, r.refundbody, o.orderregdate, p.pdno, r.refundregdate"
 					 +" from orderdetail od left join product p"
 					 +" on od.pdno = p.pdno"
 					 +" left join refund r"
@@ -72,11 +72,12 @@ public class RefundDAO {
 				String pdname=rs.getString("pdname");
 				int orderqty=rs.getInt("orderqty");
 				int price=rs.getInt("price");
-				String pickup=rs.getString("pickup");
+				String refundbody=rs.getString("refundbody");
 				Timestamp orderregdate=rs.getTimestamp("orderregdate");
 				int pdno=rs.getInt("pdno");
+				Timestamp refundregdate=rs.getTimestamp("refundregdate");
 				
-				ViewVO vo=new ViewVO(refundno, orderno, filename, pdname, orderqty, price, pickup, orderregdate, pdno);
+				ViewVO vo=new ViewVO(refundno, orderno, filename, pdname, orderqty, price, refundbody, orderregdate, pdno,refundregdate);
 				list.add(vo);
 			}
 			
