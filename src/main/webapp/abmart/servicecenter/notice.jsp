@@ -109,7 +109,7 @@
 			<!-- category list -->
 			<dt><a href="FAQ.jsp">FAQ</a></dt>
 			<dt><a href="notice.jsp">공지사항</a></dt>
-			<dt><a href="findStore.jsp">매장 찾기</a></dt>
+			<dt><a href="store.jsp">매장 찾기</a></dt>
 		</dl>
 		<hr style="width: 170px;">
 		<dl id="leftNavi">
