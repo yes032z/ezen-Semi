@@ -1,3 +1,4 @@
+<%@page import="java.util.ArrayList"%>
 <%@page import="com.semi.faq.model.FAQVO"%>
 <%@page import="java.util.List"%>
 <%@page import="java.sql.SQLException"%>
@@ -113,7 +114,7 @@
 			
 	}//
 	
-	List<FAQVO> list = null;
+	List<FAQVO> list = new ArrayList<>();
 	
 	System.out.println("bool = " + bool);
 	if (bool) {
