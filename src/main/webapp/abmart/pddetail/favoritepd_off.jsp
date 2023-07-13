@@ -9,13 +9,14 @@
 <title>Insert title here</title>
 </head>
 <body>
-<% 	int no=(int)session.getAttribute("no");
+<% 	
+	String no=(String)session.getAttribute("no");
 	String pdno=request.getParameter("pdno");
 	
 	FavoritePdService favoritePdService=new FavoritePdService();
 	
 	try{
-		int cnt=favoritePdService.deleteFavoriteByNo(no, Integer.parseInt(pdno));
+		int cnt=favoritePdService.deleteFavoriteByNo(Integer.parseInt(no), Integer.parseInt(pdno));
 		
 		if(cnt>0){%>
 			<script type="text/javascript">

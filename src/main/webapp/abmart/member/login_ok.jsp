@@ -33,7 +33,7 @@
 		if(result==MemberService.LOGIN_OK){
 			//1 세션에 로그인 정보 저장
 			session.setAttribute("id", id);
-			session.setAttribute("no", vo.getNo());
+			session.setAttribute("no", Integer.toString(vo.getNo()));
 			
 			//2 쿠키에 저장- 아이디 저장하기가 체크된 경우 on, null
 			if(remember!=null){ //체크한 경우

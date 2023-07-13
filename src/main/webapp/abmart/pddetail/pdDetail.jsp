@@ -22,7 +22,7 @@
 <%@include file="../../inc/top.jsp"%>
 
 <%
-	int no=(int)session.getAttribute("no");
+	String no=(String)session.getAttribute("no");
 	String pdno = request.getParameter("pdno");
 	String grade=request.getParameter("grade");
 	String lately=request.getParameter("lately");
@@ -31,8 +31,11 @@
 	ProductDetailService productDetailService = new ProductDetailService();
 	QnAService qnaService=new QnAService();
 	FavoritePdService favoritePdService=new FavoritePdService();
-	boolean bool=favoritePdService.selectByNo(no, Integer.parseInt(pdno));
 	
+	boolean bool=false;
+	if(no!=null && !no.isEmpty()){
+		bool=favoritePdService.selectByNo(Integer.parseInt(no), Integer.parseInt(pdno));
+	}
 	if (pdno == null || pdno.isEmpty()) {
 	%>
 		<script>
@@ -59,7 +62,7 @@
 	List<QnAVO> qnaList=null;
 	
 	try {
-		qnaList=qnaService.selectQnAAll(no,Integer.parseInt(pdno));
+		qnaList=qnaService.selectQnAAll(Integer.parseInt(pdno));
 		
 		//사이즈 가져오기
 		list = stockService.stockSelectByPdNo(Integer.parseInt(pdno));
@@ -161,7 +164,7 @@
 		}else{
 			$('#heartimg').attr('src','../../images/heartoff.png');
 		}
-		
+		<%if(no!=null && !no.isEmpty()){%>
 		$('#heart').click(function(){
 			if(bool10){
 				$(this).find('img').attr('src','../../images/heartoff.png');
@@ -173,13 +176,29 @@
 				location.href="favoritepd_ok.jsp?pdno=<%=pdno%>";
 			}
 		});
+		<%}else{%>
+		$('#heart').click(function(){
+			alert("로그인 후 찜한 상품으로 담을 수 있습니다.");
+			location.href="../member/login.jsp";
+		});
+		<%}%>
 		
 		$('#review').click(function(){
-			open('../reviewWrite.jsp?pdno=<%=pdno%>','review','width=600,height=900,top=300,left=700,location=yes,resizable=yes');
+			<%if(no!=null && !no.isEmpty()){%>
+				open('../reviewWrite.jsp?pdno=<%=pdno%>','review','width=600,height=900,top=300,left=700,location=yes,resizable=yes');
+			<%}else{%>
+				alert("로그인 후 리뷰 등록을 할 수 있습니다.");
+				location.href="../member/login.jsp";
+			<%}%>
 		});
 		
 		$('#qna').click(function(){
-			open('../qnaWrite.jsp?pdno=<%=pdno%>','qna','width=960,height=700,top=200,left=500,location=yes,resizable=yes');
+			<%if(no!=null && !no.isEmpty()){%>
+				open('../qnaWrite.jsp?pdno=<%=pdno%>','qna','width=960,height=700,top=200,left=500,location=yes,resizable=yes');
+			<%}else{%>
+				alert("로그인 후 QnA 등록을 할 수 있습니다.");
+				location.href="../member/login.jsp";
+			<%}%>
 		});
 		var bool1=false;
 		var bool2=false;

@@ -21,7 +21,7 @@ public class QnAService {
 	}
 	
 	//상품 디테일에 Q&A 전체 조회
-	public List<QnAVO> selectQnAAll(int no,int pdno) throws SQLException {
-		return qnaDao.selectQnAAll(no,pdno);
+	public List<QnAVO> selectQnAAll(int pdno) throws SQLException {
+		return qnaDao.selectQnAAll(pdno);
 	}
 }

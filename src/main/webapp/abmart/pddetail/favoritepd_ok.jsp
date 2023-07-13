@@ -11,13 +11,13 @@
 </head>
 <body>
 <%
-	int no=(int)session.getAttribute("no");
+	String no=(String)session.getAttribute("no");
 	String pdno=request.getParameter("pdno");
 	
 	FavoritePdService favoritePdService=new FavoritePdService();
 	
 	try{
-		int cnt=favoritePdService.insertFavoritePd(no, Integer.parseInt(pdno));
+		int cnt=favoritePdService.insertFavoritePd(Integer.parseInt(no), Integer.parseInt(pdno));
 		
 		if(cnt>0){%>
 			<script type="text/javascript">

@@ -97,7 +97,7 @@ public class QnADAO {
 		}
 	}
 	
-	public List<QnAVO> selectQnAAll(int no,int pdno) throws SQLException {
+	public List<QnAVO> selectQnAAll(int pdno) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs=null;
@@ -109,12 +109,11 @@ public class QnADAO {
 			String sql="select q.qnano, q.qnabody, q.qnaview, q.qnaregdate,q.no,q.pdno,m.id"
 					+ " from qna q join member m"
 					+ " on q.no=m.no"
-					+ " where q.no=? and q.pdno=?"
+					+ " where q.pdno=?"
 					+ " order by q.qnaregdate desc";
 			ps=con.prepareStatement(sql);
 			
-			ps.setInt(1, no);
-			ps.setInt(2, pdno);
+			ps.setInt(1, pdno);
 			
 			rs=ps.executeQuery();
 			while(rs.next()) {
@@ -130,7 +129,7 @@ public class QnADAO {
 				list.add(vo);
 			}
 			
-			System.out.println("Q&A 전체 조회 결과 list.size()="+list.size()+", 매개변수 no="+no+", pdno="+pdno);
+			System.out.println("Q&A 전체 조회 결과 list.size()="+list.size()+", 매개변수 pdno="+pdno);
 			return list;
 		}finally {
 			pool.dbClose(rs, ps, con);
