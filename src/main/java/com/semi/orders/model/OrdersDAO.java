@@ -16,7 +16,7 @@ public class OrdersDAO {
 		pool=new ConnectionPoolMgr();
 	}
 	
-	public OrdersVO selectOrderByNo(int no) throws SQLException {
+	public OrdersVO selectOrderByNo(int no , int pdno) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
 		ResultSet rs =null;
@@ -25,22 +25,29 @@ public class OrdersDAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="select orderno, orderaddress, orderregdate,ordertel,pickup,no,receiver  from orders where no=?";
+			String sql="select od.pdno,od.orderno,od.orderqty,od.pdsizeno,o.orderaddress,o.orderregdate,o.ordertel,o.pickup,o.no,o.receiver"
+					+ " from orderdetail od join orders o"
+					+ " on od.orderno=o.orderno"
+					+ " where o.no=? and od.pdno= ?";
 			ps=con.prepareStatement(sql);
 			
 			ps.setInt(1, no);
+			ps.setInt(2, pdno);
 			
 			rs=ps.executeQuery();
 			if(rs.next()) {
-				int orderno=rs.getInt(1);
-				String orderaddress=rs.getString(2);
-				Timestamp orderregdate=rs.getTimestamp(3);
-				String ordertel=rs.getString(4);
-				String pickup=rs.getString(5);
-				int no2=rs.getInt(6);
-				String receiver=rs.getString(7);
+				int pdno2=rs.getInt(1);
+				int orderno=rs.getInt(2);
+				int orderqty=rs.getInt(3);
+				int pdsizeno=rs.getInt(4);
+				String orderaddress=rs.getString(5);
+				Timestamp orderregdate=rs.getTimestamp(6);
+				String ordertel=rs.getString(7);
+				String pickup=rs.getString(8);
+				int no2=rs.getInt(9);
+				String receiver=rs.getString(10);
 				
-				vo=new OrdersVO(orderno, orderaddress, orderregdate, ordertel, pickup, no2, receiver);
+				vo=new OrdersVO(pdno2, orderqty, pdsizeno, orderno, orderaddress, orderregdate, ordertel, pickup, no2, receiver);
 			}
 			System.out.println("주문 조회 결과 vo="+vo + ", 매개변수 no="+no);
 			return vo;

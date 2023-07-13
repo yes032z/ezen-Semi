@@ -12,7 +12,6 @@ public class ViewVO {
 	private int reviewno; /* 리뷰번호 */
 	private String reviewbody; /* 내용 */
 	private int reviewgrade; /* 별점 */
-	private int good; /* 좋아요 */
 	private Timestamp reviewregdate; /* 등록일 */
 	
 	private int orderno; /* 주문번호 */
@@ -48,13 +47,12 @@ public class ViewVO {
 		this.pdno = pdno;
 	}
 	//마이페이지 > 내가 쓴 상품리뷰 목록조회
-	public ViewVO(int reviewno, String reviewbody, String pdname, int reviewgrade, int good, Timestamp reviewregdate, int pdno) {
+	public ViewVO(int reviewno, String reviewbody, String pdname, int reviewgrade, Timestamp reviewregdate, int pdno) {
 		super();
 		this.reviewno = reviewno;
 		this.reviewbody = reviewbody;
 		this.pdname = pdname;
 		this.reviewgrade = reviewgrade;
-		this.good = good;
 		this.reviewregdate = reviewregdate;
 		this.pdno = pdno;
 	}
@@ -178,12 +176,6 @@ public class ViewVO {
 	public void setReviewgrade(int reviewgrade) {
 		this.reviewgrade = reviewgrade;
 	}
-	public int getGood() {
-		return good;
-	}
-	public void setGood(int good) {
-		this.good = good;
-	}
 	public Timestamp getReviewregdate() {
 		return reviewregdate;
 	}
@@ -284,7 +276,7 @@ public class ViewVO {
 	public String toString() {
 		return "ViewVO [qnano=" + qnano + ", qnabody=" + qnabody + ", pdname=" + pdname + ", qnaview=" + qnaview
 				+ ", qnaregdate=" + qnaregdate + ", reviewno=" + reviewno + ", reviewbody=" + reviewbody
-				+ ", reviewgrade=" + reviewgrade + ", good=" + good + ", reviewregdate=" + reviewregdate + ", orderno="
+				+ ", reviewgrade=" + reviewgrade + ", reviewregdate=" + reviewregdate + ", orderno="
 				+ orderno + ", orderqty=" + orderqty + ", price=" + price + ", pickup=" + pickup + ", orderregdate="
 				+ orderregdate + ", filename=" + filename + ", favoriteno=" + favoriteno + ", pdno=" + pdno + ", brand="
 				+ brand + ", regdate=" + regdate + ", pdsize=" + pdsize + ", stockqty=" + stockqty + ", refundno="

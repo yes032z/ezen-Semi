@@ -88,7 +88,7 @@ public class ReviewDAO {
 			con=pool.getConnection();
 			
 			String sql="select r.reviewno, r.reviewbody, p.pdname, r.reviewgrade,"
-					+" r.good, reviewregdate, p.pdno"
+					+" reviewregdate, p.pdno"
 					+" from review r left join product p"
 					+" on r.pdno= p.pdno"
 					+" left join member m"
@@ -111,11 +111,10 @@ public class ReviewDAO {
 				String reviewbody=rs.getString("reviewbody");
 				String pdname=rs.getString("pdname");
 				int reviewgrade=rs.getInt("reviewgrade");
-				int good=rs.getInt("good");
 				Timestamp reviewregdate=rs.getTimestamp("reviewregdate");
 				int pdno=rs.getInt("pdno");
 				
-				ViewVO vo=new ViewVO(reviewno, reviewbody, pdname, reviewgrade, good, reviewregdate, pdno);
+				ViewVO vo=new ViewVO(reviewno, reviewbody, pdname, reviewgrade, reviewregdate, pdno);
 				list.add(vo);
 			}
 			System.out.println("사용자 리뷰 목록 조회 결과, list.size="+list.size()+", 매개변수 id="+id
@@ -170,7 +169,7 @@ public class ReviewDAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="select distinct r.reviewno, r.reviewbody,r.reviewregdate,r.reviewgrade,r.good,r.no,r.pdno,rd.filename,rd.filesize,rd.originalfilename,m.id"
+			String sql="select distinct r.reviewno, r.reviewbody,r.reviewregdate,r.reviewgrade,r.no,r.pdno,rd.filename,rd.filesize,rd.originalfilename,m.id"
 					+ " from review r left join reviewdetail rd"
 					+ " on r.reviewno=rd.reviewno"
 					+ " left join member m"
@@ -191,15 +190,14 @@ public class ReviewDAO {
 				String reviewbody=rs.getString(2);
 				Timestamp reviewregdate=rs.getTimestamp(3);
 				int reviewgrade=rs.getInt(4);
-				int good=rs.getInt(5);
-				int no=rs.getInt(6);
-				int pdno2=rs.getInt(7);
-				String filename=rs.getString(8);
-				long filesize=rs.getLong(9);
-				String originalfilename=rs.getString(10);
-				String id=rs.getString(11);
+				int no=rs.getInt(5);
+				int pdno2=rs.getInt(6);
+				String filename=rs.getString(7);
+				long filesize=rs.getLong(8);
+				String originalfilename=rs.getString(9);
+				String id=rs.getString(10);
 				
-				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, good, no, pdno2, filename, filesize, originalfilename, id);
+				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, no, pdno2, filename, filesize, originalfilename, id);
 				list.add(vo);
 			}
 			
@@ -220,7 +218,7 @@ public class ReviewDAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="select distinct r.reviewno, r.reviewbody,r.reviewregdate,r.reviewgrade,r.good,r.no,r.pdno,rd.filename,rd.filesize,rd.originalfilename,m.id"
+			String sql="select distinct r.reviewno, r.reviewbody,r.reviewregdate,r.reviewgrade,r.no,r.pdno,rd.filename,rd.filesize,rd.originalfilename,m.id"
 					+ " from review r left join reviewdetail rd"
 					+ " on r.reviewno=rd.reviewno"
 					+ " left join member m"
@@ -241,15 +239,14 @@ public class ReviewDAO {
 				String reviewbody=rs.getString(2);
 				Timestamp reviewregdate=rs.getTimestamp(3);
 				int reviewgrade=rs.getInt(4);
-				int good=rs.getInt(5);
-				int no=rs.getInt(6);
-				int pdno2=rs.getInt(7);
-				String filename=rs.getString(8);
-				long filesize=rs.getLong(9);
-				String originalfilename=rs.getString(10);
-				String id=rs.getString(11);
+				int no=rs.getInt(5);
+				int pdno2=rs.getInt(6);
+				String filename=rs.getString(7);
+				long filesize=rs.getLong(8);
+				String originalfilename=rs.getString(9);
+				String id=rs.getString(10);
 				
-				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, good, no, pdno2, filename, filesize, originalfilename, id);
+				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, no, pdno2, filename, filesize, originalfilename, id);
 				list.add(vo);
 			}
 			
@@ -270,7 +267,7 @@ public class ReviewDAO {
 		try {
 			con=pool.getConnection();
 			
-			String sql="select distinct r.reviewno, r.reviewbody,r.reviewregdate,r.reviewgrade,r.good,r.no,r.pdno,rd.filename,rd.filesize,rd.originalfilename,m.id"
+			String sql="select distinct r.reviewno, r.reviewbody,r.reviewregdate,r.reviewgrade,r.no,r.pdno,rd.filename,rd.filesize,rd.originalfilename,m.id"
 					+ " from review r left join reviewdetail rd"
 					+ " on r.reviewno=rd.reviewno"
 					+ " left join member m"
@@ -291,15 +288,14 @@ public class ReviewDAO {
 				String reviewbody=rs.getString(2);
 				Timestamp reviewregdate=rs.getTimestamp(3);
 				int reviewgrade=rs.getInt(4);
-				int good=rs.getInt(5);
-				int no=rs.getInt(6);
-				int pdno2=rs.getInt(7);
-				String filename=rs.getString(8);
-				long filesize=rs.getLong(9);
-				String originalfilename=rs.getString(10);
-				String id=rs.getString(11);
+				int no=rs.getInt(5);
+				int pdno2=rs.getInt(6);
+				String filename=rs.getString(7);
+				long filesize=rs.getLong(8);
+				String originalfilename=rs.getString(9);
+				String id=rs.getString(10);
 				
-				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, good, no, pdno2, filename, filesize, originalfilename, id);
+				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, no, pdno2, filename, filesize, originalfilename, id);
 				list.add(vo);
 			}
 			

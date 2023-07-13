@@ -78,7 +78,7 @@
 		
 		//주문번호 가져오기
 		if(no!=null && !no.isEmpty()){
-			ordersVo=orderService.selectOrderByNo(Integer.parseInt(no));
+			ordersVo=orderService.selectOrderByNo(Integer.parseInt(no),Integer.parseInt(pdno));
 		}
 		if(lately.equals("lately")){
 			//리뷰 최근 등록순

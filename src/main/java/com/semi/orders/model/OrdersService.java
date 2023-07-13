@@ -10,8 +10,8 @@ public class OrdersService {
 	}
 	
 	
-	public OrdersVO selectOrderByNo(int no) throws SQLException {
-		return orderDao.selectOrderByNo(no);
+	public OrdersVO selectOrderByNo(int no,int pdno) throws SQLException {
+		return orderDao.selectOrderByNo(no,pdno);
 	}
 
 }

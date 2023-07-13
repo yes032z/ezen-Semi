@@ -3,6 +3,10 @@ package com.semi.orders.model;
 import java.sql.Timestamp;
 
 public class OrdersVO {
+	private int pdno;
+	private int orderqty;
+	private int pdsizeno;
+	
 	private int orderno; 
 	private String orderaddress; 
 	private Timestamp orderregdate;
@@ -14,6 +18,23 @@ public class OrdersVO {
 	public OrdersVO() {
 		super();
 	}
+	
+
+	public OrdersVO(int pdno, int orderqty, int pdsizeno, int orderno, String orderaddress, Timestamp orderregdate,
+			String ordertel, String pickup, int no, String receiver) {
+		super();
+		this.pdno = pdno;
+		this.orderqty = orderqty;
+		this.pdsizeno = pdsizeno;
+		this.orderno = orderno;
+		this.orderaddress = orderaddress;
+		this.orderregdate = orderregdate;
+		this.ordertel = ordertel;
+		this.pickup = pickup;
+		this.no = no;
+		this.receiver = receiver;
+	}
+
 
 	public OrdersVO(int orderno, String orderaddress, Timestamp orderregdate, String ordertel, String pickup, int no,
 			String receiver) {
@@ -26,6 +47,38 @@ public class OrdersVO {
 		this.no = no;
 		this.receiver = receiver;
 	}
+	
+	
+
+	public int getPdno() {
+		return pdno;
+	}
+
+
+	public void setPdno(int pdno) {
+		this.pdno = pdno;
+	}
+
+
+	public int getOrderqty() {
+		return orderqty;
+	}
+
+
+	public void setOrderqty(int orderqty) {
+		this.orderqty = orderqty;
+	}
+
+
+	public int getPdsizeno() {
+		return pdsizeno;
+	}
+
+
+	public void setPdsizeno(int pdsizeno) {
+		this.pdsizeno = pdsizeno;
+	}
+
 
 	public int getOrderno() {
 		return orderno;
@@ -83,11 +136,14 @@ public class OrdersVO {
 		this.receiver = receiver;
 	}
 
+
 	@Override
 	public String toString() {
-		return "OrdersVO [orderno=" + orderno + ", orderaddress=" + orderaddress + ", orderregdate=" + orderregdate
-				+ ", ordertel=" + ordertel + ", pickup=" + pickup + ", no=" + no + ", receiver=" + receiver + "]";
+		return "OrdersVO [pdno=" + pdno + ", orderqty=" + orderqty + ", pdsizeno=" + pdsizeno + ", orderno=" + orderno
+				+ ", orderaddress=" + orderaddress + ", orderregdate=" + orderregdate + ", ordertel=" + ordertel
+				+ ", pickup=" + pickup + ", no=" + no + ", receiver=" + receiver + "]";
 	}
+
 	
 	
 }
