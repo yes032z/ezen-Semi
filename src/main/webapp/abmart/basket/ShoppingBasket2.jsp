@@ -1,3 +1,8 @@
+<%@page import="java.text.DecimalFormat"%>
+<%@page import="java.sql.SQLException"%>
+<%@page import="java.util.List"%>
+<%@page import="com.semi.product.model.ProductVO"%>
+<%@page import="com.semi.product.model.ProductService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@include file="../../inc/top.jsp" %>
@@ -185,37 +190,52 @@ td {
 .basket ul :first-child {
   color: red;
 }
-
-
-
 </style>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
-$(document).ready(function() { 		       
+$(document).ready(function() { 	
+    $(document).on("click", ".plus_btn", function() {
+        var input = $(this).siblings(".quantity-input");
+        var quantity = parseInt(input.val());
+        input.val(quantity + 1);
+
+        updateTotalPrice($(this).closest("tr"));
+    });
+
+    $(document).on("click", ".minus_btn", function() {
+        var input = $(this).siblings(".quantity-input");
+        var quantity = parseInt(input.val());
+        if (quantity > 1) {
+            input.val(quantity - 1);
+            updateTotalPrice($(this).closest("tr"));
+        }
+    });
+
+    function updateTotalPrice(row) {
+        var quantity = parseInt(row.find(".quantity-input").val());
+        var price = parseInt(row.find(".price").text().replace(",", "").replace("원", ""));
+        var totalPrice = quantity * price;
+        row.find(".sumprice").text(totalPrice.toLocaleString() + "원");
+    }
+
+	
     $(".basket_list_optionbtn").on("click", function() {
         var checkedRows = $("input[type='checkbox'][name!='all']:checked").parents("tr");
         checkedRows.remove();
     }); 
         
     $(".basket_bigorderbtn.left").click(function() {
-    	location.href = "index.jsp";
+    	location.href = "http://localhost:9090/semiProject/index.jsp";
     }); 
-    
+  
     $(".basket_bigorderbtn.right").click(function() {
-    	location.href = "OrderPayment.jsp";
+        var checkedItems = $("input[type='checkbox'][name!='all']:checked").length;
+        if (checkedItems === 0) {
+            alert("주문할 상품을 선택해주세요."); 
+        } else {
+        	location.href = "OrderPayment.jsp";
+        }
     });
-    
-    $(".plus_btn").on("click", function() {
-        var quantity = parseInt($(this).siblings(".quantity-input").val());
-        $(this).siblings(".quantity-input").val(quantity + 1);
-        quantity++;
-        updateSumPrice($(this));
-    });
-
-
-
-    
-    
 });
 </script>
 </head>
@@ -225,55 +245,64 @@ $(document).ready(function() {
         <hr>
     </div>
     <section class="basket">
-        <table class="basket_list">
-            <form>            	 
+        <table class="basket_list">         	 
             	<input type="button" class="basket_list_optionbtn" name="delete_btn" value="선택 상품 삭제">
                 <thead>
                     <tr>
                         <td></td>
                         <td colspan="2">상품정보</td>
+                        <td>사이즈</td>
                         <td>상품 주문 수량</td>
                         <td>상품금액</td>
-                        <td>배송비</td>                                               
+                        <td>배송비</td>
+                        <td>합계</td>                                               
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="basket_list_detail">
-                        <td><input type="checkbox"></td>
-                        <td><img src="https://image.a-rt.com/art/product/2023/05/73554_1683853295803.jpg?shrink=590:590" alt="1"></td>
-                        <td><a href="#">아디다스</a><span class="basket_list_smartstore"></span>
-                            <p>아디코드</p>                       
-                        </td>
-                       	<td class="basket_list_option">
-	                        <button class="plus_btn">+</button>
-	                        <input type="text" class="quantity-input" value="1" style=width:30px>
-	                        <button class="minus_btn">-</button>                        
-                        </td>
-                        <td><span class="sumprice">63,000원</span><br>                            
-                        </td>
-                        <td>무료</td>
-                    </tr>
                     <tr class="basket_list_detail">
                         <td style="width: 2%;"><input type="checkbox"></td>
                         <td style="width: 13%;">
                             <img src="https://image.a-rt.com/art/product/2020/10/29855_1603086614649.jpg?shrink=590:590" alt="1">
                         </td>
-                        <td style="width: 27%;"><a href="#">나이키</a><span class="basket_list_smartstore"></span>
-                            <p>스탠 스미스</p>
+                        <td style="width: 20%;"><p>스미스</p><br>                 
+                        <span class="basket_list_smartstore"></span>스탠 스미스                            
                         </td>
-                        <td class="basket_list_option" style="width: 27%;">
+                         <td style="width: 10%;">280<span class="size"></span><br>
+                        <td class="basket_list_option" style="width: 20%;">
                         	<div class="quantity-adjustment">
-	                           	<button class="plus_btn">+</button>
-		                        <input type="text" class="quantity-input" value="1" style=width:30px>
-		                        <button class="minus_btn">-</button>    
+			                    <button class="plus_btn">+</button>
+								<input type="text" class="quantity-input" value="1" style="width:30px">
+								<button class="minus_btn">-</button>    
 		                    </div>                       
                         </td>
-                        <td style="width: 15%;"><span class="sumprice">29,000원</span><br>                            
+                        <td style="width: 15%;"><span class="price">29,000원</span><br>                            
                         </td>
                         <td style="width: 15%;">무료</td>
+                        <td class="sumprice">29,000원</td>                        
+                    </tr>
+                    
+                    <tr class="basket_list_detail">
+                        <td style="width: 2%;"><input type="checkbox"></td>
+                        <td style="width: 13%;">
+                            <img src="https://image.a-rt.com/art/product/2020/10/29855_1603086614649.jpg?shrink=590:590" alt="1">
+                        </td>
+                        <td style="width: 20%;"><p>나이키</p><br>
+                        <span class="basket_list_smartstore"></span>스탠 스미스                            
+                        </td>
+                         <td style="width: 10%;"><span class="size">260</span><br>
+                        <td class="basket_list_option" style="width: 20%;">
+                        	<div class="quantity-adjustment">
+			                    <button class="plus_btn">+</button>
+								<input type="text" class="quantity-input" value="1" style="width:30px">
+								<button class="minus_btn">-</button>    
+		                    </div>                       
+                        </td>
+                        <td style="width: 15%;"><span class="price">29,000원</span><br>                            
+                        </td>
+                        <td style="width: 15%;">무료</td>
+                        <td class="sumprice">29,000원</td>                        
                     </tr>
                 </tbody>                
-            </form>
         </table>
         <div class="basket_mainbtns">
             <input type="button" class="basket_bigorderbtn left" name="shop_btn" value="계속 쇼핑하기">                        

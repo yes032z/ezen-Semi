@@ -96,6 +96,42 @@ public class QnADAO {
 		}
 	}
 	
+	public List<QnAVO> selectQnAAll() throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<QnAVO> list=new ArrayList<>();
+		try {
+			con=pool.getConnection();
+			
+			String sql="select q.qnano, q.qnabody, q.qnaview, q.qnaregdate,q.no,q.pdno,m.id"
+					+ " from qna q join member m"
+					+ " on q.no=m.no"
+					+ " order by q.qnaregdate desc";
+			ps=con.prepareStatement(sql);
+			
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				int qnano=rs.getInt(1);
+				String qnabody=rs.getString(2);
+				String qnaview=rs.getString(3);
+				Timestamp qnaregdate=rs.getTimestamp(4);
+				int no=rs.getInt(5);
+				int pdno=rs.getInt(6);
+				String id=rs.getString(7);
+				
+				QnAVO vo=new QnAVO(qnano, qnabody, qnaview, qnaregdate, no, pdno, id);
+				list.add(vo);
+			}
+			
+			System.out.println("Q&A 전체 조회 결과 list.size()="+list.size());
+			return list;
+		}finally {
+			pool.dbClose(rs, ps, con);
+		}
+	}
+	
 	
 	
 }

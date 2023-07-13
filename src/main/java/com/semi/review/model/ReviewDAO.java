@@ -26,23 +26,18 @@ public class ReviewDAO {
 	public int insertReview(ReviewVO vo) throws SQLException {
 		Connection con=null;
 		PreparedStatement ps=null;
-		int cnt=0;
 		
 		try {
 			con=pool.getConnection();
-			String sql="insert into review(reviewno, reviewbody, reviewgrade,"
-					+ " no, pdno, filename, filesize, originalfilename)"
-					+ " values(review_seq.nextval, ?, ?, ?, ?, ?, ?, ?)";
+			String sql="insert into review(reviewno, reviewbody, reviewgrade, no, pdno)"
+					+ " values(review_seq.nextval, ?, ?, ?, ?)";
 			ps=con.prepareStatement(sql);
 			ps.setString(1, vo.getReviewbody());
 			ps.setInt(2, vo.getReviewgrade());
 			ps.setInt(3, vo.getNo());
 			ps.setInt(4, vo.getPdno());
-			ps.setString(5, vo.getFilename());
-			ps.setLong(6, vo.getFilesize());
-			ps.setString(7, vo.getOriginalfilename());
 			
-			cnt=ps.executeUpdate();
+			int cnt=ps.executeUpdate();
 			System.out.println("리뷰 등록 결과, cnt="+cnt+", 매개변수 vo="+vo);
 			return cnt;
 		}finally {
@@ -63,16 +58,12 @@ public class ReviewDAO {
 		try {
 			con=pool.getConnection();
 			String sql="update review"
-					+ " set reviewbody= ?, reviewgrade= ?, filename= ?,"
-					+ " filesize= ?, originalfilename= ?"
+					+ " set reviewbody= ?, reviewgrade= ?"
 					+ " where reviewno= ?";
 					ps=con.prepareStatement(sql);
 			ps.setString(1, vo.getReviewbody());
 			ps.setInt(2, vo.getReviewgrade());
-			ps.setString(3, vo.getFilename());
-			ps.setLong(4, vo.getFilesize());
-			ps.setString(5, vo.getOriginalfilename());
-			ps.setInt(6, vo.getReviewno());
+			ps.setInt(3, vo.getReviewno());
 			
 			cnt=ps.executeUpdate();
 			System.out.println("리뷰 수정 결과, cnt="+cnt+", 매개변수 vo="+vo);
@@ -132,6 +123,191 @@ public class ReviewDAO {
 		}finally {
 			pool.dbClose(rs, ps, con);
 		}
+	}
+	
+	public int reviewFindNo(int no,int pdno) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		int reviewno=0;
+		try {
+			con=pool.getConnection();
+			
+			String sql="select reviewno from review"
+					+ " where no=? and pdno=?"
+					+ " order by reviewregdate desc";
+			ps=con.prepareStatement(sql);
+			
+			ps.setInt(1, no);
+			ps.setInt(2, pdno);
+			
+			rs=ps.executeQuery();
+			if(rs.next()){
+				reviewno=rs.getInt(1);
+			}
+			
+			System.out.println("리뷰 번호 찾기 결과 reviewno="+reviewno+", 매개변수 no="+no+", pdno="+pdno);
+			return reviewno;
+		}finally {
+			pool.dbClose(rs, ps, con);
+		}
+	}
+	
+	/**
+	 * @param pdno
+	 * @return
+	 * @throws SQLException
+	 */
+	//평점 높은순
+	public List<ReviewVO> selectGradeHigh(int pdno) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<ReviewVO> list =new ArrayList<>();
+		try {
+			con=pool.getConnection();
+			
+			String sql="select distinct r.reviewno, r.reviewbody,r.reviewregdate,r.reviewgrade,r.good,r.no,r.pdno,rd.filename,rd.filesize,rd.originalfilename,m.id"
+					+ " from review r left join reviewdetail rd"
+					+ " on r.reviewno=rd.reviewno"
+					+ " left join member m"
+					+ " on r.no=m.no"
+					+ " left join orders o"
+					+ " on m.no=o.no"
+					+ " left join orderdetail od"
+					+ " on o.orderno=od.orderno"
+					+ " where r.pdno=?"
+					+ " order by reviewgrade desc";
+			ps=con.prepareStatement(sql);
+			
+			ps.setInt(1, pdno);
+			
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				int reviewno=rs.getInt(1);
+				String reviewbody=rs.getString(2);
+				Timestamp reviewregdate=rs.getTimestamp(3);
+				int reviewgrade=rs.getInt(4);
+				int good=rs.getInt(5);
+				int no=rs.getInt(6);
+				int pdno2=rs.getInt(7);
+				String filename=rs.getString(8);
+				long filesize=rs.getLong(9);
+				String originalfilename=rs.getString(10);
+				String id=rs.getString(11);
+				
+				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, good, no, pdno2, filename, filesize, originalfilename, id);
+				list.add(vo);
+			}
+			
+			System.out.println("리뷰 평점 높은순 조회 결과 list.size()="+list.size()+", 매개변수 pdno="+pdno);
+			return list;
+		}finally {
+			pool.dbClose(rs, ps, con);
+		}
+			
+	}
+	//평점 낮은순
+	public List<ReviewVO> selectGradeLow(int pdno) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<ReviewVO> list =new ArrayList<>();
+		try {
+			con=pool.getConnection();
+			
+			String sql="select distinct r.reviewno, r.reviewbody,r.reviewregdate,r.reviewgrade,r.good,r.no,r.pdno,rd.filename,rd.filesize,rd.originalfilename,m.id"
+					+ " from review r left join reviewdetail rd"
+					+ " on r.reviewno=rd.reviewno"
+					+ " left join member m"
+					+ " on r.no=m.no"
+					+ " left join orders o"
+					+ " on m.no=o.no"
+					+ " left join orderdetail od"
+					+ " on o.orderno=od.orderno"
+					+ " where r.pdno=?"
+					+ " order by reviewgrade";
+			ps=con.prepareStatement(sql);
+			
+			ps.setInt(1, pdno);
+			
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				int reviewno=rs.getInt(1);
+				String reviewbody=rs.getString(2);
+				Timestamp reviewregdate=rs.getTimestamp(3);
+				int reviewgrade=rs.getInt(4);
+				int good=rs.getInt(5);
+				int no=rs.getInt(6);
+				int pdno2=rs.getInt(7);
+				String filename=rs.getString(8);
+				long filesize=rs.getLong(9);
+				String originalfilename=rs.getString(10);
+				String id=rs.getString(11);
+				
+				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, good, no, pdno2, filename, filesize, originalfilename, id);
+				list.add(vo);
+			}
+			
+			System.out.println("리뷰 평점 낮은순 조회 결과 list.size()="+list.size()+", 매개변수 pdno="+pdno);
+			return list;
+		}finally {
+			pool.dbClose(rs, ps, con);
+		}
+			
+	}
+	//최근 등록순
+	public List<ReviewVO> selectLately(int pdno) throws SQLException {
+		Connection con=null;
+		PreparedStatement ps=null;
+		ResultSet rs=null;
+		
+		List<ReviewVO> list =new ArrayList<>();
+		try {
+			con=pool.getConnection();
+			
+			String sql="select distinct r.reviewno, r.reviewbody,r.reviewregdate,r.reviewgrade,r.good,r.no,r.pdno,rd.filename,rd.filesize,rd.originalfilename,m.id"
+					+ " from review r left join reviewdetail rd"
+					+ " on r.reviewno=rd.reviewno"
+					+ " left join member m"
+					+ " on r.no=m.no"
+					+ " left join orders o"
+					+ " on m.no=o.no"
+					+ " left join orderdetail od"
+					+ " on o.orderno=od.orderno"
+					+ " where r.pdno=?"
+					+ " order by r.reviewregdate desc";
+			ps=con.prepareStatement(sql);
+			
+			ps.setInt(1, pdno);
+			
+			rs=ps.executeQuery();
+			while(rs.next()) {
+				int reviewno=rs.getInt(1);
+				String reviewbody=rs.getString(2);
+				Timestamp reviewregdate=rs.getTimestamp(3);
+				int reviewgrade=rs.getInt(4);
+				int good=rs.getInt(5);
+				int no=rs.getInt(6);
+				int pdno2=rs.getInt(7);
+				String filename=rs.getString(8);
+				long filesize=rs.getLong(9);
+				String originalfilename=rs.getString(10);
+				String id=rs.getString(11);
+				
+				ReviewVO vo=new ReviewVO(reviewno, reviewbody, reviewregdate, reviewgrade, good, no, pdno2, filename, filesize, originalfilename, id);
+				list.add(vo);
+			}
+			
+			System.out.println("리뷰 최근 등록순 조회 결과 list.size()="+list.size()+", 매개변수 pdno="+pdno);
+			return list;
+		}finally {
+			pool.dbClose(rs, ps, con);
+		}
+			
 	}
 	
 }

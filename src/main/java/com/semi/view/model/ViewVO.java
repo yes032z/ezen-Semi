@@ -24,6 +24,14 @@ public class ViewVO {
 
 	private int favoriteno; /* 찜한상품번호 */
 	private int pdno; /* 상품고유번호 */
+	private String brand; /* 브랜드 */
+	
+	private Timestamp regdate; /* 입고일 */
+	private int pdsize; /* 사이즈 */
+	private int stockqty; /* 수량 */
+	
+	private int refundno; /* 환불번호 */
+	private String refundbody; /* 환불사유 */
 	
 	public ViewVO() {
 		super();
@@ -48,7 +56,7 @@ public class ViewVO {
 		this.reviewregdate = reviewregdate;
 	}
 	//마이페이지 > 주문 조회
-	public ViewVO(int orderno, String filename, String pdname,  int orderqty, int price, String pickup, Timestamp orderregdate) {
+	public ViewVO(int orderno, String filename, String pdname,  int orderqty, int price, String pickup, Timestamp orderregdate, int pdno) {
 		super();
 		this.orderno = orderno;
 		this.filename = filename;
@@ -57,6 +65,7 @@ public class ViewVO {
 		this.price = price;
 		this.pickup = pickup;
 		this.orderregdate = orderregdate;
+		this.pdno = pdno;
 	}
 	//마이페이지> 찜목록
 	public ViewVO(int favoriteno, String filename, String pdname, int price, int pdno) {
@@ -67,6 +76,57 @@ public class ViewVO {
 		this.price = price;
 		this.pdno = pdno;
 	}
+	//마이페이지 찜목록 최근 4건조회
+	public ViewVO(String filename, String pdname, String brand, int price, int pdno) {
+		super();
+		this.filename = filename;
+		this.pdname = pdname;
+		this.brand = brand;
+		this.price = price;
+		this.pdno = pdno;
+	}
+	//사용자 발사이즈에 맞는 찜상품 입고 알림 조회
+	public ViewVO(int favoriteno, int pdno, Timestamp regdate, int stockqty, String pdname, int pdsize, String filename) {
+		super();
+		this.favoriteno = favoriteno;
+		this.pdno = pdno;
+		this.regdate = regdate;
+		this.stockqty = stockqty;
+		this.pdname = pdname;
+		this.pdsize = pdsize;
+		this.filename = filename;
+	}
+	//환불 insert
+	public ViewVO(int refundno, String refundbody, int pdno, int orderno) {
+		this.refundno = refundno;
+		this.refundbody = refundbody;
+		this.pdno = pdno;
+		this.orderno = orderno;
+	}
+	//마이페이지 > 주문목록 > 환불신청전 내역띄우기
+	public ViewVO(int orderno, int orderqty, String pdname, int price, String filename,int pdno) {
+		super();
+		this.orderno = orderno;
+		this.orderqty = orderqty;
+		this.pdname = pdname;
+		this.price = price;
+		this.filename = filename;
+		this.pdno = pdno;
+	}
+	//마이페이지 > 환불목록 조회
+	public ViewVO(int refundno, int orderno, String filename, String pdname,  int orderqty, int price, String pickup, Timestamp orderregdate, int pdno) {
+		super();
+		this.refundno = refundno;
+		this.orderno = orderno;
+		this.filename = filename;
+		this.pdname = pdname;
+		this.orderqty = orderqty;
+		this.price = price;
+		this.pickup = pickup;
+		this.orderregdate = orderregdate;
+		this.pdno = pdno;
+	}
+	
 	public int getQnano() {
 		return qnano;
 	}
@@ -175,13 +235,52 @@ public class ViewVO {
 	public void setPdno(int pdno) {
 		this.pdno = pdno;
 	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public Timestamp getRegdate() {
+		return regdate;
+	}
+	public void setRegdate(Timestamp regdate) {
+		this.regdate = regdate;
+	}
+	public int getPdsize() {
+		return pdsize;
+	}
+	public void setPdsize(int pdsize) {
+		this.pdsize = pdsize;
+	}
+	public int getStockqty() {
+		return stockqty;
+	}
+	public void setStockqty(int stockqty) {
+		this.stockqty = stockqty;
+	}
+	public int getRefundno() {
+		return refundno;
+	}
+	public void setRefundno(int refundno) {
+		this.refundno = refundno;
+	}
+	public String getRefundbody() {
+		return refundbody;
+	}
+	public void setRefundbody(String refundbody) {
+		this.refundbody = refundbody;
+	}
 	@Override
 	public String toString() {
 		return "ViewVO [qnano=" + qnano + ", qnabody=" + qnabody + ", pdname=" + pdname + ", qnaview=" + qnaview
 				+ ", qnaregdate=" + qnaregdate + ", reviewno=" + reviewno + ", reviewbody=" + reviewbody
 				+ ", reviewgrade=" + reviewgrade + ", good=" + good + ", reviewregdate=" + reviewregdate + ", orderno="
 				+ orderno + ", orderqty=" + orderqty + ", price=" + price + ", pickup=" + pickup + ", orderregdate="
-				+ orderregdate + ", filename=" + filename + ", favoriteno=" + favoriteno + ", pdno=" + pdno + "]";
+				+ orderregdate + ", filename=" + filename + ", favoriteno=" + favoriteno + ", pdno=" + pdno + ", brand="
+				+ brand + ", regdate=" + regdate + ", pdsize=" + pdsize + ", stockqty=" + stockqty + ", refundno="
+				+ refundno + ", refundbody=" + refundbody + "]";
 	}
+	
 	
 }

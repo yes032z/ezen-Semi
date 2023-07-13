@@ -1,3 +1,4 @@
+<%@page import="com.semi.common.PagingVO"%>
 <%@page import="java.text.DecimalFormat"%>
 <%@page import="java.sql.SQLException"%>
 <%@page import="com.semi.product.model.ProductVO"%>
@@ -6,54 +7,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../../inc/top.jsp"%>
-<jsp:useBean id="pdService" class="com.semi.product.model.ProductService" scope="session"></jsp:useBean>
 <%
+	String brand=request.getParameter("brand");
+	String kind=request.getParameter("kind");
+	String grade=request.getParameter("grade");
+	String price=request.getParameter("price");
+	
+	if(brand==null || brand.isEmpty()){
+		brand="";
+	}
+	if(kind==null || kind.isEmpty()){
+		kind="";
+	}
+	if(grade==null || grade.isEmpty()){
+		grade="";
+	}
+	if(price==null || price.isEmpty()){
+		price="";
+	}
+	
 	List<ProductVO> list=null;
 	try{
-		list=pdService.selectPdAll();
+		list=pdService.selectPdAll(brand, kind,grade,price);
 	}catch(SQLException e){
 		e.printStackTrace();
 	}
 	
 	DecimalFormat df=new DecimalFormat("#,###");
+	
+	int currentPage=1;
+	String cp=request.getParameter("currentPage");
+	if(cp!=null && !cp.isEmpty()){
+		currentPage=Integer.parseInt(cp);
+	}
+	int totalRecord=list.size();
+	int pageSize=5;
+	int blockSize=10;
+	PagingVO pagingVo=new PagingVO(currentPage,totalRecord,pageSize,blockSize);
+	
 %>
 <script type="text/javascript">
 	$(function() {
 		$('button[name=brand]').click(function(){
 			var brand=$(this).html();
 			
-			$('#filter').before("<button class='btn size' id='del' style='float:left'>"+brand+"</button>");
+			location.href="pdlist.jsp?brand="+brand;
 		});
 		
 		$('button[name=kind]').click(function(){
 			var kind=$(this).html();
 			
-			$('#filter').before("<button class='btn size' id='del' style='float:left'>"+kind+"</button>");
+			location.href="pdlist.jsp?kind="+kind;
 		});
 		
-		$(document).on('click', '#del', function() {
-			 $(this).remove();
-		});
-		
-		$('#filter').click(function(){
-			$(this).parent().find('*').not(this).remove();
-		});
 	});
 </script>
 <div>
 	<section class="py-5">
-		<!-- <div style="text-align: center">
-		<div style="width: 1300px;">
-			<ul class="nav nav-tabs">
-				<li class="nav-item" style="width: 650px"><a class="nav-link "
-					id="alink1" aria-current="page" href="#">선택</a></li>
-				<li class="nav-item" style="width: 650px"><a class="nav-link "
-					id="alink2" href="#">미선택</a></li>
-			</ul>
-		</div>
-	</div> -->
-		<aside
-			style="width: 300px; height: 400px; float: left; margin-left: 150px;">
+		<aside style="width: 300px; height: 600px; float: left; margin-left: 150px;">
 			<div>
 				<hr>
 				<h4>브랜드</h4>
@@ -95,103 +106,110 @@
 			</div>
 		</aside>
 		<div id="pdbox">
-			<div id="fiteradd">
-				<button class="btn btn-secondary" id="filter" style="float: left;">필터
-					초기화</button>
-			</div>
 			<div id="searchSort">
 				<span class="leftSort">총 </span><span class="leftSort"
 					name="searchqty"><%=list.size() %></span><span class="leftSort">개의 상품이
 					있습니다.</span><span class="rightSort" id="span2">&nbsp;|&nbsp;<a
-					href="#">가격순</a></span> <span class="rightSort" id="span1">&nbsp;<a
-					href="#">평점순</a>&nbsp;
+					<%if(brand!=null && !brand.isEmpty()){ %>
+						href="pdlist.jsp?brand=<%=brand%>&price=price"
+					<%}else if(kind!=null && !kind.isEmpty()){ %>
+						href="pdlist.jsp?kind=<%=kind%>&price=price"
+					<%}else{%>
+						href="pdlist.jsp?price=price"
+					<%}%>>가격낮은순</a></span>
+					<span class="rightSort" id="span1">&nbsp;<a 
+					<%if(brand!=null && !brand.isEmpty()){ %>
+						href="pdlist.jsp?brand=<%=brand%>&grade=grade"
+					<%}else if(kind!=null && !kind.isEmpty()){ %>
+						href="pdlist.jsp?kind=<%=kind%>&grade=grade"
+					<%}else{%>
+						href="pdlist.jsp?grade=grade"
+					<%}%>>평점높은순</a>&nbsp;
 				</span>
 			</div>
-			<div class="div1">
+			<div style="width: 1000px;float: right;margin-left: 500px;">
 				<hr style="clear: both;">
-				
-			<%for(int i=0;i<list.size();i++){
-					ProductVO vo=list.get(i);%>
-				<a href="../pddetail/pdDetail.jsp?pdno=<%=vo.getPdno()%>">
-				<div class="col mb-5">
-					<div class="card h-100">
-						<!-- Sale badge-->
-						<!-- <div class="badge bg-dark text-white position-absolute"
-					style="top: 0.5rem; right: 0.5rem">Sale</div> -->
-						<!-- Product image-->
-						<img class="card-img-top" src="../../images/<%=vo.getFilename()%>" alt="..." />
-						<!-- Cart ins-->
-						<div class="card-body p-4">
-							<div class="text-center">
-								<!-- Product name-->
-								<h5 class="fw-bolder"><%=vo.getBrand() %></h5>
-								<!-- 상품 이름-->
-								<p><%=vo.getPdname() %></p>
-								<!-- 상품 별점-->
-								<div
-									class="d-flex justify-content-center small text-warning mb-2">
-									<div class="bi-star-fill"></div>
-									<div class="bi-star-fill"></div>
-									<div class="bi-star-fill"></div>
-									<div class="bi-star-fill"></div>
-									<div class="bi-star-fill"></div>
+			
+			<%
+				int num=pagingVo.getNum();
+				int curPos=pagingVo.getCurPos();
+				for(int i=0;i<list.size();i++){
+					if(num<1) break;
+					ProductVO vo=list.get(curPos++);
+					num--;
+					%>
+					<a href="../pddetail/pdDetail.jsp?pdno=<%=vo.getPdno()%>">
+					<div class="col mb-5">
+						<div class="card h-100">
+							<!-- Sale badge-->
+							<!-- <div class="badge bg-dark text-white position-absolute"
+						style="top: 0.5rem; right: 0.5rem">Sale</div> -->
+							<!-- Product image-->
+							<img class="card-img-top" src="../../images/<%=vo.getFilename()%>" alt="..." />
+							<!-- Cart ins-->
+							<div class="card-body p-4">
+								<div class="text-center">
+									<!-- Product name-->
+									<h5 class="fw-bolder"><%=vo.getBrand() %></h5>
+									<!-- 상품 이름-->
+									<p><%=vo.getPdname() %></p>
+									<!-- 상품 별점-->
+									<div class="d-flex justify-content-center small text-warning mb-2">
+										<%if(vo.getGrade()<2){ %>
+											<div class="bi-star-fill"></div>
+										<%}else if(vo.getGrade()<3){ %>
+											<div class="bi-star-fill"></div>
+											<div class="bi-star-fill"></div>
+										<%}else if(vo.getGrade()<4){%>
+											<div class="bi-star-fill"></div>
+											<div class="bi-star-fill"></div>
+											<div class="bi-star-fill"></div>
+										<%}else if(vo.getGrade()<5){%>
+											<div class="bi-star-fill"></div>							
+											<div class="bi-star-fill"></div>							
+											<div class="bi-star-fill"></div>							
+											<div class="bi-star-fill"></div>							
+										<%}else{%>
+											<div class="bi-star-fill"></div>							
+											<div class="bi-star-fill"></div>							
+											<div class="bi-star-fill"></div>							
+											<div class="bi-star-fill"></div>							
+											<div class="bi-star-fill"></div>							
+										<%} %>
+									</div>
+									<!-- Product price-->
+									<span class="text-muted text-decoration-line-through"><%=df.format(vo.getPrice())%>원</span>
 								</div>
-								<!-- Product price-->
-								<span class="text-muted text-decoration-line-through"><%=df.format(vo.getPrice())%>원</span>
 							</div>
-						</div>
-						</a>
-						<!-- Product actions-->
-						<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-							<div class="text-center">
-								<a class="btn btn-outline-dark mt-auto"
-									href="../basket/ShoppingBasket.jsp">장바구니</a>
-							</div>
+							</a>
 						</div>
 					</div>
-				</div>
-			<%} %>
+				<%} %>
+		</div>
+		<div class="div3">
+			   <%if(pagingVo.getFirstPage()>1){%>
+			      <a href="<%=request.getContextPath()%>/abmart/pdlist/pdlist.jsp?currentPage=<%=pagingVo.getFirstPage()-1%>">
+			         <img src="<%=request.getContextPath() %>/images/first.JPG">
+			      </a>   
+			   <%} %>
+			                  
+			   <!-- [1][2][3][4][5][6][7][8][9][10] -->
+			   <%for(int i=pagingVo.getFirstPage();i<=pagingVo.getLastPage();i++){
+			      	if(i>pagingVo.getTotalPage()) break;
+			   %>
+			   		<%if(i==pagingVo.getCurrentPage()){%>
+			            <span style="color: blue;font-weight:bold;font-size:1.1em"><%=i %></span>
+			     	<%}else{ %>
+			      		<a href="<%=request.getContextPath() %>/abmart/pdlist/pdlist.jsp?currentPage=<%=i%>">[<%=i %>]</a>
+			     	<%} %>
+			   <%}//for %>
+			   
+			   <!-- 다음 블럭으로 이동 -->
+			   <%if(pagingVo.getLastPage()< pagingVo.getTotalPage()){%>
+			      <a href="<%=request.getContextPath()%>/abmart/pdlist/pdlist.jsp?currentPage=<%=pagingVo.getLastPage()+1%>">
+			         <img src="<%=request.getContextPath() %>/images/last.JPG">
+			      </a>   
+   				<%} %>
 		</div>
 	</section>
 	<%@include file="../../inc/bottom.jsp"%>
-
-<!-- 원래 상품 양식 
-	<div class="col mb-5">
-		<div class="card h-100">
-			Sale badge
-			<div class="badge bg-dark text-white position-absolute"
-				style="top: 0.5rem; right: 0.5rem">Sale</div>
-			Product image
-			<img class="card-img-top"
-				src="https://image.a-rt.com/art/product/2023/03/11678_1678179755820.jpg?shrink=388:388"
-				alt="..." />
-			Cart ins
-			<div class="card-body p-4">
-				<div class="text-center">
-					Product name
-					<h5 class="fw-bolder">나이키</h5>
-					상품 이름
-					<p>우먼스 나이키 코트 레거시 캔버스</p>
-					상품 별점
-					<div class="d-flex justify-content-center small text-warning mb-2">
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-						<div class="bi-star-fill"></div>
-					</div>
-					Product price
-					<span class="text-muted text-decoration-line-through">69,000원</span>
-					47,000원[31%]
-				</div>
-			</div>
-			Product actions
-			<div class="card-footer p-4 pt-0 border-top-0 bg-transparent">
-				<div class="text-center">
-					<a class="btn btn-outline-dark mt-auto"
-						href="../basket/ShoppingBasket.jsp">장바구니</a>
-				</div>
-			</div>
-		</div>
-	</div>
-</div> -->

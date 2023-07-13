@@ -86,10 +86,41 @@ $(function() {
     $('#datebtn4').click(function() {
         setDates(12);
     });
-   
-    $('#chkAll').click(function(){
-        $('.chkItem').prop('checked',this.checked);
+    
+    var isChecked = false;
+    
+    $(".chkItem").on("click", function() {
+        isChecked = $(".chkItem:checked").length > 0;
     });
+ 	
+    $(".writeReview").on("click",function(){
+   	 	var checkedItems = $('.chkItem:checked');
+    	if(!isChecked){
+    		alert("리뷰를 작성할 상품을 선택해주세요.");
+   			return false;
+    	}else if (checkedItems.length !== 1) {
+          alert("리뷰를 작성할 상품을 하나만 선택해주세요.");
+          return false;
+    	}else{
+    		var value=checkedItems.attr("value1");
+    		open('../reviewWrite.jsp?pdno='+value,'review','width=600,height=900,top=300,left=700,location=yes,resizable=yes');
+    	}
+    });
+    
+    $(".refund").on("click",function(){
+   	 	var checkedItems = $('.chkItem:checked');
+    	if(!isChecked){
+    		alert("환불할 상품을 선택해주세요.");
+   			return false;
+    	}else if (checkedItems.length !== 1) {
+          alert("환불할 상품을 하나만 선택해주세요.");
+          return false;
+    	}else{
+    		var value=checkedItems.attr("value2");
+    		open('refundWrite.jsp?orderno='+value,'refund','width=570,height=700,top=300,left=700,location=yes,resizable=yes');
+    	}
+    });
+    
 });
 </script>
 <article id="mypage">
@@ -128,7 +159,7 @@ $(function() {
 			</colgroup>
    				 <thead class="thead-dark">
 					<tr>
-						<th><input type="checkbox" name="all" id="chkAll"></th>
+						<th></th>
 						<th>주문번호</th>
 						<th>이미지</th>
 						<th>상품명</th>
@@ -157,11 +188,14 @@ $(function() {
 		  		num--;
 		  	%>	
 			<tr>
-				<td><input type="checkbox" name="1" class="chkItem"></td>
+				<td>
+					<input type="checkbox" name="pdno" class="chkItem" value1="<%=vo.getPdno() %>"
+					value2="<%=vo.getOrderno()%>">
+				</td>
 				<td><%=vo.getOrderno() %></td>
 				<td>
 					<div class="media">
-						<img src="../../images/<%=vo.getFilename() %>" class="mr-3 pdimgsize" alt="1">
+						<img src="../../images/<%=vo.getFilename() %>" class="mr-3 pdimgsize" alt="상품 이미지">
 						<div class="media-body">
 							<h5 class="mt-0">
 								<a href="#"></a>
@@ -174,8 +208,8 @@ $(function() {
 				<td><%=df.format(vo.getPrice()) %>원</td>
 				<td><%=vo.getPickup() %></td>
 				<td><%=sdf.format(vo.getOrderregdate()) %></td>
-				<td><input type="button" class="mypagebtn" value="리뷰 쓰기" /><br>
-				<input type="button" class="mypagebtn" name="del" value="반품 신청"> 
+				<td><input type="button" class="mypagebtn writeReview" value="리뷰 쓰기" /><br>
+				<input type="button" class="mypagebtn refund" name="del" value="반품 신청"> 
 				</td>
 			</tr>
 		<%}//for %>

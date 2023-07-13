@@ -9,9 +9,22 @@ public class QnAVO {
 	private Timestamp qnaregdat; /* 등록일 */
 	private int no; /* 회원번호 */
 	private int pdno; /* 상품번호 */
+	
+	private String id; 
 
 	public QnAVO() {
 		super();
+	}
+
+	public QnAVO(int qnano, String qnabody, String qnaview, Timestamp qnaregdat, int no, int pdno, String id) {
+		super();
+		this.qnano = qnano;
+		this.qnabody = qnabody;
+		this.qnaview = qnaview;
+		this.qnaregdat = qnaregdat;
+		this.no = no;
+		this.pdno = pdno;
+		this.id = id;
 	}
 
 	public QnAVO(int qnano, String qnabody, String qnaview, Timestamp qnaregdat, int no, int pdno) {
@@ -22,6 +35,14 @@ public class QnAVO {
 		this.qnaregdat = qnaregdat;
 		this.no = no;
 		this.pdno = pdno;
+	}
+	
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public int getQnano() {
@@ -75,7 +96,7 @@ public class QnAVO {
 	@Override
 	public String toString() {
 		return "QnAVO [qnano=" + qnano + ", qnabody=" + qnabody + ", qnaview=" + qnaview + ", qnaregdat=" + qnaregdat
-				+ ", no=" + no + ", pdno=" + pdno + "]";
+				+ ", no=" + no + ", pdno=" + pdno + ", id=" + id + "]";
 	}
-	
+
 }

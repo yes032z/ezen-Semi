@@ -1,16 +1,32 @@
 package com.semi.basket.model;
 
-import java.util.List;
+import java.sql.SQLException;
 
-public interface BasketService {
+public class BasketService {
+	private BasketDAO basketDAO;
 	
-	//장바구니 상품 추가
-	public int addBasket(BasketVO basket);
+	public BasketService() {
+		basketDAO = new BasketDAO();
+	}
 	
-	//장바구니 정보 리스트
-	public List<BasketVO> getBasketList(String no);
+	//등록
+	public int insertBasket(BasketVO vo) {
+		try {
+			return basketDAO.insertBasket(vo);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
 	
-	//장바구니 상품 수량 변경
-	public int modifyCount(BasketVO basket);
+	//삭제
+	public int deleteBasket(int basketno) {
+		try {
+			return basketDAO.deleteBasket(basketno);
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return 0;
+		}
+	}
 	
 }

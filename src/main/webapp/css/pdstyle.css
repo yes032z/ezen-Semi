@@ -17,6 +17,7 @@ div[name=pddetail]{
 .div1 {
 	width: 1000px;
 	float: right;
+	margin-right: 201px;
 }
 #searchSort{
 	clear:both;
@@ -140,4 +141,12 @@ span.gray{
 	clear:both;
 	margin-top:200px;
 	margin-bottom: 20px;
+}
+
+.div3{
+	clear:both;
+	width:1000px;
+	height:100px;
+	margin-bottom: 20px;
+	text-align: center;
 }

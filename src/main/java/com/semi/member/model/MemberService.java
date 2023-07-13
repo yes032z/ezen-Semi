@@ -22,7 +22,23 @@ public class MemberService {
 	public int checkLogin(String id, String pwd) throws SQLException {
 		return memberDao.checkLogin(id, pwd);
 	}
-	  public int insertMember(MemberVO vo) throws SQLException  {
-	  return memberDao.insertMember(vo);
-	  }
+	public int insertMember(MemberVO vo) throws SQLException  {
+		return memberDao.insertMember(vo);
+	}
+	public MemberVO selectMember(String id) throws SQLException {
+		return memberDao.selectMember(id);
+	}
+	public int editMember(MemberVO vo) throws SQLException {
+		return memberDao.editMember(vo);
+	}
+	
+	public String finPwd(String id, String name) throws SQLException {
+		return memberDao.finPwd(id, name);
+	}
+	public String findId(String name , String pwd) throws SQLException {
+		return memberDao.findId(name, pwd);
+	}
+	public int outMember(String id) throws SQLException {
+		return memberDao.outMember(id);
+	}
 }
