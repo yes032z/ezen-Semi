@@ -1,3 +1,5 @@
+<%@page import="com.semi.member.model.MemberVO"%>
+<%@page import="com.semi.member.model.MemberService"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@include file="../../inc/top.jsp"%>
@@ -216,7 +218,7 @@ form>table td>article>div {
 }
 
 form>table td>article>div>h2 {
-	text-align: left;
+	text-align: left;	
 }
 
 form>table td>article>div>p {
@@ -246,7 +248,7 @@ form>article {
 .final>h2 {
 	width: 100%;
 	font-weight: bold;
-	font-size: 16px;
+	font-size: 20px;
 	margin-bottom: 10px;
 	padding-bottom: 10px;
 	box-sizing: border-box;
@@ -293,9 +295,10 @@ form>.final>input[type=submit] {
 
 form>article>h1 {
 	font-weight: bold;
-	font-size: 14px;
+	font-size: 20px;
 	padding: 6px 0;
 	margin-bottom: 12px;
+	margin-right: 100px;
 }
 
 form>article>div {
@@ -328,17 +331,15 @@ form input {
 	box-sizing: border-box;
 }
 
-form>.delivery>table input[name=addr1] {
+form>.delivery>table input[name=addr] {
 	width: 300px;
 }
 
-form>.delivery>table input[name=addr2] {
-	width: 300px;
-}
 
 form>.delivery>table input[name=request] {
 	width: 300px;
 }
+
 
 form>.discount>div {
 	overflow: hidden;
@@ -477,16 +478,11 @@ li{
   padding: 10px;
 }
 
+expiryMonth{
+  margin-left: 300px;
+}
 
 </style>
-<%
-	String pdsize=request.getParameter("pdsize");
-	String pdqty=request.getParameter("pdqty");
-	
-	String[] pdsizeArr=pdsize.split(" ");
-	String[] pdpriceArr=pdqty.split(" ");
-	
-%>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -495,7 +491,34 @@ $(document).ready(function() {
 			open("../zipcode/zipcode.jsp", "", "width=500, height=700, left=150, location=1");
 		});
 	});
-
+	
+    $("#email2").change(function() {
+        var selectedOption = $(this).val();
+        if (selectedOption === "etc") {
+            $("#email3").css("visibility", "visible");
+        } else {
+            $("#email3").css("visibility", "hidden");
+        }
+    });
+    
+    $(".delivery select[name='request']").change(function() {
+        var selectedOption = $(this).val();
+        if (selectedOption === "request5") {
+            $(".delivery input[name='request']").css("display", "block");
+        } else {
+            $(".delivery input[name='request']").css("display", "none");
+        }
+    });
+    
+	$("#sameAsMemberInfo").change(function() {
+		var isChecked = $(this).is(":checked");
+		if (isChecked) {
+			$(".deliveryInfo").hide();
+		} else {
+			$(".deliveryInfo").show();
+		}
+	});
+    
     $(".final input[type='submit']").click(function(event) {
       event.preventDefault();
 
@@ -522,10 +545,18 @@ $(document).ready(function() {
       }      
       location.href = "OrderCompleted.jsp"; 
     });
-    
+ 
 });
 </script>
 </head>
+
+<%	
+	String id = (String)session.getAttribute("id");
+
+	MemberService service = new MemberService();
+	MemberVO vo = service.selectMember(id); 
+	
+%>
 <body>
 	<div id="Payment">
 	<!-- header  -->
@@ -543,6 +574,7 @@ $(document).ready(function() {
                     <tr>
                         <td></td>
                         <td>상품정보</td>
+                        <td>사이즈</td>
                         <td>상품 주문 수량</td>
                         <td>총 상품금액</td>
                         <td>배송비</td>                                               
@@ -554,6 +586,7 @@ $(document).ready(function() {
                         <td>아디다스<span class="basket_list_smartstore"></span>
                             <p>아디코드</p>                       
                         </td>
+                        <td>사이즈</td>
                        	<td>1개</td>                  
                         <td><span class="sumprice">63,000원</span><br>                            
                         </td>
@@ -566,6 +599,7 @@ $(document).ready(function() {
                         <td style="width: 27%">나이키<span class="basket_list_smartstore"></span>
                             <p>스탠 스미스</p>
                         </td>
+                        <td>사이즈</td>
                         <td>1개</td>    
                         <td style="width: 15%;"><span class="sumprice">29,000원</span><br>                            
                         </td>
@@ -577,15 +611,15 @@ $(document).ready(function() {
         
         <!-- 최종 결제 정보 -->
 		<div class="final">
-			<h2>최종결제 정보</h2>
+			<h2>&& 최종결제 정보 &&</h2>
 			<table>
 				<tr>
 					<td>상품 수량</td>
-					<td><input type="text" name="qty" value=""></td>
+					<td>2건</td>
 				</tr>
 				<tr>
 					<td>상품 금액</td>
-					<td><input type="text" name="price" value=""></td>
+					<td>92,000원</td>
 				</tr>
 				<tr>
 					<td>배송비</td>
@@ -593,7 +627,7 @@ $(document).ready(function() {
 				</tr>
 				<tr>
 					<td>합계</td>
-					<td><input type="text" name="sumprice" value=""></td>
+					<td>92,000원</td>
 				</tr>
 			</table>
 			<input type="submit" value="결제하기">
@@ -602,19 +636,28 @@ $(document).ready(function() {
 		
 		<!-- 배송정보 -->
 			<article class="delivery">
-				<h1><< 배송정보 >></h1>	
+				<h1>&& 배송정보 &&</h1><input type="checkbox"> 회원정보와 동일하게
 				<table>
-					<tr>
-						<td>이름</td>
-						<td style="text-align: left;"><input type="text" name="name" value=""></td>
+					<tr>					
+						<td>주문인</td>
+						<td style="text-align: left;"><input type="text" name="name" value="<%=vo.getName()%>"></td>
 					</tr>
 					<tr>
 						<td>휴대폰</td>
-						<td style="text-align: left;"><input type="text" name="tel" value=""></td>
+						<td style="text-align: left;">
+							<select name="phone" style="width: 50px; height:25px;">
+							<option value="010">010</option>
+							<option value="011">011</option>
+							<option value="012">012</option>							
+							</select> -
+						  	<input type="text" name="phone2" id="phone2" maxlength="4" style="width: 50px; "> -
+                			<input type="text" name="phone3" id="phone3" maxlength="4" style="width: 50px;">
+                		</td>
 					</tr>
 					<tr>
 						<td>이메일</td>
-						<td style="text-align: left;"><input type="text" name="email" value="">
+						<td style="text-align: left;">
+							<input type="text" name="email" value="<%=vo.getEmail() %>">@	
 						    <select name="email2" id="email2"  title="이메일주소 뒷자리">
 				            <option value="naver.com">naver.com</option>
 				            <option value="hanmail.net">hanmail.net</option>
@@ -627,27 +670,35 @@ $(document).ready(function() {
 					</tr>
 					<tr>
 						<td>우편번호</td>
-						<td style="text-align: left;"><input type="text" name="zip" value=""> <input
-							type="button" value="우편번호찾기" id="btnZipcode"></td>
+						<td style="text-align: left;"><input type="text" name="zip" value="<%=vo.getZipno()%>">
+							<input type="button" value="우편번호찾기" id="btnZipcode">
+						</td>
 					</tr>
 					<tr>
-						<td>기본주소</td>
-						<td style="text-align: left;"><input type="text" name="addr1" value=""></td>
-					</tr>
-					<tr>
-						<td>상세주소</td>
-						<td style="text-align: left;"><input type="text" name="addr2" value=""></td>
+						<td>주소</td>
+						<td style="text-align: left;">
+						<input type="text" name="addr" value="<%=vo.getDetailaddress()%>">
+						</td>
 					</tr>
                     <tr>
-                        <td><label>배송시 요청사항</label></td>
-                        <td style="text-align: left;"><input type="text" name="request"></td>
+                        <td>배송시 요청사항</td>
+                        <td style="text-align: left;">
+                        <select name="request" style="width: 300px; height:25px;">
+							<option value="request1">배송전에 연락주세요</option>
+							<option value="request2">부재실 경비실에 맡겨주세요</option>
+							<option value="request3">부재실 문앞에 놓아주세요</option>
+							<option value="request4">직접 수령 하겠습니다</option>							
+							<option value="request5">직접입력</option>							
+						</select><br>
+                        <input type="text" name="request" style="display: none;">                                                
+                        </td>
                     </tr>					
 				</table>
 			</article>		
 			
 		<!-- 결제 수단선택 -->
 			<article class="Payment_method"><br>
-				<h1><< 결제정보>> </h1>
+				<h1> && 카드정보 && </h1>
 				<table>
 					<tr>
 						<td>카드사</td>
@@ -663,13 +714,26 @@ $(document).ready(function() {
 					<tr>
 						<td>카드번호</td>
 						<td style="text-align: left;">
-						<input type="text" name="card_number" id="card_number" maxlength="16" 
-						placeholder="&nbsp;&nbsp;&nbsp;&nbsp;(-)없이 카드번호를 입력하세요" style="width: 200px;">
+						<input type="text" name="card_number1" id="card_number1" maxlength="4" style="width: 50px;"> -
+						<input type="text" name="card_number2" id="card_number2" maxlength="4" style="width: 50px;"> -
+						<input type="text" name="card_number3" id="card_number3" maxlength="4" style="width: 50px;"> -				
+						<input type="text" name="card_number4" id="card_number4" maxlength="4" style="width: 50px;"> 				
 						</td>
 					</tr>
 					<tr>
                         <td>유효기간</td>                        
-                        <td>                        
+                        <td style="float: left;">                                                    
+                            <select name="expiryYear">
+                                <option value="2023">2023</option>
+                                <option value="2024">2024</option>
+                                <option value="2025">2025</option>
+                                <option value="2026">2026</option>
+                                <option value="2027">2027</option>
+                                <option value="2028">2028</option>
+                                <option value="2029">2029</option>
+                                <option value="2030">2030</option>
+                            </select>
+                            <span>년</span>
                             <select name="expiryMonth">
                                 <option value="01">01</option>
                                 <option value="02">02</option>
@@ -685,16 +749,14 @@ $(document).ready(function() {
                                 <option value="12">12</option>
                             </select>
                             <span>월</span>
-                            <select name="expiryYear">
-                                <option value="2023">2023</option>
-                                <option value="2024">2024</option>
-                                <option value="2025">2025</option>
-                                <option value="2026">2026</option>
-                                <option value="2027">2027</option>
-                            </select>
-                            <span>년</span>
-                        </td>
-					</tr>				
+                        </td>                       
+					</tr>	
+					<tr>
+					<td>CVC</td>
+					<td style="text-align: left;">	
+					<input type="text" name="cvc_number" id="cvc_number" maxlength="3" style="width: 50px;">				
+					</td>
+					</tr>			
 				</table>
 			</article>		
 		
