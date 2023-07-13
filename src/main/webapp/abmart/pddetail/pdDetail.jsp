@@ -1,3 +1,5 @@
+<%@page import="com.semi.orders.model.OrdersVO"%>
+<%@page import="com.semi.orders.model.OrdersService"%>
 <%@page import="com.semi.favoritepd.model.FavoritePdService"%>
 <%@page import="com.semi.qnareply.model.QnAReplyService"%>
 <%@page import="com.semi.qnareply.model.QnAReplyVO"%>
@@ -27,6 +29,7 @@
 	String grade=request.getParameter("grade");
 	String lately=request.getParameter("lately");
 	
+	OrdersService orderService=new OrdersService();
 	ProductSizeService productSizeService = new ProductSizeService();
 	ProductDetailService productDetailService = new ProductDetailService();
 	QnAService qnaService=new QnAService();
@@ -60,6 +63,7 @@
 	List<ProductDetailVO> detailList = null;
 	List<ReviewVO> reviewList=null;
 	List<QnAVO> qnaList=null;
+	OrdersVO ordersVo=null;
 	
 	try {
 		qnaList=qnaService.selectQnAAll(Integer.parseInt(pdno));
@@ -72,6 +76,10 @@
 		//상세이미지 가져오기
 		detailList = productDetailService.selectByPdNo(Integer.parseInt(pdno));
 		
+		//주문번호 가져오기
+		if(no!=null && !no.isEmpty()){
+			ordersVo=orderService.selectOrderByNo(Integer.parseInt(no));
+		}
 		if(lately.equals("lately")){
 			//리뷰 최근 등록순
 			reviewList=reviewService.selectLately(Integer.parseInt(pdno));
@@ -185,7 +193,11 @@
 		
 		$('#review').click(function(){
 			<%if(no!=null && !no.isEmpty()){%>
-				open('../reviewWrite.jsp?pdno=<%=pdno%>','review','width=600,height=900,top=300,left=700,location=yes,resizable=yes');
+				<%if(ordersVo!=null){%>
+					open('../reviewWrite.jsp?pdno=<%=pdno%>','review','width=600,height=900,top=300,left=700,location=yes,resizable=yes');
+				<%}else{%>
+					alert("주문을 해야 리뷰를 등록할 수 있습니다.");
+				<%}%>
 			<%}else{%>
 				alert("로그인 후 리뷰 등록을 할 수 있습니다.");
 				location.href="../member/login.jsp";
@@ -802,7 +814,7 @@
 					class="leftSort gray"><%=reviewVo.getReviewregdate() %></span>
 			</div>
 			<div class="div2 clearboth border-bottom reviewdiv">
-				<button class="btn leftSort size">좋아요</button>
+				<!-- <button class="btn leftSort size">좋아요</button> -->
 			</div>
 		</div>
 	<%} %>
