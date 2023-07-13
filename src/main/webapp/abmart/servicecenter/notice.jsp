@@ -1,8 +1,13 @@
+<%@page import="java.text.SimpleDateFormat"%>
+<%@page import="java.util.List"%>
+<%@page import="com.semi.notice.model.NoticeVO"%>
+<%@page import="com.semi.notice.model.NoticeService"%>
+<%@page import="java.sql.SQLException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/top.jsp" %>
 <style type="text/css">
-	.notice {margin: 90px 0 0 490px; font-family: 'Nanum Gothic';}
+	.notice {margin: 90px 0 0 400px; font-family: 'Nanum Gothic';}
 
 	.noticeBody {
 		width: 900px;
@@ -15,7 +20,7 @@
 		border-bottom: 1px solid #80808073;
 	}
 	
-	h3 {margin-bottom: 20px; font-weight: 550;}
+	h4 {margin-bottom: 20px; font-weight: 550;}
 	
 	a {text-decoration: none; color: black;}
 	
@@ -26,10 +31,10 @@
 	/* 페이징 */
 	.page {
 		font-size: 19px;
-		margin-left: 420px;;
+		margin: 20px 0 0 420px;
+		height: 20px;
 	}
 	
-
 	/* mypagenav */
 	#leftNav {width: 300px; float: left; margin-left: 70px;}
 	
@@ -55,15 +60,47 @@
 </style>
 <script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-3.7.0.min.js"></script>
 <script type="text/javascript">
-
+	function pageFunc(curPage){
+		$('input[name="currentPage"]').val(curPage);
+		$('form[name="frmPage"]').submit();
+	}
 </script>
 <%
-	/* 페이징 처리 */
+
+	request.setCharacterEncoding("utf-8");
+	String noticeNo = request.getParameter("noticeNo");
+	
+	
+	NoticeService noticeService = new NoticeService();
+	List<NoticeVO> list = null;
+	
+	try {
+		list = noticeService.selectAll();
+		
+	} catch (SQLException e) {
+		e.printStackTrace();
+	}
+	
 	int currentPage = 1;	//현재 페이지
 	
-	if (request.getParameter("currentPage") != null) {
+	if(request.getParameter("currentPage") != null) {
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
+	
+	//
+	int totalRecord = list.size();	
+	int pageSize = 10;	
+	int blockSize = 10;
+	int totalPage = (int)Math.ceil((float)totalRecord / pageSize);
+	
+	int firstPage = currentPage - ((currentPage-1) % blockSize);	
+	int lastPage = firstPage + (blockSize - 1);
+	
+	int curPos = (currentPage - 1)* pageSize;
+	
+	int num = totalRecord - curPos;
+	
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
 %>
 	<!-- mypagenav -->
 	<nav id="leftNav">
@@ -72,7 +109,7 @@
 			<!-- category list -->
 			<dt><a href="FAQ.jsp">FAQ</a></dt>
 			<dt><a href="notice.jsp">공지사항</a></dt>
-			<dt><a href="store.jsp">매장 찾기</a></dt>
+			<dt><a href="findStore.jsp">매장 찾기</a></dt>
 		</dl>
 		<hr style="width: 170px;">
 		<dl id="leftNavi">
@@ -84,9 +121,15 @@
 		</dl>
 	</nav>
 	
+	<!-- 페이징 폼 -->
+	<form action="<%=request.getContextPath() %>/abmart/servicecenter/notice.jsp" name="frmPage" method="post">
+		<input type="hidden" name="currentPage">
+	</form>
+	
 	<article>
+		
 		<div class="notice">
-			<h3>공지사항</h3>
+			<h4>공지사항</h4>
 			<table class="noticeBody" summary="공지사항 목록">
 				<colgroup>
 					<col style="width: 75px;">
@@ -101,72 +144,33 @@
 					</tr>
 				</thead>
 				<tbody id="noticeList">
+					<% 
+					for (int i = 0; i < pageSize; i++) {
+						if (num < 1) break;
+						
+						NoticeVO vo = list.get(curPos++);
+						num--;
+					%>
 					<tr>
-						<td><img alt="noticeImg" src="<%=request.getContextPath() %>/images/noticeImg.jpg"></td>
-						<td><a href="notice_detail.jsp" class="notice-link">개인정보처리방침 개정 안내</a>
-						<td>2023.06.22</td>
+						<td><%=vo.getNoticeNo() %></td>
+						<td><a href="notice_detail.jsp?noticeNo=<%=vo.getNoticeNo() %>" class="notice-link">
+						<%=vo.getNoticeName() %></a>
+						<td><%=sdf.format(vo.getNoticeRegdate()) %></td>
 					</tr>
-					
-					<tr>
-						<td>9</td>
-						<td><a href="#" class="notice-link">크록스 제품 발송 안내</a>
-						<td>2023.06.12</td>
-					</tr>
-					
-					<tr>
-						<td>8</td>
-						<td><a href="#" class="notice-link">닥터마틴 소비자가 변동 안내</a>
-						<td>2023.05.22</td>
-					</tr>
-					
-					<tr>
-						<td>7</td>
-						<td><a href="#" class="notice-link">반스 소비자가 변동 안내</a>
-						<td>2023.05.19</td>
-					</tr>
-					
-					<tr>
-						<td>6</td>
-						<td><a href="#" class="notice-link">아디다스 소비자가 변동 안내</a>
-						<td>2023.05.18</td>
-					</tr>
-					
-					<tr>
-						<td>5</td>
-						<td><a href="#" class="notice-link">개인정보 처리방침 및 위치정보서비스 이용약관 개정 안내</a>
-						<td>2023.04.12</td>
-					</tr>
-					
-					<tr>
-						<td>4</td>
-						<td><a href="#" class="notice-link">개인정보처리방침 개정 안내</a>
-						<td>2023.02.23</td>
-					</tr>
-					
-					<tr>
-						<td>3</td>
-						<td><a href="#" class="notice-link">스케쳐스 소비자가 변동 안내</a>
-						<td>2023.02.09</td>
-					</tr>
-					
-					<tr>
-						<td>2</td>
-						<td><a href="#" class="notice-link">에이비씨 셀렉트 소비자가 변동 안내</a>
-						<td>2023.01.09</td>
-					</tr>
-					
-					<tr>
-						<td>1</td>
-						<td><a href="#" class="notice-link">누오보 소비자가 변동 안내</a>
-						<td>2022.12.21</td>
-					</tr>
+					<%} %>
 				</tbody>
 			</table>
 			<!-- 페이징 -->
 			<div class="page">
-				<a href="#">[1]</a>
-				<a href="#">[2]</a>
-			</div>
+				<% for (int i = firstPage; i <= lastPage; i++) {
+					if (i > totalPage) break;
+					if (i == currentPage) { %>
+					<span class="cur" style="color: white; background-color: black; font-size: 1em"><%=i%></span>
+				<%	} else { %>
+						<a class="pa" href="#" onclick="pageFunc(<%=i%>)"><%=i %></a>
+				<%   }//if      
+				}//for %>
+			</div> <!-- 페이징 -->
 		</div>
 	</article><br><br><br><br><br><br>
 
