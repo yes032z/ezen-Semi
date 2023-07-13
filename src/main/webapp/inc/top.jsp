@@ -79,11 +79,12 @@ input.form-control.mr-sm-2 {
 
 					<!-- 검색창  -->
 					<!-- 값 입력해서 sql문에서 like로 일치하는거 찾기  -->
-					<form class ="frlist2" action="<%=request.getContextPath()%>/abmart/pdlist/pdlist.jsp">
+				
 					<!-- 값 입력해서 sql문에서 like로 일치하는거 찾기 아닌듯..쩝  -->
-					<form class ="frlist2" action="<%=request.getContextPath()%>/abmart/pdlist/pdlist.jsp">
-				    <input class="form-control mr-sm-2" id ="searchpd" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" >
-				    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					<!--  action="https://www.google.com/search" method="GET"> -->
+					<form class ="frlist2" action="<%=request.getContextPath()%>/abmart/pdlist/pdlist.jsp?kind=>" method="GET">
+				    <input class="form-control mr-sm-2" id ="searchpd" type="search" placeholder="검색어를 입력해주세요" aria-label="Search" name="kind">
+				    <button class="btn btn-outline-success my-2 my-sm-0" type="submit" id="se" >Search</button>
 				    </form>
 					<!-- 장바구니 버튼-->		
 		            <form class="d-flex" action="<%=request.getContextPath()%>/abmart/basket/ShoppingBasket2.jsp">

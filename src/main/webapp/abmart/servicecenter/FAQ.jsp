@@ -1,14 +1,18 @@
+<%@page import="com.semi.faq.model.FAQVO"%>
+<%@page import="java.util.List"%>
+<%@page import="java.sql.SQLException"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../../inc/top.jsp" %>
 
 <style type="text/css">
-	#txtsearch {width: 50%; height: 36px;}
+	#search {width: 50%; height: 36px;}
 	
-	.main {margin: 90px 0 0 490px; font-family: 'Nanum Gothic';}
+	.main {margin: 90px 0 0 400px}
 
 	.question {margin-top: 50px; width: 900px;}
 	
+	/* FAQ 검색 */
 	#btsearch {
 		background: black;
 		color: white;
@@ -27,19 +31,21 @@
 		margin-right: 5%;
 	}
 	
-	#faqtab {width: 900px;}
+	/* FAQ 분류 모음 */
+	#category {width: 900px;}
 	
-	#faqtab td {
+	#category td {
 		padding: 15px 15px 15px 15px;
 		text-align: center;
 		width: 180px;
 	}
 	
-	#faqtab a {
+	#category a {
 		color: gray;
 		text-decoration: none;
 	}
 	
+	/* FAQ 질문, 내용 */
 	.header {
 		padding: 20px 0 20px 10px; 
 		font-weight: bold;
@@ -53,9 +59,21 @@
 		font-size:14px;
 	}
 	
-	#secBox {list-style: none; margin-left: -40px;}
+	.accordion ul, li {margin: 0px; padding:0px;}
 	
-	.contents {list-style: none; margin-left: -40px;}
+	#secBox {list-style: none;}
+	
+	.accordion ul:first-child {border-top: 2px solid black;}
+	
+	.contents {list-style: none;}
+	
+	.contents li {padding: 20px 20px 20px 20px;}
+	
+	.page {
+	    font-size: 19px;
+	    margin: 20px 0 0 420px;
+	    height: 20px;
+	}
 	
 	/* mypagenav */
 	#leftNav {width: 300px; float: left; margin-left: 70px;}
@@ -81,9 +99,69 @@
 	dd:nth-child(5) {color: #808080a6;}
 	
 </style>
+
+<jsp:useBean id="faqService" class="com.semi.faq.model.FAQService" scope="session"></jsp:useBean>
+<%
+	//검색일 떄 파라미터
+	request.setCharacterEncoding("utf-8");
+	String faqCategory = request.getParameter("faqCategory");
+	String search = request.getParameter("search");
+	
+	boolean bool = false;
+	if (faqCategory != null && !faqCategory.isEmpty() || search != null && !search.isEmpty()) {
+			bool = true;
+			
+	}//
+	
+	List<FAQVO> list = null;
+	
+	System.out.println("bool = " + bool);
+	if (bool) {
+		
+		list = faqService.selectBy(faqCategory, search);
+		
+		if (search == null) search = ""; 
+		if (faqCategory == null) faqCategory = ""; 
+	}
+	
+	//자주 찾는 faq 상위 5건  
+	if (!bool) {
+		try {
+			list = faqService.selectBest5();
+		} catch (SQLException e) {
+				e.printStackTrace();		
+		}
+		
+	}//
+	
+	
+	//
+	int currentPage = 1;	//현재 페이지
+	
+	if(request.getParameter("currentPage") != null) {
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}
+	
+	//
+	int totalRecord = list.size();	
+	int pageSize = 5;	
+	int blockSize = 10;
+	int totalPage = (int)Math.ceil((float)totalRecord / pageSize);
+	
+	int firstPage = currentPage - ((currentPage-1) % blockSize);	
+	int lastPage = firstPage + (blockSize - 1);
+	
+	int curPos = (currentPage - 1)* pageSize;
+	
+	int num = totalRecord - curPos;
+	
+	
+%>
+<script type="text/javascript" src="<%=request.getContextPath() %>/js/jquery-3.7.0.min.js"></script>
 <script type="text/javascript">
 	$(function() {
-		$('#faqtab td').hover(function() {
+		
+		$('#category td').hover(function() {
 			$(this).css('background', 'black');
 			$(this).find('a').css('color', 'white');
 		}, function() {
@@ -91,7 +169,7 @@
 			$(this).find('a').css('color', '');
 		});
 		
-		$('#faqtab td').click(function() {
+		$('#category td').click(function() {
 			$(this).css('background', 'black');
 			$(this).find('a').css('color', 'white');
 		});
@@ -102,20 +180,28 @@
 	         $('.contents').slideUp();
 	         if ($(this).children('.contents').is(':hidden')){
 	            $(this).children('.contents').slideDown();
-	         } else{
+	         } else {
 	            $(this).children('.contents').slideUp();
 	         }
 		});
 		
-	});
+		$('#search')
+		
+	});//
+	
+	function pageFunc(curPage){
+		$('input[name="currentPage"]').val(curPage);
+		$('form[name="frmPage"]').submit();
+	}
 
 </script>
+
 	<!-- mypagenav -->
 	<nav id="leftNav">
 		<h2>고객센터</h2>
 		<dl id="leftNavi">
 			<!-- category list -->
-			<dt><a href="FAQ.jsp">FAQ</a></dt>
+			<dt><a href="FAQ.jsp?">FAQ</a></dt>
 			<dt><a href="notice.jsp">공지사항</a></dt>
 			<dt><a href="store.jsp">매장 찾기</a></dt>
 		</dl>
@@ -129,99 +215,94 @@
 		</dl>
 	</nav>  
 	
+	<!-- 페이징 폼 -->
+	<form action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp" name="frmPage" method="post">
+		<input type="hidden" name="currentPage">
+	</form>
+	
 	<article class="main">
-	<form name="FAQfrm" method="post" action="FAQ.jsp?faqtitle=">
+	<form name="FAQfrm" method="post" 
+		<%if (bool == true) { %>
+			action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp?faqTitle=<%=search %>&faqCategory=<%=faqCategory %>"
+		<%} else { %>
+			action="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp">
+		<%} %> 
 		<h3 style="font-weight: bold;">FAQ</h3>
 		<div id="searchFaq">
 			<hr style="border: 1px solid black;"><br>
-			<a>FAQ 검색</a>
-			<input type="text" id="txtsearch" placeholder="궁금한 내용을 입력해주세요.">
-			<button id="btsearch">검색</button><br><br>
+			<a>FAQ 검색</a> 
+			<input type="text" name="search" id="search" placeholder="궁금한 내용을 입력해주세요." 
+				value="<%=search != null ? search : "" %>">
+			<input type="submit" value="검색" class="btsearch"/><br><br>
 			<hr>
 		</div><br>
-	</form>
 		
 		<div>
-			<table summary="FAQ List" id="faqtab" border="1">
+			<table summary="FAQ List" id="category" border="1">
 				<tr>
-					<td><a href="FAQ.jsp">상품정보</a></td>
-					<td><a href="FAQ.jsp">배송현황</a></td>
-					<td><a href="FAQ.jsp">교환/반품/환불</a></td>
-					<td><a href="FAQ.jsp">주문/결제/취소</a></td>
-					<td><a href="FAQ.jsp">AS</a></td>
+					<td><a href="FAQ.jsp?faqCategory=<%="상품정보" %>">상품정보</a></td>
+					<td><a href="FAQ.jsp?faqCategory=<%="배송현황" %>">배송현황</a></td>
+					<td><a href="FAQ.jsp?faqCategory=<%="환불" %>">환불</a></td>
+					<td><a href="FAQ.jsp?faqCategory=<%="주문/결제/취소" %>">주문/결제/취소</a></td>
 				</tr>
 				<tr>
-					<td><a href="FAQ.jsp">회원정보</a></td>
-					<td><a href="FAQ.jsp">일반정보</a></td>
-					<td><a href="FAQ.jsp">멤버십</a></td>
-					<td><a href="FAQ.jsp">영수증/증빙서류</a></td>
-					<td><a href="FAQ.jsp">입점/기타</a></td>
+					<td><a href="FAQ.jsp?faqCategory=<%="회원정보" %>">회원정보</a></td>
+					<td><a href="FAQ.jsp?faqCategory=<%="일반정보" %>">일반정보</a></td>
+					<td><a href="FAQ.jsp?faqCategory=<%="AS" %>">AS</a></td>
+					<td><a href="FAQ.jsp?faqCategory=<%="영수증" %>">영수증</a></td>
 				</tr>
 			</table>
 		</div>
 		
-		<div class="question">
+		<div class="question"> 
+			<%if (!bool) { %>
 			<p style="font-weight: bold;">자주 묻는 질문 BEST 5</p>
+		<%	} %>
 			<div class="accordion">
 		      <ul id="secBox">
-		         <li class="header" style="border-top: 2px solid black;">
+			<% 
+				/* 질문 best5 반복 시작  */
+				for (int i = 0; i < pageSize; i++) {
+					if (num < 1) break;
+					
+					FAQVO vo = list.get(curPos++);
+					num--;
+				%>
+		         <li class="header">
 		            <span class="section">
-						<img alt="faqImg" src="../../images/faq.png"> &nbsp;결제방법(결제수단)을 변경하고 싶어요.
+						<img alt="faqImg" src="../../images/FAQ.png"> &nbsp;<%=vo.getfaqTitle() %>
 					</span>
 		            <ul class="contents">
-		               <li>결제완료 후 '배송완료' 상태까지만 결제수단 변경이 가능하므로 (구매확정 이후 변경 불가)<br />
-	주문상태를 확인하신 후 고객센터(1588-9667)로 요청해 주시면 재결제 가능하도록 처리해 드리고 있습니다.<br />
-	<br />
-	<결제수단 변경 안내><br />
-	 - 신용카드, 계좌이체 결제건에 한해서 결제수단 변경이 가능합니다. (이외 결제수단은 처리 불가능)<br />
-	   (포인트, 기프트카드를 같이 사용한 경우 제외)<br />
-	 - 주문건에 입점사 상품이 포함된 경우 결제수단 변경이 불가능 합니다.<br />
-	 - 아트배송으로 주문하신 상품은 결제수단 변경이 불가능 합니다.<br />
-	<br />
-	*재 결제 경로 : [마이페이지 > 주문/배송 현황 조회 > 주문상세 > 결제수단 변경 버튼 클릭]</li>
+		               <li><%=vo.getfaqBody() %></li>
 		            </ul>
-		         </li>
-		         <li class="header">
-		         	<span class="section">
-		            	<img alt="faqImg" src="../../images/faq.png"> &nbsp;포인트 사용은 어떻게 하나요?
-		            </span>
-		            <ul class="contents">
-		               <li>적립된 A-RT 포인트는 바로 사용 가능하며, 100 POINT단위로 사용할 수 있습니다.<br />
-	온라인 홈페이지에서는 상품 결제시 포인트를 함께 사용 할 수 있으며<br />
-	ABC-MART 오프라인 매장에서는 멤버십 카드를 사용하시거나<br />
-	개인정보 인증으로 포인트 사용 비밀번호 입력 후 가능합니다.<br />
-	최초의 비밀번호는 고객님의 생월일 4자리입니다.<br />
-	예) 생일이 1월 1일인 경우 비밀번호는 <u>0101</u> 입니다.</li>
-		            </ul>
-		         </li>
-		         <li class="header">
-		            <span class="section">
-		            	<img alt="faqImg" src="../../images/faq.png"> &nbsp;교환/반품/AS 신청 시 택배비는 어떻게 결제 해야 하나요?
-		            </span>
-		            <ul class="contents">
-		               <li>택배비는 교환/반품/AS 신청 시 선결제 하실 수 있습니다.</li>
-		            </ul>
-		         </li>
-		         <li class="header">
-		            <span class="section">
-		            	<img alt="faqImg" src="../../images/faq.png"> &nbsp;다른 상품으로 교환할 수 있나요?
-		            </span>
-		            <ul class="contents">
-		               <li>교환의 경우 사이즈 교환만 가능하며, 색상 변경 및 다른상품으로의 교환은 반품(환불)후 재 주문 해주셔야 합니다.</li>
-		            </ul>
-		         </li>
-		         <li class="header">
-		            <span class="section">
-		            	<img alt="faqImg" src="../../images/faq.png"> &nbsp;같은날 주문했는데 배송이 따로 왔어요
-		            </span>
-		            <ul class="contents">
-		               <li>온라인쇼핑몰에서는 온라인과 오프라인 매장의 상품이 동시에 판매되고 있습니다.<br />
-이에 같은 날 주문을 했더라도, 발송처에 따라 상품을 받는 시기가 다를 수 있습니다.</li>
-		            </ul>
-		         </li>
+		     	</li>
+		     <%}//for %>
 		      </ul>
 		   </div>
+		   <!-- 페이징 -->
+		   <div class="page">
+		   		<%if (firstPage > 1) {%>
+					<a href = "FAQ.jsp?currentPage=<%=firstPage-1 %>">[이전]</a>
+				<%} %>
+				
+				<% for (int i = firstPage; i <= lastPage; i++) {
+					if (i > totalPage) break;
+					
+					if (i == currentPage) { 
+						if (totalPage != 1) {%>
+						<span class="cur" style="color: white; background-color: black; font-size: 1em"><%=i%></span>
+				<%		}
+					} else { %>
+						<a href="<%=request.getContextPath() %>/abmart/servicecenter/FAQ.jsp?currentPage=<%=i %>&faqTitle=<%=search %>&faqCategory=<%=faqCategory %>"><%=i %></a>
+				<%  }//if      
+				}//for %>
+				
+				<%if (lastPage < totalPage) {%>
+					<a href = "FAQ.jsp?currentPage=<%=lastPage+1 %>">[다음]</a>
+				<%} System.out.println("현재 페이지" + currentPage);%>
+			</div> <!-- 페이징 -->
 	   </div>
+	</form>
 	</article><br><br><br><br><br><br>
 
 <%@ include file="../../inc/bottom.jsp" %>

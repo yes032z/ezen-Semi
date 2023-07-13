@@ -16,7 +16,7 @@
 	if(l_id==null || l_id.isEmpty()){%>
 		<script type="text/javascript">
 			alert("먼저 로그인하세요.");
-			location.href="<%=ctxPath %>/login/login.jsp";
+			location.href="<%=ctxPath %>/abmart/member/login.jsp";
 		</script>	
 	<%	return; //서비스메서드를 리턴
 	}
