@@ -13,7 +13,7 @@
 <%	
 	request.setCharacterEncoding("utf-8");	
 
-	int no=(int)session.getAttribute("no");
+	String no=(String)session.getAttribute("no");
 	String pdno=request.getParameter("pdno");
 	String qnabody=request.getParameter("qnabody");
 	String qnaview=request.getParameter("qnaview");
@@ -26,7 +26,7 @@
 	
 	QnAService qnaService=new QnAService();
 	QnAVO vo=new QnAVO();
-	vo.setNo(no);
+	vo.setNo(Integer.parseInt(no));
 	vo.setPdno(Integer.parseInt(pdno));
 	vo.setQnabody(qnabody);
 	vo.setQnaview(qnaview);

@@ -701,7 +701,7 @@
 				name="searchqty" id="sumprice" style="font-size: 2em; float: right;">0</span>
 		</div>
 		<div>
-			 <form name="frmbasket" method="post" action="../basket/ShoppingBasket.jsp">
+			 <form name="frmbasket" method="post" action="../basket/ShoppingBasket2.jsp">
 			 	<input type="hidden" name="pdno" id="pdno" value="<%=pdno%>" />
 				<input type="hidden" name="pdsize" id="pdsize1" />
 				<input type="hidden" name="pdqty" id="pdqty1"/>

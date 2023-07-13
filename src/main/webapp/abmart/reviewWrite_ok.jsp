@@ -20,11 +20,12 @@
 </head>
 <body>
 <%
-	int no=(int)session.getAttribute("no");
+	String no=(String)session.getAttribute("no");
 	List<String> fileNameArr=new ArrayList<>();
 	List<Long> fileSizeArr=new ArrayList<>();
 	List<String> originalFileNameArr=new ArrayList<>();
-
+	
+	
 	String upPath="/images";
 	String saveDir=config.getServletContext().getRealPath(upPath);
 	saveDir=application.getRealPath(upPath);
@@ -84,12 +85,12 @@
 		
 		reviewVo.setReviewbody(reviewbody);
 		reviewVo.setReviewgrade(Integer.parseInt(reviewgrade));
-		reviewVo.setNo(no);
+		reviewVo.setNo(Integer.parseInt(no));
 		reviewVo.setPdno(Integer.parseInt(pdno));
 		
 		int cnt=reviewService.insertReview(reviewVo);
 		
-		int reviewno=reviewService.reviewFindNo(no, Integer.parseInt(pdno));
+		int reviewno=reviewService.reviewFindNo(Integer.parseInt(no), Integer.parseInt(pdno));
 		
 		
 		ReviewDetailService reviewDetailService=new ReviewDetailService();
