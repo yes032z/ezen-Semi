@@ -239,41 +239,6 @@ $(document).ready(function() {
 });
 </script>
 </head>
-<%
-
-	String brand=request.getParameter("brand");
-	String kind=request.getParameter("kind");
-	String grade=request.getParameter("grade");
-	String price=request.getParameter("price");
-
-	if(brand==null || brand.isEmpty()){
-		brand="";
-	}
-	if(kind==null || kind.isEmpty()){
-		kind="";
-	}
-	if(grade==null || grade.isEmpty()){
-		grade="";
-	}
-	if(price==null || price.isEmpty()){
-		price="";
-	}
-	
-	List<ProductVO> list=null;
-	try{
-		list=pdService.selectPdAll(brand, kind,grade,price);
-	}catch(SQLException e){
-		e.printStackTrace();
-	}
-	
-	DecimalFormat df=new DecimalFormat("#,###");
-
-%>
-<%
-	
-
-			
-%>
 <body>
     <div id="shopping">
         <header><strong>01.장바구니</strong> > 02.주문결제 > 03.주문완료</header>
