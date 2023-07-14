@@ -259,17 +259,17 @@ $(document).ready(function() {
                         <td>배송비</td>
                         <td>합계</td>                                               
                     </tr>
-                </thead>
+                </thead>	
                 <tbody>
                     <tr class="basket_list_detail">
                         <td style="width: 2%;"><input type="checkbox"></td>
                         <td style="width: 13%;">
-                            <img src="https://image.a-rt.com/art/product/2020/10/29855_1603086614649.jpg?shrink=590:590" alt="1">
+                            <img src="http://localhost:9090/semiProject/images/RUN%20STAR%20LEGACY%20CX%20HI1.PNG" alt="1">
                         </td>
-                        <td style="width: 20%;"><p>스미스</p><br>                 
-                        <span class="basket_list_smartstore"></span>스탠 스미스                            
+                        <td style="width: 20%;"><p>캔버스</p><br>                 
+                        <span class="basket_list_smartstore"></span>런 스타 레거시 CX 하이                           
                         </td>
-                         <td style="width: 10%;">280<span class="size"></span><br>
+                         <td style="width: 10%;">240<span class="size"></span><br>
                         <td class="basket_list_option" style="width: 20%;">
                         	<div class="quantity-adjustment">
 			                    <button class="plus_btn">+</button>
@@ -277,19 +277,63 @@ $(document).ready(function() {
 								<button class="minus_btn">-</button>    
 		                    </div>                       
                         </td>
-                        <td style="width: 15%;"><span class="price">29,000원</span><br>                            
+                        <td style="width: 15%;"><span class="price">112,500원</span><br>                            
                         </td>
                         <td style="width: 15%;">무료</td>
-                        <td class="sumprice">29,000원</td>                        
+                        <td class="sumprice">112,500원</td>                        
                     </tr>
+               		<tr class="basket_list_detail">
+                        <td style="width: 2%;"><input type="checkbox"></td>
+                        <td style="width: 13%;">
+                            <img src="http://localhost:9090/semiProject/images/RUN%20STAR%20LEGACY%20CX%20HI1.PNG" alt="1">
+                        </td>
+                        <td style="width: 20%;"><p>캔버스</p><br>                 
+                        <span class="basket_list_smartstore"></span>런 스타 레거시 CX 하이                           
+                        </td>
+                         <td style="width: 10%;">260<span class="size"></span><br>
+                        <td class="basket_list_option" style="width: 20%;">
+                        	<div class="quantity-adjustment">
+			                    <button class="plus_btn">+</button>
+								<input type="text" class="quantity-input" value="1" style="width:30px">
+								<button class="minus_btn">-</button>    
+		                    </div>                       
+                        </td>
+                        <td style="width: 15%;"><span class="price">112,500원</span><br>                            
+                        </td>
+                        <td style="width: 15%;">무료</td>
+                        <td class="sumprice">112,500원</td>                        
+                    </tr>
+                    
                     
                     <tr class="basket_list_detail">
                         <td style="width: 2%;"><input type="checkbox"></td>
                         <td style="width: 13%;">
-                            <img src="https://image.a-rt.com/art/product/2020/10/29855_1603086614649.jpg?shrink=590:590" alt="1">
+                            <img src="http://localhost:9090/semiProject/images/GZ1180.png" alt="1">
                         </td>
-                        <td style="width: 20%;"><p>나이키</p><br>
-                        <span class="basket_list_smartstore"></span>스탠 스미스                            
+                        <td style="width: 20%;"><p>아디다스</p><br>
+                        <span class="basket_list_smartstore"></span>아딜렛 샌들                           
+                        </td>
+                         <td style="width: 10%;"><span class="size">240</span><br>
+                        <td class="basket_list_option" style="width: 20%;">
+                        	<div class="quantity-adjustment">
+			                    <button class="plus_btn">+</button>
+								<input type="text" class="quantity-input" value="1" style="width:30px">
+								<button class="minus_btn">-</button>    
+		                    </div>                       
+                        </td>
+                        <td style="width: 15%;"><span class="price">25,000원</span><br>                            
+                        </td>
+                        <td style="width: 15%;">무료</td>
+                        <td class="sumprice">25,000원</td>                        
+                    </tr>
+                    
+                      <tr class="basket_list_detail">
+                        <td style="width: 2%;"><input type="checkbox"></td>
+                        <td style="width: 13%;">
+                            <img src="http://localhost:9090/semiProject/images/GALAXY%206%20OM%20W1.PNG" alt="1">
+                        </td>
+                        <td style="width: 20%;"><p>아디다스</p><br>
+                        <span class="basket_list_smartstore"></span>갤럭시 6 OM 우먼스                          
                         </td>
                          <td style="width: 10%;"><span class="size">260</span><br>
                         <td class="basket_list_option" style="width: 20%;">
@@ -299,10 +343,32 @@ $(document).ready(function() {
 								<button class="minus_btn">-</button>    
 		                    </div>                       
                         </td>
-                        <td style="width: 15%;"><span class="price">29,000원</span><br>                            
+                        <td style="width: 15%;"><span class="price">55,000원</span><br>                            
                         </td>
                         <td style="width: 15%;">무료</td>
-                        <td class="sumprice">29,000원</td>                        
+                        <td class="sumprice">55,000원</td>                        
+                    </tr>
+                    
+                      <tr class="basket_list_detail">
+                        <td style="width: 2%;"><input type="checkbox"></td>
+                        <td style="width: 13%;">
+                            <img src="http://localhost:9090/semiProject/images/1SM01935E.png" alt="1">
+                        </td>
+                        <td style="width: 20%;"><p>휠라</p><br>
+                        <span class="basket_list_smartstore"></span>휠라 퐁 슬라이드                         
+                        </td>
+                         <td style="width: 10%;"><span class="size">260</span><br>
+                        <td class="basket_list_option" style="width: 20%;">
+                        	<div class="quantity-adjustment">
+			                    <button class="plus_btn">+</button>
+								<input type="text" class="quantity-input" value="1" style="width:30px">
+								<button class="minus_btn">-</button>    
+		                    </div>                       
+                        </td>
+                        <td style="width: 15%;"><span class="price">19,000원</span><br>                            
+                        </td>
+                        <td style="width: 15%;">무료</td>
+                        <td class="sumprice">19,000원</td>                        
                     </tr>
                 </tbody>                
         </table>

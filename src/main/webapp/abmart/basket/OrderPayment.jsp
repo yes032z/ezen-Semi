@@ -491,6 +491,8 @@ expiryMonth{
 	MemberVO vo = service.selectMember(id); 
 	
 %>
+
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="text/javascript">
 $(document).ready(function() {
@@ -578,6 +580,9 @@ $(document).ready(function() {
           $("#paymentPassword").val("");
           return;
         }      
+        
+        alert("결제가 완료되었습니다.");
+        
         location.href = "OrderCompleted.jsp"; 
       });
     
@@ -608,29 +613,46 @@ $(document).ready(function() {
                 </thead>
                 <tbody>
                     <tr class="basket_list_detail">
-                        <td><img src="https://image.a-rt.com/art/product/2023/05/73554_1683853295803.jpg?shrink=590:590" alt="1"></td>
-                        <td>아디다스<span class="basket_list_smartstore"></span>
-                            <p>아디코드</p>                       
+                        <td style="width: 13%;">
+                            <img src="http://localhost:9090/semiProject/images/GZ1180.png" alt="1">
                         </td>
-                        <td>사이즈</td>
-                       	<td>1개</td>                  
-                        <td><span class="sumprice">63,000원</span><br>                            
+                        <td style="width: 20%;"><p>아디다스</p><br>
+                        <span class="basket_list_smartstore"></span>아딜렛 샌들                           
                         </td>
-                        <td>무료</td>
-                    </tr>
+                         <td style="width: 10%;"><span class="size">240</span><br>
+						<td style="width: 15%;">3개</td>    
+                        <td style="width: 15%;"><span class="sumprice">75,000원</span><br>                            
+                        </td>
+                        <td style="width: 15%;">무료</td>                     
+                    </tr>    
+                    
                     <tr class="basket_list_detail">
-                        <td style="width: 15%;">
-                            <img src="https://image.a-rt.com/art/product/2020/10/29855_1603086614649.jpg?shrink=590:590" alt="1">
+                        <td style="width: 13%;">
+                            <img src="http://localhost:9090/semiProject/images/GALAXY%206%20OM%20W1.PNG" alt="1">
                         </td>
-                        <td style="width: 25%;">나이키<span class="basket_list_smartstore"></span>
-                            <p>스탠 스미스</p>
+                        <td style="width: 20%;"><p>아디다스</p><br>
+                        <span class="basket_list_smartstore"></span>갤럭시 6 OM 우먼스                          
                         </td>
-                        <td style="width: 15%;">사이즈</td>
-                        <td style="width: 15%;">1개</td>    
-                        <td style="width: 15%;"><span class="sumprice">29,000원</span><br>                            
+                         <td style="width: 10%;"><span class="size">260</span><br>
+						<td style="width: 15%;">1개</td>    
+                        <td style="width: 15%;"><span class="sumprice">55,000원</span><br>                            
                         </td>
-                        <td style="width: 15%;">무료</td>
-                    </tr>
+                        <td style="width: 15%;">무료</td>                     
+                    </tr>  
+
+                    <tr class="basket_list_detail">
+                        <td style="width: 13%;">
+                            <img src="http://localhost:9090/semiProject/images/1SM01935E.png" alt="1">
+                        </td>
+                        <td style="width: 20%;"><p>아디다스</p><br>
+                        <span class="basket_list_smartstore"></span>아딜렛 샌들                           
+                        </td>
+                         <td style="width: 10%;"><span class="size">240</span><br>
+						<td style="width: 15%;">1개</td>    
+                        <td style="width: 15%;"><span class="sumprice">19,000원</span><br>                            
+                        </td>
+                        <td style="width: 15%;">무료</td>                     
+                    </tr>            
                 </tbody>                
         </table><br><br>
         
@@ -641,11 +663,11 @@ $(document).ready(function() {
 			<table>
 				<tr>
 					<td>상품 수량</td>
-					<td>2건</td>
+					<td>5건</td>
 				</tr>
 				<tr>
 					<td>상품 금액</td>
-					<td>92,000원</td>
+					<td>149,000원</td>
 				</tr>
 				<tr>
 					<td>배송비</td>
@@ -653,7 +675,7 @@ $(document).ready(function() {
 				</tr>
 				<tr>
 					<td>합계</td>
-					<td>92,000원</td>
+					<td>149,000원</td>
 				</tr>
 			</table>
 			<input type="submit" value="결제하기">
@@ -684,7 +706,7 @@ $(document).ready(function() {
 					<tr>
 						<td>이메일</td>
 						<td style="text-align: left;">
-							<input type="text" name="email" value="">
+							<input type="text" name="email" value="">@
 						    <select name="email2" id="email2"  title="이메일주소 뒷자리">
 				            <option value="naver.com">naver.com</option>
 				            <option value="hanmail.net">hanmail.net</option>

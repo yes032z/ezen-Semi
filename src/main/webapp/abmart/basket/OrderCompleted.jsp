@@ -45,7 +45,7 @@ p {
     font-weight: bold;
     font-size: 14px;
     color: #111;
-    padding: 6px 0;
+    padding: 10px 0;
 }
 .complete table {
     width: 100%;
@@ -82,8 +82,8 @@ p {
     padding: 6px;
 }
 .info table tr > td img {
-    float: left;
-    width: 80px;
+    float: left;   
+    width: 150px;
 }
  .info table tr > td div {
     float: left;
@@ -107,7 +107,7 @@ p {
     background: #f2f2f2;
     font-weight: normal;
     border-bottom: none;
-    padding: 10px;
+    padding: 8px;
     box-sizing: border-box;
 }
 .info .total > td > table tr:last-child span {
@@ -221,83 +221,83 @@ li.li{
                     <h1>상품정보</h1>
                     <table border="0">
                         <tr>
-                            <th>상품명</th>
-                            <th>상품금액</th>
-                            <th>할인금액</th>
-                            <th>수량</th>
-                            <th>주문금액</th>
+                            <th>상품명</th>                            
+                            <th>상품 사이즈</th>
+                            <th>구매 수량</th>
+                            <th>배송비</th>
+                            <th>총금액</th>
                         </tr>
                         <tr>
                             <td>
                                 <article>
-                                    <img src="https://via.placeholder.com/80X80" alt="">
+                                    <img src="http://localhost:9090/semiProject/images/GZ1180.png" alt="3">
+                                    <div>
+                                        <h3>
+                                            <a>아디다스</a>
+                                        </h3>
+                                        <p>아딜렛 샌들 </p>
+                                    </div>
+                                </article>
+                            </td>
+                            <td>240</td>
+                            <td>3개</td>
+                            <td>무료</td>
+                            <td>75,000원</td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <article>
+                                    <img src="http://localhost:9090/semiProject/images/GALAXY%206%20OM%20W1.PNG" alt="">
                                     <div>
                                         <h2>
-                                            <a href="#">상품명</a>
+                                            <a>상품명</a>
                                         </h2>
                                         <p>상품설명</p>
                                     </div>
                                 </article>
                             </td>
-                            <td>17,000원</td>
-                            <td>1,000원</td>
-                            <td>1</td>
-                            <td>16,000원</td>
+                            <td>260</td>
+                            <td>1개</td>
+                            <td>무료</td>
+                            <td>55,000원</td>
                         </tr>
                         <tr>
                             <td>
                                 <article>
-                                    <img src="https://via.placeholder.com/80X80" alt="">
+                                    <img src="http://localhost:9090/semiProject/images/1SM01935E.png" alt="">
                                     <div>
                                         <h2>
-                                            <a href="#">상품명</a>
+                                            <a>상품명</a>
                                         </h2>
                                         <p>상품설명</p>
                                     </div>
                                 </article>
                             </td>
-                            <td>17,000원</td>
-                            <td>1,000원</td>
-                            <td>1</td>
-                            <td>16,000원</td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <article>
-                                    <img src="https://via.placeholder.com/80X80" alt="">
-                                    <div>
-                                        <h2>
-                                            <a href="#">상품명</a>
-                                        </h2>
-                                        <p>상품설명</p>
-                                    </div>
-                                </article>
-                            </td>
-                            <td>17,000원</td>
-                            <td>1,000원</td>
-                            <td>1</td>
-                            <td>16,000원</td>
+                            <td>240</td>
+                            <td>1개</td>
+                            <td>무료</td>
+                            <td>19,000원</td>
                         </tr>                                                                                             
                         <tr class="total">
                             <td colspan="4"></td>
                             <td>
                                 <table>
                                     <tr>
-                                        <td>총 상품금액:</td>
+                                        <td>총상품수량 :</td>
                                         <td>
-                                            <span>34,000원</span>
+                                            <span>5개</span>
                                         </td>
                                      </tr>
                                     <tr>
-                                        <td>배송비:</td>
+                                        <td>배송비 :</td>
                                         <td>
                                             <span>무료</span>
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td>총 결제금액:</td>
+                                        <td>총결제금액 :</td>
                                         <td>
-                                            <span>35,000</span>원
+                                            <span>149,000원</span>
                                         </td>
                                     </tr>
                                 </table>
@@ -308,7 +308,7 @@ li.li{
                 
                 <!-- 주문정보 -->
                 <article class="order">
-                    <h1>주문정보</h1>
+                    <h1 >주문정보</h1>
                     <table border="0">
                         <tr>
                             <td>주문번호</td>
@@ -336,6 +336,10 @@ li.li{
                         <tr>
                             <td>배송지 주소</td>
                             <td><%=vo.getDetailaddress()%></td>    
+                        </tr>
+                         <tr>
+                            <td>배송 요청사항</td>
+                            <td>직접 수령하겠습니다</td>    
                         </tr>
 
                     </table>
