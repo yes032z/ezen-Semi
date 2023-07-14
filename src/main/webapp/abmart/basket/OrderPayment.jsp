@@ -546,14 +546,14 @@ $(document).ready(function() {
     	});
     
     //배송요청사항 - 직접입력
-    $("#deliveryRequest").change(function() {
-        var selectedOption = $(this).val();
-        if (selectedOption === "직접입력") {
-            $("#deliveryRequestInput").show(); 
-        } else {
-            $("#deliveryRequestInput").hide(); 
-        }
-    });
+     $("#deliveryRequest").change(function() {
+         var selectedOption = $(this).val();
+         if (selectedOption === "request5") {
+             $("#deliveryRequestInput").show();
+         } else {
+             $("#deliveryRequestInput").hide();
+         }
+     });
     
     //결제비밀번호입력
     $(".final input[type='submit']").click(function(event) {
@@ -732,15 +732,14 @@ $(document).ready(function() {
                     <tr>
                         <td>배송시 요청사항</td>
                         <td style="text-align: left;">
-                        <select name="deliveryRequest" id="deliveryRequest1" style="width: 300px; height:25px;">
+                        <select name="deliveryRequest" id="deliveryRequest" style="width: 300px; height:25px;">
 							<option value="request1">배송전에 연락주세요</option>
 							<option value="request2">부재실 경비실에 맡겨주세요</option>
 							<option value="request3">부재실 문앞에 놓아주세요</option>
 							<option value="request4">직접 수령 하겠습니다</option>							
 							<option value="request5">직접입력</option>							
 						</select><br>
-                          <input type="text" name="requestInput" id="deliveryRequestInput" style="display: none; width:300px;">                                                 
-                        </td>
+                         <input type="text" name="deliveryRequestInput" id="deliveryRequestInput" style="display: none; width:300px;">
                     </tr>                  		
 				</table>
 			</article>		

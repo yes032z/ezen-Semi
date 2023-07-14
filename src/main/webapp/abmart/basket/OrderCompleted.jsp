@@ -339,7 +339,7 @@ li.li{
                         </tr>
                          <tr>
                             <td>배송 요청사항</td>
-                            <td>직접 수령하겠습니다</td>    
+                            <td>AB-MART 대박나자</td>  
                         </tr>
 
                     </table>
