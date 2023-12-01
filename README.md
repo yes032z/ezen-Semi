@@ -3,7 +3,8 @@
 - 세미 팀프로젝트-모델1를 이용, abc-mart를 참고하여 만든 신발 판매 쇼핑몰 사이트 입니다. 
 - 개발 기간 : 2023.06.26 ~ 2023.07.14
 - 구성 인원 : 5명
-
+- 프로젝트 PPT<BR>
+https://docs.google.com/presentation/d/1yrxX9vTZopffr4-329XvvLQ7psIOiKuB/edit?usp=drive_link
 ## 맡은 역할
 마이페이지 기능 구현
 - 최근 구매내역(주문 조회)
