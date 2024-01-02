@@ -15,7 +15,7 @@
 - 마이페이지 메뉴 구현
 
 ## 개발 환경
-- 언어 : Java, JSP, JSTL/EL, JavaScript, jQuery, SQL
+- 언어 : Java, JSP, JavaScript, jQuery, SQL
 - 프론트엔드 : HTML5, CSS, Bootstrap
 - 데이터베이스 : AWS RDS - Oracle Database
 - IDE : Eclipse
